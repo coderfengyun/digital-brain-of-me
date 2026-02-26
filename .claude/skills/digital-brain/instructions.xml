@@ -1,0 +1,156 @@
+<digital-brain-skill>
+  <purpose>
+    Help users manage their digital brain - a structured knowledge management system
+    for personal productivity, content creation, relationship management, and goal tracking.
+  </purpose>
+
+  <modules>
+    <module name="identity">
+      <path>identity/</path>
+      <files>
+        <file>brand/profile.yaml</file>
+        <file>voice/style.md</file>
+        <file>voice/principles.md</file>
+      </files>
+      <purpose>Personal brand, voice, and core values</purpose>
+    </module>
+
+    <module name="content">
+      <path>content/</path>
+      <files>
+        <file>ideas/ideas.jsonl</file>
+        <file>drafts/*.md</file>
+        <file>published/published.jsonl</file>
+      </files>
+      <purpose>Content creation pipeline from ideas to publication</purpose>
+    </module>
+
+    <module name="knowledge">
+      <path>knowledge/</path>
+      <files>
+        <file>bookmarks/bookmarks.jsonl</file>
+        <file>research/notes.md</file>
+        <file>learning/courses.yaml</file>
+      </files>
+      <purpose>Learning materials, bookmarks, and research notes</purpose>
+    </module>
+
+    <module name="network">
+      <path>network/</path>
+      <files>
+        <file>contacts/contacts.jsonl</file>
+        <file>relationships/interactions.jsonl</file>
+      </files>
+      <purpose>Professional network and relationship management</purpose>
+    </module>
+
+    <module name="operations">
+      <path>operations/</path>
+      <files>
+        <file>goals/goals.yaml</file>
+        <file>tasks/tasks.jsonl</file>
+        <file>meetings/meetings.jsonl</file>
+        <file>metrics/weekly.jsonl</file>
+      </files>
+      <purpose>Goals, tasks, meetings, and productivity metrics</purpose>
+    </module>
+  </modules>
+
+  <data-formats>
+    <format name="jsonl">
+      <usage>Append-only logs for bookmarks, contacts, tasks, interactions</usage>
+      <benefits>Preserves history, easy to parse, agent-friendly</benefits>
+    </format>
+
+    <format name="yaml">
+      <usage>Structured configuration for goals, learning, profile</usage>
+      <benefits>Hierarchical data, human-readable</benefits>
+    </format>
+
+    <format name="markdown">
+      <usage>Narrative content, drafts, research notes</usage>
+      <benefits>Easy to edit, rich formatting, version-controllable</benefits>
+    </format>
+  </data-formats>
+
+  <operations>
+    <operation name="add-idea">
+      <trigger>User wants to capture a content idea</trigger>
+      <action>Append to content/ideas/ideas.jsonl with proper structure</action>
+      <fields>id, title, description, tags, status, created_at, priority</fields>
+    </operation>
+
+    <operation name="add-bookmark">
+      <trigger>User shares a link or wants to save a resource</trigger>
+      <action>Append to knowledge/bookmarks/bookmarks.jsonl</action>
+      <fields>id, url, title, description, tags, saved_at, category</fields>
+    </operation>
+
+    <operation name="add-contact">
+      <trigger>User mentions meeting someone new</trigger>
+      <action>Append to network/contacts/contacts.jsonl</action>
+      <fields>id, name, relationship, tags, met_at, last_contact, notes, links</fields>
+    </operation>
+
+    <operation name="log-interaction">
+      <trigger>User mentions communicating with a contact</trigger>
+      <action>Append to network/relationships/interactions.jsonl and update last_contact</action>
+      <fields>id, contact_id, date, type, summary, follow_up</fields>
+    </operation>
+
+    <operation name="add-task">
+      <trigger>User mentions something they need to do</trigger>
+      <action>Append to operations/tasks/tasks.jsonl</action>
+      <fields>id, title, description, status, priority, created_at, due_date, tags, related_goal</fields>
+    </operation>
+
+    <operation name="weekly-review">
+      <trigger>User asks for weekly review or summary</trigger>
+      <action>Run scripts/weekly_review.py to analyze the week</action>
+    </operation>
+
+    <operation name="content-ideas">
+      <trigger>User asks what to write about</trigger>
+      <action>Run scripts/content_ideas.py to suggest topics</action>
+    </operation>
+
+    <operation name="stale-contacts">
+      <trigger>User asks who to reconnect with</trigger>
+      <action>Run scripts/stale_contacts.py to find neglected relationships</action>
+    </operation>
+
+    <operation name="expand-idea">
+      <trigger>User wants to turn an idea into a draft</trigger>
+      <action>Run scripts/idea_to_draft.py &lt;idea-id&gt;</action>
+    </operation>
+  </operations>
+
+  <behavior-guidelines>
+    <guideline>Always read the identity module first to understand user's voice and values</guideline>
+    <guideline>Use append-only patterns for JSONL files - never overwrite existing entries</guideline>
+    <guideline>Generate unique IDs for new entries (format: type-XXX, e.g., idea-001)</guideline>
+    <guideline>Cross-reference between modules (e.g., link tasks to goals, content to bookmarks)</guideline>
+    <guideline>Suggest proactive actions (e.g., "I noticed you haven't published in a while...")</guideline>
+    <guideline>Maintain consistent tagging across modules for better discovery</guideline>
+    <guideline>When running scripts, show output to user and explain insights</guideline>
+  </behavior-guidelines>
+
+  <context-loading>
+    <principle>Load progressively - only what's needed for the current task</principle>
+    <on-skill-invocation>
+      <load>identity/brand/profile.yaml</load>
+      <load>identity/voice/style.md</load>
+      <reason>Understand user's brand and voice for all interactions</reason>
+    </on-skill-invocation>
+    <on-content-task>
+      <load>content/ideas/ideas.jsonl</load>
+      <load>knowledge/bookmarks/bookmarks.jsonl</load>
+      <reason>Access ideas and research materials for content creation</reason>
+    </on-content-task>
+    <on-network-task>
+      <load>network/contacts/contacts.jsonl</load>
+      <load>network/relationships/interactions.jsonl</load>
+      <reason>Access contact database and interaction history</reason>
+    </on-network-task>
+  </context-loading>
+</digital-brain-skill>

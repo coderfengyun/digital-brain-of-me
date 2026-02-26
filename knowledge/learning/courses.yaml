@@ -1,0 +1,23 @@
+courses:
+  - title: ""
+    platform: ""
+    status: "not_started|in_progress|completed"
+    started_at: ""
+    completed_at: ""
+    notes: ""
+    tags: []
+
+books:
+  - title: ""
+    author: ""
+    status: "reading|completed|want_to_read"
+    started_at: ""
+    completed_at: ""
+    key_takeaways: []
+    rating: 0
+
+skills:
+  - name: ""
+    level: "beginner|intermediate|advanced"
+    learning_resources: []
+    practice_projects: []
