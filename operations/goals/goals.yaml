@@ -1,0 +1,22 @@
+yearly_goals:
+  - goal: ""
+    category: "career|personal|learning|health|financial"
+    status: "not_started|in_progress|completed"
+    target_date: "2026-12-31"
+    progress: 0
+    milestones: []
+
+quarterly_goals:
+  - goal: ""
+    quarter: "Q1|Q2|Q3|Q4"
+    year: 2026
+    status: "not_started|in_progress|completed"
+    progress: 0
+    related_yearly_goal: ""
+
+monthly_goals:
+  - goal: ""
+    month: "2026-02"
+    status: "not_started|in_progress|completed"
+    progress: 0
+    related_quarterly_goal: ""
