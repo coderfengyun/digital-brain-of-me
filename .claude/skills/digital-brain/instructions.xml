@@ -35,6 +35,15 @@
       <purpose>Learning materials, bookmarks, and research notes</purpose>
     </module>
 
+    <module name="papers">
+      <path>papers/</path>
+      <files>
+        <file>papers.jsonl</file>
+        <file>paper-*.md</file>
+      </files>
+      <purpose>Academic paper reading with narrative-driven approach</purpose>
+    </module>
+
     <module name="network">
       <path>network/</path>
       <files>
@@ -123,16 +132,61 @@
       <trigger>User wants to turn an idea into a draft</trigger>
       <action>Run scripts/idea_to_draft.py &lt;idea-id&gt;</action>
     </operation>
+
+    <operation name="add-paper">
+      <trigger>User wants to add an academic paper to reading list</trigger>
+      <action>Run scripts/add_paper.py with title, URL, and metadata</action>
+      <fields>id, title, authors, year, venue, url, tags, reading_status, main_claim</fields>
+    </operation>
+
+    <operation name="search-papers">
+      <trigger>User asks about papers or wants to find papers to read</trigger>
+      <action>Run scripts/search_papers.py with filters (status, tags, keywords)</action>
+    </operation>
+
+    <operation name="read-paper">
+      <trigger>User wants guidance on reading a paper</trigger>
+      <action>Guide through 2-phase narrative-driven reading approach</action>
+      <phase1>Extract narrative: Read abstract/intro/conclusion, fill narrative section, draw Mermaid diagram (15-30 min)</phase1>
+      <phase2>Verify data: Find evidence for claims, fill data table, critical thinking (1-2 hours)</phase2>
+    </operation>
+
+    <operation name="update-paper-status">
+      <trigger>User completes a reading phase or finishes a paper</trigger>
+      <action>Run scripts/update_paper_status.py to update status and metadata</action>
+    </operation>
+
+    <operation name="create-module">
+      <trigger>User wants to extend the system or create a new module</trigger>
+      <action>Open module_operation/MODULE_CREATION_GUIDE.md and guide through 6-phase process</action>
+      <phases>
+        <phase1>Requirements Analysis (30 min) - Define data model, workflow, tags</phase1>
+        <phase2>Core Files Creation (2-3 hours) - README, data.jsonl, scripts</phase2>
+        <phase3>Documentation (2-3 hours) - Templates, examples, quick start</phase3>
+        <phase4>System Integration (1-2 hours) - Update 8 system files (CRITICAL)</phase4>
+        <phase5>Cross-Module Integration (1-2 hours) - Define data flows</phase5>
+        <phase6>Quality Assurance (1 hour) - Test and verify with check script</phase6>
+      </phases>
+      <files_to_update>SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md, README.md, knowledge/KNOWLEDGE.md, .claude/skills/digital-brain/skill.md, .claude/skills/digital-brain/instructions.xml</files_to_update>
+    </operation>
+
+    <operation name="check-module-integration">
+      <trigger>User wants to verify a module is properly integrated</trigger>
+      <action>Run module_operation/check_module_integration.py with module name and keyword</action>
+      <verification>Checks that all 8 system files have sufficient references (5+ for core files, 3+ for skill files)</verification>
+    </operation>
   </operations>
 
   <behavior-guidelines>
     <guideline>Always read the identity module first to understand user's voice and values</guideline>
     <guideline>Use append-only patterns for JSONL files - never overwrite existing entries</guideline>
-    <guideline>Generate unique IDs for new entries (format: type-XXX, e.g., idea-001)</guideline>
-    <guideline>Cross-reference between modules (e.g., link tasks to goals, content to bookmarks)</guideline>
+    <guideline>Generate unique IDs for new entries (format: type-XXX, e.g., idea-001, paper-YYYYMMDD-XXX)</guideline>
+    <guideline>Cross-reference between modules (e.g., link tasks to goals, content to bookmarks, ideas to papers)</guideline>
     <guideline>Suggest proactive actions (e.g., "I noticed you haven't published in a while...")</guideline>
     <guideline>Maintain consistent tagging across modules for better discovery</guideline>
     <guideline>When running scripts, show output to user and explain insights</guideline>
+    <guideline>For papers, always use narrative-first approach: extract story before diving into data</guideline>
+    <guideline>When creating new modules, follow module_operation/MODULE_CREATION_GUIDE.md and verify with check_module_integration.py</guideline>
   </behavior-guidelines>
 
   <context-loading>
@@ -145,8 +199,14 @@
     <on-content-task>
       <load>content/ideas/ideas.jsonl</load>
       <load>knowledge/bookmarks/bookmarks.jsonl</load>
-      <reason>Access ideas and research materials for content creation</reason>
+      <load>papers/papers.jsonl</load>
+      <reason>Access ideas, research materials, and papers for content creation</reason>
     </on-content-task>
+    <on-paper-task>
+      <load>papers/papers.jsonl</load>
+      <load>papers/paper-*.md</load>
+      <reason>Access paper database and reading notes</reason>
+    </on-paper-task>
     <on-network-task>
       <load>network/contacts/contacts.jsonl</load>
       <load>network/relationships/interactions.jsonl</load>

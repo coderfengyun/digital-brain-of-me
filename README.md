@@ -29,6 +29,9 @@ digital-brain-of-me/
 │   ├── bookmarks/    # Saved links (JSONL)
 │   ├── research/     # Deep research notes (Markdown)
 │   └── learning/     # Courses, books, skills (YAML)
+├── papers/           # Academic paper reading (JSONL + Markdown)
+│   ├── papers.jsonl  # Paper metadata
+│   └── paper-*.md    # Reading notes
 ├── network/          # Relationship management
 │   ├── contacts/     # Professional network (JSONL)
 │   └── relationships/ # Interactions log (JSONL)
@@ -38,10 +41,13 @@ digital-brain-of-me/
 │   ├── meetings/     # Meeting notes (JSONL)
 │   └── metrics/      # Weekly metrics (JSONL)
 └── scripts/          # Automation tools
-    ├── weekly_review.py    # Generate weekly summary
-    ├── content_ideas.py    # Suggest what to write
-    ├── stale_contacts.py   # Who to reconnect with
-    └── idea_to_draft.py    # Expand ideas into drafts
+    ├── weekly_review.py          # Generate weekly summary
+    ├── content_ideas.py          # Suggest what to write
+    ├── stale_contacts.py         # Who to reconnect with
+    ├── idea_to_draft.py          # Expand ideas into drafts
+    ├── add_paper.py              # Add papers to reading list
+    ├── search_papers.py          # Search and query papers
+    └── update_paper_status.py    # Update paper metadata
 ```
 
 ## 🚀 Quick Start
@@ -73,6 +79,16 @@ echo '{"id": "idea-002", "title": "How to build a digital brain", "description":
 
 ```bash
 echo '{"id": "bm-002", "url": "https://example.com/article", "title": "Great article on PKM", "description": "Personal knowledge management strategies", "tags": ["productivity", "learning"], "saved_at": "2026-02-26", "category": "article"}' >> knowledge/bookmarks/bookmarks.jsonl
+```
+
+#### Add a Paper to Read
+
+```bash
+python scripts/add_paper.py "Paper Title" "https://arxiv.org/abs/xxxx" \
+  --authors "Author Name" \
+  --year 2024 \
+  --venue "Conference" \
+  --tags "nlp,transformer"
 ```
 
 #### Add a Contact
@@ -113,6 +129,19 @@ python scripts/stale_contacts.py
 python scripts/idea_to_draft.py idea-002
 ```
 
+#### Search Papers
+
+```bash
+# Find unread papers
+python scripts/search_papers.py --status unread
+
+# Search by tags
+python scripts/search_papers.py --tags nlp,transformer
+
+# View statistics
+python scripts/search_papers.py --stats
+```
+
 ## 🤖 Using with Claude Code
 
 This system includes a Claude Code skill for AI-assisted knowledge management.
@@ -132,6 +161,9 @@ When working with Claude Code, you can say things like:
 - "Generate my weekly review"
 - "Who should I reach out to?"
 - "Turn idea-003 into a draft"
+- "Add this paper to my reading list: https://arxiv.org/abs/xxxx"
+- "Show me all unread papers on transformers"
+- "I finished reading this paper, mark it as completed"
 
 Claude will automatically:
 - Read your identity files to understand your voice
@@ -255,10 +287,28 @@ Add new fields to JSONL entries as needed. The format is flexible.
 6. **Start Small**: Don't fill everything at once, grow organically
 7. **Use AI Assistance**: Let Claude help with data entry and analysis
 
+## 🛠️ Extending the System
+
+### Adding New Modules
+
+Want to add a new module to your Digital Brain? See [module_operation/MODULE_CREATION_GUIDE.md](module_operation/MODULE_CREATION_GUIDE.md) for a complete step-by-step guide based on real experience.
+
+The guide includes:
+- Complete checklist for creating new modules
+- Integration requirements for all system files
+- Quality assurance steps
+- Automated checking scripts
+
+**Quick check**: After creating a module, run:
+```bash
+python module_operation/check_module_integration.py <module_name> [keyword]
+```
+
 ## 📚 Learn More
 
 - [Original Digital Brain Skill](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/tree/main/examples/digital-brain-skill)
 - [Context Engineering Tweet](https://x.com/koylanai/status/2025286163641118915)
+- [Module Creation Guide](module_operation/MODULE_CREATION_GUIDE.md) - How to extend this system
 
 ## 📄 License
 

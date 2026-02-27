@@ -1,6 +1,6 @@
 ---
 name: digital-brain
-description: This skill should be used when the user asks to "write a post", "check my voice", "look up contact", "prepare for meeting", "weekly review", "track goals", or mentions personal brand, content creation, network management, or voice consistency.
+description: This skill should be used when the user asks to "write a post", "check my voice", "look up contact", "prepare for meeting", "weekly review", "track goals", "add paper", "read paper", "create module", "add module", or mentions personal brand, content creation, network management, academic paper reading, system extension, or voice consistency.
 version: 1.0.0
 ---
 
@@ -22,8 +22,10 @@ Activate this skill when the user:
 - Asks for weekly reviews or goal tracking
 - Needs to save or retrieve bookmarked resources
 - Wants to organize research or learning materials
+- Needs to add, read, or manage academic papers
+- Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "create module", "add module", "extend system"
 
 ## Core Concepts
 
@@ -61,7 +63,7 @@ JSONL files are **append-only**. Never delete entries:
 digital-brain-of-me/
 ├── identity/     → Voice, brand, values (READ FIRST for content)
 ├── content/      → Ideas, drafts, posts, calendar
-├── knowledge/    → Bookmarks, research, learning
+├── knowledge/    → Bookmarks, research, learning, papers
 ├── network/      → Contacts, interactions, intros
 ├── operations/   → Todos, goals, meetings, metrics
 └── scripts/      → Automation scripts
@@ -157,14 +159,63 @@ Productivity system with priority levels:
 
 **Output**: Pre-meeting brief with relationship context.
 
+### Example: Academic Paper Reading
+
+**Input**: "I want to read the Attention Is All You Need paper"
+
+**Process**:
+1. Run `scripts/add_paper.py` to add paper to reading list
+2. Open generated `paper-YYYYMMDD-XXX.md` note file
+3. Guide user through Phase 1: Extract narrative (15-30 min)
+   - Read abstract, intro, conclusion
+   - Fill in core narrative section
+   - Draw Mermaid structure diagram
+4. Update status to "reading" with main claim
+5. Later guide through Phase 2: Verify data (1-2 hours)
+   - Find supporting evidence for each claim
+   - Fill data evidence table
+   - Complete critical thinking section
+6. Update status to "completed"
+
+**Output**: Structured paper notes with narrative, evidence, and critical analysis.
+
+### Example: Creating a New Module
+
+**Input**: "I want to create a contacts module to track my professional network"
+
+**Process**:
+1. Open `module_operation/MODULE_CREATION_GUIDE.md` for complete checklist
+2. Guide user through 6-phase creation process:
+   - Phase 1: Requirements analysis (30 min)
+   - Phase 2: Core files creation (2-3 hours)
+   - Phase 3: Documentation (2-3 hours)
+   - Phase 4: System integration (1-2 hours) - update 8 files
+   - Phase 5: Cross-module integration (1-2 hours)
+   - Phase 6: Quality assurance (1 hour)
+3. Create necessary files:
+   - `knowledge/contacts/README.md`
+   - `knowledge/contacts/contacts.jsonl`
+   - `scripts/add_contact.py`, `scripts/search_contacts.py`
+4. Update system integration files:
+   - SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md
+   - README.md, knowledge/KNOWLEDGE.md
+   - `.claude/skills/digital-brain/skill.md`
+   - `.claude/skills/digital-brain/instructions.xml`
+5. Run verification: `python module_operation/check_module_integration.py contacts contact`
+6. Create COMPLETION_REPORT.md documenting the module
+
+**Output**: Fully integrated new module ready for production use.
+
 ## Guidelines
 
 1. **Voice First**: Always read `identity/voice/style.md` before any content generation
 2. **Append Only**: Never delete from JSONL files - archive instead
 3. **Update Timestamps**: Set `updated_at` field when modifying tracked data
-4. **Cross-Reference**: Knowledge informs content, network informs operations
+4. **Cross-Reference**: Knowledge informs content, network informs operations, papers inspire ideas
 5. **Log Interactions**: Always log meetings/calls to `interactions.jsonl`
 6. **Preserve History**: Past content in `published.jsonl` informs future performance
+7. **Narrative First**: For papers, extract narrative structure before diving into data details
+8. **Complete Integration**: New modules require updating 8 system files - use module_operation/MODULE_CREATION_GUIDE.md and check_module_integration.py
 
 ## Integration
 
@@ -179,9 +230,12 @@ This skill integrates context engineering principles:
 
 Internal references:
 - [Identity Module](./identity/voice/principles.md) - Voice and brand details
-- [Content Module](./content/README.md) - Content pipeline docs
-- [Network Module](./network/README.md) - CRM documentation
-- [Operations Module](./operations/README.md) - Productivity system
+- [Content Module](./content/CONTENT.md) - Content pipeline docs
+- [Knowledge Module](./knowledge/KNOWLEDGE.md) - Learning and research
+- [Papers Module](./papers/PAPERS.md) - Academic paper reading
+- [Network Module](./network/NETWORK.md) - CRM documentation
+- [Operations Module](./operations/OPERATIONS.md) - Productivity system
+- [Module Creation Guide](./module_operation/MODULE_CREATION_GUIDE.md) - How to extend the system
 
 External resources:
 - [Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)
