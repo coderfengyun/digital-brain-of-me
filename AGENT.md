@@ -36,6 +36,12 @@ This is a Digital Brain personal operating system. When working in this project:
 | "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `goals/goals.yaml` with progress |
+| "Add paper to read" | Run `add_paper.py` → Create note file |
+| "Read this paper" | Guide through 2-phase reading → Update status |
+| "Show unread papers" | Run `search_papers.py --status unread` |
+| "Create new module" | Open `module_operation/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
+| "Extend the system" | Follow module creation process → Update 8 system files |
+| "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
 
 ## Module Loading Strategy
 
@@ -49,6 +55,7 @@ Use **progressive disclosure**:
    - `content/ideas/ideas.jsonl`
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
+   - `knowledge/papers/papers.jsonl` (if paper-related)
 
 3. **Load on Network Tasks** (L2):
    - `network/contacts/contacts.jsonl`
@@ -62,6 +69,7 @@ Use **progressive disclosure**:
 5. **Load on Demand** (L3):
    - Individual draft files
    - Research notes
+   - Paper notes (`paper-YYYYMMDD-XXX.md`)
    - Meeting records
 
 ## Data Entry Best Practices
@@ -92,6 +100,29 @@ Use **progressive disclosure**:
   "saved_at": "YYYY-MM-DD",
   "category": "article|video|tool|paper|documentation"
 }
+```
+
+### Adding Papers
+
+```json
+{
+  "id": "paper-YYYYMMDD-XXX",
+  "title": "Paper title",
+  "authors": ["Author 1", "Author 2"],
+  "year": 2024,
+  "venue": "Conference/Journal",
+  "url": "https://arxiv.org/...",
+  "tags": ["domain", "method", "application"],
+  "reading_status": "unread|reading|completed",
+  "main_claim": "One-sentence summary",
+  "added_at": "YYYY-MM-DD",
+  "related_papers": []
+}
+```
+
+Or use the script:
+```bash
+python scripts/add_paper.py "Title" "URL" --tags "nlp,transformer" --year 2024
 ```
 
 ### Adding Contacts
@@ -151,6 +182,10 @@ Run these to generate insights:
 - `python scripts/content_ideas.py` - Content suggestions from bookmarks
 - `python scripts/stale_contacts.py` - Identify people to reconnect with
 - `python scripts/idea_to_draft.py <idea-id>` - Expand idea into draft
+- `python scripts/add_paper.py "Title" "URL"` - Add paper to reading list
+- `python scripts/search_papers.py --status unread` - Find papers to read
+- `python scripts/update_paper_status.py paper-XXX --status completed` - Update paper status
+- `python module_operation/check_module_integration.py <module> <keyword>` - Verify module integration completeness
 
 ## Voice Consistency Checklist
 
@@ -162,6 +197,40 @@ Before generating any content, verify:
 4. ✅ Applied voice patterns (tone, vocabulary, structure)
 5. ✅ Maintained authenticity and brand positioning
 
+## Module Creation
+
+When creating new modules, follow the complete guide in `module_operation/MODULE_CREATION_GUIDE.md`:
+
+### 6-Phase Process
+
+1. **Requirements Analysis** (30 min) - Define data model, workflow, and tag system
+2. **Core Files Creation** (2-3 hours) - README, data.jsonl, scripts
+3. **Documentation** (2-3 hours) - Templates, examples, quick start
+4. **System Integration** (1-2 hours) ⭐ - Update 8 system files:
+   - SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md
+   - README.md, knowledge/KNOWLEDGE.md
+   - `.claude/skills/digital-brain/skill.md`
+   - `.claude/skills/digital-brain/instructions.xml`
+5. **Cross-Module Integration** (1-2 hours) - Define data flows and relationships
+6. **Quality Assurance** (1 hour) - Test and verify with check script
+
+### Integration Verification
+
+After creating a module, ALWAYS run:
+```bash
+python module_operation/check_module_integration.py <module_name> <keyword>
+```
+
+This checks that all 8 system files have been properly updated with sufficient references.
+
+### Common Pitfalls
+
+⚠️ Most commonly missed files (marked with ⭐⭐⭐ in guide):
+1. `.claude/skills/digital-brain/skill.md`
+2. `.claude/skills/digital-brain/instructions.xml`
+3. Multiple locations in EXAMPLES.md
+4. Multiple sections in AGENT.md
+
 ## Context Engineering Principles
 
 This system follows these principles:
@@ -171,6 +240,7 @@ This system follows these principles:
 3. **Cross-Reference**: Link related data across modules
 4. **Voice-First**: Identity always loaded before content generation
 5. **Historical Analysis**: Past data informs future decisions
+6. **Complete Integration**: New modules require 8-file update (use guide and checker)
 
 ## Error Prevention
 
