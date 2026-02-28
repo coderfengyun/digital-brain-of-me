@@ -2,6 +2,29 @@
 
 本指南记录了创建新模块时需要完成的所有步骤和检查点,基于创建papers模块的实际经验总结。
 
+## ⭐ 核心命名规范
+
+**模块主文档必须遵循以下命名规则**:
+
+```
+✅ 正确: <MODULE>.md  (模块名全大写 + .md)
+   示例: PAPERS.md, KNOWLEDGE.md, MODULE-TOOLKIT.md
+
+❌ 错误: README.md, readme.md, Papers.md, papers.md
+```
+
+**为什么?**
+- 统一性: 所有模块遵循相同命名规范
+- 可识别: 大写文件名立即表明这是模块主文档
+- 避免冲突: 不与项目根目录的 README.md 混淆
+
+**检查方法**:
+```bash
+python module-toolkit/check_module_integration.py <module_name> <keyword>
+```
+
+---
+
 ## 📋 创建新模块检查清单
 
 ### ✅ 阶段一:需求分析与设计 (30分钟)
@@ -73,13 +96,18 @@ knowledge/新模块名/
 **检查点**:
 - [ ] 目录创建在正确位置
 - [ ] JSONL文件初始化(空文件或示例数据)
-- [ ] 主文档使用大写命名 (<MODULE>.md)
+- [ ] ⭐ **主文档命名正确**: `<MODULE>.md` (全大写,不是README.md)
 - [ ] 文档总量 < 600行
 - [ ] 没有重复/冗余文档
+- [ ] 检查脚本可以通过命名规范验证
 
 #### 2. 编写主文档 (<MODULE>.md)
 
-**命名规则**: 使用大写,如 `PAPERS.md`, `KNOWLEDGE.md`, `CONTACTS.md`
+**⭐ 命名规则 (必须遵守)**:
+- 使用**大写模块名**作为主文档名: `<MODULE>.md`
+- 示例: `PAPERS.md`, `KNOWLEDGE.md`, `CONTACTS.md`, `MODULE-TOOLKIT.md`
+- ❌ 不要使用: `README.md`, `readme.md`, `Papers.md`
+- ✅ 正确格式: 模块名全大写 + `.md` 扩展名
 
 **文档结构** (参考原repo风格,100-150行):
 ```markdown
@@ -113,7 +141,7 @@ Links to TEMPLATE.md, EXAMPLE.md if they exist
 - **精确**: 100-150行,~500-700词
 
 **检查点**:
-- [ ] 文件名使用大写 (<MODULE>.md)
+- [ ] ⭐ **文件名使用大写模块名**: `<MODULE>.md` (例: PAPERS.md, CONTACTS.md)
 - [ ] 长度在100-150行之间
 - [ ] 所有JSONL字段都有说明
 - [ ] 包含完整工作流程
