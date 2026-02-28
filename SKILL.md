@@ -184,7 +184,7 @@ Productivity system with priority levels:
 **Input**: "I want to create a contacts module to track my professional network"
 
 **Process**:
-1. Open `module_operation/MODULE_CREATION_GUIDE.md` for complete checklist
+1. Open `module-toolkit/MODULE_CREATION_GUIDE.md` for complete checklist
 2. Guide user through 6-phase creation process:
    - Phase 1: Requirements analysis (30 min)
    - Phase 2: Core files creation (2-3 hours)
@@ -201,7 +201,7 @@ Productivity system with priority levels:
    - README.md, knowledge/KNOWLEDGE.md
    - `.claude/skills/digital-brain/skill.md`
    - `.claude/skills/digital-brain/instructions.xml`
-5. Run verification: `python module_operation/check_module_integration.py contacts contact`
+5. Run verification: `python module-toolkit/check_module_integration.py contacts contact`
 6. Create COMPLETION_REPORT.md documenting the module
 
 **Output**: Fully integrated new module ready for production use.
@@ -215,7 +215,7 @@ Productivity system with priority levels:
 5. **Log Interactions**: Always log meetings/calls to `interactions.jsonl`
 6. **Preserve History**: Past content in `published.jsonl` informs future performance
 7. **Narrative First**: For papers, extract narrative structure before diving into data details
-8. **Complete Integration**: New modules require updating 8 system files - use module_operation/MODULE_CREATION_GUIDE.md and check_module_integration.py
+8. **Complete Integration**: New modules require updating 8 system files - use module-toolkit/MODULE_CREATION_GUIDE.md and check_module_integration.py
 
 ## Integration
 
@@ -235,7 +235,7 @@ Internal references:
 - [Papers Module](./papers/PAPERS.md) - Academic paper reading
 - [Network Module](./network/NETWORK.md) - CRM documentation
 - [Operations Module](./operations/OPERATIONS.md) - Productivity system
-- [Module Creation Guide](./module_operation/MODULE_CREATION_GUIDE.md) - How to extend the system
+- [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md) - How to extend the system
 
 External resources:
 - [Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)

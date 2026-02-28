@@ -158,7 +158,7 @@
 
     <operation name="create-module">
       <trigger>User wants to extend the system or create a new module</trigger>
-      <action>Open module_operation/MODULE_CREATION_GUIDE.md and guide through 6-phase process</action>
+      <action>Open module-toolkit/MODULE_CREATION_GUIDE.md and guide through 6-phase process</action>
       <phases>
         <phase1>Requirements Analysis (30 min) - Define data model, workflow, tags</phase1>
         <phase2>Core Files Creation (2-3 hours) - README, data.jsonl, scripts</phase2>
@@ -172,7 +172,7 @@
 
     <operation name="check-module-integration">
       <trigger>User wants to verify a module is properly integrated</trigger>
-      <action>Run module_operation/check_module_integration.py with module name and keyword</action>
+      <action>Run module-toolkit/check_module_integration.py with module name and keyword</action>
       <verification>Checks that all 8 system files have sufficient references (5+ for core files, 3+ for skill files)</verification>
     </operation>
   </operations>
@@ -186,7 +186,7 @@
     <guideline>Maintain consistent tagging across modules for better discovery</guideline>
     <guideline>When running scripts, show output to user and explain insights</guideline>
     <guideline>For papers, always use narrative-first approach: extract story before diving into data</guideline>
-    <guideline>When creating new modules, follow module_operation/MODULE_CREATION_GUIDE.md and verify with check_module_integration.py</guideline>
+    <guideline>When creating new modules, follow module-toolkit/MODULE_CREATION_GUIDE.md and verify with check_module_integration.py</guideline>
   </behavior-guidelines>
 
   <context-loading>

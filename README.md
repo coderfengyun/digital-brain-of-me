@@ -291,7 +291,7 @@ Add new fields to JSONL entries as needed. The format is flexible.
 
 ### Adding New Modules
 
-Want to add a new module to your Digital Brain? See [module_operation/MODULE_CREATION_GUIDE.md](module_operation/MODULE_CREATION_GUIDE.md) for a complete step-by-step guide based on real experience.
+Want to add a new module to your Digital Brain? See [module-toolkit/MODULE_CREATION_GUIDE.md](module-toolkit/MODULE_CREATION_GUIDE.md) for a complete step-by-step guide based on real experience.
 
 The guide includes:
 - Complete checklist for creating new modules
@@ -301,14 +301,14 @@ The guide includes:
 
 **Quick check**: After creating a module, run:
 ```bash
-python module_operation/check_module_integration.py <module_name> [keyword]
+python module-toolkit/check_module_integration.py <module_name> [keyword]
 ```
 
 ## 📚 Learn More
 
 - [Original Digital Brain Skill](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/tree/main/examples/digital-brain-skill)
 - [Context Engineering Tweet](https://x.com/koylanai/status/2025286163641118915)
-- [Module Creation Guide](module_operation/MODULE_CREATION_GUIDE.md) - How to extend this system
+- [Module Creation Guide](module-toolkit/MODULE_CREATION_GUIDE.md) - How to extend this system
 
 ## 📄 License
 
