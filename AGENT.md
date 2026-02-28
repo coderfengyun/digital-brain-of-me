@@ -39,7 +39,7 @@ This is a Digital Brain personal operating system. When working in this project:
 | "Add paper to read" | Run `add_paper.py` → Create note file |
 | "Read this paper" | Guide through 2-phase reading → Update status |
 | "Show unread papers" | Run `search_papers.py --status unread` |
-| "Create new module" | Open `module_operation/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
+| "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
 | "Extend the system" | Follow module creation process → Update 8 system files |
 | "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
 
@@ -185,7 +185,7 @@ Run these to generate insights:
 - `python scripts/add_paper.py "Title" "URL"` - Add paper to reading list
 - `python scripts/search_papers.py --status unread` - Find papers to read
 - `python scripts/update_paper_status.py paper-XXX --status completed` - Update paper status
-- `python module_operation/check_module_integration.py <module> <keyword>` - Verify module integration completeness
+- `python module-toolkit/check_module_integration.py <module> <keyword>` - Verify module integration completeness
 
 ## Voice Consistency Checklist
 
@@ -199,7 +199,7 @@ Before generating any content, verify:
 
 ## Module Creation
 
-When creating new modules, follow the complete guide in `module_operation/MODULE_CREATION_GUIDE.md`:
+When creating new modules, follow the complete guide in `module-toolkit/MODULE_CREATION_GUIDE.md`:
 
 ### 6-Phase Process
 
@@ -218,7 +218,7 @@ When creating new modules, follow the complete guide in `module_operation/MODULE
 
 After creating a module, ALWAYS run:
 ```bash
-python module_operation/check_module_integration.py <module_name> <keyword>
+python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```
 
 This checks that all 8 system files have been properly updated with sufficient references.

@@ -61,7 +61,7 @@ knowledge/新模块名/
 
 **⛔ 避免创建**:
 - ❌ 多个README类文件 (README.md + QUICKSTART.md + OVERVIEW.md)
-- ❌ 开发文档 (COMPLETION_REPORT.md, SUMMARY.md) - 这些属于 module_operation/
+- ❌ 开发文档 (COMPLETION_REPORT.md, SUMMARY.md) - 这些属于 module-toolkit/
 - ❌ 超过3个文档文件
 
 **文档大小规范**:

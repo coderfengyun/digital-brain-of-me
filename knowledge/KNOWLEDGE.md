@@ -44,7 +44,7 @@ Systematic academic paper reading with narrative-driven approach. See [../papers
 
 ## Extending the Knowledge Module
 
-Want to add new knowledge types? Follow the [Module Creation Guide](../module_operation/MODULE_CREATION_GUIDE.md).
+Want to add new knowledge types? Follow the [Module Creation Guide](../module-toolkit/MODULE_CREATION_GUIDE.md).
 
 Examples of modules you could add:
 - **courses/**: Track online courses and MOOCs
@@ -55,5 +55,5 @@ Examples of modules you could add:
 
 After creating a new module, verify integration:
 ```bash
-python module_operation/check_module_integration.py <module_name> <keyword>
+python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```

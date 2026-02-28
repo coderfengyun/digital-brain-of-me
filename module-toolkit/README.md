@@ -1,4 +1,4 @@
-# Module Operation
+# Module Toolkit
 
 This directory contains tools and guides for creating and managing Digital Brain modules.
 
@@ -26,16 +26,16 @@ Automated checker that verifies module integration completeness.
 
 **Usage:**
 ```bash
-python module_operation/check_module_integration.py <module_name> <keyword>
+python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```
 
 **Examples:**
 ```bash
 # Check papers module
-python module_operation/check_module_integration.py papers paper
+python module-toolkit/check_module_integration.py papers paper
 
 # Check a hypothetical contacts module
-python module_operation/check_module_integration.py contacts contact
+python module-toolkit/check_module_integration.py contacts contact
 ```
 
 **What it checks:**
@@ -52,7 +52,7 @@ python module_operation/check_module_integration.py contacts contact
 
 1. **Read the guide:**
    ```bash
-   open module_operation/MODULE_CREATION_GUIDE.md
+   open module-toolkit/MODULE_CREATION_GUIDE.md
    ```
 
 2. **Follow the 6 phases:**
@@ -65,7 +65,7 @@ python module_operation/check_module_integration.py contacts contact
 
 3. **Verify integration:**
    ```bash
-   python module_operation/check_module_integration.py <your_module> <keyword>
+   python module-toolkit/check_module_integration.py <your_module> <keyword>
    ```
 
 4. **Success criteria:**
