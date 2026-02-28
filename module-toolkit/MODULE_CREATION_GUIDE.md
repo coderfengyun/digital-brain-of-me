@@ -109,23 +109,35 @@ knowledge/新模块名/
 - ❌ 不要使用: `README.md`, `readme.md`, `Papers.md`
 - ✅ 正确格式: 模块名全大写 + `.md` 扩展名
 
-**文档结构** (参考原repo风格,100-150行):
+**⭐ 文档职责 (入口文件标准)**:
+
+模块入口文件的**唯一职责**是说明**如何使用这个模块**:
+- ✅ 数据格式 (JSONL schema)
+- ✅ 使用方法 (CLI命令、工作流)
+- ✅ 目录结构
+- ✅ 与其他模块的集成
+- ❌ 不包含: 开发指南、规范文档、系统架构
+
+**标准文档结构** (100-150行):
 ```markdown
 # <Module Name> - Brief Description
 
-Brief introduction (2-3 sentences).
+Brief introduction (2-3 sentences) - What this module does.
 
 ## Structure
-File organization diagram
+File organization diagram - Show directory layout
 
 ## Data Schema
-Complete JSONL schema with all fields and descriptions
+Complete JSONL schema - Document all fields with types and descriptions
 
-## Workflows
-Step-by-step usage workflows
+## Workflows (optional)
+Step-by-step usage workflows - How users interact with this module
 
 ## Usage
-CLI commands and examples
+CLI commands and examples - Concrete usage instructions
+
+## Integration with Other Modules (optional)
+Cross-module relationships - How this connects to other parts
 
 ## Integration with Other Modules
 How this module connects to others
