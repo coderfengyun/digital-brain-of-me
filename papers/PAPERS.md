@@ -7,7 +7,11 @@ Systematic academic paper reading with a narrative-driven approach. Focus on und
 ```
 papers/
 ├── papers.jsonl           # Paper metadata (append-only)
-├── paper-*.md             # Reading notes
+├── paper-YYYYMMDD-XXX/    # Individual paper folder
+│   ├── README.md          # Reading notes
+│   ├── paper.html         # Downloaded HTML version
+│   └── paper.pdf          # Downloaded PDF (optional)
+├── TEMPLATE.md            # Note template
 └── PAPERS.md              # This file
 ```
 
@@ -18,64 +22,59 @@ Each entry in `papers.jsonl`:
 ```json
 {
   "id": "paper-YYYYMMDD-XXX",
-  "title": "Paper Title",
-  "authors": ["Author 1", "Author 2"],
-  "year": 2024,
-  "venue": "Conference/Journal",
   "url": "https://arxiv.org/abs/...",
-  "pdf_path": "",
-  "tags": ["domain", "method", "application"],
-  "reading_status": "unread",
-  "main_claim": "",
-  "added_at": "YYYY-MM-DD",
-  "read_at": "",
-  "related_papers": []
+  "html": "",
+  "notes": ""
 }
 ```
 
-### Status Values
-- `unread` - Not started
-- `reading` - Phase 1 completed (narrative extracted)
-- `completed` - Phase 2 completed (data verified)
+### Fields
+- `url` - Original paper URL
+- `html` - Local HTML version path (e.g., `"paper-YYYYMMDD-XXX/paper.html"`)
+- `notes` - Reading notes path (e.g., `"paper-YYYYMMDD-XXX/README.md"`)
 
-### Tag Categories
-- **Domain**: `nlp`, `cv`, `ml`, `systems`, `hci`, `theory`
-- **Method**: `transformer`, `rl`, `diffusion`, `optimization`
-- **Application**: `generation`, `understanding`, `reasoning`, `multimodal`
+### Reading Status
+- `notes` empty = Not read yet
+- `notes` filled = Reading completed
 
 ## Paper Note Structure
 
 Each `paper-*.md` contains:
 
-1. **Metadata** - Title, authors, links, dates
+1. **Metadata** - Title only
 2. **Narrative Layer**
    - Core narrative (text)
    - Narrative structure (Mermaid diagram)
 3. **Evidence Layer** - Table of claims and supporting data
-4. **Critical Thinking** - Evaluation and insights
+4. **Critical Thinking** - Bullet-point core questions and evaluation
 5. **Related Papers** - Connections to other work
 
 ## Reading Workflow
 
-### Phase 1: Extract Narrative (15-30 min)
+### Phase 0: Download Paper
+
+**Process**:
+1. Download HTML version of the paper to `paper-YYYYMMDD-XXX/paper.html`
+2. Update `html` field in papers.jsonl with the path
+3. Save PDF if needed for reference
+
+### Phase 1: Extract Narrative (1-2 hours)
 
 **Goal**: Understand the story the paper tells
 
 **Process**:
-1. Read: Abstract → Intro → Conclusion → Section headers
+1. Read the full paper thoroughly
 2. Fill in narrative section and draw Mermaid diagram
-3. Update `main_claim` in papers.jsonl
-4. Set status to `reading`
 
-### Phase 2: Verify Data (1-2 hours)
+### Phase 2: Critical Analysis (30-60 min)
 
-**Goal**: Validate claims with evidence
+**Goal**: Validate claims with evidence and think critically
 
 **Process**:
 1. For each claim in narrative: find supporting data
 2. Fill evidence table with data and credibility assessment
-3. Complete critical thinking section
-4. Set status to `completed`, update `read_at`
+3. Complete critical thinking section with bullet-point core questions
+4. Update `notes` field in papers.jsonl with README.md path
 
 ## Usage
 
@@ -87,35 +86,16 @@ python scripts/add_paper.py "Title" "URL" --tags "nlp,transformer" --year 2024
 ```
 
 **Manual**:
-1. Append entry to `papers.jsonl`
-2. Create `paper-YYYYMMDD-XXX.md` from template
+1. Create folder `paper-YYYYMMDD-XXX/`
+2. Copy TEMPLATE.md to `paper-YYYYMMDD-XXX/README.md`
+3. Download paper HTML to the folder
+4. Append entry to `papers.jsonl` with id, url, html path, and empty notes
 
-### Searching Papers
-
-```bash
-# Find unread papers
-python scripts/search_papers.py --status unread
-
-# Search by tags
-python scripts/search_papers.py --tags nlp,transformer
-
-# Full-text search in notes
-grep -r "attention mechanism" knowledge/papers/*.md
-
-# View statistics
-python scripts/search_papers.py --stats
-```
-
-### Updating Status
+### Marking as Read
 
 ```bash
-# Mark as reading (after Phase 1)
-python scripts/update_paper_status.py paper-20260227-001 \
-  --status reading \
-  --claim "Transformers achieve SOTA with pure attention"
-
-# Mark as completed (after Phase 2)
-python scripts/update_paper_status.py paper-20260227-001 --status completed
+# Mark as completed (after finishing reading)
+python scripts/update_paper_status.py paper-20260227-001 --completed
 ```
 
 ## Integration with Other Modules

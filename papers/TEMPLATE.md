@@ -1,13 +1,5 @@
 # [论文标题]
 
-> **Paper ID**: paper-YYYYMMDD-XXX
-> **Authors**: 作者1, 作者2, 作者3
-> **Year**: YYYY
-> **Venue**: 会议/期刊名称
-> **Links**: [[PDF]](url) [[Project]](url) [[Code]](url)
-> **Status**: 🔵 Reading / ✅ Completed
-> **Tags**: `#tag1` `#tag2` `#tag3`
-
 ---
 
 ## 📖 核心叙事 (Narrative)
@@ -80,6 +72,11 @@ graph TD
 ---
 
 ## 🤔 批判性思考 (Critical Thinking)
+
+### 核心问题 (以bullet形式提出)
+
+- 问题1: 这个方法的核心假设是什么？在什么情况下会失效？
+- 问题2: 实验设计是否充分？缺少哪些关键对比？
 
 ### 叙事完整性分析
 
