@@ -42,15 +42,15 @@ python module-toolkit/check_module_integration.py papers paper
 
 ### Integration Requirements
 
-Every module must update 8 files:
-- **5 Core Docs**: SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md, README.md
+Every module must update 6 files:
+- **3 Core Docs**: SKILL.md, AGENT.md, README.md
 - **1 Module Doc**: knowledge/KNOWLEDGE.md
 - **2 Skill Files**: .claude/skills/digital-brain/skill.md, instructions.xml
 
 ### Success Criteria
 
 Integration checker must show:
-- ✅ All 8 files pass (100%)
+- ✅ All 6 files pass (100%)
 - ✅ Module files exist (data.jsonl, scripts)
 - ✅ Sufficient keyword references in each file
 
