@@ -11,7 +11,7 @@ This skill helps you manage five key areas plus system extension:
 3. **Knowledge** - Bookmarks, research, learning materials, and academic papers
 4. **Network** - Contacts and relationship management
 5. **Operations** - Goals, tasks, meetings, and metrics
-6. **System Extension** - Create new modules and extend functionality
+6. **Module Toolkit** - Create new modules and extend functionality
 
 ## Commands
 
@@ -46,7 +46,9 @@ Eight Python scripts in `scripts/`:
 5. `add_paper.py` - Add academic papers to reading list
 6. `search_papers.py` - Search and query papers
 7. `update_paper_status.py` - Update paper reading status
-8. `check_module_integration.py` - Verify module integration completeness
+
+**Module toolkit**:
+- `module-toolkit/check_module_integration.py` - Verify module integration completeness
 
 ## Usage Examples
 
