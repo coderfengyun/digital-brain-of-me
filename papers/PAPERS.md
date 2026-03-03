@@ -9,7 +9,6 @@ papers/
 ├── papers.jsonl           # Paper metadata (append-only)
 ├── paper-YYYYMMDD-XXX/    # Individual paper folder
 │   ├── notes.md           # Reading notes
-│   ├── narrative_diagram.png  # Generated narrative structure diagram
 │   ├── paper.html         # Downloaded HTML version
 │   └── paper.pdf          # Downloaded PDF (optional)
 ├── TEMPLATE.md            # Note template
@@ -45,7 +44,7 @@ Each `paper-*.md` contains:
 1. **Metadata** - Title only
 2. **Narrative Layer**
    - Core narrative (text)
-   - Narrative structure (Mermaid diagram)
+   - Narrative structure (arrow-connected flow)
 3. **Evidence Layer** - Table of claims and supporting data (optional: key figure/table interpretations)
 4. **Critical Thinking** - Bullet-point core questions and evaluation
 
@@ -64,42 +63,29 @@ Each `paper-*.md` contains:
 
 **Process**:
 1. Read the full paper thoroughly
-2. Fill in narrative section:
-   - Identify problem background and solution
-   - List core innovations and key differences
-3. Create narrative structure diagram:
-   - Use script: `python scripts/generate_narrative_diagram.py paper-YYYYMMDD-XXX "问题: ..." "观察: ..." "假设: ..." "方法: ..." "验证: ..." "结论: ..."`
-   - Script generates `paper-YYYYMMDD-XXX/narrative_diagram.png`
-   - Reference in notes.md: `![叙事结构图](narrative_diagram.png)`
-
-**Important**: "论文提出了什么方法?"部分应与后续"关键论点与支撑数据"表格对齐
-
-**Script Usage**:
-```bash
-python scripts/generate_narrative_diagram.py PAPER_ID NODE1 NODE2 NODE3 ...
-
-# Example with typical 6-node flow:
-python scripts/generate_narrative_diagram.py paper-20260302-001 \
-    "问题: GenAI上下文管理碎片化" \
-    "观察: 现有方法缺乏统一架构" \
-    "假设: 文件系统抽象可提供统一基础设施" \
-    "方法: 提出file-system abstraction" \
-    "验证: exemplars展示可行性" \
-    "结论: 方法有效"
-
-# First node (问题) = red background
-# Last node (结论) = green background
-# Other nodes = white background
-```
+2. Write narrative structure as vertical flow with arrows:
+   ```
+   问题: ...
+   ↓
+   观察: ...
+   ↓
+   假设: ...
+   ↓
+   方法: ...
+   ↓
+   验证: ...
+   ↓
+   结论: ...
+   ```
 
 ### Phase 2: Critical Analysis (30-60 min)
 
 **Goal**: Validate claims with evidence and think critically
 
 **Process**:
-1. Create evidence table with key claims that align with Phase 1 narrative
-2. For each claim: find supporting data, source, and assess credibility
-3. Complete critical thinking section with bullet-point core questions
+1. Create evidence table with columns: 论点 | 创新点 | 支撑数据 | 数据来源 | 说服力评估
+2. For each claim: identify innovation, find supporting data, source, and assess credibility
+3. Complete critical thinking section with 3 core questions
 4. Update `notes` field in papers.jsonl with notes.md path
 
 ## Usage
@@ -117,13 +103,6 @@ python scripts/add_paper.py "Title" "URL" --tags "nlp,transformer" --year 2024
 3. Download paper HTML to the folder
 4. Append entry to `papers.jsonl` with id, url, html path, and empty notes
 
-### Generating Narrative Diagram
-
-```bash
-# Generate narrative structure diagram
-python scripts/generate_narrative_diagram.py paper-YYYYMMDD-XXX \
-    "问题: ..." "观察: ..." "假设: ..." "方法: ..." "验证: ..." "结论: ..."
-```
 
 ## Integration with Other Modules
 
