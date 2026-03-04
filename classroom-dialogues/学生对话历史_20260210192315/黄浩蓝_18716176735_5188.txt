@@ -1,0 +1,1072 @@
+# 环节[1] (sectionId: 170)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 
+Student: [Student Speak] 那是不是一对一
+Teacher: 
+Student: [Student Speak] 是 a i 一对一应该就是 a i 一对一你看一下
+Teacher: 同学你好，我是派老师，很高兴能和你一起学习。没错，这是一节AI一对一的数学课。在接下来的时间里，我会带你一起探索数学的奥秘。你准备好
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 同学你好，欢迎回来！我是派老师，很高兴能和你一起学习。在接下来的时间里，我会带你一起探索数学的奥秘。你准备好了吗？
+Student: [Student Speak] ok
+Teacher: 好！那我们正式开始上课咯。你看，我们的生活中有各种各样形状的物体。派老师想问问你，你生活中最喜欢玩的、或者是见过的东西里，有哪些是像这样方方正正的呀？
+Student: [Student Speak] 魔方
+Teacher: 哇，魔方！派老师也很喜欢玩魔方，你看，它就是一个很标准的正方体。像魔方、字典、快递盒这些方方正正的物体，在数学里我们把它们叫做长方体和正方体。这节课，我们就来一起认识一下它们。准备好笔和草稿纸了吗？
+Student: [Student Speak] 没有
+Teacher: 啊？那快去准备一下吧，等会儿我们可能需要动笔算一算、画一画。准备好了告诉我一声哦。
+Student: [Student Speak] 好吧
+Teacher: 
+Student: [Student Speak] 准备好了
+Teacher: 非常好！那我们马上开始今天的新知识学习吧！
+
+# 环节[2] (sectionId: 176)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这节课呢，我们会先来研究一下长方体和正方体的特征，然后再去看看它们的展开图。生活中很多盒子的展开图都很有意思哦。对了，告诉你一个小秘密，每学完一个模块，你都会获得一张专属的学习卡片！是不是很期待？
+Student: [Student Speak] 开始上课吧
+Teacher: 好的，那我们先来做个小热身，看看你对以前学过的知识掌握得怎么样。准备好了吗？
+Student: [Student Speak] 好了
+Teacher: 好，我们这就开始！
+
+# 环节[3] (sectionId: 98)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，屏幕上这三道题，你先来试试
+Student: [Student Speak] 第一道题是 a 第一道题是 a 第一道题是 a 第一道题是 a
+Teacher: 这么快！没错，就是A。那第
+Student: [Student Speak] 第二道题是四个正方形四个正方四个小正方体四个小正方体
+Teacher: 哎哟，不错嘛！第二题也对了，就是4个。那第三题呢？你再看看。
+Student: [Student Speak] 选 c c c c c c 选 c 选 c
+Teacher: 完全正确！看来你对立体图形已经有不错的了解了。热身结束，
+Student: [Student Speak] 好下一个知识点
+Teacher: 好的，
+Student: [Student Speak] 下一个知识点
+Teacher: 
+Student: [Student Speak] 老师还没有我有用
+Teacher: 哈哈，看来你已经迫不及待了。那我们马上开始学习新知识！
+
+# 环节[4] (sectionId: 99)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 
+Student: [Student Speak] 你先学的好老师
+Teacher: 
+Student: [Student Speak] 我要开始吃饭
+Teacher: 
+Student: [Student Speak] 吃完饭的人来跟你学
+Teacher: 哈哈，好的好的，吃饱了才有力气学习嘛！那我们来看看，元宵节快到了，灯笼厂想做两种新的灯笼，就是屏幕上这两种，一个长方体，一个正方体。为了把它们做得又漂亮又结实，咱们
+Student: [Student Speak] 我把年号拆短点的也行能拆也拆我也不能不拆等你拆
+Teacher: 
+Student: [Student Speak] 长方体和正方体它们都是
+Teacher: 哎，对！你是不是想说它们都是立体图形？没错，为了把灯笼做得又漂亮又结实，咱们就需要研究一下长方体和正方体的特点。接下来，我们会学习三个内容：第一，认识它们的面、棱和顶点。第二，看看它俩有啥关系。第三，学习怎么算它们的棱长和。准备好了吗？
+Student: [Student Speak] 准备好了
+Teacher: 好，那我们马上开始！
+
+# 环节[5] (sectionId: 101)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 首先，我们来认识一下长方体的“面”。你看，像这样围成长方体的每一个平平的、方方的部分，就叫做它的“面”。那派老师问你，一个长方体，一共有几个面呀？
+Student: [Student Speak] 哈吉米
+Teacher: 
+Student: [Student Speak] 哈吉米哈吉米
+Teacher: 
+Student: [Student Speak] 我叫你好机密
+Teacher: 哈哈，你可真会起外号。那“好机密”同学，能回答派老师的问题吗？一个长方体有几个面呀？
+Student: [Student Speak] 六个面
+Teacher: 对咯！长方体有6个面。那我们再来看看这6个面之间有什么关系。你看这个长方体，我点亮了其中一个面。你来
+Student: [Student Speak] 我是丁丁
+Teacher: 好的，丁丁同学。那你来转
+Student: [Commit Reason] 学生主动提交了在长方体面的特征教学工具中的操作
+<State> {
+  "长方体面的特征教学工具" : {
+    "id" : "4-1",
+    "做题情况" : "几何体4-2中被学生标记点亮的面有Face5",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 哟！动作真快！我还没说完你就找到了！没错，你找到的这个面，正好是我点亮这个面的对面。像这样相对的两个面，它们的大小和形状是完全一样的。所以我们得出一个结论：长方体相对的两个面是完全相同的。明白了吗？
+Student: [Student Speak] 老公公公公
+Teacher: 
+Student: [Student Speak] 老公公公公耶
+Teacher: 哈哈，别闹啦。派老师问你，刚才讲的“长方体相对的面完全相同”，你听明白了吗？
+Student: [Student Speak] 听明白了
+Teacher: 很好！关于“面”的知识我们就学到这里。接下来，我们去看看长方体身上还有什么别的秘密。
+
+# 环节[6] (sectionId: 102)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 除了面，
+Student: [Student Speak] 这姿势好像反了
+Teacher: 哈哈，什么姿势反了？好啦，我们继续看长方体。除了面，两个面相交的地方，会形成一条线段，你看图上这条加粗的边，我们把它叫做“棱”。那派老师问你，一个长方体，一共有多少条棱呢？你可以看着这个图数一数。
+Student: [Student Speak] 四条棱
+Teacher: 只有4条吗？你再仔细看看，图上可不止一种颜色的棱哦。你看，有红色的，有绿色的，还有蓝色的。每种颜色的棱都有
+Student: [Student Speak] 十二条棱十二条棱
+Teacher: 对咯！就是12条。看来你数得很快嘛！那这12条棱，它们的长度都是一样的吗？还是有什么规律？
+Student: [Student Speak] 长短不一各自
+Teacher: 嗯，确实不是每一条都一样长。但你再仔细看看，比如这4条绿色的棱，它们的长度是不是一样的？
+Student: [Student Speak] 是
+Teacher: 没错！同样地，4条红色的棱长度也都相等，4条蓝色的棱长度也都相等。所以你看，我们是不是可以把这12条棱分成3组，每组里面4条相对的棱，长度都是相等的。明白了吗？
+Student: [Student Speak] 嗯明白了
+Teacher: 很好！那关于“棱”
+Student: [Student Speak] 你明白了吗
+Teacher: 哈哈，派老师当然明白啦。好，关于“棱”的知识我们就学到这。认识了面和棱，接下来我们去看看长方体最后一个秘密——顶点。
+
+# 环节[7] (sectionId: 103)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 那我们先来看看，什么是“顶点”呢？你看这张图，我们刚刚学的“棱”，棱和棱相交的地方，形成了一个点，这个点就叫做“顶点”。明白了吗？
+Student: [Student Speak] 明白了有十二个顶点
+Teacher: 诶？是12个吗？你再仔细看看这张图，这些标出来的点点都是顶点，你再数数看，一共有几个？
+Student: [Student Speak] 哦八个
+Teacher: 这就对了！长方体一共有8个顶点。记住了哦。好，那我们接着看。在一个顶点上，是不是交汇了三条棱？你看，这三条棱的长度，我们就把它们分别叫做长方体的“长”、“宽”、“高”。明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！这样我们就把长方体的面、棱、顶点，还有长、宽、高都认识啦。接下来，我们就要请出长方体的好朋友——正方体了！
+
+# 环节[8] (sectionId: 104)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这就是一个正方体。它和我们刚刚学的长方体，长得是不是很像呀？
+Student: [Student Speak] 对对对
+Teacher: 那我们就来对比着看一看。我们先来快速回忆一下长方体的特征。这些我们刚刚都学过，对吧？
+Student: [Student Speak] yes
+Teacher: 好。那我们来看正方体。你先看看它的“面”，和长方体比，你觉得它有什么不一样的地方？你可以拖动这个正方体看看。
+Student: [Student Speak] 它的面是六个
+Teacher: 没错，也是6个面
+Student: [Student Speak] 而且还玩
+Teacher: 
+Student: [Student Speak] 完全一样
+Teacher: 哇！你观察得太仔细了！不仅看出来有6个面，还发现了它们都是完全一样的正方形。非常棒！那我们再来看看“棱”呢？你觉得
+Student: [Student Speak] 然后它它有
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 
+Student: [Student Speak] 它有它的棱有
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 别着急，慢慢想。你先数数看，它有多少条棱？
+Student: [Student Speak] 它也有十二个棱
+Teacher: 对，也是12条棱。那这些棱的长度呢？它们之间有什么关系？
+Student: [Student Speak] 全部相同
+Teacher: 完全正确！正方体的12条棱长度都相等。那最后，你猜猜它有几个顶点？
+Student: [Student Speak] 八个
+Teacher: 没错！也是8个顶点。你看，长方体和正方体都有6个面、12条棱、8个顶点。但是正方体的要求更高，它的6个面必须完全一样，12条棱也得一样长。所以我们说，正方体是一种特殊的长方体。你觉得这句话对吗？为什么？
+Student: [Student Speak] 对的因为
+Teacher: 
+Student: [Student Speak] 长如长方体
+Teacher: 
+Student: [Student Speak] 切长长方体分成两个就是两个正方体
+Teacher: 嗯？这个说法有点意思，但不太准确哦。不是所有长方体切开都能变成正方体的。你想想我们刚刚总结的特征。长方体要求“相对的面”完全相同，正方体的6个面是不是都满足这个要求？
+Student: [Student Speak] 是的
+Teacher: 对吧！然后长方体要求“相对的棱”长度相等，正方体的12条棱是不是也都满足这个要求？
+Student: [Student Speak] 是的
+Teacher: 这就对了嘛！所以你看，长方体有的特征，正方体全都有。只是正方体对自己更“严格”一点，要求所有的面和棱都一样。所以我们才说，正方体是长、宽、高都相等的特殊长方体。这下明白了吧？
+
+# 环节[9] (sectionId: 107)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 明白了吗？好，既然我们已经彻底搞
+Student: [Student Speak] 嗯明白了
+Teacher: 明白了就好！那我们回到一开始的那
+Student: [Student Speak] 我还
+Teacher: 
+Student: [Student Speak] 我还发现
+Teacher: 
+Student: [Student Speak] 正正方体每个面的面积都一样
+Teacher: 哇！你这个发现非常厉害！确实是这样，因为正方体的每个面都是完全一样的正方形，所以它们的面积当然也都一样啦。这个知识点我们后面算表面积的时候就会用到。不过现在，我们先回到一开始的那个问题。你看，要做这两个灯笼的“框架”，你觉得是和我们刚学的“面”、“棱”、“顶点”里的哪个零件有关系呢？
+Student: [Student Speak] 面
+Teacher: 嗯？你再想想，框架是用一根根的木条搭起来的，对吧？就像我们身体的骨架一样。那这些“木条”对应的是我们学的哪个部分呢？是“面”吗？
+Student: [Student Speak] 角
+Teacher: 角？是说顶点吗？顶点只是一个一个的点，木条可是一条一条的线段呀。再想想，面和面相交的线段，我们叫它什么来着？
+Student: [Student Speak] 忘了
+Teacher: 哈哈，这么快就忘了？我们刚刚才说过，面和面相交的线段，叫做“棱”呀。你看，这个灯笼的框架，就是由一根根木条，也就是长方体和正方体的“棱”组成的。所以，题目问我们至少需要多少厘米长的木条，其实就是在问什么呢？
+Student: [Student Speak] 问要多少的菱角
+Teacher: 哈哈，是“棱”，不是“菱角”哦。你是不是想说，要算所有“棱”的长度加起来是多少？
+Student: [Student Speak] 对
+Teacher: 对啦！这个问题其实就是让我们算这两个灯笼所有棱的长度加起来有多长，也就是它们的“棱长总和”。那我们先来看这个长方体灯笼。它的长、宽、高分别是30厘米、25厘米和15厘米。你还记得长方体一共有多少条棱吗？
+Student: [Student Speak] 八个
+Teacher: 诶？8个是顶点哦。再想想，棱有多少条？我们之前数过的。
+Student: [Student Speak] 十二个人
+Teacher: 
+Student: [Student Speak] 十二个
+Teacher: 对了！是12条棱。那要算棱长总和，我们是不是要把这12条棱的长度全都加起来？
+Student: [Student Speak] 是的
+Teacher: 没错！那这12条棱，它们的长度都一样吗？还是有什么规律？
+Student: [Student Speak] 有些一样有些不一样
+Teacher: 说得很好！那具体是怎么个一样，怎么个不一样呢？你看看这个图，我们把相同长度的棱都涂上了相同的颜色。你看看，有几种
+Student: [Student Speak] 每四正方形正方
+Teacher: 
+Student: [Student Speak] 正方形的
+Teacher: 
+Student: [Student Speak] 嗯棱是每四个一样
+Teacher: 
+Student: [Student Speak] 总共有三个不一样的每四个就是每四个过后就有一个就有一个不一样的
+Teacher: 太棒了！你总结得非常准确！就是这样，长方体的12条棱可以分成3组，每组有4条棱，而且每组里的4条棱长度都相等。那你看，这个长方体的长是30厘米，宽是25厘米，高是15厘米。这三种长度的棱，各有几条呢？
+Student: [Student Speak] 有四
+Teacher: 
+Student: [Student Speak] 四条
+Teacher: 完全正确！就是各有4条。那要算这个长方体灯笼的棱长总和，是不是就是4条30厘米的棱，加上4条25厘米的棱，再加上4条15厘米的棱
+Student: [Student Speak] 再加四条
+Teacher: 
+Student: [Student Speak] 再加上四条十五厘米的棱
+Teacher: 对！就是这样。那这个算式，你有没有发现什么特点？有没有更简单的方法来计算它？
+Student: [Student Speak] 可以用，二十五乘以四
+Teacher: 嗯，25乘以4肯定是要算的。你看，这个算式里有30×4，有25×4，还有15×4，它们都乘了4，
+Student: [Student Speak] 哦可可以这样可以先二十五乘以四得出一百再拿一百去乘以三十加十五再乘四加四最后的和就算出来了
+Teacher: 你的想法很有意思，不过好像有点绕晕了。我们一起来理一理。你看这个算式：`30×4+25×4+15×4`。我们是不是可以把30、25和15先加起来，然后再一起乘以4呢？这叫乘法分配律的逆运算，还记得吗？
+Student: [Student Speak] 记得
+Teacher: 记得就好！那用这个方法，算式就变成了`(30+25+15)×4`。你算算看，括号里等于多少？
+Student: [Student Speak] 三百二十
+Teacher: 
+Student: [Student Speak] 厘米
+Teacher: 算得很快，但是好像算错了哦。我们一步一步来，30加25等于多少？
+Student: [Student Speak] 五五
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 对，55。那55再加上15呢？
+Student: [Student Speak] 七十
+Teacher: 对啦！是70。那最后一步，就是用70乘以4，等于多少呢？
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 七十乘四等于
+Teacher: 
+Student: [Student Speak] 二百八
+Teacher: 完全正确！就是280厘米。你看，我们刚刚通过计算，发现长方体的棱长总和，就等于它的（长+宽+高）×4。这就是长方体棱长和的计算公式。好了，长方体解决了，那我们再来看看旁边这个正方体灯笼。它的棱长是20厘米。你觉得它的棱长总和该怎么算呢？
+Student: [Student Speak] 边长乘四
+Teacher: 边长乘四？这个是算正方形的周长哦。我们现在算的是正方体，它可是个立体的家伙。你再想想，正方体一共有多少条棱来着？
+Student: [Student Speak] 十二
+Teacher: 对，12条！那正方体的这12条棱，它们的长度有什么关系呢？
+Student: [Student Speak] 都相同
+Teacher: 
+Student: [Student Speak] 全部相同
+Teacher: 完全正确！12条棱的长度全部相同。那现在每条棱的长度都是20厘米，一共有12条，那总长度该怎么算呢？
+Student: [Student Speak] 每条棱的长长乘以十二
+Teacher: 太棒了！你直接总结出了公式！没错，正方体的棱长总和就是用一条棱的长度乘以12。那这个正方体灯笼，它的棱长总和是多少呢？
+Student: [Student Speak] 二百四
+Teacher: 完全正确！就是240厘米。你看，我们今天就学会了两个非常重要的公式：长方体的棱长总和等于（长+宽+高）×4，而正方体的棱长总和等于棱长×12。这两个公式在解决生活中的很多问题时都非常有用哦。
+
+# 环节[10] (sectionId: 172)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好了，我们刚刚把长方体和正方体的知识都学了一遍，还学会了怎么算它们的棱长总和。现在，派老师想请你来当一次小老师，把我们今天学的知识点整理一下，做个课堂笔记。来，你试着把下面这些知识点拖到对应的标题下面吧。
+Student: [Student Speak] 棒棒棒棒棒
+[Commit Reason] 学生点击提交按钮主动提交2-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 太棒了！你全
+Student: [Student Speak] 收碗洗碗先吃不管
+Teacher: 太棒了！你全都拖对了，看来今天学的知识你都记在心里啦！
+
+# 环节[11] (sectionId: 108)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 既然你都记住了，那我们就来练练手，看看能不能把这些知识用起来。接下来我们有几道练习题，先从简单的开始，然后会有一道稍微难一点的，最后还有一个小挑战。派老师发现你公式记得挺牢，但有时候会把棱的数量记错，或者计算的时候有点小马虎。咱们就在练习里把这些问题都解决掉，好不好？来，先看这两道题，你试着在手写板上算出它们的棱长和吧。给你90秒，加油！
+Student: [Student Speak] ok
+<State> {
+  "手写板" : {
+    "id" : "3-1",
+    "长方体" : {
+      "name" : "1",
+      "异常状态" : "笔迹无法识别"
+    },
+    "剩余时间" : "83s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 好的，开始吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交手写板的做题结果
+<State> {
+  "手写板" : {
+    "id" : "3-1",
+    "长方体" : {
+      "name" : "1",
+      "异常状态" : "笔迹无法识别"
+    },
+    "正方体" : {
+      "name" : "2",
+      "做题情况" : "<学生在手写板上写了“<p>$$10{\\times}4+6{\\times}4+4{\\times}4$$<br/>$$=40+24+16$$<br/>$$=40+36$$<br/>$$=76$$</p><p>$$5{\\times}12=60$$</p>”>"
+    },
+    "剩余时间" : "7s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 这么快就做完啦！派老师来看看。先看第一个长方体，你的思路完全正确，知道用每种长度的棱乘以4再相加。但是，你看这里，`24+16`等于多少呀？是不是算错了？再看第二个正方体，`5×12=60`，这个完全正确！公式用对了，也算对了。你再算一下第一个题，`40+24+16`，最后结果应该是多少呢？
+Student: [Student Speak] 等于八十
+Teacher: 对啦！等于80厘米。你看，`24+16`应该等于40，`40+40`就是80。下次计算可要再仔细一点哦。你已经掌握了长方体和正方体棱长和的计算方法，只是计算的时候偶尔会出点小差错，以后多加注意就好啦！
+
+# 环节[12] (sectionId: 113)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 刚刚那两道题只是热身，接下来还有一道稍微难一点的，最后还有一个小挑战。派老师发现你公式记得挺牢，但有时候会把棱的数量记错，或者计算的时候有点小马虎。咱们就在练习里把这些问题都解决掉，好不好？来，看这道题。跟刚才的题有点不一样哦，你仔细读读题，特别是括号里的字。想好了就在手写板上写下你的算法吧，给你120秒，加油！
+Student: [Commit Reason] 学生点击提交按钮主动提交手写板的做题结果
+<State> {
+  "手写板" : {
+    "id" : "2-1",
+    "手写板 1" : {
+      "name" : "1",
+      "做题情况" : "<学生在手写板上写了“<p>$$50{\\times}4+25{\\times}4+40{\\times}4$$<br/>$$=200+100+160$$<br/>$$=300+160$$<br/>$$=460$$</p>”>"
+    },
+    "剩余时间" : "80s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 这么快就写好啦！派老师看看。嗯，你这个算式是把所有的棱都加起来了，对不对？但你再仔细看看题目，特别是括号里那句话，说了什么呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 没关系，我们一起来看看。题目最后有个括号，写着“底边不装”，对不对？你看这个大楼的模型，彩灯是装在四周的棱上。那“底边不装”意思就是，最下面接触地面的那些棱，是不需要装彩灯的。你来想一想，底边有几条长和几条宽呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 来，我们看这个模型。你看老师标出来的这几条棱，它们是不是就是大楼的底边？数一数，这里面有几条长，几条宽？
+Student: [Student Speak] 两条长两条宽
+Teacher: 对咯！底边就是2条长和2条宽。那现在我们再想一下，既然这2条长和2条宽不用装彩灯，那我们一共需要给几条长、几条宽和几条高装上彩灯呢？
+Student: 
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 你来说吧
+Teacher: 好的，那派老师来给你分析一下。你看，一个长方体原来有4条长、4条宽、4条高，对吧？现在底边的2条长和2条宽都不装彩灯了。那我们还剩下几条长需要装？
+Student: [Student Speak] 爸爸爸爸爸爸
+Teacher: 嘘，认真听讲哦。我们刚才说到，一个长方体本来有4条长，现在底边的2条长不用装彩灯了，那还剩下几条长需要装呢？
+Student: [Student Speak] b
+Teacher: 
+Student: [Student Speak] 你要来赶紧说不鸡鸡都要来
+Teacher: 
+Student: [Student Speak] 我来帮帮
+Teacher: 同学，我们正在上课呢，要集中注意力哦。我们再看一遍这个问题。长方体一共有4条长，现在底下的2条不装彩灯了，那还剩下几条长需要装？是不是`4-2=2`条？用
+Student: [Student Speak] 让我看看
+Teacher: 
+Student: [Student Speak] 对对的对的
+Teacher: 很好！那用同样的方法想一想，宽需要装几条呢？
+Student: [Student Speak] 宽需要装
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 
+Student: [Student Speak] 等等我上个厕所
+Teacher: 好的，派老师等你回来。
+Student: [Commit Reason] 学生沉默30s
+Teacher: 还没回来吗？派老师在等你哦。
+Student: [Student Speak] 嗯
+Teacher: 回来啦？那我们继续。刚才我们说到，长需要装2条。那你再看看，宽需要装几条呢？
+Student: [Student Speak] 宽需要装三条
+Teacher: 嗯？为什么是3条呢？你再看看，长方体一共是4条宽，底边有2条不装，那还剩下几条呀？
+Student: [Student Speak] 宽也有两条
+Teacher: 对啦！宽也是需要装2条。那高呢？题目有没有说高有哪几条不装？
+Student: [Student Speak] 高有底不装
+Teacher: 
+Student: [Student Speak] 高只装一条
+Teacher: 嗯？高为什么只装一条呢？你再想想，“底边”指的是不是最下面那个面
+Student: [Student Speak] 因为底因为
+Teacher: 
+Student: [Student Speak] 底边不装啊因为
+Teacher: 对，就是因为“底边不装”。但你想想，“底边”指的是不是最下
+Student: [Student Speak] 所以才说
+Teacher: 没错，就是因为“底边不装”。但你仔细想一下，“底边”指的是最下面那个面上的棱，对不对？你看模型，高是竖着的这些棱，它们有在底边上吗？
+Student: [Student Speak] 你看我呀我看你你不上你的课
+Teacher: 同学，派老师在跟你一起看题呢。我们一起把这道题弄明白，好不好？你看这些绿色的棱，它们是长方体的高。题目只说了“底边不装”，没有说高要怎么样。所以，这4条高是不是都要装上彩灯呀？
+Student: [Student Speak] 是的
+Teacher: 好，那现在我们知道了，需要装2条长、2条宽和4条高。长是50米，宽是25米，高是40米。那你能告诉我，算式应该怎么列吗？
+Student: [Student Speak] 二乘
+Teacher: 
+Student: [Student Speak] 五二乘五十二乘二十五二乘四乘四十
+Teacher: 
+Student: [Student Speak] 五十乘二二十五五十乘二加二十五乘二再加四十乘四最后把它们加起来
+Teacher: 
+Student: [Student Speak] 听懂掌声
+Teacher: 
+Student: [Student Speak] 乐乐老师给我鼓励
+Teacher: 非常棒！思路完全正确！就是这样！2条长就是`50×2`。再加上2条宽，就是`50×2+25×2`。最后加上4条高，就是`50×2+25×2+40×4`。算出来最后等于310米。你看，这道题的关键就是要仔细读题，弄清楚到底需要计算哪些棱。以后遇到这种题目，一定要先看清楚条件再动手哦！
+Student: [Student Speak] ok ok
+Teacher: 好的，看来你已经完全明白啦！
+
+# 环节[13] (sectionId: 112)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 
+Student: [Student Speak] 我 twenty thousand
+Teacher: 
+Student: [Student Speak] 看我几点弄你
+Teacher: 
+Student: [Student Speak] 妈妈哦不二宝你记得哈四点三点钟上课四点钟结束课后记得没有
+Teacher: 
+Student: [Student Speak] 十点正结束我就可以翻你
+Teacher: 好的，看来你已经完全明白啦！那我们来看最后一道练习题。这道题和刚才的有点像，也是一个生活中的问题。你仔细看看图和题目，特别是括号里的字。你看，这个礼品盒是用丝带这样捆起来的。你先观察一下，捆这个礼品盒，用了几条和“长”一样的丝带，几条和“宽”一样的丝带，还有几条和“高”一样的丝带呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 没关系，我们一起来看。你看这个图，丝带是这样绕着盒子捆的。我们先来看和“长”平行的丝带，也就是横着最长的这几段。你看老师标出来的这两条橙色丝带，它们是不是和礼品盒的“长”一样长？数一数，有几条呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 看着屏幕上老师标出来的橙色线条，这里有2条和长一样长的丝带，对不对？好，那我们再来看看和“宽”平行的丝带。你看，老师现在标出了粉色的这几段，它们是和礼品盒的“宽”一样长的。你数数看，有几条呀？
+Student: [Student Speak] 一八八 ok
+Teacher: 
+Student: [Student Speak] 十二条哦不对两条两条
+Teacher: 对咯！也是2条。那最后，我们来看看和“高”平行的丝带，也就是竖着的那几段。你再数数看，老师标出来的绿色丝带，有几条呀？
+Student: [Student Speak] 死
+Teacher: 是“四”条吗？
+Student: [Student Speak] 四
+Teacher: 没错，是4条！好，现在我们知道了，需要2条长、2条宽、4条高。那算式的第一步就是把这些丝带的长度加起来。长是30厘米，宽是20厘米，高是10厘米。你来列一下这部分的算式吧。
+Student: [Student Speak] 你来列吧
+Teacher: 好的，那我们一起来列。2条长，每条30厘米，就是`30×2`，对吧？再加上2条宽，每条20厘米，算式就变成了什么样？
+Student: [Student Speak] 就变成了三十乘啊不对，三十乘二二乘二十十乘四
+Teacher: 
+Student: [Student Speak] 然后再减去三十
+Teacher: 诶，前面说得都对！就是`30×2+20×2+10×4`。但是，你再看看题目括号
+Student: [Student Speak] 然后再减三十再减三十减三十
+Teacher: 为什么要减30呢？你再仔细读读题目里括号的话，“打结处要30厘米”。这是什么意思呀？是说我们用掉了30厘米，还是需要额外留出30厘米
+Student: [Student Speak] 多用了三十厘米多用了三十厘米要减去三要加去加上来多用了多用了三十厘米要加上去
+Teacher: 对啦！想明白了！“打结处要30厘米”是说我们除了捆盒子的丝带，还需要额外留出30厘米来打结。所以应该是加上30。那完整的算式就是`30×2+20×2+10×4+30`。来，
+Student: [Student Speak] 加棒棒棒
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 棒！那现在你来算算，最后结果是多少呢？
+Student: [Student Speak] 因为钱
+Teacher: 算出来等于170厘米。这道题和上一道题一样，都是在考我们怎么算棱长和，但都加了一些变化的条件。所以做题的时候，一定要仔细读题，特别是括号里的说明，明白到底要算哪些部分，是加还是减。
+
+# 环节[14] (sectionId: 165)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，看来你已经完全明白啦！那我们来看最后一道练习题。这道题和刚才的有点像，也是一个生活中的问题。你仔细看看图和题目，特别是括号里的字。你看，这个礼品盒是用丝带这样捆起来的。你先观察一下，捆这个礼品盒，用了几条和“长”一样的丝带，几条和“宽”一样的丝带，还有几条和“高”一样的丝带呢？
+Student: [Student Speak] 怎么这样子呢
+Teacher: 嗯？你是指这个礼品盒的捆法，还是题目有什么让你觉得奇怪的地方呀？
+Student: [Student Speak] 没有没有就是我看不到题目了
+Teacher: 哦哦，好的好的，没问题，派老师再把题目给你放出来哈。//Theusercan'tseetheproblem,soIneedtore-displaythecontextfromthepreviousturn.//Thisisatechnicalissue,soIwilljustrepeatthecorequestion.//Theproblemisaboutagiftbox:length30cm,
+Student: [Student Speak] 而我数学老师讲英文的
+Teacher: 
+Student: [Student Speak] 我没看我看不到题目了老师
+Teacher: 好的好的，派老师听到了，你别着急。现在能看到了吗？
+Student: [Student Speak] 不能
+Teacher: 还是看不到吗？这样吧，派老师把题目念给你听，你仔细听好哦。这个题目是说，有一个礼品盒，它的长是30厘
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 欢迎回来！刚刚好像出了点小问题，现在能看到题目了吗？
+Student: [Student Speak] 还是不能看到题目题目都不见了
+Teacher: 别着急别着急，派老师在这儿呢。看来是系统出了点小故障，没关系，我们不看图了，派老师直接告诉你信息，你跟着派老师的思路走，好不好？
+Student: [Student Speak] ok ok
+Teacher: 
+Student: [Student Speak] 来帮你看
+Teacher: 
+Student: [Student Speak] 你
+Teacher: 好的，那我们开始咯。这个礼品盒是用丝带捆起来的。虽然看不到图，但派老师告诉你，这个丝带绕了两圈，一圈是横着绕的，一圈是竖着绕的。我们先来看，和礼品盒的“长”一样长的丝带，有几条呢？
+Student: [Student Speak] 请慢点
+Teacher: 好的，派老师说慢一点。你想象一个长方形的盒子，我们用丝带把它捆起来。丝带是绕着盒子捆的。我们先看，和盒子的“长”平行的丝带，有几条呢？
+Student: [Student Speak] 题目真没给他算好
+Teacher: 哎呀，是派老师的错
+Student: [Student Speak] 老抽给刷新下系统
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 欢迎回来！看来这个题目跟我们“捉迷藏”呢。这样吧，咱们不跟它耗着了，这个题我们先跳过，直接进入下一个环节，好不好？
+Student: [Student Speak] 好的
+Teacher: 好！那咱们就不跟这个“调皮”的题目“纠缠”了。其实呀，刚刚那道题已经是我们这个模块的最后一道练习题了。恭喜你，完成了“长、正方体的认识”这个模块的学习！你看，这是你努力学习换来的专属卡片，你获得了一个称号，叫“空间架构师”！是不是很酷？这说明你在立体感知、逻
+Student: [Student Speak] i love you
+Teacher: 
+Student: [Student Speak] i love you
+Teacher: 
+Student: [Student Speak] 那我看看背面
+Teacher: 哈哈，派老师也爱你！没问题，你点一下卡片上的“解锁高能瞬间”，就能看到背面
+Student: [Commit Reason] 学生翻转id为1-1模块卡片，此时模块卡片位于反面
+Teacher: 翻过来了！你看，这上面记录了你的专属高能瞬间！
+Student: [Student Speak] 我还有三分钟上葫芦还有三分钟上葫芦
+Teacher: 
+Student: [Commit Reason] 学生将id为1-1的模块卡片收集至卡片墙中
+Teacher: 好，卡片我们先收好。接下来，我们还有一个新的模块“正方体的展开图”要学习。不过派老师听到你说还有三分钟要上别的课，是吗？
+Student: [Student Speak] 还有十分钟
+Teacher: 哦，还有十分钟，那时间足够了！你看，我们下一个要挑战的模块就是“正方体的展开图”。刚刚学习长方体和正方体，你表现得很棒，尤其是自己能发现正方体的特点。派老师觉得你学有余力，所以我们来挑战一个更有趣的内容！准备好了吗？
+Student: [Student Speak] 还有什么说法吗就是前一个吗
+Teacher: 
+Student: [Student Speak] 还是一分钟
+Teacher: 前一个模块我们已经顺利完成了，卡片也收集好了。现在我们要开始一个新的挑战，就是“正方体的展开图”。这个内容会很有意思哦！你学到这里感觉怎么样？要不要休息一下，还是我们直接开始？
+Student: [Student Speak] 不用不用不用不用不用休息
+Teacher: 好的，派老师就知道你精力充沛！那我们马上开始下一个模块的学习！
+
+# 环节[15] (sectionId: 162)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，派老师就知道你精力充沛！那我们马上开始下一个模块的学习！不过，为了保证我们能一口气学明白这个有趣的新内容，要不要花一分钟快速休息一下，喝口水，让眼睛和大脑都放松一下呢？
+Student: [Student Speak] 不用不用
+Teacher: 好嘞，听你的！那我们就不休息，直接开始！
+Student: [Student Speak] 直接开始吧
+Teacher: 没问题，我们立刻开始！
+
+# 环节[16] (sectionId: 131)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 同学，欢迎来到新模块的学习！刚刚我们研
+Student: [Student Speak] 老派盲盒
+Teacher: 
+Student: [Student Speak] 老派萌
+Teacher: 哈哈，没错，就是“老派”我
+Student: [Student Speak] 这还有
+Teacher: 哈哈，对，就是派老师的专属盲盒！你看，工厂为了给我做这个盲盒，生产了一大堆包装盒的纸板。但问题来了，这些纸板，哪些才能真正地折成一个正方体盒子呢？
+Student: [Student Speak] 呃只有第一个和第四个
+Teacher: 
+Student: [Student Speak] 还有第二个
+Teacher: 
+Student: [Student Speak] 才能折成
+Teacher: 
+Student: [Student Speak] 第一个第二个第四个才能折成正方形
+Teacher: 哇！你观察得好快啊！已经开始当“质检员”了！到底是不是这几个，咱们等会儿来验证。像这种能折成正方体的平面图形，我们就叫它“正方体的展开图”。接下来，我们就来系统地研究一下，正方体的展开图到底有哪些类型，好不好？
+Student: [Student Speak] 好的
+Teacher: 好，那我们就正式开始研究这些有趣的展开图吧！
+
+# 环节[17] (sectionId: 132)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，像这样，我们把一个正方体沿着它的一些棱剪开，然后把它展开成一个平面图形，这个图形就叫做“正方体的展开图”。明白了吗？就是把一个正方体“摊平”了。
+Student: [Student Speak] 明白了
+Teacher: 好。那派老师再给你看一个。你看，这次我们换一种剪法，展开之后，得到的图形和刚才那个长得不一样了，对吧？这说明了什么呢？
+Student: [Student Speak] 说明了
+Teacher: 
+Student: [Student Speak] 正方形
+Teacher: 嗯，展开
+Student: [Student Speak] 可以剪成各种各可以剪成剪成各种各样的平面图
+Teacher: 说得太棒了！就是这个意思！我们用不同的方法去剪，就能得到各种各样不同的展开图。所以，正方体的展开图不是只有一种，而是有很多种。那到底有多少种呢？这就是我们接下来要研究的问题啦。准备好了吗？
+Student: [Student Speak] 准备好了
+Teacher: 好，那我们马上开始！
+
+# 环节[18] (sectionId: 133)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 既然正方体的展开图有这么多种，那我们肯定得找个规律来研究它们，不然就乱套了，对吧？我们先来看最常见的一种类型。你看这个展开图，它是不是中间一行有4个正方形，上下两行各有1个？你觉得它能折成一个正方体吗？
+Student: [Student Speak] 能
+Teacher: 很确定
+Student: [Student Speak] 啊能能能
+Teacher: 没错！你看，它确实可以折成一个正方体。好，我们再把它展开。现在派老师想考考你，如果我们只移动最下面那个小正方形的位置，你觉得它还能怎么放，也能折成一个正方体呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 
+Student: [Student Speak] 可以把它放在
+Teacher: 嗯，大胆
+Student: [Student Speak] 第从左往右数的第三个位置上
+Teacher: 
+Student: [Student Speak] 啊不对可以放在下下可以把它的位置向右移动两格
+Teacher: 向右移动两格，也就是放在从左往右数第三个正方形的下面，是吗？好想法！那除了这个位置，还有别的位置可以放吗？
+Student: [Student Speak] 可以放在从左往右数的最后一个方块上也可以
+Teacher: 嗯！你把所有可能的情况都找出来了！你看，除了我们最开始的那一种，下面这个小正方形还可以放在这三个位置。这几种呀，我们都把它们叫做“1-4-1”型展开图。你看，因为它们都是中间一行有4个，上下两行各有1个正方形。那除了这4种，你觉得“1-4-1”型还有没有别的可能呢？
+Student: [Student Speak] 还有
+Teacher: 哦？你觉得还有？那你说说看，会是什么样的呢？
+Student: [Student Speak] 可以
+Teacher: 
+Student: [Student Speak] 是
+Teacher: 没关系，慢慢想，可以怎么描述它的样子？比如上面那一行，中间那一行，下面那一行，分别有几个正方形，都在什么位
+Student: [Student Speak] 可以把中间那可可以把中间那一行最右边的放在最左边的那一个位置第一个图
+Teacher: 嗯...派老师有点没听懂你的意思。你是说，我们把中间
+Student: [Student Speak] 直接让我把图把我的意思画出来吧让我把意思画出来
+Teacher: 哈哈，派老师也希望你能直接画出来呢，不过现在我们没法画图。要不你再试着描述一下？比如说，我们把上面那个小正方形的位置也动一动，怎么样？你看，像这样，把上面那个方块往右挪一格，你觉得这个图形，还能折成正方体吗？
+Student: [Student Speak] 可以可以
+Teacher: 真的可以吗？你再仔细看看。派老师给你变个魔术。你看，我们把它上下翻转一下，它是不是就和我们刚才找到的其中一种长得一模一样了？所以呀，它虽然看起来
+Student: [Student Speak] 对呀所以可以呀
+Teacher: 
+Student: [Student Speak] 上课呢
+Teacher: 对，是“可以”折，但它不是一种“新的”形状，对不对？它只是我们已经找到的这一种，换了个方向看而已。我们现在要找的是，所有长得不一样
+Student: [Student Speak] 一下课
+Teacher: 
+Student: [Student Speak] 不是下课了咦
+Teacher: 还没下课呢，我们正在探索正方体展开图的秘密，马上就要有新发现了！刚刚说到，这个图形虽然能折，但它和我们之前找到的是重复的，所以不能算一种新的。不过，如果我们把上面那个小正方形固定在第二个位置，下面那个小正方形换换位置，又能得到两种新的哦！这样一来，我们“1-4-1”型的展开图就一共有6种啦。明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！那除了“1-4-1”型，正方体的展开图还有没有其他类型呢？我们接下来就去看看别的形状。
+
+# 环节[19] (sectionId: 134)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 比
+Student: [Student Speak] 下课了
+Teacher: 
+Student: [Student Speak] 真下课了不信你看时间
+Teacher: 
+Student: [Student Speak] 三点钟的课上到四点零一
+Teacher: 
+Student: [Student Speak] 是不是下课了么
+Teacher: 哎呀，派老师知道你可能有点累了，想下课了。但是我们的探险才进行到一半呢！再坚持一下，我们马上就能发现正方体展开图所有的小秘密了，很快的！刚刚我们认识了“1-4-1”型，现在我们来看看，如果把中间一行的4个正方形，拿掉1个，
+Student: [Student Speak] 关个 hellen
+Teacher: 
+Student: [Student Speak] 关个三分钟
+Teacher: 
+Student: [Student Speak] 广告杀人了
+Teacher: 哈哈，哪有广告呀。咱们的数学探险可比广告有意思多啦！别着急，我们很快就能结束战斗了！你看，我们把刚刚中间一行的4个正方形，拿掉1个，变成3个。然后把上面那一行变成2个，下面那一行还是1个。就变成了这个样
+Student: [Student Speak] 雪花飘飘北风萧萧
+Teacher: 
+Student: [Student Speak] 我要擦皮鞋我有眼睛啊啦啦
+Teacher: 哈哈，你还会唱这首歌呢！不过我们先不当“擦鞋匠”，先当个“空间架构师”好不好？快看派老师给你变的这个新形状，你觉得它能折成一个正方体吗？
+Student: [Student Speak] 啊能能能
+Teacher: 这么肯定？那我们就来验证一下！你看，果然可以！那现在问题来了，我们保持上面和中间这两行的方块不动，只移动最下面那个小正方形，你觉得它还能放在哪，也能拼成一个正方体呢？
+Student: [Student Speak] 可以把它放在可以把
+Teacher: 
+Student: [Student Speak] 最底下的向右移动两格也可以拼成
+Teacher: 
+Student: [Student Speak] 正方形
+Teacher: 向右移动两格？也就是放在最右边那个正方形的下面，对吗？好，那除了这个位置，还有没有别的位置可以放呢？你来拖一拖，找一找。
+Student: [Student Speak] 还有吧
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "剩余时间" : "30s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中将方块拖成了expanded-cuboid-representation-2的样式，请调用展示expanded-cuboid-representation-2相同样式的预置几何体教具。>",
+    "剩余时间" : "30s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 嗯，你找到了一个！就是把下面这个小方块放在中间的位置，对吧？我们来验证一下，
+Student: [Student Speak] 还有一个还有一个还有
+Teacher: 别急别急，派老师知道你还想到了一个！我们先来验证你刚刚找到的这个。你看，确实可以！那你刚才说“还有一个”，是想把小方块放在哪里呀？
+Student: [Student Speak] 让我，把最底下的小方块再向再向旁边移一格
+Teacher: 再向旁边移一格，就是放到最右边，对不对？你太棒了，把所有可能都想到了！你看，就是这样。这个当然也
+Student: [Student Speak] 还有可以
+Teacher: 
+Student: [Student Speak] 可以移动中间的那一格
+Teacher: 移动中间的那一格？哦？你的想法很大胆啊！那你说说看，你想怎么移动中间这一行呢？
+Student: [Student Speak] 把中，中间那一行正中间的那一个向上移然后把左右两边的推进来就可以了
+Teacher: 嗯......派老师正在努力理解你的想法。你是说，把中间那行的3个方块，最中间的那个向上挪，然后把左右两边的向中间靠拢？这个想法很有创意！不过，我们先来看看刚刚找到的这几种。你看，这三种，它们每一层的正方形个数都是2个、3个、1个。所以我们把它们叫做“2-3-1”型。那除了这3种，还有没有别的“2-3-1”型呢？比如，我们把上面那两个方块
+Student: [Student Speak] 没有了
+Teacher: 
+Student: [Student Speak] 没有了
+Teacher: 没错！“2-3-1”型确实就这3种了。
+Student: [Student Speak] 快点领取名片吧
+Teacher: 
+Student: [Student Speak] 快点领取名片吧我着急下课
+Teacher: 哈哈，别着急领卡片嘛，我们的探险还没结束呢！马上就到下一个关卡了！刚刚我们找到了3种“2-3-1”型。但如果我们在
+Student: [Student Speak] 吓哭我了我不想上了还拖堂跟我们班的老师一样还拖堂
+Teacher: 
+Student: [Student Speak] 哼哼
+Teacher: 
+Student: [Student Speak] 好酷哦
+Teacher: 
+Student: [Student Speak] 嗯嗯
+Teacher: 
+Student: [Student Speak] 嗯嗯
+Teacher: 哎呀，派老师听到你有点不开心了。是不是觉得有点累了？我们探险马上就到终点站了，再坚持一小会儿，保证不拖堂，好不好？你看，如果我们把上面那两个小方块，
+Student: [Student Speak] q 费
+Teacher: 咱们不聊Q币啦，来看个更酷的东西！如果我们把上面那两个小方块向右边移动一下，变成这个样子，你觉得它还能折成一个正方体吗？
+Student: [Student Speak] no no no no no
+Teacher: 
+Student: [Student Speak] 哦可以可以
+Teacher: 
+Student: [Student Speak] 啊不可以不可以
+Teacher: 
+Student: [Student Speak] 不可以的这是
+Teacher: 哈哈，你最后还是很坚定的嘛！没错，就是不可以！你知道为什么吗？你看，如果尝试去折叠它，就会发现有两个面重叠在一起了，另外有两个面又没地方放。像这种四个正方形挤在一起，长得像汉字“田”的，我们叫它“田字形”。只要展开图里出现了“田
+Student: [Student Speak] 当然拼不成
+Teacher: 
+Student: [Student Speak] 当然拼不成田字形
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 哎呀咋还不下课我有终点站都要到了都还没到吗
+Teacher: 
+Student: [Student Speak] 我又多想了两分钟
+Teacher: 
+Student: [Student Speak] 二宝宝呀输了
+Teacher: 
+Student: [Student Speak] 我要数了
+Teacher: 
+Student: [Student Speak] 还不下课
+Teacher: 哎呀，派老师知道你着急了，是我们探险路上的一个小插曲嘛。你看，我们刚刚又发现了一个大秘密：只要展开图里有“田字形”，就肯定不能折成正方体！这个发现很厉害吧！好啦，我们已经把“2-3-1”型和“田字形”都研究明白了。这样一来，“2-3-1”型的展开图就一共有3种。我们马上就去看最后两种类型！
+
+# 环节[20] (sectionId: 135)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，先看这种，它的每一层都有2个正方形，像不像上楼梯？你觉得它能折成正方体吗？
+Student: [Student Speak] 嗯可以吧
+Teacher: 没错，你
+Student: [Student Speak] 哦不可以不可以
+Teacher: 诶，你看，其实
+Student: [Student Speak] 它可以折成
+Teacher: 
+Student: [Student Speak] 它可以折成可以
+Teacher: 对，是可以的。你看，它正好能折成一个正方体。我们把这种样子的，叫做“2-2-2”型。这种“2-2-2”型就只有这一种情况。
+Student: [Student Speak] 知道了
+Teacher: 
+Student: [Student Speak] 嗯还不想哭呢
+Teacher: 
+Student: [Student Speak] 啊有多少两分钟我要中暑身亡了
+Teacher: 哎呀，别着急，马上就好，最后一种了！你看这个，它也是每层2个，但它长得像个“凹”字，对不对？你觉得它能折吗？
+Student: [Student Speak] 对
+Teacher: 
+Student: [Student Speak] 它可以
+Teacher: 你再仔细看看，折叠之后，有两个面是不是撞到一起，重叠了？所以，只要看到这种“凹”字形，它就肯定不是正方体的展开图。明白了吗？
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 欢迎回来！我们刚才说到，这种“凹”字形的图案是不能折成正方体的。你明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！那我们来看最后一种！你看这个，它有两层，每层3个正方形。你猜它行不行？
+Student: [Student Speak] 他
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 
+Student: [Student Speak] 可以可以
+Teacher: 
+Student: [Student Speak] 它可以折成
+Teacher: 
+Student: [Student Speak] 可以折成
+Teacher: 没错！你判断得非常快！它确实可以折成一个正方体。我们把这种呢，叫做“3-3”型。它也只有这一种情况。
+Student: [Student Speak] 三三
+Teacher: 对！这样我们就把所有类型的展开图都学完啦！“1-4-1”型有6种，“2-3-1”型有3种，刚刚学的“2-2-2”型和“3-3”型各有1种。很棒，我们马上进入下一关！
+
+# 环节[21] (sectionId: 137)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好了，我们已经把所有类型的展开图都学完了。现在就用我们学到的知识，来当一次质检员，看看这5个纸板，哪个是合格的吧！你先来看第一个，你觉得它能折成
+Student: [Student Speak] 一二三都是合格的一二三都是合格的
+Teacher: 哇，这么快！你觉得一、二、三都是合格的。那我们一个一个来看。先看第一个，你再仔细看看，它中间一行有4
+Student: [Student Speak] 哦一二
+Teacher: 
+Student: [Student Speak] 只有一和二
+Teacher: 只有一和二了？行，那我们还是先看第一个。你再仔细看看，它中间一行有4个，上下各1个，这是我们学的“1-4-1”型吗？
+Student: [Student Speak] 不是
+Teacher: 对，它不是标准的“1-4
+Student: [Student Speak] 只有二
+Teacher: 
+Student: [Student Speak] 只有二
+Teacher: 哈哈，你的答案一直在变啊！最后确定只有②是合格的，是吗？这次你答对啦！确实只有②是
+Student: [Student Speak] 确定确
+Teacher: 好的，确定了！确实只有②是合格
+Student: [Student Speak] 我先死
+Teacher: 
+Student: [Student Speak] 十四了
+Teacher: 
+Student: [Student Speak] 又要我上线十分钟的课哇
+Teacher: 
+Student: [Student Speak] 好不好哦
+Teacher: 
+Student: [Student Speak] 真要撕了这次
+Teacher: 
+Student: [Student Speak] no
+Teacher: 
+Student: [Student Speak] 雪莲花飘飘
+Teacher: 
+Student: [Student Speak] 微风萧萧
+Teacher: 别急别急，派老师知道你很着急，我们速战速决！你已经找到了正确答案，非常棒！我们光速过一下剩下的几个为什么不行，好不好？你看③，它这一行有5个正
+Student: [Student Speak] 三秒过完
+Teacher: 收到！三秒倒计时开始！③号，一行5个，太多了，不行！④号，“凹”字形，不行！⑤号，“田”字形，不行！搞定！你看，我们配合得多好，一下就解决了。你对这些形状的判断力还是很强的！
+
+# 环节[22] (sectionId: 171)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 太棒了！你真是火眼金睛！现在，质检员的任务完成了，就差最后一步，把这个派老师的手办放进盲盒里，这个任务就彻底搞定啦！快，动手帮我一下！
+Student: [Commit Reason] 学生点击提交按钮主动提交2-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生将派老师乐高拖进了立方体中，完成了盲盒制作。>",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 哇！完美！感谢你的帮忙！为了感谢你，这个盲盒就送给你啦！快，拆开看看里面是什么惊喜！
+Student: [Student Speak] 拆成盲盒了今天你是
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 
+Student: [Student Speak] 六六六
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 哈哈，快点
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "学生拆开了盲盒",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 哇！是你最喜欢的魔方！还记得吗，这可是咱们刚上课时你提到的东西。派老师专门为你准备的，喜欢吗？
+
+# 环节[23] (sectionId: 173)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 喜欢就好！好啦，礼物也送完了，咱们这节课学到的知识可不少，是时候来整理一下笔记啦。来，动动小手，把我们刚刚学过的正方体展开图的知识点，拖到对应的位置吧！
+Student: [Student Speak] 好的好的
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 加油！
+Student: [Commit Reason] 学生点击提交按钮主动提交2-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 太棒了！完全正确
+Student: [Student Speak] ok ok
+Teacher: 太棒了！完全正确！看来你已经把正方体展开图的几种类型和数量都记牢了。最后派老师再强调一下，以后看到“田”字形和“凹”字形，就可以直接判断它们肯定不是正方体的展开图哦。
+
+# 环节[24] (sectionId: 138)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，笔记整理得又快又好！那接下来，咱们就用几道题来检验一下学习成果。别担心，不会很多，就三道题，咱们快速过完！来，看这第一道题，你来选一选，下面哪个图形能
+Student: [Student Speak] 选 d 选 d 选 d d d d
+Teacher: 这么快！而且完全正确！看来你真的掌握了。那你能告诉派老师，为什么A、B、C这三个选项不对吗？它们分别是什么形状？
+Student: [Student Speak] 田字形和凸字形
+Teacher: 没错！就是因为“田”字形和“凹”字形。（小声说：是“凹”哦，不是“凸”）。那你再具体说说，A、B、C里面，哪个是“田”字形呀？
+Student: [Student Speak] b
+Teacher: 哎，再仔细看看，B是“田”字形吗？你看看B这个样子，是不是更像我们说的“凹”字形？哪个才是“田”字形呢？
+Student: [Student Speak] c
+Teacher: 对啦！C是“田”字形。那A和B呢？它们是什么形状？
+Student: [Student Speak] a 是三
+Teacher: 
+Student: [Student Speak] 三一二型
+Teacher: “三一二”型？哈哈，你这个命名方式还挺有创意的！不过我们来看看，A选项这里，是不是也出现了一个“凹”字形？你看，这几个面连在一起，是不是就像一个“凹”字？所以它也不能折成正方体。
+Student: [Student Speak] 所以不行
+Teacher: 
+Student: [Student Speak] 还有
+Teacher: 
+Student: [Student Speak] 所以可以领名片了吗
+Teacher: 别着急，别着急，咱们把这道题分析完，后面还有两道题，很快的！刚刚说了A和C，那B呢？B是什么形状？
+Student: [Student Speak] b 是凹字形
+Teacher: 完全正确！A和B都是“凹”字形，C是“田”字形，所以都不能选。只有D选项，它是我们学过的“2-3-1”型的一种，所以可以折成正方体。
+Student: [Student Speak] 下一道题
+Teacher: 好的，我们马上进入下一题！
+
+# 环节[25] (sectionId: 142)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，这是第二道题。你来看，这个图形要剪掉一个正方形，让它能折成一个正方体。你觉得有几种剪法？给你60秒时间，在屏幕上填一下答案吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中填入了6,结果是错误的>",
+    "剩余时间" : "59s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 诶，填了6种。这个答案不对哦。派老师给你个提示，你仔细看这个图形，有没有发现我们之前说过的，肯定不能折成正方体的形状？
+Student: [Student Speak] 对的
+Teacher: 
+Student: [Student Speak] 所以要减去一个二
+Teacher: 没错！数字
+Student: [Student Speak] 只有一种减法
+Teacher: 只有一种吗？你刚刚说要剪掉2，那如果剪掉1呢？或者剪掉6呢？是不是
+Student: [Student Speak] 也可以也可以有三种减法
+Teacher: 对啦！就是3种！剪掉1、2或者6都可以，但是剪掉5就不行了。所以一共是3种剪法。好，我们看最后一题！
+
+# 环节[26] (sectionId: 139)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这道题注意看，是要选**不能**围成正方体的。你来选选看吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中填入了C,结果是正确的>",
+    "剩余时间" : "59s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 非常快，而且完全正确！就是C。C选项里出现了我们说过的“田”字形，所以肯定不行。A是“1-4-1”型，B是“2-2-2”型，D是“3-3”型，它们都可以折成正方体。
+Student: [Commit Reason] 继续讲解、学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "id为3-1的互动题已经收起，老师已经在白板上为学生展示互动题正确答案",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 好了，咱们这个模块的练习就到这里。你表现得很好！
+
+# 环节[27] (sectionId: 166)
+
+## 学生情况
+学生已基本掌握本节课的知识点，尤其在图形判断方面反应迅速，展现出较好的空间想象能力。但他在计算和审题方面存在马虎的问题。整堂课下来，学生表现出明显的急躁和不耐烦情绪，多次催促下课，注意力容易分散，说明他可能对课程时长比较敏感，或者有其他事情安排。尽管如此，他在知识小结和练习环节依然能快速准确地完成任务，说明其基础较好，思维敏捷。
+
+## 教学策略
+我将采用快速、精炼的语言进行总结，以适应学生急于下课的状态。首先，我会利用跑马灯组件快速回顾本节课的核心知识点，不做任何提问，只做陈述。接着，我会展示专属称号卡片，结合他在图形判断上的突出表现，解释称号的由来，给予他正向的肯定和鼓励。然后，我会调出他之前获得的魔方礼物，再次表扬他，并简要回顾他获得礼物的过程。整个过程我会保持紧凑的节奏，多用鼓励性语言，最后愉快地和他告别，确保课堂顺利结束。
+
+## 对话内容
+Teacher: 祝贺你，我们又完成了一
+Student: [Commit Reason] 学生翻转id为1-1模块卡片，此时模块卡片位于反面
+Teacher: 
+Student: [Commit Reason] 学生将id为1-1的模块卡片收集至卡片墙中
+Teacher: 哇，你这手速也太快了！派老师话还没说完，你就把卡片翻过来还收好了。你获得了“平面魔术师”的称号，真厉害！尤其是在找那些不能折的图形时，你反应特别快，一眼就能认出来。卡片背面还给你总结了高能瞬间和易错提醒，你都看到了吧？我们这节课马上就要结束了，就剩下最后一个总结环节了。要不要休息一下？
+Student: [Student Speak] 可以休息吗
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 当然可以，不过看你已经回来啦，那我们就快速总结一下，然后就下课，好不好？
+Student: [Student Speak] ok
+Teacher: 好的，那我们来快速回顾一下今天都学了些什么。今天我们先认识了长方体和正方体，知道了它们的面、棱和顶点，还学会了怎么算它们的棱长总和。然后，我们又一起探索了正方体的展开图，了解了“1-4-1”型、“2-3-1”型、“2-2-2”型和“3-3”型这几种可以折成正方体的图形，也排除了“田”字形和“凹”字形这两种“伪装者”。你今天表现得非常棒，虽然中间有点小插曲，但整体思路非常快，尤其是在图形判断上，很有天赋！
+
+# 环节[28] (sectionId: 169)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 派老师还为你准备了这节课的专属称号卡片，来，我们一起看看！当当当当！“效率先锋”！这节课你的反应速度真的超级快，尤其是在判断图形的时候，简直就是火眼金睛。而且你的空间想象能力也很强，所以派老师觉得这个称号特别适合你！你看，这个礼物还记得吧？这是你最开始告诉派老师你喜欢魔方，然后通过自己的努力赢得的。这节课你表现得太棒了，派老师真为你感到骄傲！好啦，我们今天的课就上到这里，可以去上你的下一节课啦！下次课再见！
+

@@ -1,0 +1,738 @@
+# 环节[1] (sectionId: 170)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 同学你好呀！我是派老师，很高兴能和你一起学习。在上课之前，派老师想先问你一个问题，你生活中最喜欢玩的、或者是见过的东西里，有哪些是方方正正的长方体或者正方体呀？
+Student: [Student Speak] 乐高
+Teacher: 乐高积木是吧！派老师也挺喜欢玩的。你看，就是这种方方正正的积木块。除了乐高，派老师还特别喜欢玩魔方，你玩过吗？
+Student: [Student Speak] 玩过
+Teacher: 玩过就好！那你肯定知道，魔方就是一个很标准的正方体，对不对？其实正方体里藏着好多小秘密呢！今天这节课，我们就当一回“小小侦探”，一起来探索正方体的奥秘，好不好？
+Student: [Student Speak] 好
+Teacher: 那我们准备出发咯！
+
+# 环节[2] (sectionId: 176)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 今天这节课，我们会一起研究两个问题：一个是“正方体的展开图”，另一个是“展开图上相对的面”。怎么样，准备好接受挑战了吗？
+Student: [Student Speak] 都学过
+Teacher: 都学过呀，那太棒了！说明你基础很不错嘛。那正好，咱们先来个快速热身，看看你还记不记得，好不好？
+Student: [Student Speak] 好
+Teacher: 好的，那我们马上开始！
+
+# 环节[3] (sectionId: 98)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，这儿有三道热身题，你先自己看看，会哪个就先说哪个。
+Student: [Student Speak] 都会
+Teacher: 这么厉害！行，那你先说第一题，哪个是正方体？
+Student: [Student Speak] a
+Teacher: 没错，就是A。那第二题呢，有几个小正方体？
+Student: [Student Speak] 四个
+Teacher: 也对！看来你数得很快嘛。那最后一题，最多能看到几个面？
+Student: [Student Speak] 三个
+Teacher: 完全正确！看来这些基础知识你都掌握得很扎实嘛。热身结束，我们马上进入今天的新知识学习。
+
+# 环节[4] (sectionId: 131)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 同学你好，欢迎来到派老师的数学小课堂！刚刚的热身表现很棒，看来你对正方体已经有不少了解了。接下来，咱们就来研究一下正方体的展开图。你看，小猿学校为了感谢我，给我定制了一批专属的盲盒手办，就像这样。现在工厂生产了一批包装盒的纸板，但不知道哪些能用，哪些不能用。这节课，派老师想请你来当一回“质
+Student: [Student Speak] 已经在课上了
+Teacher: 哈哈，对，我们已经在课上了，派老师太激动了。那我们接着刚刚说的，马上进入今天的新知识学习。你看，小猿学校为了感谢我，给我定制了一批专属的盲盒手办，就像这样。现在工厂生产了一批包装盒的纸板，但不知道哪些能用，哪些不能用。这节课，派老师想请你来当一回“质检员”，帮我判断一下，什么样的纸板才是合格的。所以，我们接下来就要研究一下，正方体的展开图到底是什么样子的。你准备好了吗？
+Student: [Student Speak] 准备好了
+Teacher: 好！那我们马上开始！
+
+# 环节[5] (sectionId: 132)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这是一个正方体，如果我沿着它的一些棱把它剪开，再展开，就得到了这样一个平面图形。你觉得，我们可以给这样的图形取个什么名字呢？
+Student: [Student Speak] 平面图形
+Teacher: 嗯，它确实是一个平面图形。我们把正方体展开后得到的这个平面图形，有一个专门的名字，叫做“展开图”。那你看，这个展开图是由几个正方形组成的呀？
+Student: [Student Speak] 六个
+Teacher: 对，6个正方形。那派老师再问你一个问题，你觉得正方体的展开图，是不是就只有这一种样子呢？
+Student: [Student Speak] 不是
+Teacher: 哦？为什么不是呢？
+Student: [Student Speak] 可以给它变成其他样子的
+Teacher: 说得非常好！我们换一种剪法，得到的样子就不一样了。你看，像这样换个方式剪，就得到了一个完全不同的展开图，对吧？所以，正方体的展开图不是唯一的。其实它一共有11种不同的样子呢！接下来，我们就来一个个认识它们，好不好？
+Student: [Student Speak] 好
+Teacher: 很好！那我们就从最常见的一种开始。
+
+# 环节[6] (sectionId: 133)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这是最常见的一种展开图。你觉得它能折成一个正方体吗？
+Student: [Student Speak] 能
+Teacher: 
+Student: [Student Speak] 能
+Teacher: 很确定嘛！那我们来验证一下。你看好了哦。你看，它确实可以折成一个正方体。现在我们再把它展开。你来数一数，这个展开图每一层分别有几个正方形呀？从上到下说。
+Student: [Student Speak] 第一层有一个第二层有四个第三层有一个
+Teacher: 完全正确！所以我们把这种结构的展开图叫做“1-4-1”型。那派老师想考考你，你觉得这种“1-4-1”型的展开图，还有没有其他的样子呢？
+Student: [Student Speak] 有
+Teacher: 哦？那我们来找找看。如果我们把上面和中间这几层固定住不动，只移动最下面这个小正方形，你觉得它可以移动到哪些位置，还能折成一个正方体呢？
+Student: [Student Speak] 移到中间
+Teacher: 移到中间？你是说像这样吗？你觉得这个样子的展开图，还能折成一个正方体吗？
+Student: [Student Speak] 能
+Teacher: 好，我们来试试看！你看，确实可以！你找对了一个！那除了这个位置，最下面那个小正方形还能放在哪儿呢？
+Student: [Student Speak] 最右边
+Teacher: 最右边？是这个位置吗？你觉得这个可以吗？
+Student: [Student Speak] 可以
+Teacher: 我们再来验证一下。bingo！又找对一个！那除了最左边、中间、最右边，还有没有其他位置了？
+Student: [Student Speak] 右边的中间
+Teacher: 右边的中间，是说这个位置吗？你觉得这个可以吗？
+Student: [Student Speak] 可以
+Teacher: 好的，那我们就来最后验证一次！你看，完全没问题！太棒了！这样一来，我们就找到了4种“1-4-1”型的展开图了。那我们还能不能找到更多呢？比如说，我们把最上面那个小正方形也移动一下位置，会怎么样？
+Student: [Student Speak] 形状不变
+Teacher: 形状不变？哦？你的意思是说，移动了之后得到的图形，可能跟我们已经找到的这些是一样的，对吗？
+Student: [Student Speak] 对
+Teacher: 哇，你这个想法很超前啊！我们来验证一下是不是真的。你看，我把上面那个正方形往右移动一格，下面那个还放在最左边。这个样子，你看着眼熟吗？
+Student: [Student Speak] 眼熟
+Teacher: 眼熟是吧？那你觉得它跟我们之前找到的哪个图形长得像？
+Student: [Student Speak] 第一个
+Teacher: 第一个？你是说这个吗？好像不太一样啊。你再仔细看看？
+Student: [Student Speak] 第二个
+Teacher: 
+Student: [Student Speak] 第二个
+Teacher: 
+Student: [Student Speak] 第二个
+Teacher: 第二个？是这个吗？眼神不错！就是它！你看，我们把这个新的图形上下翻转一下，就和我们找到的第二种一模一样了。所以它不是一种新的展开图。不过，如果我们把上面那个正方形固定在第二个位置，下面那个小正方形再挪一挪，又能找到两种新的哦。就是这两种。所以，加上我们最开始找到的4种，“1-4-1”型的展开图一共就有6种。明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！我们已经把“1-4-1”这种最常见的类型都搞清楚了。接下来，我们去看看其他类型的展开图。
+
+# 环节[7] (sectionId: 134)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 除了“1-4-1”型，我们再来看一种新的类型。你看这个，它也能折成一个正方体哦。你看，没问题吧？那现在，派老师想让你来动手试一试。如果我把上面和中间这两层固定住，只移动最下面这个小正方形，你觉得把它拖到哪个位置，还能组成一个新的展开图呢？
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中将方块拖成了expanded-cuboid-representation-3的样式，请调用展示expanded-cuboid-representation-3相同样式的预置几何体教具。>",
+    "剩余时间" : "52s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 不错嘛，一次就找对了！我们来验证一下你找的这个。看，完全可以！其实除了你找的这个，还有一种，就是把小正方形放在中间。所以你看，我们把这种上面2个，中间3个，下面1个的类型，叫做“2-3-1”型。那派老师考考你，如果我把上面那两个正方形往右边挪一挪，变成这样，你觉得它还能折成正方体吗？
+Student: [Student Speak] 能
+Teacher: 嗯？你确定吗？我们来仔细看看这个图形的中间部分，这四个小正方形挤在一起，像不像一个“田”字？像这种“田”字形的结构，是没办法折成一个正方体的哦。你看，它们折叠的时候会“打架”，有两个面会重叠在一起，没法合拢。所以记住啦，以后看到“田”字形，就直接判断它不是正方体的展开图。明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！这样一来，我们就又找到了3种“2-3-1”型的展开图。除了“1-4-1”和“2-3-1”型，还有两种比较特殊的类型，我们接着来看。
+
+# 环节[8] (sectionId: 135)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看这个，它长得像不像一个楼梯？你觉得它能折成一个正方体吗？
+Student: [Student Speak] 能
+Teacher: 没错，我们来验证一下。你看，完全可以！这种像楼梯一样的，我们把它叫做“2-2-2”型。你来数数看，它是不是每层都有2个正方形呀？
+Student: [Student Speak] 对
+Teacher: 是的。那派老师再考考你，如果我把这个“楼梯”变个样子，比如像这样，你觉得它还能折成一个正方体吗？
+Student: [Student Speak] 不能
+Teacher: 为什么呢？说说你的想法。
+Student: [Student Speak] 因为它上面跟下面那个
+Teacher: 
+Student: [Student Speak] 重重叠了
+Teacher: 观察得非常仔细！说得完全正确！你看，折叠的时候，确实有两个面会重叠在一起，合不拢。我们把这种中间是空的，像一个“凹”字一样的形状，叫做“凹”字形。它和“田”字形一样，都不能折成正方体。所以“2-2-2”型其实就只有1种。明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！那我们来看最后一种类型。这个图形，你觉得它能折成正方体吗？
+Student: [Student Speak] 都不能的
+Teacher: 真的不能吗？你再仔细看看，它有没有我们之前
+Student: [Student Speak] 能能能能
+Teacher: 哈哈，想清楚了？到底能不能？
+Student: [Student Speak] 能
+Teacher: 这次就对了嘛！它当然是可以的。你看，它没有“田”字形，也没有“凹”字形，对不对？我们把这种上下两层，每层都有3个正方形的，叫做“3-3”型。这种类型也比较特殊，只有1种情况。记住了吗？
+Student: [Student Speak] 记住了
+Teacher: 好，到这里，11种正方体的展开图我们就全都认识啦！分别是“1-4-1”型6种，“2-3-1”型3种，还有刚刚学的“2-2-2”型和“3-3”型各1种。另外，我们还学了两种不能折叠的形状：“田”字形和“凹”字形。接下来，派老师就要考考你，看你掌握得怎么样啦！
+
+# 环节[9] (sectionId: 137)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 准备好了吗？这里有5个展开图，你来当一回“质检员”，帮我判断一下，哪一个是合格的，可以折成正方体？
+Student: [Student Speak] 第一个
+Teacher: 第一个吗？说说看，你为什么觉得第一个是合格的呀？
+Student: [Student Speak] 不合格不合格说错了
+Teacher: 哈哈，没事，想清楚再告诉我。那你觉得哪个是合格的呢？
+Student: [Student Speak] 第二个
+Teacher: 嗯，这次确定是第二个了？那跟派老师说说，你是怎么判断出第二个是合格的呀？
+Student: [Student Speak] 因为它既没有重叠也没有田字形也没有凹字形
+Teacher: 非常棒！你用了排除法，把我们学过的不能折叠的“田”字形和“凹”字形都给排除了，这个方法很好！你看，它确实可以折成一个正方体。所以，②号是通过质检的合格产品！那剩下的③、④、⑤为什么不合格，你能分别说说理由吗？我们先看③号。
+Student: [Student Speak] 因为三号它重叠了
+Teacher: 嗯，你说它会重叠，能具体说说哪几个面会重叠吗？或者你看看它的形状，像我们学过的哪种类型吗？
+Student: [Student Speak] 它重叠了一个面
+Teacher: 
+Student: [Student Speak] 缺少了一个面
+Teacher: 没关系，你再想想。你看，这一长条有几个正方形连在一起了？
+Student: [Student Speak] 五个
+Teacher: 对，有5个。我们学过的展开图里，中间一行最多有几个来着？还记得吗？
+Student: [Student Speak] 四个
+Teacher: 对啦！最多就是“1-4-1”型里的4个。如果像这样有5个连成一条线，折叠的时候首尾两个面就一定会重叠在一起，同时还会少一个面。所以③号不合格。那我们再看看④号，它为什么不合格呢？
+Student: [Student Speak] 因为它有个凹字形
+Teacher: 完全正确！一眼就看出来了，④号是个典型的“凹”字形，我们说过“凹”字形是肯定不能折成正方体的。好，那最后一个，⑤号呢？它又是为什么不合格？
+Student: [Student Speak] 因为它有田字形
+Teacher: 太棒了！你真是火眼金睛，一下子就找到了藏在里面的“田”字形！看来这些知识你都掌握得非常扎实啊！我们今天把正方体展开图的11种情况都学完了，还知道了“田”字形和“凹”字形这两种特殊情况。你表现得非常好，能把学过的知识马上就用到题目里。
+
+# 环节[10] (sectionId: 173)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 接下来，咱们一起来把今天学的知识整理一下，做个小笔记吧。你来动手拖一拖，把下面这些知识点放到对应的标题下面去。
+Student: [Student Speak] 学会了
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 嗯，动手试试看吧。
+Student: [Student Speak] 怎么动手啊
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 你看，屏幕下面有四个知识点的小方块，上面有四个标题。你用手指按住下面的小方块，把它拖到对应的标题下面的框里就行了。来，试一下。
+Student: [Student Speak] 拖完了
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 拖完之后，记得要点一下“提交”按钮哦，这样派老师才能看到你的答案。
+Student: [Student Speak] 哪有提交呀
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 就在你拖拽的那些方块下面，应该有一个蓝色的“提交”按钮，你找找看。
+Student: [Student Speak] 没找着
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 没关系，那可能是我这边看错了。你已经都拖好了是吧？那派老师就当你已经提交了哦。
+Student: [Student Speak] 好
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生在id为2-1的互动题中的拖拽结果是0 0 0 0,尚未提交>",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 我看到你还没有拖动哦，没关系，派老师直接告诉你答案吧。你看，应该是这样对应的。“1-4-1”型有6种，“2-3-1”型有3种，“2-2-2”型有1种，“3-3”型也是1种。最重要的是要记住，一定不是
+Student: [Student Speak] 拖完了
+Teacher: 
+Student: [Student Speak] 拖的正确呀
+Teacher: 啊？你拖完了吗？但是我这边看到的还是没有拖动的样子。可能是系统有点慢。没关系，那你直接告诉我吧，“1-4-1”型有几种呀？
+Student: [Student Speak] 六种
+Teacher: 对的！那“2-3-1”型呢？
+Student: [Student Speak] 三种
+Teacher: 很好！“2-2-2”型呢？
+Student: [Student Speak] 一种
+Teacher: 没错！那最后一种，“3-3”型有几种？
+Student: [Student Speak] 一种
+Teacher: 非常好！看来你都记住了。你看，这样我们就把知识点都整理好啦。“1-4-1”型有6种，“2-3-1”型有3种，“2-2-2”型有1种，“3-3”型也是1种。最后，派老师再强调一下，以后看到“田”字形和“凹”字形，就要马上反应过来，它们一定不是正方体的展开图哦！
+
+# 环节[11] (sectionId: 138)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，刚刚我们已经把知识点都梳理了一遍，你掌握得非常不错！接下来咱们就通过几道练习题来检验一下学习成果。我看你对展开图的类型和不能折叠的特殊形状都记得很清楚，所以派老师给你准备了三道难度逐步提升的题目，来挑战一下你的空间想象能力。先来看第一题，热热身。你来选一选，下面哪个
+Student: [Student Speak] 选 d
+Teacher: 
+Student: [Student Speak] 选 d
+Teacher: 
+Student: [Student Speak] 选 d
+Teacher: 这么快！派老师题目还没说完呢。你选了D，非常正确！那你能不能告诉派老师，为什么不选A、B、C呢？它们分别是什么情况呀？
+Student: [Student Speak] 因为 a b 是凹字形 c 是田字形
+Teacher: 完全正确！A和B都是“凹”字形，C是“田”字形，所以都不能折成正方体。你看，就像你说的，A和B里都有我们讲过的“凹”字形，C里有个“田”字形。我们来折一下看看，它们果然都合不上。而D选项，虽然看起来有点歪歪扭扭，但它其实是我们学过的“2-3-1”型，可以完美地折成一个正方体。你分析得又快又准，太棒了！这道题对你来说太简单了。
+
+# 环节[12] (sectionId: 142)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，刚刚我们已经把知识点都梳理了一遍，你掌握得非常不错！接下来咱们就通过几道练习题来检验一下学习成果。我看你对展开图的类型和不能折叠的特殊形状都记得很清楚，所以派老师给你准备了三道难度逐步提升的题目，来挑战一下你的空间想象能力。先来看第一题
+Student: [Student Speak] 有三种减法
+Teacher: 哇！你这速度也太快了吧！派老师题目都还没读完呢。你直接就说出了答案是3种，而且完全正确！太厉害了！那你能跟派老师说说，你是怎么这么快就找到这3种剪法的吗？剪掉的分别是哪个数字呀？
+Student: [Student Speak] 一二六
+Teacher: 剪掉1、2、6，完全正确！那你能不能告诉派老师，为什么偏偏是剪掉这三个呢？比如，为什么不剪掉数字7，或者数字3呢？你是怎么想的？
+Student: [Student Speak] 因为剪掉的话它还有田字形剪掉一个也不是六个了
+Teacher: 嗯？“剪掉的话它还有田字形”？你的意思是说，这个图形里面本来就有一个“田”字形，所以我们要想办法把它破坏掉，是这个意思吗？
+Student: [Student Speak] 对
+Teacher: 
+Student: [Student Speak] 对
+Teacher: 非常棒！你的观察力太敏锐了！没错，这个图形里藏着一个“田”字形，就是由1、2、5、6这四个小正方形组成的。我们知道“田”字形是肯定折不成正方体的，所以必须剪掉其中的一个，来破坏这个结构。那你再想想，为什么剪掉5就不行呢？剪掉1、2、6都可以，为什么5这么特殊？
+Student: [Student Speak] 因为有减掉五的话它们就不是一个整体了拼不成正方形而且，一而且一跟二也会重叠
+Teacher: 说得太好了！“不是一个整体了”，这个观察非常关键！你说得完全正确。如果剪掉数字5，数字3和4这两个面就会和剩下的部分断开，整个图形就分成了两块，那肯定就没法折成一个正方体了。你不仅找到了关键的“田”字形，还考虑到了图形的连通性，思路非常清晰完整！这道题对你来说也完全没有难度嘛。
+Student: [Student Speak] 对
+Teacher: 看来你已经完全掌握了正方体展开图的判断方法，连这种需要逆向思考的题目都难不倒你。太棒了！
+
+# 环节[13] (sectionId: 145)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 既然你表现得这么好，那咱们就来挑战一下最后一题，这道题会更考验你的空间想象力哦！仔细看看题目，这是一个**没有盖子**的正方体纸盒，而且“星星”图案在**下底面**。现在把它剪开，展开后的图形会是哪个呢？请你来选一选吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中填入了A,结果是正确的>",
+    "剩余时间" : "91s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 一次就选对了，太厉害了！看来这种空间想象的题目也难不倒你。那你能告诉派老师，为什么不选B、C、D呢？它们错在哪儿了？
+Student: [Student Speak] 因为选 b 的话就不会对就星星就不会在底下 c 有田字形折不成正方形 d d 也是，没法让星星在底下
+Teacher: 嗯，C选项的理由非常充分，一眼就看出来它有个“田”字形，肯定不能折成正方体。那你再仔细想想B和D。你说“星星就不会在底下”，是什么意思呢？我们能不能把B和D折成一个正方体，只是星星不在底面呢？
+Student: [Student Speak] 对
+Teacher: 好，那我们一起来验证一下。先看B选项。如果把画着星星的面当作底面，我们把它折起来看看会发生什么。你看，折好之后，星星确实在底面，但是哪个面不见了？是少了哪个面？
+Student: [Student Speak] 侧面
+Teacher: 侧面？说得很接近了。你看，正对着我们的这个面是不是没有了？我们一般管这个面叫“前面”。所以B选项折起来之后，是少了前面。但题目里说的是一个“无盖”的盒子，意思是没有哪个面呀？
+Student: [Student Speak] 顶面
+Teacher: 对啦！“无盖”就是没有顶面，也就是上面。所以B选项缺少的是前面，不符合“无盖”的要求。那我们再用同样的方法看看D选项。你看，如果以星星为底面，它缺少的是哪个面呢？
+Student: [Student Speak] 后面
+Teacher: 完全正确！就是后面。所以D选项缺少的是后面，也不符合“无盖”的要求。最后我们来看看你选的A。当我们把星星作为底面折起来，你看，它缺少的正好是哪个面？
+Student: [Student Speak] 上面
+Teacher: 对了！A选项折起来之后，正好缺少的是上面，完全符合“无盖”的要求。所以正确答案就是A。你不仅能快速识别展开图的类型，还能在脑子里把它们折起来，判断每个面的位置，空间想象能力真的很强！
+
+# 环节[14] (sectionId: 166)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你真的太棒了！好啦，我们已经把“正方体的展开图”这个知识点彻底搞明白了！经过你的努力，你又收获了一张专属的模块卡片！你看，你获得了“空间架构师”的称号！在折叠想象、识破陷阱和逻辑这几个方面都表现得特别出色！快，点击“解锁高能瞬间”，看看卡片背面写了什么吧！
+Student: [Commit Reason] 学生翻转id为1-1模块卡片，此时模块卡片位于反面
+Teacher: 哇，快看你的高能瞬间！还记得那道剪正方形的题吗？老师话都没说完，你就直接报出了正确答案，逆向思维太厉害了！当然啦，卡片也给了你一个温馨提示哦。就是在判断“3-3”型
+Student: [Commit Reason] 学生将id为1-1的模块卡片收集至卡片墙中
+Teacher: 这么快就收起来啦！看来你对自己的表现很满意嘛。你看，我们这节课的进度条也前进了一大步哦！接下来，我们要挑战一个新的模块——“展开图上相对的面”。学到这里，你感觉怎么样？累不累？
+Student: [Student Speak] 我累
+Teacher: 累了呀，没关系，很正常。学了这么多新知识，大脑肯定需要休息一下。你已经表现得非常棒了，我们稍微放松一下，马上就进入下一个挑战啦！准备好了吗？
+Student: [Student Speak] 准备好了
+Teacher: 好，有精神！那我们马上开始新的挑战！
+
+# 环节[15] (sectionId: 163)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 不过，派老师看你好像有点累了，咱们不如先休息一下，放松放松眼睛和大脑，怎么样？
+Student: [Commit Reason] 学生休息结束
+Teacher: 休息时间到啦！感觉好点了吗？我们继续出发咯！
+Student: [Student Speak] 出发吧
+Teacher: 好的，我们继续！
+
+# 环节[16] (sectionId: 147)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 刚才我们已经把合格的包装盒都挑出来了，对吧？现在，工厂就要给这些空白的包装盒喷上颜色啦。不过，涂颜色也是有规则的。这就引出了我们接下来要研究的问题：怎么才能找到相对的面呢？准备好迎接新挑战了吗？
+Student: [Student Speak] 准备好了
+Teacher: 非常好！那我们就正式开始研究“相对面”的问题！
+
+# 环节[17] (sectionId: 148)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这是一个涂好颜色的正方体，它的三个相对面都涂上了相同的颜色。你仔细观察，派老师要把它展开了哦。好，现在它变成了一个展开图。你看看，这三组颜色相同，也就是相对的面，它们在展开图上的位置，有什么规律吗？
+Student: [Student Speak] 都是一粉一紫一粉一紫
+Teacher: 嗯？一粉一紫？你是说这个粉色和紫色是挨着的吗？那你再看看蓝色的面呢？它们的位置有什么特点？
+Student: [Student Speak] 一个是顶部一个是底部
+Teacher: 说得太好了！一个在最上面，一个在最下面。你看，这三个面排成一排，蓝色的面正好在这一排的头和尾，对不对？
+Student: [Student Speak] 对
+Teacher: 是的！你看，这三个连在一起的正方形，像不像一个汉字“目”？上下两个蓝色的面，就是“目”字最上面和最下面的一横。所以我们就发现了一个规律：当有三个正方形连成一排时，在两头的两个面就是相对面。我们把这个方法叫做“目”字形找相对面。那我们再看看其他颜色的面，比如这三个，它们是不是也像一个“目”字？
+Student: [Student Speak] 对
+Teacher: 是的！它们也组成了一个“目”字形。那根据我们刚才的发现，这个“目”字形里，哪两个面是相对面呢？
+
+# 环节[18] (sectionId: 149)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 粉色的面和紫色的面。说得很好！你看，这两个粉色的面是相对面。那紫色的面呢？它们俩是不是相对面？
+Student: [Student Speak] 对
+Teacher: 嗯！那
+Student: [Student Speak] 紫色是相对面的
+Teacher: 没错！紫色也是相对面。那你看，这两个紫色的面，和中间这个粉色的面，它们三个连在一起，像不像一个字母“Z”？
+Student: [Student Speak] 像
+Teacher: 对吧！你看，这两个紫色的面正好在“Z”字的两头。除了“目”字形，我们又发现了一个新的规律！我们再来看一个展开图，你找找看，这里面有没有“Z”字形？
+Student: [Student Speak] 有
+Teacher: 有是吧！那你看看，在这个“Z”字形里，哪两个面是相对面呢？
+Student: [Student Speak] 蓝色
+Teacher: 太棒了！就是这两个蓝色的面！你看，它们也正好是在一个“Z”字的两端。看来我们又发现了一个找相对面的好方法！当几个正方形连成“Z”字形的时候，在“Z”字两端的两个面，就是相对面。那我们再来挑战一个最复杂的“Z”字形，你看这个展开图，能找到它的相对面吗？
+Student: [Student Speak] 能
+Teacher: 好，那你来指给派老师看看，哪两个面是相对的？
+Student: [Student Speak] 这两个
+Teacher: 嗯？“这两个”是哪两个呀？是蓝色的面吗？
+Student: [Student Speak] 是是
+Teacher: 完全正确！就是这两个蓝色的面。你看，它们也组成了一个大大的“Z”字形，并且分别在“Z”字的两端。看来你已经完全掌握“Z”字形找相对面的方法了！
+
+# 环节[19] (sectionId: 150)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 既然你已经完全掌握了“目”字形和“Z”字形这两种方法，那咱们就来实际用一下，帮派老师解决一个问题吧！你看，这里有一个还没上色的包装盒，我们需要给它涂上颜色。规则是这样的：红色的对面必须是紫色，橙色的对面是绿色，蓝色的对面是粉色。现在，请你来当一次质检员，告诉我，A、B、C这三个面，分别应该涂什么颜色呢？我们一个一个来，先看A面，你觉得它应该涂什么颜色？
+Student: [Student Speak] 绿色
+Teacher: 绿色，完全正确！那你是怎么知道A是绿色的呀？能给派老师讲讲你的思路吗？
+Student: [Student Speak] 因为把它们都折起来以后就会发现橙色的对面是 a 而橙色对面就是绿色
+Teacher: 哇，你的空间想象能力也太强了吧！直接在脑子里把它折起来了！那除了在脑子里折，我们能不能用刚刚学的“目”字形或者“Z”字形，来更快地找到A的对面呢？你看看，A和哪个面能组成“目”字形或者“Z”字形？
+Student: [Student Speak] 那一面
+Teacher: 是这三个面吗？它们组成了一个什么形状呀？
+Student: [Student Speak] 木字形
+Teacher: 对啦！就是“目”字形。那根据“目”字形的规律，首尾两个面是相对的，所以A的对面是哪个面呀？
+Student: [Student Speak] 橙色面
+Teacher: 没错！A的对面就是橙色面。那根据规则，橙色的对面应该是什么颜色呢？
+Student: [Student Speak] 是绿色
+Teacher: 是的！所以A面就应该涂绿色。你看，用“目”字形的方法是不是也能很快找到答案？好，那我们继续看B面。你觉得B面应该涂什么颜色呢？
+Student: [Student Speak] 地面该
+Teacher: 
+Student: [Student Speak] 背面该涂紫色
+Teacher: 紫色，又答对了！这次你又是怎么找到的呀？是用的“目”字形还是“Z”字形呢？
+Student: [Student Speak] 木字形
+Teacher: 嗯！是这三个面组成的“目”字形吗？
+Student: [Student Speak] 对
+Teacher: 很好！那根据“目”字形首尾相对的规律，B的对面就是哪个面呢？
+Student: [Student Speak] 是紫色
+Teacher: 嗯？你再仔细看看，B的对面是哪个面？是红色的面还是紫色的面？
+Student: [Student Speak] 红色的面
+Teacher: 这就对啦！B
+Student: [Student Speak] b 是紫色
+Teacher: 对！B的对面是红色的面，那根据规则，红色的对面是紫色，所以B面就应该涂紫色。好，就剩最后一个C面了，你觉得它应该是什么颜色？
+Student: [Student Speak] 粉色
+Teacher: 太棒了！C面就是粉色！那这次你用的是什么方法呀？
+Student: [Student Speak] z 字形
+Teacher: 是这几个面组成的“Z”字形吗？
+Student: [Student Speak] 对
+Teacher: 没错！那根据“Z”字形两端相对的规律，C的对面是哪个面呢？
+Student: [Student Speak] c 的对面是蓝色
+Teacher: 完全正确！C的对面是蓝色的面，而蓝色的对面是粉色，所以C面就是粉色。你看，我们成功地帮派老师把所有的颜色都涂对啦！你真是太厉害了，把“目”字形和“Z”字形都掌握得这么好！
+
+# 环节[20] (sectionId: 171)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 为了感谢你帮派老师解决了这个大难题，派老师也为你准备了一个小小的惊喜！你看，这是一个专属盲盒，快来拆开看看里面是什么吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交2-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "学生拆开了盲盒",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 哇，拆开啦！是你最喜欢的乐高积木！希望你喜欢派老师送你的这个小礼物。
+Student: [Student Speak] 谢谢老师
+Teacher: 不客气，这是你应得的奖励！那我们休息好了，也收到礼物了，就继续出发，迎接下一个挑战吧？
+Student: [Student Speak] 好
+Teacher: 好，我们继续！
+
+# 环节[21] (sectionId: 174)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 刚刚我们一起学习了两种找相对面的方法，现在我们来把它们整理一下，做个小笔记。你来动手拖一拖，把它们放到对应的位置吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交2-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "2-1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 嗯，做得非常棒！看来你已经把这两种方法都记在心里了。那我们就继续往下走啦。
+
+# 环节[22] (sectionId: 157)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你刚刚学得又快又好，派老师觉得普通的练习对你来说太简单了。所以，我特意给你准备了几道更有挑战的题目，咱们来试试看！这道题就是要根据这个正方体，找出它正确的展开图。你来试试看吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中填入了D,结果是正确的>",
+    "剩余时间" : "66s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 这么快就选好了，而且一次就对了！非常棒！那你来给派老师讲讲，你是怎么判断出D是正确答案的？其他几个选项又错在哪里呢？
+Student: [Student Speak] a 是 a 和 a 的心形跟圆形没有错三角形的位置错了
+Teacher: 嗯？三角形的位置错了？你是怎么看出来它的位置错了呢？我们先来看看这个正方体，三角形、五角星和圆形这三个面是挨在一起的，对吧？那我们再看选项A，用我们学过的方法找找看，三角形和五角星是什么关系？
+Student: [Student Speak] 是相邻关系
+Teacher: 相邻关系？你是怎么看出来的？你看，这个展开图里，三角形和五角星是不是构成了一个“Z”字形？那“Z”字形两端的面，是什么关系来着？
+Student: [Student Speak] 相对关系
+Teacher: 对啦！是相对关系。那你看原来的正方体，三角形和五角星是相邻的。一个相邻，一个相对，这不就矛盾了吗？所以选项A肯定不对，对吧？
+Student: [Student Speak] 对
+Teacher: 好，那我们再来看看选项B。你用我们学过的方法看看，选项B里，哪两个面是相对的？
+Student: [Student Speak] 选项 b 里应该 a 是，三三角形跟圆形是相邻关系可它那里面却变成了相对关系所以不正确
+Teacher: 完全正确！你已经能熟练运用“目”字形了！就像你说的，在选项B里，三角形和圆形是相对的，但是它们在原来的正方体里是相邻的，所以B也是错的。那选项C呢？它错在哪了？
+Student: [Student Speak] 选项 c 把选项 c 三角形跟星形应该是相邻关系把它却变成了相对关系
+Teacher: 说得非常好！选项C里，五角星和三角形用“目”字形一看，又是相对的，也和原来的正方体矛盾了。既然A、B、C都排除了，那正确答案就是D了。你做这道题的思路非常清晰，能够快速地把我们学到的“Z”字形和“目”字形规律用起来，通过排除法找到正确答案，太棒了！
+Student: [Student Speak] 下一题
+Teacher: 没问题，看来这道题已经难不倒你了。我们马上来看下一道！
+
+# 环节[23] (sectionId: 158)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这道题比刚才的要复杂一点哦，不过我相信你肯定没问题。来，给你90秒时间，试试看吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交3-1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "3-1",
+    "做题情况" : "<学生在id为3-1的互动题中填入了C,结果是正确的>",
+    "剩余时间" : "53s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 哇，又快又准！看来这种题型真的难不倒你。那这次你来当小老师，给我讲讲你是怎么选出C的？其他几个选项又错在哪儿了？
+Student: [Student Speak] 他们几个是木字形
+Teacher: 
+Student: [Student Speak] 就是笑笑脸笑脸的对面和和三角形是相邻关系而笑脸和正方形应该是相对关系，d 的 d 却却变成了笑脸跟正方形是相邻关系而而 b 只能看见三角形 a 就不正确，它
+Teacher: 
+Student: [Student Speak] 它无法跟平行四边形组成相邻关系
+Teacher: 等等，我有点没跟上。你刚刚说“笑脸的对面和三角形是相邻关系”，这个“笑脸的对面”是哪个面呀？我们先在展开图里找找看。你看，用“目”字形的方法，
+Student: [Student Speak] 笑脸的对面是正方形笑脸的对面是正方形
+Teacher: 对！笑脸和正方形是相对面。那你再看看，还有哪两组是相对面？
+Student: [Student Speak] 笑脸跟正方形是相对面
+Teacher: 没错，笑脸和正方形是相对面。那除了这一组，还有其他的相对面吗？
+Student: [Student Speak] 没有
+Teacher: 真的没有了吗？你再仔细看看，我们找相对面除了“目”字形，还有什么方法来着？
+Student: [Student Speak] 还有，z 字形
+Teacher: 
+Student: [Student Speak] 但图中没有 z 字形
+Teacher: 咦？真的没有吗？你再换个角度看看，这个展开图里其实藏着好几个“目”字形呢。你看，这三个面是不是也组成了一个“目”字形？那根据这个，哪两个面是相对的？
+Student: [Student Speak] 图中没有 z 字形
+Teacher: 嗯，你观察得很仔细，这个图里确实没有明显的“Z”字形。不过我们刚刚不是发现有好几个“目”字形吗？我们再来看这个“目”字形，首尾两个面是哪两个？它们是什么关系？
+Student: [Student Speak] 相对关系
+Teacher: 没错，是相对关系。那具体是哪两个面相对呢？
+Student: [Student Speak] 三角形跟平行四边形相对
+Teacher: 嗯，你说的是这个面吧？它是个梯形。不过没关系，你找对了！就是梯形面和三角形面是相对的。好，我们现在找到了两组相对面了：笑脸和正方形相对，梯形和三角形相对。那剩下最后两个空白面，它们是什么关系呀？
+Student: [Student Speak] 是相对关系不可能是相邻关系
+Teacher: 完全正确！剩下的两个空白面也一定是相对关系。好，现在我们把三组相对面都找齐了：1.笑脸和正方形相对2.梯形和三角形相对3.两个空白面相对有了这些线索，你再回头看看那几个选项，跟我说说为什么A、B、D是错的？先看A。
+Student: [Student Speak] a 显示的
+Teacher: 
+Student: [Student Speak] a 跟平行四边形 a 跟梯形不可能是相邻关系
+Teacher: 非常好！你说到点子上了。在选项A里，梯形面和三角形面是相邻的，但我们刚刚分析过，它们应该是相对的。所以A是错的。那选项B呢？它错在哪儿了？
+Student: [Student Speak] b 是，那两个空白地方不可能是相邻关系应该是相对关系
+Teacher: 完全正确！选项B里，两个空白面挨在一起了，变成了相邻关系，所以它也是错的。那最后一个，选项D呢？
+Student: [Student Speak] 选项 d 是笑脸跟正方形不可能是相邻关系
+Teacher: 太棒了！你总结得非常到位。选项D里，笑脸和正方形成了邻居，这也和我们分析出的“相对关系”矛盾了。既然A、B、D都排除了，那正确答案就是C了。你看，在C里，我们能同时看到笑脸、三角形和空白面，它们三个是相邻的，这和展开图的情况是完全一致的。你这道题做得又快又好，思路非常清晰！
+
+# 环节[24] (sectionId: 161)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 刚刚那道题你做得非常好，思路清晰，总结到位！接下来这道题，会比之前的都复杂一点，因为它需要我们把前面学到的所有知识都用上。不过我看你前面的表现，觉得你肯定能搞定！我们一起来看看这道题。它给了我们一张大图纸，上面有12个小格子，要求我们剪掉一些，留下6个连在一起的，折成一个正方体。而且，还有一个特殊要求：相对的面，点数加起来要等于7。信息有点多，对吧？我们先来理一理，你觉得解这道题的关键是什么？
+Student: [Student Speak] 再说一遍没有听清
+Teacher: 好的，没问题。派老师是想问，你看这道题的要求这么多，又要剪下来6个连在一起的，又要折成正方体，还要保证相对面的点数加起来是7。这么多条件，你觉得我们应该先从哪个条件开始思考呢？哪个是解题的突破口？
+Student: [Student Speak] 先从先从使得使得相对面的点数的和都是七来入手
+Teacher: 非常好！一下就抓住了重点。那既然相对面的点数和是7，你能告诉我，具体是哪几个点数和哪几个点数配对吗？比如，6个点的面，它的对面应该是几个点的面？
+Student: [Student Speak] 一个点的面
+Teacher: 对！6点和1点是相对面。那剩下的呢？5点和几点相对？4点和几点相对？
+Student: [Student Speak] 五点跟二点相对四点跟两点相对
+Teacher: 
+Student: [Student Speak] 四点跟三点相对
+Teacher: 嗯，很好，马上就自己改正过来了！5点和2点相对，4点和3点相对。好，现在我们知道了这三组相对面。那我们就从最容易观察的“6点和1点”这一组开始找吧。你看看图里，标着6点的面有两个，标着1点的面也有两个。我们最终只能留下一个6点和一个1点，让它们成为相对面。你觉得我们应该怎么选呢？
+Student: [Student Speak] e g
+Teacher: 
+Student: [Student Speak] e g 留下
+Teacher: 哦？为什么选择E和G呢？你是怎么判断的？
+Student: [Student Speak] 因为它说相对面而 e 跟 g 正好是一个木字形是相对面
+Teacher: 观察得太棒了！你说到了最关键的地方！E、F、G这三个面正好组成了一个“目”字形，所以E和G是相对面。那既然我们选了E和G，中间的F是不是也必须得留下来？
+Student: [Student Speak] 对
+Teacher: 没错。好，现在我们已经确定了E、F、G这三个面是必须留下的。我们看看F，F是3点。根据我们刚才的分析，3点的相对面应该是几点？
+Student: [Student Speak] 应该是四点
+Teacher: 对，是4点。那你再看看图里，4点也有两个，一个是D，一个是L。我们应该选哪一个作为F的相对面呢？
+Student: [Student Speak] l
+Teacher: TheuserchoseL.IneedtoguidethemtoseewhyLisnotthecorrectchoice.1.**Acknowledgetheuser'schoice:**TheuserchoseL.2.选L是吗？我们来验证一下。如果选了L，F和L要成为相对面。你看看，它们能组成“目”字形或者“Z”字形吗？
+Student: [Student Speak] 能
+Teacher: TheuserthinksFandLcanformarelativepair.Ineedtoshowthemhowtocheckthis.1.**Askforthespecificpattern
+Student: [Student Speak] 不要说英文
+Teacher: 
+Student: [Student Speak] 不要说英文
+Teacher: Theuserisreactingtotheletter"L".Ishouldclarifythatit'sjustalabelforthesquare,notanEnglishword.Then,Ineedtobringthefocusbacktothegeometricpattern("Z"shapeor"目"shape).1.**Clarifytheletter:**Explainthat"L"isjustanameforthatsquare,likealabel,notanEnglishword.好的好的，派老师不说英文。我说的“L”是指那个标着字母“L”的格子，就是右下角那个4点的格子。你说F和L能组成相对面，那它们是组成了“目”字形还是“Z”字形呀？
+Student: [Student Speak] z 字形
+Teacher: 
+Student: [Student Speak] z 字形
+Teacher: 
+Student: [Student Speak] 应该是 z 字形
+Teacher: 
+Student: [Student Speak] 应该是 z 字形
+Teacher: 
+Student: [Student Speak] l 是 z 字型
+Teacher: 
+Student: [Student Speak] 嗨老师我有问题
+Teacher: Theusercorrectly
+Student: [Student Speak] 应该是 e f g k l 跟 c 组成的正方形
+Teacher: 
+Student: [Student Speak] the user see the chinese english，don't see english for chinese
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: Theuserseemstohavereconnectedandisnowproposingafullsetof6squares:E,F,G,K,L,andC.Thisisabigleap.Ineedtobreakthisdownandanalyzeitwiththem.1.**Acknowledgetheuser'sreturnandtheirnewidea.**Welcomethembackandacknowledgetheirproposedsetofsquares.2.欢迎回来！你刚刚提出了一个新的组合：E,F,G,K,L,C。这是一个很有趣的想法！我们一起来分析一下这个组合行不行。首先，你把K选进来了，K是1点。我们之前选的6点是G，对吧？你看看K和G，它们俩是挨着的，是相邻关系。这符合我们“相对面点数和为7”的要求吗？
+Student: [Student Speak] 不符合
+Teacher: 
+Student: [Student Speak] 不符合
+Teacher: 
+Student: [Student Speak] 潘老师继续讲课吧
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 
+Student: [Student Speak] 老师
+Teacher: 
+Student: [Student Speak] ok don't see the english see the china i'm don't listen english
+Teacher: 
+Student: [Student Speak] 柴呢
+Teacher: Theuserseemstobehavingsometechnicalorconnectionissues,andisalsoreiteratingtheirpreferencefornoEnglish.They'vere-enteredtheclassmultipletimes.Thelastthingtheysaidwas"不符合"(doesn'tmatch)regardingKandGbeingadjacent,whichiscorrect.Thentheyaskedmetocontinue.Ishouldacknowledgetheircorrectanswer,reassurethemaboutthelanguage,andthenguidethembacktothepreviousstepwewereonbeforetheyproposedthenewset.1.**AcknowledgeandReassure:**Welcomethembackagain.ReassurethemIwillsticktoChinese.2.**Confirmtheirlastcorrectpoint:**RemindthemtheycorrectlyidentifiedthatKandGbeingadjacentisaproblem.3.**Gobackto
+Student: [Student Speak] 我说完了
+Teacher: Theuserisbackandreadytocontinue.Ineedtopickupwhereweleftoff.1.**Recapthesituation:**WeestablishedthatKandGcan'tbeusedtogetherbecausetheyareadjacent.Thismeansthecombinationthestudentproposed(E,F,G,K,L,C)isincorrect.2.**Returntothepreviousdecisionpoint:**WeweretryingtofindapartnerforF(3dots).ThestudentinitiallychoseL(4dots).Ineedtoguidethemtore-evaluatethatchoiceandconsidertheotheroption,D(4dots).3.**Guidethere-evaluation:**Let'sgobacktothechoicebetweenLandDforF'spartner.Wehaven'tfullyexploredwhyLmightbewrongorwhyDmightberight.4.**FocusonD:**Let'sexaminetherelationshipbetweenF(3dots)andD(4dots).**Plan:**1.Acknowledgetheuserisready.2.BrieflystatethattheirproposedsetwithKdidn'tworkbecauseKandGareneighbors.3.BringthefocusbacktofindingapartnerforF(3dots).4.Askthemtolookattheother4-dotsquare,D,andseeifitcanbearelativeofF.好的，我们继续。你刚才判断得非常对，K和G是挨着的，不能当相对面。所以你刚才想的那个组合（E,F,G,K,L,C）就行不通了。那我们回到刚才那一步。我们已经确定了要留下E、F、G这三个面。现在要给F（3点）找一个相对面。我们刚才看了L（4点），好像有点问题。那我们看看另一个4点的面，就是D。你觉得F和D能组成相对面吗？
+Student: [Student Speak] 能
+Teacher: 
+Student: [Student Speak] 可以组成相对面
+Teacher: 
+Student: [Student Speak] 可以组成相对面
+Teacher: 
+Student: [Student Speak] 老师你在吗
+Teacher: 
+Student: [Student Speak] 老师
+Teacher: 
+Student: [Student Speak] 喂喂喂
+Teacher: 
+Student: [Student Speak] 哦下课了呀
+Teacher: 
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂
+Teacher: 
+

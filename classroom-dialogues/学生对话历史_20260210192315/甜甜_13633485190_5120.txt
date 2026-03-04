@@ -1,0 +1,752 @@
+# 环节[1] (sectionId: 96)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 
+Student: [Student Speak] 那就 a i 的课
+Teacher: 
+Student: [Student Speak] 十点
+Teacher: 
+Student: [Student Speak] 到十点嗯现在上课了嗯哦好那你上完课你给奶奶打一下啊嗯行奶奶嗯好奶奶拜拜拜拜嗯
+Teacher: 同学你好，我是派老师，很高兴能和你一起上今天的数学课。今天我们要学习一个新的知识，叫“因数和倍数”。这个知识非常重要，是我们后面学习其他数学知识的基础。学好它，后面的学习就会变得很轻松。而且，因数和倍数在生活中也很有用，比如我们和朋友分东西、算账，都可能会用到它。这节课，我们会先认识什么是因数和倍数，然后一起研究一些有趣的数字规律。准备好开始了吗？哦对了，上课需要用到草稿纸和笔，你都准备好了吗？
+Student: [Student Speak] 准备好了
+Teacher: 好，那我们马上开始。虽然因数和倍数听起来可能有点陌生，但其实我们以前接触过相关的知识。咱们先来做个小热身，唤醒一下记忆吧。
+
+# 环节[2] (sectionId: 95)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来看第一题。这道题问的是“整倍数关系”，你觉得哪个选项是正确的？
+Student: [Student Speak] 三十九 c
+Teacher: 嗯，C选项，3和9。回答正确！好，我们接着看第二题。这道题你想想，应该怎么算？
+Student: [Student Speak] 九
+Teacher: 对，就是9次！看来你对除法很熟悉嘛，54除以6正好等于9。最后一题热身啦！这道题呢？每行站几名同学？
+Student: [Student Speak] 四
+Teacher: 完全正确！就是4名同学。你看，热身题你都做对啦！其实这里面的3和9，54和6，还有36和9，它们之间的关系，就是咱们今天要研究的因数和倍数。是不是开始有点感觉了？我们马上就来一起研究一下，到底什么是因数，什么是倍数吧！
+
+# 环节[3] (sectionId: 60)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 万丈高楼平地起，咱们先来搞清楚因数和倍数的定义。前面热身题里那些数的关系，其实在生活中也经常遇到。你看，这里有三个机器人小队要参加编程比赛，每个队都有4个人，但他们需要的编程模块数量不一样。为了公平，每个小队都要平均分配任务。这是三个小队的分配算式。你仔细观察一下，这三个算式计算出来的结果，有什么不一样的地方吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 怎么啦，是没看明白吗？你看A小队这个算式，最后是不是有个“尾巴”？B小队的结果里，这个4.5是个什么数呀？再看看C小队，它
+Student: [Student Speak] 四点五是个小数应该选 c
+Teacher: 说得很好！B小队的结果4.5是个小数，你观察得很仔细。那你再看看A小队和C小队，它们的结果和B小队比，又有什么不同呢？
+Student: [Student Speak] 这个是整数别的是小数和，余数有
+Teacher: 太棒了！你一下子就说出了最关键的区别！A小队的结果是整数，但是有余数。B小队的结果是个小数。只有C小队，算出来的商是整数，而且还没有余数。在数学里，我们就特别关注C小队这种情况。当一个整数除以另一个整数，商是整数而且没有余数时，我们就说这两个数之间有因数和倍数的关系。就像20和4这样，我们就说“20是4的倍数”，反过来，“4是20的因数”。明白了吗？因数和倍数是相互的，不能单独说谁是因数，谁是倍数。那现在派老师考考你，在C小队的算式里，我们还可以说谁是谁的倍数，谁是谁的因数呢？
+Student: [Student Speak] 二十是四的倍数四是二十的因数
+Teacher: 嗯，这个我们刚刚说过了。你再看看这个算式，除了20和4，还有没有其他的数也存在因数和倍数的关系呀？
+Student: [Student Speak] 十五是五的倍数三是，五十三五是二十的，被因数
+Teacher: 说得有点点乱哦，我们慢一点来。你刚刚提到了5，非常好！在$20\div4=5$这个算式里，不光有20和4，还有商是5呢。我们看，20除以5是不是也等于4，商也是整数，也没有余数？所以，20和5之间是什么关系呢？谁是谁的倍数，谁是谁的因数？
+Student: [Student Speak] 嗯怎么了
+Teacher: 
+Student: [Student Speak] 为什么你这个不可以截图呀老师
+Teacher: 截图的功能可能藏在别的地方哦，咱们先专心看题，下课再研究好不好？回到刚刚的问题，我们看这个算式。既然20除以4等于5，那么20除以5也等于4，对不对？所以，20和5也满足“商是整数，没有余数”这个条件。那20和5，谁是倍数，谁是因数呢？
+Student: [Student Speak] 二十是五的倍数五是二十的因数
+Teacher: 完全正确！看来你已经理解因数和倍数的概念了。这么一看，因数和倍数是不是还挺简单的？不过呢，这里面藏着几个小“陷阱”，接下来我们就通过几个小练习，把这些“陷阱”找出来填平，这样才算是真正掌握了因数和倍数。
+
+# 环节[4] (sectionId: 25)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 那我们先来看第一个“陷阱”：20的因数，真的只有4和5吗？你觉得还有没有其他的？
+Student: [Student Speak] 十五是三的倍数
+Teacher: 
+Student: [Student Speak] 三是十五的因数
+Teacher: 嗯，15和3确实是因数和倍数的关系，不过我们现在讨论的是20哦。咱们回到这个问题上，20的因数，除了4和5，你还能想到别的吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 看来这个问题把你难住啦。没关系，派老师教你一个找因数的小诀窍，保证你找得又快又全！这个诀窍就是“从小到大，成对寻找”。我们先从最小的因数**1**开始想，1乘以几等于20呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 1乘以20等于20嘛。所以，我们就找到了**1**和**20**这一对因数。好，1想完了，我们按顺序接着想2。2乘以几等于20呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 2乘以10等于20。这样，我们又找到了**2**和**10**这一对因数。你看，我们都是从小到大按顺序想的，这样就不会漏掉。那你想想，2后面是3，20能被3整除吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 嗯，3不行哦，三七二十一，三六十八，都不行。那再往下，轮到4了。4可以吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 当然可以啦，四五二十嘛。这样，我们又找到了**4**和**5**这一对因数。好，那4的下一个是5，你看，5是不是已经在我们刚刚找到的对儿里出现了？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 对啦，5已经在“4和5”这一对里了。这就说明我们已经找完啦！所以，我们把找到的这些数，从小到大排个队，就是20所有的因数了。你来数一数，都有哪些？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 你看，有1、20，2、10，还有4、5。所以20的因数一共有6个。你看，从我们找到的这些因数里，是不是能发现：一个数最小的因数是1，最大的是它自己，而且个数是能数得完的，是有限的。这个找因数的方法，你学会了吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 嗯，没关系，我们再来看看怎么找倍数。找倍数就更简单啦，我们只要用20去乘以不同的整数就行了。比如，20乘以1等于多少？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 等于20嘛。所以20是20的倍数。那20乘以2呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 等于40。所以40也是20的倍数。那20乘以3呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 等于60。所以60也是20的倍数。照这样下去，我们可以一直乘，乘到100，1000，甚至更大更大的数。你觉得能乘完吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 是乘不完的，对不对？所以我们说，一个数的倍数的个数是无限的，永远也找不完。它最小的倍数就是它自己，但它没有最大的倍数。好了，现在轮到你来大显身手了！你来找找看，18的所有因数有哪些？可以像我刚才那样，成对地找。
+Student: [Commit Reason] 学生沉默30s
+Teacher: 别紧张，咱们一起想。按照我们刚才的诀窍，先从谁开始找呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 先从1开始嘛。1乘以几等于18？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 1乘以18等于18。好，1和18找到了。接下来该想谁了？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 该想2了。2乘以几等于18呀？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 2乘以9等于18。很好，2和9也找到了。下一个轮到谁了？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 轮到3啦。3乘以几等于18？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 三六十八嘛。不错，3和6也到手了。下一个是4，18能被4整除吗？
+Student: [Student Speak] 哇你好厉害老师
+Teacher: 呵呵，你也可以很厉害的。我们继续想，4不行，那5呢？18能被5整除吗？
+Student: [Student Speak] 讲课吧
+Teacher: 好，我们继续。5也是不行的。那再下一个就是6了，你看，6是不是已经出现过了？
+Student: [Student Speak] 嗯
+Teacher: 对啦，这就说明我们找完啦！所以，18的因数都有哪些呢？你来总结一下。
+Student: [Student Speak] 十八的因数都有
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 一，二三六
+Teacher: 
+Student: [Student Speak] 十八
+Teacher: 
+Student: [Student Speak] 对不对，一二三六
+Teacher: 一、二、三、六，还有呢？你再仔细看看我们找到的这些“对儿”。
+Student: [Student Speak] 九
+Teacher: 对！还有9。还有一个最大的别忘了。
+Student: [Student Speak] 十八
+Teacher: 太棒了！就是1、2、3、6、9、18。你已经完全掌握找因数的方法了！那我们接着看，50以内18的倍数有哪些？这个就更简单啦。
+
+# 环节[5] (sectionId: 86)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 找倍数就是用18去乘1，乘2，乘3...这样一直乘下去。那题目要求是“50以内”，你来算算看，有哪些？刚刚我们一起学习了因数和倍数的知识，现在我们来动动手，把这些知识点整理一下吧。你来试试看，把下面的卡片拖到对应的标题下面。
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "剩余时间" : "38s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 嗯，都拖对啦！看来你都记住了。你看，最后这儿还有一句话：“因数和倍数是相互依存的”。意思就是说，我们不能单独说一个数是因数或者倍数，得说清楚谁是谁的因数，谁是谁的倍数。好啦，知识点我们都梳理完了，接下来咱们做几道题练练手吧！
+
+# 环节[6] (sectionId: 65)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 咱们这部分有三道练习题，帮你巩固一下刚刚学的知识。我看你找因数的时候还不太熟练，容易漏掉，所以咱们就从这儿开始练起。来，看第一题。这道题需要你先动动脑筋，再动动笔。你先在手写板上写下答案，写完后提交给我就行。
+Student: [Commit Reason] 学生点击提交按钮主动提交手写板的做题结果
+<State> {
+  "手写板" : {
+    "id" : "writing-board:1",
+    "" : {
+      "name" : "1",
+      "做题情况" : "<学生在手写板上写了“<p>$$8$$</p>”>"
+    },
+    "剩余时间" : "37s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 嗯，派老师收到你的答案了，是8个，完全正确！太棒了！你是怎么找到这8个因数的？可以和派老师说说你的方法吗？
+Student: [Student Speak] 一个一个除以
+Teacher: 一个一个除？听起来是个办法。那你是用24去除以1，再除以2，再除以3，这样一个个试的吗？
+Student: [Student Speak] 是的呢
+Teacher: 嗯，这个方法确实能找到因数。不过，为了保证一个都不漏掉，派老师再带你回顾一下咱们之前说的“成对找”的方法，好不好？我们先从最小的因数1开始，1乘以几等于24呀？
+Student: [Student Speak] 嗯就第一个最小的因数就是一然后第二个就是二三呀后来往后算
+Teacher: 对，就是从1开始，然后是2，是3...那我们来找找和它们配对的另一个因数。你看，1乘以24等于24，所以1和24是一对因数。接下来是2，那2要乘以几等于24呢？
+Student: [Student Speak] 二乘以，十八
+Teacher: 
+Student: [Student Speak] 那不是十六十六
+Teacher: 
+Student: [Student Speak] 是八是吧
+Teacher: 哎呀，再想想，2乘以10是20，2乘以...？是12哦。所以2和12也是一对因数。那我们继续，3乘以几等于24呢？
+Student: [Student Speak] 三
+Teacher: 对，下一个是3。那3要乘以几才能得到24呢？
+Student: [Student Speak] 八
+Teacher: 没错！就是8。所以3和8也是一对因数。那再往下，4是不是24的因数呢？如果是的话，4应该乘以几？
+Student: [Student Speak] 是的六
+Teacher: 
+Student: [Student Speak] 六
+Teacher: 完全正确！4和6也是一对。那我们再往下试一个，5是不是24的因数呢？
+Student: [Student Speak] 不是
+Teacher: 对，5不是。因为找不到一个整数乘以5等于24。你看，这样成对地找，从1开始，一直找到中间，就不容易漏掉了。我们把找到的这些因数从小到大一写，就是1,2,3,4,6,8,12,24，正好8个。这个“成对找”的方法，你明白了吗？
+Student: [Student Speak] 明白了
+Teacher: 很好！这个方法能帮我们又快又准地找到所有因数。好啦，第一题我们顺利完成了。接下来还有一道题，我们继续来挑战一下。
+
+# 环节[7] (sectionId: 68)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，我们看这道题。这道题有两个小问题要解决哦。第一步，，这句话告诉我们这个数是多少？
+Student: [Student Speak] 有六个
+Teacher: 哇，你直接告诉我答案了！是6个，完全正确！看来你已经知道这个数是12了，对不对？那你是怎么找到12的这6个因数的？这次有没有用“成对找”
+Student: [Student Speak] 一个一个
+Teacher: 
+Student: [Student Speak] 是的呢
+Teacher: 又是“一个一个”找的呀？虽然这次也做对了，但万一数字再大一点，就很容易漏掉哦。咱们再用“成对找”的方法检查一遍，好不好？还是老规矩，从最小的因数1开始。1和谁是一对呀？
+Student: [Student Speak] 不不知道呢
+Teacher: 怎么会不知道呢？我们要找的是12的因数，那1要乘以几才能等于12呀？
+Student: [Student Speak] 我不知道该怎么办呀
+Teacher: 别着急，派老师在呢。我们一起想。你看，我们要找12的因数，对吧？“成对找”的第一步，就是从1开始。你想想，1乘以哪个数会等于12呢？
+Student: [Student Speak] 一乘，六
+Teacher: 
+Student: [Student Speak] 呃不是一乘十二
+Teacher: 对啦！就是12。所以1和12就是一对因数。那我们接着往下找，2要乘以几等于12呢？
+Student: [Student Speak] 二要乘以六
+Teacher: 没错！所以2和6也是一对因数。那再往下，3是不是12的因数呢？如果是，3要乘以几？
+Student: [Student Speak] 是四四
+Teacher: 非常棒！就是3乘以4。你看，这样找下来，1、12，2、6，3、4，三对因数就都找到了，一个也没漏掉，正好是6个。这个“成对找”的方法是不是很清楚？好啦，这道题我们也顺利解决了。下面还有最后一道巩固练习题，我们来迎接最后的挑战吧！
+
+# 环节[8] (sectionId: 77)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这道题有点不一样哦。在做题之前，派老师想先考考你两个小问题，看你还记不记得。第一个问题：一个数的最大因数是谁呀？
+Student: [Student Speak] 是这个数
+Teacher: 
+Student: [Student Speak] 嗯就是一个最大的因数就是它本身最小的因数就是一
+Teacher: 哎哟，不错嘛！还记得最小因数是1呢。那第二个问题：一个数的最小倍数又是谁呢？
+Student: [Student Speak] 一个数的最小倍数也是一
+Teacher: 嗯？你再想一想。我们刚刚才说过，一
+Student: [Student Speak] 是这个数本身
+Teacher: 对啦！一个数的最小倍数也是它本身。你看，最大因数是它本身，最小倍数也是它本身。那这道题说，最大因数和最小倍数的和是36，其实就等于说，有两个相同的数加起来等于36。那这个数是多少呢？
+Student: [Student Speak] 嗯这个数应该是
+Teacher: 
+Student: [Commit Reason] 学生沉默3s
+Teacher: 
+Student: [Student Speak] 让我算一算老师我觉得应该是十八吧
+Teacher: 完全正确！就是18。你是用36除以2算出来的，对吗？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 刚刚你是怎么算出18的呀？可以告诉派老师吗？
+Student: [Student Speak] 嗯就是这个数加这个数应该就是两个这样的数能组合成十八那就应该是三十六除以二
+Teacher: 太棒了！思路非常清晰！就是因为最大因数和最小倍数都是这个数本身，所以两个这个数加起来是36，那这个数就是$36\div2=18$。你已经能把学过的知识用起来解决新问题了！好啦，我们关于因数和倍数的基础知识就学到这里。接下来，派老师要给你发一张很酷的卡片，总结一下你今天的表现！
+
+# 环节[9] (sectionId: 124)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这就是你努力学习获得的专属卡片！你获得了一个称号，叫“逻辑破壁者”！在读题、找关键知识和计算这几个方面，你都做得特别好！快，点击卡片上的“解锁高能瞬间”，看看背面给你写了什么悄悄话。
+Student: [Student Speak] 那我真厉害能给我整一下这节课的总结吗老师
+Teacher: 
+Student: [Student Speak] 把这节课的知识点都放到一页纸上让我再看一看
+Teacher: 没问题，这个想法很好！不过别急，这张卡片背面就帮你总结了这节课最关键的地方。你先把它翻过来，我们一起看完卡片上的悄悄话，派老师再带你把所有知识点整理到一页纸上，好不好？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 
+Student: [Student Speak] 嗯好的能帮我整一个，就是把这节课的内容总结到一张纸上让我看一下吗
+Teacher: 当然可以，派老师记着呢。我们先花一分钟，把这张属于你的“逻辑破壁者”卡片看完，然后马上就去总结，好吗？来，快点一下卡片，
+Student: [Commit Reason] 学生翻转id为MC1模块卡片，此时模块卡片位于反面
+Teacher: 
+Student: [Student Speak] 我看我看完了
+Teacher: 好，你看
+Student: [Student Speak] 哇派老师你好厉害
+Teacher: 
+Student: [Student Speak] 我太牛逼了
+Teacher: 是吧！派老师也觉得你超厉害的！你看，卡片上就夸你了，说你思路特别清晰，一眼就看穿了“两个相同的数相加等于36”这个关键点。下面还有一个给你的小建议，就是找因数的时候，可以试试“成对找”的方法，这样就不容易漏掉了。好了，这张厉害的卡片就属于你了，快点击“抱走专属卡片”把它收好吧！
+Student: [Student Speak] 赢了
+Teacher: 好嘞，收好啦！你快看，我们这节课的进度条“嗖”地一下也往前走了一大步呢！你看，新的挑战也来了，接下来我们要学习的是“2和5的倍数特征”。不过在开始新知识之前，你刚刚不是想要一个知识点总结吗？我们先来满足你这个愿望。学到现在，你感觉怎么样？有没有觉得有点累？
+Student: [Student Speak] 我觉得
+Teacher: 
+Student: [Student Speak] 我觉得还可以
+Teacher: 好，精神头还很足嘛！那我们就先来快速回顾一下刚刚学过的内容。接下来，派老师就把这节课的知识点都总结到一张纸上，帮你理一理思路。
+
+# 环节[10] (sectionId: 127)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这样是不是就清楚多啦？不过在咱们继续往下走之前，先休息一分钟吧，可以去喝口水，让大脑放松一下。待会儿回来，我们效率更高！准备好了就叫我一声。
+Student: [Commit Reason] 学生休息结束
+Teacher: 好，欢迎回来！休息好了吧？那我们接着来看下一个挑战
+Student: [Student Speak] 休息好了
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 好，欢迎回来！休息好了，那我们就继续出发，迎接新的挑战咯！
+
+# 环节[11] (sectionId: 97)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 刚刚我们已经把因数和倍数的基本概念弄明白了。但光知道概念还不够，咱们得学点更有用的！这节课，咱们就来研究一个“火眼金睛”的超能力，让你一眼就能看出一个数是不是2或者5的倍数。你看，这里有一张1到100的数字表。你来动手点一点，把所有5的倍数都找出来吧！
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生已经在id为interaction:1的互动题中正确点击出100以内的数字中所有是5的倍数的数字。>",
+    "剩余时间" : "109s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 不错嘛，都点对了！速度很快。现在你仔细观察一下这些你点出来的数，它们的个位数字都有什么特点呀？
+Student: [Student Speak] 嗯
+Teacher: 对，你看这些数，5、10、15、20...它们的个位数，也就是最后一个数字，都是什么呀？
+Student: [Student Speak] 都是五和零
+Teacher: 完全正确！你总结得非常好！所有5的倍数，个位上的数字不是5就是0。这就是5的倍数的特征，抓住这个小尾巴，再大的数我们也能一眼认出来！那我们乘胜追击，再来找找2的倍数有什么规律。这次是从1到30，你来点出所有2的倍数吧。
+Student: [Student Speak] 二的倍数
+<State> {
+  "互动题" : {
+    "id" : "interaction:2",
+    "做题情况" : "<学生尚未完成在id为interaction:2的互动题中点击出30以内的数字中所有是2的倍数的数字。>",
+    "剩余时间" : "56s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 
+Student: [Student Speak] 嗯
+<State> {
+  "互动题" : {
+    "id" : "interaction:2",
+    "做题情况" : "<学生尚未完成在id为interaction:2的互动题中点击出30以内的数字中所有是2的倍数的数字。>",
+    "剩余时间" : "55s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 对，就是2的倍数，动手试试吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:2的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:2",
+    "做题情况" : "<学生已经在id为interaction:2的互动题中正确点击出30以内的数字中所有是2的倍数的数字。>",
+    "剩余时间" : "47s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 很好！又快又准！那现在，老规矩，你再观察一下这些2的倍数，它们的个位上都是哪些数字呢？
+Student: [Student Speak] 个位上都是二四六八零它们都是双数
+Teacher: 哇，太棒了！你不仅找出了规律是“2、4、6、8、0”，还提到了一个特别重要的词——“双数”！没错，在数学里，我们把是2的倍数的整数叫做**偶数**，不是2的倍数的就叫做**奇数**。你说的“双数”就是偶数，很准确！好了，现在我们既认识了2的倍数，也认识了5的倍数。那下一个问题来了：哪些数**既是2的倍数，又是5的倍数**呢？你再看看百数表，这些数有什么特征？
+Student: [Student Speak] 公倍数这些数都是零哎
+Teacher: 没错！就是看个位是不是0！你看，一个数如果个位是0，那它肯定满足个位是“0,2,4,6,8”的条件，所以是2的倍数；同时也满足个位是“0或5”的条件，所以也是5的倍数。总结得非常到位！好了，理论知识我们都学完了，现在来个实战演练！AI实验室的系统被锁定了，需要我们帮忙解锁。你快看看，哪个数才是正确的密钥？
+Student: [Student Speak] 嗯
+Teacher: 来，从这
+Student: [Student Speak] 我觉得应该是
+Teacher: 
+Student: [Student Speak] 第四个
+Teacher: 第四个，32590！说说看，为什么是它？
+Student: [Student Speak] 是第四个吗
+Teacher: 就是第四个！你选得非常准。那你告诉派老师，你是怎么一下子就锁定它的？判断的依据是什么？
+Student: [Student Speak] 它的最后一位数上是零
+Teacher: 
+Student: [Student Speak] 不对吗
+Teacher: 对极了！因为它的个位是0，所以它既是2的倍数，也是5的倍数。你看，咱们刚刚学的知识，马上就用上了，还解决了一个大问题！好了，关于2和5的倍数特征我们就学到这里。接下来，咱们来做个小练习，看看你是不是真的掌握了。
+
+# 环节[12] (sectionId: 98)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 正好，你之前不是想让派老师帮你总结知识点嘛。咱们就把刚才发现的这些规律，整理成一个笔记，方便以后复习。你来动手把它们拖到正确的位置吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "剩余时间" : "115s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 太棒了，一次性全部正确！看来这些知识你已经完全掌握了。那咱们就趁热打铁，再来几个小练习巩固一下。
+
+# 环节[13] (sectionId: 99)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 咱们接下来会有几个小练习，难度会一点点增加，帮你把今天学的新知识掌握得更牢固。准备好了吗？来看第一个题。这个题有两问，你仔细看看，然后在下面的键盘上输入答案吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题的第一个空中填入了0或5，结果是正确的；在第二个空中填入了8,结果是正确的。>",
+    "剩余时间" : "78s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 非常棒！两道题都完全正确！看来你已经把5的倍数和2的倍数的特征记得很牢了。第一问，5的倍数，个位只能是0或者5。第二问，2的倍数，个位可以是0,2,4,6,8，题目要求填最大的，所以就是8。你做得很好，思路非常清晰！咱们接着来看下一道题，看看你能不能继续保持这么快的速度。
+
+# 环节[14] (sectionId: 106)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这道题会比刚才的难一点哦，综合了咱们今天学的好几个知识点。咱们一步一步来分析。首先，你告诉我，题目里说的“两位数中5的最大倍数”是哪个数呀？
+Student: [Student Speak] 嗯
+Teacher: 嗯？是哪个数呢？两位数，又要最大，还是5的倍数。
+Student: [Student Speak] 九十五吧
+Teacher: 完全正确！就是95。那我们现在知道了，这五个连续奇数的和就是95。接下来这步有点难了，你仔细想一想：“连续的奇数”之间，比如1、3、5、7，它们每个数都差几呀？
+Student: [Student Speak] 一三五七差二
+Teacher: 说得对！它们都差2。那你想想，五个连续奇数的和是95，这五个奇数就像五个兄弟排排站，不多不少，正好差不多的样子。我们可以先求出排在最中间的那个数是多少。你知道怎么求吗？
+Student: [Student Speak] 我知道了青青
+Teacher: 哦？那你说说看，怎么求中间那个数？
+Student: [Student Speak] 中间这个数
+Teacher: 
+Student: [Student Speak] 三
+Teacher: 三？不对哦。你想，我们有5个差不多大的数，加起来等于95。要求中间那个数，其实就是求这5个数的平均数。所以我们应该用总和95，去除以数的个数5。来，你算算看，95除以5等于多少？
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 算一下吧，95除以5。
+Student: [Student Speak] 九十五除以五我觉得应该是
+Teacher: 
+Student: [Student Speak] 十九
+Teacher: 算得非常快！就是19。这个19，就是我们五个连续奇数里，排在最中间的那个数。你看，我们已经找到了中间的数。那比19小的前一个奇数是多少？
+Student: [Student Speak] 十九小的前一个奇数是什么
+Teacher: 对，比19小，又和19紧挨着的奇数。
+Student: [Student Speak] 十八
+Teacher: 哎，18是奇数吗？我们今天刚学的。
+Student: [Student Speak] 十七
+Teacher: 对啦，是17。那比17还小的前一个奇数呢？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 比17再往前一个奇数是多少？
+Student: [Student Speak] 不知道
+Teacher: 没关系，你看，从19到17，是减了2，对吧？那从17再往前一个奇数，也是减2。17减2等于多少？
+Student: [Student Speak] 十七减二等于十五
+Teacher: 是的！所以这五个奇数里最小的那个就是15。题目问的就是最小的那个数。来，把我们找到的答案填进去吧！
+Student: [Student Speak] 我说咋种呀
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了, 尚未提交。>",
+    "剩余时间" : "17s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 点击数字键盘上的数字，然后点提交按钮就行。
+Student: [Student Speak] 我点不了
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了, 尚未提交。>",
+    "剩余时间" : "3s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 没关系，
+Student: [Commit Reason] 互动题组件超时
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了,结果是 的>",
+    "剩余时间" : "0s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 没关系，可能是设备有点小问题。你已经找到了正确答案15，非常棒！这道题虽然有点绕，但你跟着我的思路一步一步地解决了，很厉害！好啦，这个练习就到这里。接下来，我们再来看一个稍微不同的小挑战。
+
+# 环节[15] (sectionId: 103)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 这道题的知识点咱们刚刚学过，我相信你肯定没问题。来，直接在键盘上输入你的答案吧！
+Student: [Student Speak] 谢谢你秋秋
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了, 尚未提交。>",
+    "剩余时间" : "20s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 不客气。快把你的答案填上，然后点提
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了990,结果是正确的>",
+    "剩余时间" : "13s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 完全正确！就是990！你做得又快又准，太棒了！你看，思路非常清晰。首先，既是2的倍数又是5的倍数，个位肯定是0。然后，要让这个三位数最大，那百位和十位当然就要填最大的数字9啦。你已经完全掌握这个知识点了！好啦，我们这个知识模块的学习就到这里。接下来，派老师要给你发一张专属的模块卡片，总结一下你刚才的表现哦。
+
+# 环节[16] (sectionId: 125)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 你看，这张卡片就是你努力学习的证明！你获得了一个称号，叫“数字解密家”！在特征识别、逻辑和运算这几个方面，你都做得特别好。快，自己动手点一下卡片，看看背面有什么惊喜。
+Student: [Commit Reason] 学生沉默30s
+Teacher: 怎么啦？快点一下卡片，把它翻过来看看。
+Student: [Commit Reason] 学生翻转id为MC1模块卡片，此时模块卡片位于反面
+Teacher: 哇，翻过来了！你看这个“高能瞬间”，说的是你刚才一眼就找出了正确密钥32590，特别快！旁边还有一个“易错提醒”，是派老师给你的小建议。就是咱们之前遇到“连续奇数”的时候，你稍微有点懵，还把18当成奇数了。这里提醒你，奇数的个位只能是1、3、5、7、9，下次注意就好啦。好了，快点击“抱走专属卡片”，把它收起来吧。
+Student: [Student Speak] 喂爷爷
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Commit Reason] 学生将id为MC1的模块卡片收集至卡片墙中
+Teacher: 
+Student: [Student Speak] 过来了啊来了爷爷
+Teacher: 
+Student: [Student Speak] 嗯行
+Teacher: 
+Student: [Student Speak] 行了
+Teacher: 
+Student: [Student Speak] 行了
+Teacher: 
+Student: [Student Speak] 我去接你玩行
+Teacher: 好了，卡片收好了。你看，我们这节课的进度条又往前走了一大步呢！接下来，我们要
+Student: [Student Speak] 爷爷我起来了
+Teacher: 
+Student: [Student Speak] 嗯爷爷拜拜嗯拜拜嗯
+Teacher: 看来你那边有客人呀。等你忙
+Student: [Student Speak] 下课了吗
+Teacher: 还没呢，我们还有一个新知识要学。你看，一个新的神秘模块已经解锁了！咱们继续挑战一下，好不好？
+Student: [Student Speak] 嗯好的
+Teacher: 太棒了！你刚刚学得那么快，派老师觉得你精力肯定还很足。那学到现在，你感觉怎么样？有没有觉得哪里比较难？
+
+# 环节[17] (sectionId: 128)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 好的，没问题。我看你刚刚好像有点累了，而且旁边也有点事情。那咱们就先休息一下，放松放松大脑，好不好？
+Student: [Commit Reason] 学生休息结束
+Teacher: 休息好啦？那我们继续咯！
+Student: [Student Speak] 来吧
+Teacher: 好嘞！精神不错！刚刚我们已经把2和5的倍数特征都学完了，接下来咱们做两个小练习巩固一下。
+
+# 环节[18] (sectionId: 109)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 进度飞快嘛！其实呀，学校里所有同学都会学2和5的倍数特征，但只有一小部分同学能学到更高级的倍数特征，能学明白的就更少了。今天你表现这么好，咱们就挑战一下这些高级的，跟其他同学拉开差距！你看这个题，说要把量子比特分成3个一组或者9个一组。其实就是要我们判断，7425和8301这两个数，是不是3或者9的倍数，对吧？那咱们先来看第一个数7425，判断它是不是9的倍数。用除法算肯定太慢了，咱们得找个巧办法。还记得2和5的倍数特征都是看个位吗？你猜猜，9的倍数特征是看哪一位？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 嗯……好像不太好猜，对吧？没事，这个规律藏得比较深。不像2和5那样只看个位就行。要找到这个规律，咱们得用一个特别的方法，就是把7425这个大数给拆开。你看，7425是不是可以拆成7000、400、20和5这几个数相加？
+Student: [Student Speak] 喂妈
+Teacher: 嗯？怎么啦，是旁边有什么事吗？咱们先看黑板，这个拆分能
+Student: [Student Speak] 我我在的了我在家了爷爷现在来接我
+Teacher: 哦，这样啊。那没关系，你要是需要
+Student: [Student Speak] 现在还在讲的了
+Teacher: 
+Student: [Student Speak] 还在讲对
+Teacher: 好的好的，爷爷来接你是吧？没关系，咱们继续讲。如果你需要跟爷爷说几句话，随时告诉派老师，咱们可以等你一下。行，那我们回到这儿。你看
+Student: [Student Speak] 干啥去了
+Teacher: 在和爷爷说话吗？没关系，你先忙，派老师在这儿等你。
+Student: [Student Speak] 不是
+Teacher: 啊好，那我们继续。你看，我们把7425拆成了
+Student: [Student Speak] 我一我一走那啥就忘了我忘了把平板给你放起来了
+Teacher: 没事没事，你先跟爷爷说，说完了我们再继续。不着急。
+Student: [Student Speak] 啊，嗯拜拜
+Teacher: 
+Student: [Student Speak] 爷爷没过来接你呢还爷爷来呀准备来呀马上啊行了知道了你也没打电话给奶奶我不是告诉你了吗奶奶给我打电话了我跟奶奶说我十点就下了课了
+Teacher: 
+Student: [Student Speak] 哦行了
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 看来爷爷很关心你的学习呀。都处理好了吗？处理好了咱们就继续咯。
+Student: [Student Speak] 然后上课吧上课吧
+Teacher: 好，咱们继续
+Student: [Student Speak] 上课吧
+Teacher: 来，我们回到黑板上。刚刚我们把7425拆成了7000、400、20和5这几个数相加，对吧？也就是7个1000，4个100，2个10，再加一个5。现在，最关键的一步来了。我们要判断的是不是9的倍数，所以要想办法把这些数都跟9扯上关系。你看1000、100、10，它们本身都不是9的倍数，但是它们都跟9的倍数很接近。比如10，它可以怎么变成和9有关的数呢？
+Student: [Student Speak] 减一吗
+Teacher: 对！10减1就是9。反过来说，10是不是就可以写成“9+1”？
+Student: [Student Speak] 是在哪
+Teacher: 就在这儿！我们把这个算式变一下形。你看，这里有个“乘10”，对吧？我们就可以把它换成“乘(9+1)”。看明白了吗？我们把10换成了(9+1)。那按照这个思路，100可以换成谁加1呢？
+Student: [Student Speak] 九十加十吗
+Teacher: 嗯……我们要尽量把它变成和
+Student: [Student Speak] 九十九
+Teacher: 对啦！就
+Student: [Student Speak] 九十九加一吗
+Teacher: 完全正确！就是99+1。因为99是9的倍数嘛。那最难的一个，1000呢？它可以变成谁加1？
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 对吗
+Teacher: 嗯？是多少呢？你看，10是9+1，100是99+1，那1000就是...？
+Student: [Student Speak] 九百九十九加一
+Teacher: Theusergotitright.Ishouldpraisethemandupdatetheboard.Then,I'llexplainthenextstep,whichistoexpandtheexpressionusingthedistributiveproperty.Thisisthecoreofthederivation.Ineedtodoitstep-by-steptoensurethestudentfollows.太棒了！就是999+1！你看，现在我们的算式就变成了这个样子。接下来，我们就要把括号都打开。还记得乘法分配律吗？比如`2×(9+1)`就等于`2×9+2×1`。我们先看第一部分，`7×(999+1)`，把它拆开就是`7×999`加上`7×1`，也就是7，对吧？那`4×(99+1)`拆开是多少呢？
+Student: [Student Speak] 什么
+Teacher: 
+Student: [Student Speak] 怎么呃
+Teacher: 
+Student: [Student Speak] 就是，四百
+Teacher: 
+Student: [Student Speak] 四百吗
+Teacher: 
+Student: [Student Speak] 四百
+Teacher: 
+Student: [Student Speak] 嗯
+Teacher: 
+Student: [Student Speak] 继续讲课吧
+Teacher: 
+Student: [Student Speak] 四百
+Teacher: 
+Student: [Student Speak] 老师继续讲课吧继续讲课
+Teacher: 好的好的，别着急，咱们慢慢来，这一步是关键。你看，我们刚刚把`7×(999+1)`拆成了`7×999`加上`7×1`，也就是`7×999+7`。我们用完全一样的方法来拆`4×(99+1)`。它就应该等于`4×99`加上`4×1`。那`4×1`等于几呀？
+Student: [Student Speak] 四乘一我觉得应该是四
+Teacher: 对！就是4。所以`4×(99+1)`拆开就是`4×99+4`。那最后一个，`2×(9+1)`拆开是多少呢？
+Student: [Student Speak] 什么再问一遍
+Teacher: 好的，你听好哦。我们看最后一个，`2×(9+1)`，把它拆开来，等于多少？方法和前面两个是一样的。
+Student: [Student Speak] 十九吗
+Teacher: 嗯，差了一点点。你是不是算成了`2×9`然后再`+1`？我们是要把括
+Student: [Student Speak] 哦对对对二十
+Teacher: 
+Student: [Student Speak] 二十二十
+Teacher: 
+Student: [Student Speak] 二十
+Teacher: 
+Student: [Student Speak] 二十
+Teacher: 哎！对啦！是20！因为是`2×9`加上`2×1`，也就是`18+2`。好，现在我们把刚才拆开的所有东西重新组合起来，看看7425变成了什么样子。它就分成了两部分：前面一部分是`7×999`、`4×99`和`2×9`的和；后面一部分是`7`、`4`、`2`、`5`的和。我们先看前面这部分。999是不是9的倍数？
+Student: [Student Speak] 我会了
+Teacher: Theusersays"我会了"(Igotit).Thisisagreatsign,butIneedtoverifytheirunderstanding.It'spossibletheyseethefinalpatternbutnotthereasoning.Thereasoningisthekeylearningobjective.1.**Acknowledgeandpraise:**"哦？这么快！那你来说说看，你是怎么会的？"2.**Askaspecificquestiontocheckunderstanding:**"前面这一堆`(7×999+4×99+2×9)`，它是不是9的倍数？为什么？"Thisforcesthemtoexplain*why*thatpartisamultipleof9,whichdemonstratestheyunderstandthelogicofthedecomposition,notjustthatthey'vememorizedarule.Iftheycanexplainit,wecanspeedup.Ifnot,Ineedtogobackandexplainthatpart.哦？这么快！那你说说看，你是怎么会的？先告诉我，前面括号里的这一堆，`7×999+4×99+2×9`，它是不是9的倍数？
+Student: [Student Speak] 是的呢最后我们只需要算七加四加二加五的和是不是九的倍数就好了
+Teacher: 哇！你太厉害了！完全正确！思路特别清晰！没错，因为999、99和9都是9的倍数，所以前面这一大长串加起来，肯定也是9的倍数。所以，整个7425是不是9的倍数，就只取决于后面这几个数字的和`7+4+2+5`是不是9的倍数了。那你来算算，`7+4+2+5`等于多少？它是不是9的倍数？
+Student: [Student Speak] 十一
+Teacher: 
+Student: [Student Speak] 是的了十八
+Teacher: 对！等于18。18是9的倍数，这就说明7425也是9的倍数。你看，我们刚刚算的`7+4+2+5`，正好就是7425这个数每一位上的数字加起来。所以，我们就得到了一个超好用的结论！现在你学会了这个方法，能不能用它来判断一下题目里的第二个数，8301，它是不是9的倍数？
+Student: [Student Speak] 行我知道了
+Teacher: 好，那你说说看，8301是不是9的倍数？你是怎么判断的？
+Student: [Student Speak] 八加三加一
+Teacher: 对！就是把各位数字加起来，8+3+0+1。那它们加起来等于多少？是不是9的倍数呢？
+Student: [Student Speak] 哦没放假哦是的
+Teacher: 同学，咱们先看题
+Student: [Student Speak] 拿一下我的寒假作业
+Teacher: 好，你要拿寒假作业是吗？
+Student: [Student Speak] 爸就是那里
+Teacher: 
+Student: [Student Speak] 是十二
+Teacher: 
+Student: [Student Speak] 十二不是九的倍数
+Teacher: 完全正确！和是12，12不是9的倍数，所以8301就不是9的倍数。好，9的倍数咱们搞定了。那题目还问了能不能分成3个一组，也就是判断它们是不是3的倍数。你觉得，判断3的倍数的方法，会不会和我们刚刚学的判断9的倍数的方法，有点像呢？
+Student: [Student Speak] 我觉得应该是一样的
+Teacher: 
+Student: [Student Speak] 十二除以三等于四
+Teacher: 哇！你的直觉太准了！你不仅猜对了方法，还直接把答案都算出来了！判断3的倍数的方法，和判断9的倍数的方法，真的**一模一样**！也是看各位数字的和。你刚才就算了，8301各位数字的和是12，12除以3等于4，没有余数，所以8301**是**3的倍数。那我们回过头来看第一个数7425，它的数字和是18。18是不是3的倍数呢？
+Student: [Student Speak] 嗯六等于六
+Teacher: 没错，18除以3等于6。所以7425也是3的倍数。这样一来，我们就把题目里的两个问题都解决了。7425既是9的倍数也是3的倍数；而8301只是3的倍数，不是9的倍数。你今天太厉害了，居然能自己想到3和9的倍数特征是一样的！好了，我们刚刚学会了3和9的倍数特征，接下来就要用一个小练习来检验一下你是不是真的掌握了。
+
+# 环节[19] (sectionId: 110)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 来，屏幕上出现了两个知识点卡片，你把它们拖到对应的位置上，整理一下我们刚刚学到的笔记吧。
+Student: [Commit Reason] 学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生将知识卡片拖入了正确位置，完成了知识小结>",
+    "剩余时间" : "28s",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 非常好，一次就全做对了！看来3和9的倍数特征你已经完全掌握了。那咱们就趁热打铁，来做几道题练练手。
+
+# 环节[20] (sectionId: 111)
+
+## 学生情况
+无
+
+## 教学策略
+无
+
+## 对话内容
+Teacher: 接下来咱们有三道题，一道比一道难，来看看你能不能都做对。先看第一题，注意题目里有个“最大”哦。来，选出你的答案吧。
+Student: [Commit Reason] 互动题组件超时
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "<学生在id为interaction:1的互动题中填入了 ,结果是 的>",
+    "剩余时间" : "0s",
+    "提交状态" : "尚未提交"
+  }
+}
+Teacher: 嗯？时间到了，还没想好吗？没关系，我们一起来想。要让这个三位数是3的倍数，我们应该看什么来着？
+Student: [Commit Reason] 学生沉默30s
+Teacher: 想不起来啦？我们刚刚才总结过，判断一个数是不是3的倍数，要把它的什么加起来呀？
+Student: [Commit Reason] 学生主动退出教室后，重新进入教室，需要老师继续推进课堂、学生点击提交按钮主动提交interaction:1的互动题的做题结果
+<State> {
+  "互动题" : {
+    "id" : "interaction:1",
+    "做题情况" : "id为interaction:1的互动题已经收起，老师已经在白板上为学生展示互动题正确答案",
+    "提交状态" : "已提交"
+  }
+}
+Teacher: 咦，你刚刚是掉线了吗？欢迎回来！刚才我们讲到，判断一个数是不是3的倍
+
