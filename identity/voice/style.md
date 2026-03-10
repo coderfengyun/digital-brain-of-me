@@ -33,7 +33,7 @@
 
 | 文章类型 | 风格规范文件 |
 |---------|-------------|
-| Prompt 设计 | `work-standard/writing-style-prompt-design.md` |
+| Prompt 设计 | `identity/voice/writing-style-prompt-design.md` |
 
 ---
 Last updated: 2026-03-10

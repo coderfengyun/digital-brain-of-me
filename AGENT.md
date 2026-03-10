@@ -8,6 +8,7 @@ This is a Digital Brain personal operating system. When working in this project:
 2. **Append to JSONL files, never overwrite** - Preserve history
 3. **Update timestamps** when modifying tracked data
 4. **Cross-reference modules** - Knowledge informs content, network informs operations
+5. **Update all references when moving/renaming files** - Search entire repo for references to the old path and update them
 
 ## Quick Reference
 
@@ -250,6 +251,7 @@ This system follows these principles:
 - Generate content without reading voice.md
 - Modify template entries
 - Break JSONL format (one object per line)
+- Move/rename files without searching for and updating all references
 
 ✅ **DO**:
 - Append new entries to JSONL files
@@ -257,6 +259,7 @@ This system follows these principles:
 - Read identity files before content creation
 - Cross-reference related data
 - Preserve complete history
+- Search repo with `grep -r "filename"` before moving/renaming files, then update all references
 
 ---
 
