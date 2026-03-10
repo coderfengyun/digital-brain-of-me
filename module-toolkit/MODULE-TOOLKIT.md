@@ -6,38 +6,47 @@ Tools and guides for extending the Digital Brain system by creating new modules.
 
 ```
 module-toolkit/
-├── MODULE-TOOLKIT.md           # This file
-├── MODULE_CREATION_GUIDE.md    # Complete creation guide
-└── check_module_integration.py # Integration checker
+├── MODULE-TOOLKIT.md            # This file
+├── MODULE_CREATION_GUIDE.md     # Complete creation guide
+├── create_module.py             # Automated module creator
+└── check_module_integration.py  # Integration checker
 ```
 
 ## Purpose
 
 Module Toolkit provides:
+- **Automated Creator**: Script to generate new modules with system integration
 - **Creation Guide**: Step-by-step instructions for building new modules
 - **Integration Checker**: Automated verification of module completeness
-- **Best Practices**: Lessons learned from existing modules
 
 ## Usage
 
 ### Creating a New Module
 
-Follow the 6-phase process in MODULE_CREATION_GUIDE.md:
+**Automated creation** (recommended):
 
 ```bash
-# 1. Read the guide
-open module-toolkit/MODULE_CREATION_GUIDE.md
+# Create module and auto-integrate into system
+python module-toolkit/create_module.py <module_name> <keyword>
 
-# 2. Create module files following the checklist
-# 3. Update 8 system integration files
-# 4. Verify integration
-python module-toolkit/check_module_integration.py <module_name> <keyword>
+# Example:
+python module-toolkit/create_module.py tasks task
 ```
 
-**Example**:
+This automatically:
+- ✅ Creates `knowledge/<module>/<MODULE>.md`
+- ✅ Updates 6 system integration files
+- ✅ Provides template with standard structure
+
+**Manual creation**:
+
+Follow the 5-phase process in MODULE_CREATION_GUIDE.md for custom requirements.
+
+**Verification**:
+
 ```bash
-# Check if papers module is properly integrated
-python module-toolkit/check_module_integration.py papers paper
+# Check integration completeness
+python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```
 
 ### Integration Requirements
@@ -54,14 +63,6 @@ Integration checker must show:
 - ✅ Module files exist (data.jsonl, scripts)
 - ✅ Sufficient keyword references in each file
 
-## Module Naming Convention
-
-**Main Document**: `<MODULE>.md` (uppercase module name)
-
-Examples:
-- ✅ PAPERS.md, KNOWLEDGE.md, MODULE-TOOLKIT.md
-- ❌ README.md, Papers.md, papers.md
-
 ## Integration with Other Modules
 
 Module Toolkit enables system extension:
@@ -73,9 +74,10 @@ Module Toolkit enables system extension:
 
 | Task | Command |
 |------|---------|
-| Create module | Follow MODULE_CREATION_GUIDE.md |
+| Create module (auto) | `python module-toolkit/create_module.py <name> <keyword>` |
+| Create module (manual) | Follow MODULE_CREATION_GUIDE.md |
 | Check integration | `python module-toolkit/check_module_integration.py <name> <keyword>` |
-| View requirements | See "Integration Requirements" section in guide |
+| View requirements | See "Integration Requirements" section above |
 
 ---
 

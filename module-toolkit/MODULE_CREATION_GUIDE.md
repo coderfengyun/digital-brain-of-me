@@ -2,6 +2,42 @@
 
 完整的模块创建流程，确保新模块完全集成到系统中。
 
+## 🚀 快速开始 (自动化创建)
+
+**推荐方式**: 使用自动化脚本
+
+```bash
+# 默认: 在 knowledge/ 子目录下创建
+python module-toolkit/create_module.py <module_name> <keyword>
+
+# 例如:
+python module-toolkit/create_module.py tasks task
+# 创建: knowledge/tasks/TASKS.md
+
+# 顶级目录: 使用 --top-level 标志
+python module-toolkit/create_module.py <module_name> <keyword> --top-level
+
+# 例如:
+python module-toolkit/create_module.py projects project --top-level
+# 创建: projects/PROJECTS.md
+```
+
+**自动完成**:
+- ✅ 创建 `<module>/<MODULE>.md` (顶级) 或 `knowledge/<module>/<MODULE>.md` (子目录)
+- ✅ 更新 6 个系统集成文件
+- ✅ 提供下一步指导
+
+**后续步骤**:
+1. 编辑 `<MODULE>.md` 定义数据模型
+2. 如需要,创建 `<module>.jsonl`: `touch <module_path>/<module>.jsonl`
+3. 验证集成: `python module-toolkit/check_module_integration.py <module> <keyword>`
+
+**选择目录的建议**:
+- 📁 **knowledge/** - 适合知识管理类模块 (bookmarks, research, learning)
+- 📁 **顶级目录** - 适合独立功能模块 (operations, network, identity, content, papers, classroom-dialogues)
+
+---
+
 ## ⭐ 核心命名规范
 
 **模块主文档必须遵循以下命名规则**:
@@ -23,6 +59,10 @@ python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```
 
 ---
+
+## 📖 手动创建流程 (高级自定义)
+
+如果自动化脚本不满足需求,按以下流程手动创建:
 
 ## 📋 5阶段创建流程
 
@@ -112,6 +152,16 @@ Cross-module relationships
 6. **.claude/skills/digital-brain/instructions.xml**
    - 添加 `<operation>` 标签
    - 定义触发器和动作
+   - **单一真相源原则**: 保留 action/workflow/rules 结构，但内容通过锚点指向模块文档
+   ```xml
+   <operation name="read-paper">
+     <trigger>User wants to read or add a paper</trigger>
+     <action>Read papers/PAPERS.md and follow the workflow</action>
+     <workflow>See papers/PAPERS.md #reading-workflow</workflow>
+     <rules>See papers/PAPERS.md #reading-workflow</rules>
+   </operation>
+   ```
+   **锚点定义**: 在模块文档中添加 `<a id="reading-workflow"></a>` 于章节标题前
 
 **⚠️ 最容易遗漏**:
 - `.claude/skills/digital-brain/` 两个文件

@@ -133,22 +133,11 @@
       <action>Run scripts/idea_to_draft.py &lt;idea-id&gt;</action>
     </operation>
 
-    <operation name="add-paper">
-      <trigger>User wants to add an academic paper to reading list</trigger>
-      <action>Run scripts/add_paper.py with title, URL, and metadata</action>
-      <fields>id, title, authors, year, venue, url, tags, reading_status, main_claim</fields>
-    </operation>
-
-    <operation name="search-papers">
-      <trigger>User asks about papers or wants to find papers to read</trigger>
-      <action>Run scripts/search_papers.py with filters (status, tags, keywords)</action>
-    </operation>
-
     <operation name="read-paper">
-      <trigger>User wants guidance on reading a paper</trigger>
-      <action>Guide through 2-phase narrative-driven reading approach</action>
-      <phase1>Extract narrative: Read abstract/intro/conclusion, fill narrative section, draw Mermaid diagram (15-30 min)</phase1>
-      <phase2>Verify data: Find evidence for claims, fill data table, critical thinking (1-2 hours)</phase2>
+      <trigger>User wants to read or add a paper</trigger>
+      <action>Read papers/PAPERS.md and follow the workflow</action>
+      <workflow>See papers/PAPERS.md #reading-workflow</workflow>
+      <rules>See papers/PAPERS.md #reading-workflow</rules>
     </operation>
 
     <operation name="update-paper-status">
