@@ -29,5 +29,11 @@
 - Technical terms you use frequently
 - Phrases that represent your brand
 
+## 文章类型风格索引
+
+| 文章类型 | 风格规范文件 |
+|---------|-------------|
+| Prompt 设计 | `work-standard/prompt-design-article.md` |
+
 ---
-Last updated: 2026-02-26
+Last updated: 2026-03-10
