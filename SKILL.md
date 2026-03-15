@@ -23,9 +23,10 @@ Activate this skill when the user:
 - Needs to save or retrieve bookmarked resources
 - Wants to organize research or learning materials
 - Needs to add, read, or manage academic papers
+- Wants to transcribe podcast episodes
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "create module", "add module", "extend system"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "create module", "add module", "extend system"
 
 ## Core Concepts
 
@@ -66,6 +67,7 @@ digital-brain-of-me/
 ├── knowledge/    → Bookmarks, research, learning, papers
 ├── network/      → Contacts, interactions, intros
 ├── operations/   → Todos, goals, meetings, metrics
+├── podcasts/     → Podcast transcription and notes
 └── scripts/      → Automation scripts
 ```
 

@@ -40,6 +40,7 @@ This is a Digital Brain personal operating system. When working in this project:
 | "Add paper to read" | Run `add_paper.py` → Create note file |
 | "Read this paper" | Guide through 2-phase reading → Update status |
 | "Show unread papers" | Run `search_papers.py --status unread` |
+| "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
 | "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
 | "Extend the system" | Follow module creation process → Update 8 system files |
 | "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
@@ -57,6 +58,7 @@ Use **progressive disclosure**:
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
    - `knowledge/papers/papers.jsonl` (if paper-related)
+   - `podcasts/podcasts.jsonl` (if podcast-related)
 
 3. **Load on Network Tasks** (L2):
    - `network/contacts/contacts.jsonl`
@@ -186,6 +188,8 @@ Run these to generate insights:
 - `python scripts/add_paper.py "Title" "URL"` - Add paper to reading list
 - `python scripts/search_papers.py --status unread` - Find papers to read
 - `python scripts/update_paper_status.py paper-XXX --status completed` - Update paper status
+- `python scripts/transcribe_podcast.py --rss "URL" --count 1` - Transcribe podcast from RSS feed
+- `python scripts/transcribe_podcast.py --audio file.mp3 --title "Title" --show "Show"` - Transcribe local audio
 - `python module-toolkit/check_module_integration.py <module> <keyword>` - Verify module integration completeness
 
 ## Voice Consistency Checklist

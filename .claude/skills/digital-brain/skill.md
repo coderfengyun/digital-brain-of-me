@@ -4,14 +4,15 @@ A structured knowledge management system for AI-assisted personal productivity.
 
 ## Core Capabilities
 
-This skill helps you manage five key areas plus system extension:
+This skill helps you manage six key areas plus system extension:
 
 1. **Identity** - Personal brand, voice, and values
 2. **Content** - Ideas, drafts, and publishing pipeline
 3. **Knowledge** - Bookmarks, research, learning materials, and academic papers
-4. **Network** - Contacts and relationship management
-5. **Operations** - Goals, tasks, meetings, and metrics
-6. **Module Toolkit** - Create new modules and extend functionality
+4. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
+5. **Network** - Contacts and relationship management
+6. **Operations** - Goals, tasks, meetings, and metrics
+7. **Module Toolkit** - Create new modules and extend functionality
 
 ## Commands
 
@@ -20,6 +21,7 @@ When invoked with `/digital-brain`, Claude will help you:
 - Add and organize content ideas
 - Log bookmarks and research
 - Add and read academic papers with narrative-driven approach
+- Transcribe podcast episodes from RSS feeds or local audio files
 - Track contacts and interactions
 - Manage tasks and goals
 - Generate weekly reviews
@@ -37,7 +39,7 @@ When invoked with `/digital-brain`, Claude will help you:
 
 ## Automation Scripts
 
-Eight Python scripts in `scripts/`:
+Nine Python scripts in `scripts/`:
 
 1. `weekly_review.py` - Generate weekly productivity review
 2. `content_ideas.py` - Suggest content from knowledge base
@@ -46,6 +48,7 @@ Eight Python scripts in `scripts/`:
 5. `add_paper.py` - Add academic papers to reading list
 6. `search_papers.py` - Search and query papers
 7. `update_paper_status.py` - Update paper reading status
+8. `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
 
 **Module toolkit**:
 - `module-toolkit/check_module_integration.py` - Verify module integration completeness
@@ -75,6 +78,12 @@ Eight Python scripts in `scripts/`:
 
 ### Checking unread papers
 "Show me all my unread papers on transformers"
+
+### Transcribing a podcast
+"Transcribe this podcast from RSS: https://example.com/feed.xml"
+
+### Transcribing a local audio file
+"Transcribe this audio file: ~/Downloads/episode.mp3"
 
 ### Creating a new module
 "I want to create a projects module to track my side projects"

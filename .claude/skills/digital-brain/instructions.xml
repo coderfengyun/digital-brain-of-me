@@ -44,6 +44,15 @@
       <purpose>Academic paper reading with narrative-driven approach</purpose>
     </module>
 
+    <module name="podcasts">
+      <path>podcasts/</path>
+      <files>
+        <file>podcasts.jsonl</file>
+        <file>transcripts/*.md</file>
+      </files>
+      <purpose>Podcast transcription via RSS feed or local audio using whisper.cpp</purpose>
+    </module>
+
     <module name="network">
       <path>network/</path>
       <files>
@@ -145,6 +154,13 @@
       <action>Run scripts/update_paper_status.py to update status and metadata</action>
     </operation>
 
+    <operation name="transcribe-podcast">
+      <trigger>User wants to transcribe a podcast episode</trigger>
+      <action>Read podcasts/PODCASTS.md and follow the workflow</action>
+      <workflow>See podcasts/PODCASTS.md #transcription-workflow</workflow>
+      <rules>See podcasts/PODCASTS.md #transcription-workflow</rules>
+    </operation>
+
     <operation name="create-module">
       <trigger>User wants to extend the system or create a new module</trigger>
       <action>Open module-toolkit/MODULE_CREATION_GUIDE.md and guide through 6-phase process</action>
@@ -196,6 +212,11 @@
       <load>papers/paper-*.md</load>
       <reason>Access paper database and reading notes</reason>
     </on-paper-task>
+    <on-podcast-task>
+      <load>podcasts/podcasts.jsonl</load>
+      <load>podcasts/transcripts/*.md</load>
+      <reason>Access podcast database and transcripts</reason>
+    </on-podcast-task>
     <on-network-task>
       <load>network/contacts/contacts.jsonl</load>
       <load>network/relationships/interactions.jsonl</load>

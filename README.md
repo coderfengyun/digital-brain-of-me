@@ -32,6 +32,9 @@ digital-brain-of-me/
 ├── papers/           # Academic paper reading (JSONL + Markdown)
 │   ├── papers.jsonl  # Paper metadata
 │   └── paper-*.md    # Reading notes
+├── podcasts/         # Podcast transcription (RSS + whisper.cpp)
+│   ├── podcasts.jsonl # Podcast metadata
+│   └── transcripts/  # Transcribed markdown files
 ├── network/          # Relationship management
 │   ├── contacts/     # Professional network (JSONL)
 │   └── relationships/ # Interactions log (JSONL)
@@ -47,7 +50,8 @@ digital-brain-of-me/
     ├── idea_to_draft.py          # Expand ideas into drafts
     ├── add_paper.py              # Add papers to reading list
     ├── search_papers.py          # Search and query papers
-    └── update_paper_status.py    # Update paper metadata
+    ├── update_paper_status.py    # Update paper metadata
+    └── transcribe_podcast.py     # Transcribe podcasts (RSS/local audio)
 ```
 
 ## 🚀 Quick Start
@@ -164,6 +168,8 @@ When working with Claude Code, you can say things like:
 - "Add this paper to my reading list: https://arxiv.org/abs/xxxx"
 - "Show me all unread papers on transformers"
 - "I finished reading this paper, mark it as completed"
+- "Transcribe this podcast from RSS: https://example.com/feed.xml"
+- "Transcribe this audio file as a podcast episode"
 
 Claude will automatically:
 - Read your identity files to understand your voice

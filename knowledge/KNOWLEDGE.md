@@ -29,6 +29,9 @@ Track courses, books, and skills you're developing in `courses.yaml`.
 ### papers/ (now at top-level)
 Systematic academic paper reading with narrative-driven approach. See [../papers/PAPERS.md](../papers/PAPERS.md) for details.
 
+### podcasts/ (top-level)
+Podcast transcription using RSS feed + whisper.cpp. See [../podcasts/PODCASTS.md](../podcasts/PODCASTS.md) for details.
+
 **Format:**
 - `papers.jsonl`: Paper metadata (title, authors, status, tags)
 - `paper-YYYYMMDD-XXX.md`: Detailed reading notes focusing on narrative, evidence, and critical thinking
@@ -48,7 +51,7 @@ Want to add new knowledge types? Follow the [Module Creation Guide](../module-to
 
 Examples of modules you could add:
 - **courses/**: Track online courses and MOOCs
-- **podcasts/**: Save podcast episodes with notes
+- **podcasts/**: Now available at top-level — transcribe podcast episodes via RSS or local audio
 - **videos/**: Technical talks and tutorials
 - **tools/**: Software tools and utilities you use
 - **snippets/**: Code snippets and recipes
