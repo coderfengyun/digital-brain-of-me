@@ -1,0 +1,108 @@
+{
+  "$schema": "https://specs.frictionlessdata.io/schemas/table-schema.json",
+  "title": "交易日志汇总表",
+  "description": "从投资周记中提取的现货交易记录，不含合约交易",
+  "fields": [
+    {
+      "name": "序号",
+      "type": "string",
+      "description": "唯一递增标识",
+      "constraints": {
+        "required": true,
+        "unique": true,
+        "pattern": "^\\d+$"
+      }
+    },
+    {
+      "name": "品种",
+      "type": "string",
+      "description": "资产名称，需全局统一命名（同一资产在不同周记中必须使用完全相同的名称）",
+      "constraints": {
+        "required": true,
+        "minLength": 1
+      }
+    },
+    {
+      "name": "操作类型",
+      "type": "string",
+      "description": "交易方向",
+      "constraints": {
+        "required": true,
+        "enum": ["买入", "卖出"]
+      }
+    },
+    {
+      "name": "价格",
+      "type": "number",
+      "description": "每单位资产的价格（纯数值，如黄金为 CNY/g，股票/ETF 为对应币种/股）",
+      "constraints": {
+        "required": true,
+        "minimum": 0
+      }
+    },
+    {
+      "name": "数量",
+      "type": "number",
+      "description": "交易数量（纯数值，无单位后缀、无 ≈ 前缀）",
+      "constraints": {
+        "required": true,
+        "minimum": 0
+      }
+    },
+    {
+      "name": "金额",
+      "type": "number",
+      "description": "= 价格 × 数量（允许四舍五入误差 ≤1%）",
+      "constraints": {
+        "required": true,
+        "minimum": 0
+      }
+    },
+    {
+      "name": "币种",
+      "type": "string",
+      "description": "交易结算币种",
+      "constraints": {
+        "required": true,
+        "enum": ["CNY", "USD", "HKD"]
+      }
+    },
+    {
+      "name": "日期",
+      "type": "date",
+      "format": "%Y-%m-%d",
+      "description": "交易日期；若原始日期为周期范围，取范围起始日",
+      "constraints": {
+        "required": true
+      }
+    },
+    {
+      "name": "日期精确度",
+      "type": "string",
+      "description": "标记原始日期是精确日期还是周期范围",
+      "constraints": {
+        "required": true,
+        "enum": ["精确", "周期范围"]
+      }
+    },
+    {
+      "name": "备注",
+      "type": "string",
+      "description": "可选，标注数据来源说明（如"数量由金额÷价格推算"、"价格由国际金价换算"）",
+      "constraints": {
+        "required": false
+      }
+    }
+  ],
+  "missingValues": [""],
+  "primaryKey": "序号",
+  "custom": {
+    "businessRules": [
+      "价格、数量、金额字段中不得包含货币符号（￥/$）、单位后缀（g/个/股）、≈ 前缀、任何非数字文字",
+      "若原文中数量为近似值，应按 金额÷价格 计算精确值填入，备注标注'数量由金额÷价格推算'",
+      "黄金价格统一为 CNY/g；国际金价（$/oz）需换算为 CNY/g，备注标注'价格由国际金价换算'",
+      "合约交易（开仓/平仓/多单/空单）不纳入此表",
+      "金额 与 价格×数量 的偏差不得超过 1%"
+    ]
+  }
+}
