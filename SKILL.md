@@ -24,9 +24,10 @@ Activate this skill when the user:
 - Wants to organize research or learning materials
 - Needs to add, read, or manage academic papers
 - Wants to transcribe podcast episodes
+- Needs to record, import, or analyze investment trades
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "create module", "add module", "extend system"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "create module", "add module", "extend system"
 
 ## Core Concepts
 
@@ -68,6 +69,7 @@ digital-brain-of-me/
 ├── network/      → Contacts, interactions, intros
 ├── operations/   → Todos, goals, meetings, metrics
 ├── podcasts/     → Podcast transcription and notes
+├── investment/   → Trade journal, broker imports, P&L analysis
 └── scripts/      → Automation scripts
 ```
 
@@ -103,6 +105,14 @@ Productivity system with priority levels:
 - **high**: Do today, blocking
 - **medium**: This week, important
 - **low**: This month, valuable
+
+### Investment Module
+
+Trade journal and P&L analysis:
+- Record trades manually or import from brokers (Binance, Futu)
+- CSV-based trade log with schema validation
+- FIFO-based realized/floating P&L calculation
+- See [investment/INVESTMENT.md](investment/INVESTMENT.md) for details
 
 ## Practical Guidance
 
@@ -199,7 +209,7 @@ Productivity system with priority levels:
    - `knowledge/contacts/contacts.jsonl`
    - `scripts/add_contact.py`, `scripts/search_contacts.py`
 4. Update system integration files:
-   - SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md
+   - SKILL.md, CLAUDE.md, README.md
    - README.md, knowledge/KNOWLEDGE.md
    - `.claude/skills/digital-brain/skill.md`
    - `.claude/skills/digital-brain/instructions.xml`
@@ -237,6 +247,7 @@ Internal references:
 - [Papers Module](./papers/PAPERS.md) - Academic paper reading
 - [Network Module](./network/NETWORK.md) - CRM documentation
 - [Operations Module](./operations/OPERATIONS.md) - Productivity system
+- [Investment Module](./investment/INVESTMENT.md) - Trade journal and P&L analysis
 - [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md) - How to extend the system
 
 External resources:

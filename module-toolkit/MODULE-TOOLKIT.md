@@ -52,7 +52,7 @@ python module-toolkit/check_module_integration.py <module_name> <keyword>
 ### Integration Requirements
 
 Every module must update 6 files:
-- **3 Core Docs**: SKILL.md, AGENT.md, README.md
+- **3 Core Docs**: SKILL.md, CLAUDE.md, README.md
 - **1 Module Doc**: knowledge/KNOWLEDGE.md
 - **2 Skill Files**: .claude/skills/digital-brain/skill.md, instructions.xml
 

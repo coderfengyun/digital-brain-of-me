@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -69,7 +70,13 @@ def parse_args() -> argparse.Namespace:
         "--symbol",
         nargs="+",
         default=None,
-        help="交易对，如 BTCUSDT ETHUSDT（不指定则自动发现所有交易过的币种）",
+        help="交易对，如 BTCUSDT ETHUSDT（不指定则自动发现有余额的币种）",
+    )
+    parser.add_argument(
+        "--all", "-a",
+        action="store_true",
+        dest="all_assets",
+        help="查询所有资产（包括余额为 0 的），默认只查有余额的",
     )
     parser.add_argument(
         "--output", "-o",
@@ -100,7 +107,11 @@ def fetch_trades_for_symbol(
     start_ms: int | None = None,
     end_ms: int | None = None,
 ) -> list[dict]:
-    """获取某个交易对的全部成交记录（自动分页）。"""
+    """获取某个交易对的全部成交记录（自动分页）。
+
+    策略：只传 startTime（不传 endTime 以避免 24h 限制），
+    用 fromId 翻页，最后按 end_ms 过滤。
+    """
     all_trades = []
     from_id = None
 
@@ -109,9 +120,8 @@ def fetch_trades_for_symbol(
         if from_id is not None:
             kwargs["fromId"] = from_id
         elif start_ms is not None:
+            # 只传 startTime，不传 endTime，避免 24h 限制
             kwargs["startTime"] = start_ms
-        if end_ms is not None:
-            kwargs["endTime"] = end_ms
 
         trades = client.get_my_trades(**kwargs)
 
@@ -119,16 +129,16 @@ def fetch_trades_for_symbol(
             break
 
         if from_id is not None:
-            # fromId 查询包含该 id 本身，跳过第一条避免重复
+            # fromId 查询包含该 id 本身，跳过避免重复
             trades = [t for t in trades if t["id"] != from_id]
             if not trades:
                 break
 
-        # 时间范围过滤（startTime 仅在首次请求生效）
-        if start_ms is not None:
-            trades = [t for t in trades if t["time"] >= start_ms]
+        # 按 end_ms 过滤并判断是否超出范围
         if end_ms is not None:
             trades = [t for t in trades if t["time"] <= end_ms]
+            if not trades:
+                break
 
         all_trades.extend(trades)
 
@@ -136,6 +146,7 @@ def fetch_trades_for_symbol(
             break
 
         from_id = trades[-1]["id"]
+        time.sleep(0.2)  # 翻页时稍作暂停
 
     return all_trades
 
@@ -195,11 +206,12 @@ def create_client(env_file: str | None = None) -> Client:
     return Client(api_key, api_secret)
 
 
-def discover_symbols(client: Client) -> list[str]:
-    """从账户信息自动发现所有交易过的交易对。
+def discover_symbols(client: Client, include_zero_balance: bool = False) -> list[str]:
+    """从账户信息自动发现交易对。
 
-    逻辑：获取账户所有资产余额（包括 free 和 locked 都为 0 但曾有过交易的不会出现），
-    再结合交易所支持的交易对，找出实际存在的 xxxUSDT 等配对。
+    Args:
+        include_zero_balance: 为 True 时包含余额为 0 的资产（空投灰尘等），
+                              为 False 时只返回有实际余额的资产。
     """
     print("自动发现交易过的币种...", file=sys.stderr)
 
@@ -207,13 +219,21 @@ def discover_symbols(client: Client) -> list[str]:
     exchange_info = client.get_exchange_info()
     valid_symbols = {s["symbol"] for s in exchange_info["symbols"] if s["status"] == "TRADING"}
 
-    # 获取账户资产（只返回余额 > 0 或曾有快照的资产）
+    # 获取账户资产
     account = client.get_account()
-    assets = [
-        b["asset"]
-        for b in account["balances"]
-        if b["asset"] not in SKIP_ASSETS
-    ]
+    if include_zero_balance:
+        assets = [
+            b["asset"]
+            for b in account["balances"]
+            if b["asset"] not in SKIP_ASSETS
+        ]
+    else:
+        assets = [
+            b["asset"]
+            for b in account["balances"]
+            if b["asset"] not in SKIP_ASSETS
+            and (float(b["free"]) > 0 or float(b["locked"]) > 0)
+        ]
 
     # 对每个资产尝试拼出交易对
     symbols = []
@@ -238,7 +258,7 @@ def fetch_and_display(args: argparse.Namespace):
     if args.symbol:
         symbols = args.symbol
     else:
-        symbols = discover_symbols(client)
+        symbols = discover_symbols(client, include_zero_balance=args.all_assets)
         if not symbols:
             print("未发现任何交易过的币种。", file=sys.stderr)
             return
@@ -265,11 +285,15 @@ def fetch_and_display(args: argparse.Namespace):
     print(f"查询交易对: {', '.join(symbols)} ({' '.join(date_desc)})", file=sys.stderr)
 
     all_trades = []
-    for symbol in symbols:
-        print(f"  获取 {symbol} ...", file=sys.stderr)
+    for i, symbol in enumerate(symbols):
+        print(f"  获取 {symbol} ({i+1}/{len(symbols)}) ...", file=sys.stderr)
         trades = fetch_trades_for_symbol(client, symbol, start_ms, end_ms)
         all_trades.extend(trades)
-        print(f"    {len(trades)} 条记录", file=sys.stderr)
+        if trades:
+            print(f"    {len(trades)} 条记录", file=sys.stderr)
+        # 每 10 个请求暂停 1 秒，避免触发频率限制
+        if (i + 1) % 10 == 0 and i + 1 < len(symbols):
+            time.sleep(1)
 
     if not all_trades:
         print("该时间范围内无成交记录。", file=sys.stderr)

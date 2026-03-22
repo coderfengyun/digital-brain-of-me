@@ -120,8 +120,8 @@ def update_skill_md(module_name, keyword):
 
 
 def update_agent_md(module_name, keyword):
-    """Update AGENT.md with new module references"""
-    agent_path = ROOT / "AGENT.md"
+    """Update CLAUDE.md with new module references"""
+    agent_path = ROOT / "CLAUDE.md"
     content = agent_path.read_text(encoding='utf-8')
 
     # Add to Quick Reference table (around line ~30)
@@ -262,7 +262,7 @@ def create_module(module_name, keyword, top_level=False):
 
     files_to_update = [
         ("SKILL.md", lambda m, k: update_skill_md(m, k)),
-        ("AGENT.md", lambda m, k: update_agent_md(m, k)),
+        ("CLAUDE.md", lambda m, k: update_agent_md(m, k)),
         ("README.md", lambda m, k: update_readme_md(m, k)),
         ("knowledge/KNOWLEDGE.md", lambda m, k: update_knowledge_md(m, k)),
         (".claude/skills/digital-brain/skill.md", lambda m, k: update_claude_skill_md(m, k)),

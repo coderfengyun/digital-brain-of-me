@@ -262,7 +262,7 @@ class TestIntegration:
 
     @pytest.fixture
     def real_df(self):
-        csv_path = Path(__file__).parent / "交易日志汇总表.csv"
+        csv_path = Path(__file__).parent.parent / "交易日志汇总表.csv"
         if not csv_path.exists():
             pytest.skip("交易日志汇总表.csv 不存在")
         try:

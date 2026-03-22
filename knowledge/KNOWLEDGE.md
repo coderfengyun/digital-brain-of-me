@@ -32,6 +32,9 @@ Systematic academic paper reading with narrative-driven approach. See [../papers
 ### podcasts/ (top-level)
 Podcast transcription using RSS feed + whisper.cpp. See [../podcasts/PODCASTS.md](../podcasts/PODCASTS.md) for details.
 
+### investment/ (top-level)
+Investment trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis. See [../investment/INVESTMENT.md](../investment/INVESTMENT.md) for details.
+
 **Format:**
 - `papers.jsonl`: Paper metadata (title, authors, status, tags)
 - `paper-YYYYMMDD-XXX.md`: Detailed reading notes focusing on narrative, evidence, and critical thinking
@@ -41,6 +44,7 @@ Podcast transcription using RSS feed + whisper.cpp. See [../podcasts/PODCASTS.md
 - Tag bookmarks consistently for easy retrieval
 - Link research notes to related bookmarks using bookmark IDs
 - Link papers to related bookmarks and research notes using IDs
+- Investment research notes (`investment/*.md`) can complement knowledge module content
 - Regularly review and consolidate learning materials
 - Use research notes to synthesize information from multiple sources
 - When reading papers, focus on understanding the narrative first, then verify with data

@@ -4,7 +4,7 @@ A structured knowledge management system for AI-assisted personal productivity.
 
 ## Core Capabilities
 
-This skill helps you manage six key areas plus system extension:
+This skill helps you manage seven key areas plus system extension:
 
 1. **Identity** - Personal brand, voice, and values
 2. **Content** - Ideas, drafts, and publishing pipeline
@@ -12,7 +12,8 @@ This skill helps you manage six key areas plus system extension:
 4. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
 5. **Network** - Contacts and relationship management
 6. **Operations** - Goals, tasks, meetings, and metrics
-7. **Module Toolkit** - Create new modules and extend functionality
+7. **Investment** - Trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis
+8. **Module Toolkit** - Create new modules and extend functionality
 
 ## Commands
 
@@ -28,6 +29,8 @@ When invoked with `/digital-brain`, Claude will help you:
 - Suggest content ideas from your knowledge base
 - Identify contacts to reconnect with
 - Expand ideas into structured drafts
+- Record investment trades manually or import from brokers
+- Calculate realized and floating P&L across all positions
 - Create new modules to extend the system
 - Verify module integration completeness
 
@@ -36,10 +39,11 @@ When invoked with `/digital-brain`, Claude will help you:
 - **JSONL**: Append-only logs (bookmarks, contacts, tasks, etc.)
 - **YAML**: Structured configuration (goals, learning progress)
 - **Markdown**: Narrative content (drafts, research notes)
+- **CSV**: Tabular data with schema validation (investment trades)
 
 ## Automation Scripts
 
-Nine Python scripts in `scripts/`:
+Eight Python scripts in `scripts/`:
 
 1. `weekly_review.py` - Generate weekly productivity review
 2. `content_ideas.py` - Suggest content from knowledge base
@@ -49,6 +53,12 @@ Nine Python scripts in `scripts/`:
 6. `search_papers.py` - Search and query papers
 7. `update_paper_status.py` - Update paper reading status
 8. `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
+
+**Investment scripts** in `investment/投资日志整理/scripts/`:
+- `write_trade_journal.py` - Add, import, migrate, and validate trade records
+- `fetch_binance_trades.py` - Fetch trades from Binance API
+- `fetch_futu_trades.py` - Fetch trades from Futu (placeholder)
+- `calc_pnl.py` - FIFO-based P&L calculation and report generation
 
 **Module toolkit**:
 - `module-toolkit/check_module_integration.py` - Verify module integration completeness
@@ -84,6 +94,12 @@ Nine Python scripts in `scripts/`:
 
 ### Transcribing a local audio file
 "Transcribe this audio file: ~/Downloads/episode.mp3"
+
+### Adding an investment trade
+"Add a BTC buy trade: 0.00391 at $76653 on 2025-04-07"
+
+### Calculating investment P&L
+"Calculate my investment P&L"
 
 ### Creating a new module
 "I want to create a projects module to track my side projects"

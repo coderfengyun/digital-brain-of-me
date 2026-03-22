@@ -9,32 +9,33 @@
 ## 2. 系统架构
 
 ```
-周记原始文件 (.md)
+券商/交易所 API
        │
        ▼
-┌─────────────────────┐
-│ 上游：提取交易日志     │  TASK_提取交易日志表格.md 定义
-│ (由 LLM 执行)        │
-└─────────┬───────────┘
+┌──────────────────────────┐
+│ 上游：交易记录获取 & 写入   │  scripts/fetch_binance_trades.py
+│ (程序化执行)               │  scripts/fetch_futu_trades.py
+│                            │  scripts/write_trade_journal.py
+└─────────┬────────────────┘
           │ 输出：交易日志汇总表.csv（严格遵循 Schema）
           ▼
-┌─────────────────────┐
-│ 下游：盈亏计算脚本     │  calc_pnl.py
-│ (纯程序执行)          │
-└─────────┬───────────┘
+┌──────────────────────────┐
+│ 下游：盈亏计算脚本          │  scripts/calc_pnl.py
+│ (纯程序执行)               │
+└─────────┬────────────────┘
           │ 输出：盈亏统计报告.md
           ▼
      最终报告
 ```
 
 **核心设计原则：上下游解耦**
-- 上游（LLM）负责非结构化数据 → 结构化 CSV 的转换
-- 下游（Python 脚本）负责数值计算，保证准确性
+- 上游（API 脚本 + write_trade_journal.py）负责从各数据源获取交易记录并写入 CSV
+- 下游（calc_pnl.py）负责数值计算，保证准确性
 - 两者通过 CSV Schema 契约连接
 
 ## 3. CSV Schema 契约
 
-Schema 采用 [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) 规范，机器可读定义见 [交易日志汇总表.schema.json](交易日志汇总表.schema.json)。人类可读版本见 [TASK_提取交易日志表格.md](TASK_提取交易日志表格.md)。
+Schema 采用 [Frictionless Table Schema](https://specs.frictionlessdata.io/table-schema/) 规范，机器可读定义见 [交易日志汇总表.schema.json](交易日志汇总表.schema.json)。人类可读版本见 [INVESTMENT.md](../INVESTMENT.md#data-schema)。
 
 ```csv
 序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
@@ -105,7 +106,7 @@ calc_pnl.py
 ```
 main():
     1. validate_and_load(csv_path)    → DataFrame
-    2. 过滤排除品种 (BTC, ETH)
+    2. 过滤排除品种 (ETH — BTC 已有买入记录，可纳入计算)
     3. run_fifo_all(df)               → realized, open_positions, unmatched
     4. fetch_current_prices(open_pos)  → prices, fx_rates
     5. calc_floating_pnl(open_pos, prices) → floating
@@ -117,21 +118,24 @@ main():
 
 | 排除项 | 原因 |
 |--------|------|
-| BTC | CSV 中仅有卖出记录，无买入成本，无法计算盈亏 |
-| ETH | 同上 |
+| BTC | ~~已补充买入记录（币安 API），可纳入计算~~ → 从排除列表移除 |
+| ETH | CSV 中仅有卖出记录（非币安交易），无买入成本，暂排除 |
 | BTC 合约 (C1-C4) | 合约交易语义不同且数据不完整（如"微盈利"），已在 schema 层面排除 |
 
 ## 6. 文件清单
 
 ```
-杂活/投资日志整理/
-├── TASK_提取交易日志表格.md        # 上游任务定义 + CSV Schema 人类可读版
+investment/投资日志整理/
 ├── TASK_盈亏情况统计.md            # 本任务需求定义
 ├── DESIGN_盈亏统计系统设计.md      # 本文件
 ├── 交易日志汇总表.schema.json      # CSV Schema 机器可读定义 (Frictionless Table Schema)
-├── 交易日志汇总表.csv              # 数据文件（由上游按 schema 生成）
-├── calc_pnl.py                     # 盈亏计算脚本
-├── test_calc_pnl.py                # 测试用例
+├── 交易日志汇总表.csv              # 数据文件
+├── scripts/
+│   ├── write_trade_journal.py      # 交易日志写入工具
+│   ├── fetch_binance_trades.py     # 币安交易记录获取
+│   ├── fetch_futu_trades.py        # 富途交易记录获取
+│   ├── calc_pnl.py                 # 盈亏计算脚本
+│   └── test_*.py                   # 测试用例
 └── 盈亏统计报告.md                 # 输出报告（由脚本生成）
 ```
 
@@ -140,4 +144,5 @@ main():
 - **新增品种**：在 `TICKER_MAP` 中添加品种名到 yfinance ticker 的映射
 - **新增币种**：在 `VALID_CURRENCIES` 和 `FX_TICKERS` 中添加
 - **合约交易支持**：需设计独立的 schema 和匹配逻辑（开仓/平仓语义不同于买入/卖出）
-- **BTC/ETH 纳入**：待补充买入成本数据后，从 `EXCLUDED_ASSETS` 中移除即可
+- **BTC 已纳入**：买入记录已通过币安 API 补充
+- **ETH 纳入**：待确认买入交易所并补充买入记录后，从 `EXCLUDED_ASSETS` 中移除

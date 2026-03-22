@@ -129,7 +129,7 @@ Cross-module relationships
    - 添加操作流程说明
    - 更新模块列表
 
-2. **AGENT.md**
+2. **CLAUDE.md**
    - 添加快速参考表
    - 添加自动化脚本列表
 
@@ -165,12 +165,12 @@ Cross-module relationships
 
 **⚠️ 最容易遗漏**:
 - `.claude/skills/digital-brain/` 两个文件
-- AGENT.md 的多个位置
+- CLAUDE.md 的多个位置
 
 **验证命令**:
 ```bash
 # 检查每个文件的引用次数
-for file in SKILL.md AGENT.md README.md; do
+for file in SKILL.md CLAUDE.md README.md; do
   echo "$file: $(grep -c '<keyword>' $file)"
 done
 
@@ -218,7 +218,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 - `.claude/skills/digital-brain/instructions.xml`
 
 ### 2. 多个位置的引用
-- AGENT.md 的多个部分
+- CLAUDE.md 的多个部分
 - README.md 的不同区块
 
 ### 3. 命名规范

@@ -56,7 +56,7 @@ def main():
     files_to_check = {
         "系统核心文档": {
             "SKILL.md": 3,
-            "AGENT.md": 3,
+            "CLAUDE.md": 3,
             "README.md": 3,
         },
         "模块文档": {

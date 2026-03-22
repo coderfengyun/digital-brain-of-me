@@ -15,8 +15,9 @@ from typing import NamedTuple
 import pandas as pd
 
 SCRIPT_DIR = Path(__file__).parent
-CSV_PATH = SCRIPT_DIR / "交易日志汇总表.csv"
-REPORT_PATH = SCRIPT_DIR / "盈亏统计报告.md"
+PROJECT_DIR = SCRIPT_DIR.parent  # 投资日志整理/
+CSV_PATH = PROJECT_DIR / "交易日志汇总表.csv"
+REPORT_PATH = PROJECT_DIR / "盈亏统计报告.md"
 
 EXPECTED_COLUMNS = ["序号", "品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "备注"]
 VALID_OPS = {"买入", "卖出"}

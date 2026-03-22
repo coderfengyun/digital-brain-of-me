@@ -72,6 +72,19 @@
       </files>
       <purpose>Goals, tasks, meetings, and productivity metrics</purpose>
     </module>
+
+    <module name="investment">
+      <path>investment/</path>
+      <files>
+        <file>INVESTMENT.md</file>
+        <file>投资日志整理/交易日志汇总表.csv</file>
+        <file>投资日志整理/交易日志汇总表.schema.json</file>
+        <file>投资日志整理/scripts/write_trade_journal.py</file>
+        <file>投资日志整理/scripts/calc_pnl.py</file>
+        <file>投资日志整理/scripts/fetch_binance_trades.py</file>
+      </files>
+      <purpose>Trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis</purpose>
+    </module>
   </modules>
 
   <data-formats>
@@ -161,6 +174,24 @@
       <rules>See podcasts/PODCASTS.md #transcription-workflow</rules>
     </operation>
 
+    <operation name="add-trade">
+      <trigger>User wants to record an investment trade (买入/卖出)</trigger>
+      <action>Run investment/投资日志整理/scripts/write_trade_journal.py add with trade parameters</action>
+      <fields>品种, 操作类型(买入/卖出), 价格, 数量, 金额, 币种(CNY/USD/HKD), 日期, 备注</fields>
+    </operation>
+
+    <operation name="import-binance-trades">
+      <trigger>User wants to import trades from Binance</trigger>
+      <action>Run fetch_binance_trades.py to export, then write_trade_journal.py import-binance to import</action>
+      <workflow>See investment/INVESTMENT.md #usage</workflow>
+    </operation>
+
+    <operation name="calc-pnl">
+      <trigger>User asks about investment P&L, 盈亏, or profit/loss</trigger>
+      <action>Run investment/投资日志整理/scripts/calc_pnl.py to generate 盈亏统计报告.md</action>
+      <workflow>See investment/INVESTMENT.md #usage</workflow>
+    </operation>
+
     <operation name="create-module">
       <trigger>User wants to extend the system or create a new module</trigger>
       <action>Open module-toolkit/MODULE_CREATION_GUIDE.md and guide through 6-phase process</action>
@@ -172,7 +203,7 @@
         <phase5>Cross-Module Integration (1-2 hours) - Define data flows</phase5>
         <phase6>Quality Assurance (1 hour) - Test and verify with check script</phase6>
       </phases>
-      <files_to_update>SKILL.md, AGENT.md, ARCHITECTURE.md, EXAMPLES.md, README.md, knowledge/KNOWLEDGE.md, .claude/skills/digital-brain/skill.md, .claude/skills/digital-brain/instructions.xml</files_to_update>
+      <files_to_update>SKILL.md, CLAUDE.md, README.md, knowledge/KNOWLEDGE.md, .claude/skills/digital-brain/skill.md, .claude/skills/digital-brain/instructions.xml</files_to_update>
     </operation>
 
     <operation name="check-module-integration">
@@ -222,5 +253,11 @@
       <load>network/relationships/interactions.jsonl</load>
       <reason>Access contact database and interaction history</reason>
     </on-network-task>
+    <on-investment-task>
+      <load>investment/INVESTMENT.md</load>
+      <load>investment/投资日志整理/交易日志汇总表.csv</load>
+      <load>investment/投资日志整理/交易日志汇总表.schema.json</load>
+      <reason>Access trade journal, schema, and investment module documentation</reason>
+    </on-investment-task>
   </context-loading>
 </digital-brain-skill>

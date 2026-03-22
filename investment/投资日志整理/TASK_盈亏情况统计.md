@@ -9,5 +9,5 @@
 因为涉及大量的数值计算，要求准确性，尽量有程序完成，只有碰到非结构化无法解析数据时才使用LLM完成。
 
 # 待办
-- [ ] 重新执行 TASK_提取交易日志表格.md，按 交易日志汇总表.schema.json 重新生成符合新 schema 的 CSV
-- [ ] CSV 就绪后，运行 calc_pnl.py 生成盈亏统计报告，并运行 test_calc_pnl.py 验证集成测试通过
+- [x] 交易日志汇总表.csv 已迁移为符合 schema 的格式（由 `scripts/write_trade_journal.py migrate` 完成）
+- [ ] 运行 `scripts/calc_pnl.py` 生成盈亏统计报告，并运行 `scripts/test_calc_pnl.py` 验证集成测试通过
