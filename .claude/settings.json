@@ -7,8 +7,19 @@
       "Write",
       "Glob",
       "Grep",
+      "NotebookEdit",
       "Bash(pip3 install:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "mcp__playwright__browser_navigate",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git diff-tree:*)",
+      "Bash(git -c http.postBuffer=524288000 push)",
+      "Bash(sort:*)",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
     ]
   }
 }
