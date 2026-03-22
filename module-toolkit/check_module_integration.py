@@ -168,7 +168,7 @@ def main():
         print("\n💡 建议:")
         print("   1. 查看 MODULE_CREATION_GUIDE.md 了解完整步骤")
         print("   2. 使用检查清单逐项完成")
-        print("   3. 参考 knowledge/papers/ 作为完整示例")
+        print("   3. 参考 papers/ 作为完整示例")
 
     print("="*70)
 

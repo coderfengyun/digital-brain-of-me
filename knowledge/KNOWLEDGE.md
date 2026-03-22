@@ -1,6 +1,6 @@
 # Knowledge Module
 
-This module organizes your learning materials, bookmarks, and research.
+This module organizes bookmarks, research notes, and learning materials.
 
 ## Structure
 
@@ -26,41 +26,23 @@ Deep research notes on specific topics. Create separate markdown files for each 
 ### learning/
 Track courses, books, and skills you're developing in `courses.yaml`.
 
-### papers/ (now at top-level)
-Systematic academic paper reading with narrative-driven approach. See [../papers/PAPERS.md](../papers/PAPERS.md) for details.
+### web-clippings/
+Saved web pages converted to Markdown for offline reading.
 
-### podcasts/ (top-level)
-Podcast transcription using RSS feed + whisper.cpp. See [../podcasts/PODCASTS.md](../podcasts/PODCASTS.md) for details.
+## Related Top-Level Modules
 
-### investment/ (top-level)
-Investment trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis. See [../investment/INVESTMENT.md](../investment/INVESTMENT.md) for details.
+These modules were originally under `knowledge/` but are now independent top-level modules:
 
-**Format:**
-- `papers.jsonl`: Paper metadata (title, authors, status, tags)
-- `paper-YYYYMMDD-XXX.md`: Detailed reading notes focusing on narrative, evidence, and critical thinking
+- **papers/** - Academic paper reading. See [../papers/PAPERS.md](../papers/PAPERS.md)
+- **podcasts/** - Podcast transcription. See [../podcasts/PODCASTS.md](../podcasts/PODCASTS.md)
+- **investment/** - Investment trade journal. See [../investment/INVESTMENT.md](../investment/INVESTMENT.md)
 
 ## Usage Tips
 
 - Tag bookmarks consistently for easy retrieval
 - Link research notes to related bookmarks using bookmark IDs
-- Link papers to related bookmarks and research notes using IDs
-- Investment research notes (`investment/*.md`) can complement knowledge module content
 - Regularly review and consolidate learning materials
-- Use research notes to synthesize information from multiple sources
-- When reading papers, focus on understanding the narrative first, then verify with data
 
-## Extending the Knowledge Module
+## Extending
 
 Want to add new knowledge types? Follow the [Module Creation Guide](../module-toolkit/MODULE_CREATION_GUIDE.md).
-
-Examples of modules you could add:
-- **courses/**: Track online courses and MOOCs
-- **podcasts/**: Now available at top-level — transcribe podcast episodes via RSS or local audio
-- **videos/**: Technical talks and tutorials
-- **tools/**: Software tools and utilities you use
-- **snippets/**: Code snippets and recipes
-
-After creating a new module, verify integration:
-```bash
-python module-toolkit/check_module_integration.py <module_name> <keyword>
-```

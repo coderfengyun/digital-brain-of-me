@@ -52,9 +52,9 @@ This is a Digital Brain personal operating system. When working in this project:
 | "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `goals/goals.yaml` with progress |
-| "Add paper to read" | Run `add_paper.py` → Create note file |
+| "Add paper to read" | Run `add_paper.py "URL"` → Create paper folder |
 | "Read this paper" | Guide through 2-phase reading → Update status |
-| "Show unread papers" | Run `search_papers.py --status unread` |
+| "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
 | "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
 | "Add trade" / "交易记录" | Use `investment/投资日志整理/scripts/write_trade_journal.py add` |
 | "Import trades from Binance" | Run `fetch_binance_trades.py` → `write_trade_journal.py import-binance` |
@@ -75,7 +75,7 @@ Use **progressive disclosure**:
    - `content/ideas/ideas.jsonl`
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
-   - `knowledge/papers/papers.jsonl` (if paper-related)
+   - `papers/papers.jsonl` (if paper-related)
    - `podcasts/podcasts.jsonl` (if podcast-related)
 
 3. **Load on Network Tasks** (L2):
@@ -133,22 +133,20 @@ Use **progressive disclosure**:
 ```json
 {
   "id": "paper-YYYYMMDD-XXX",
-  "title": "Paper title",
-  "authors": ["Author 1", "Author 2"],
-  "year": 2024,
-  "venue": "Conference/Journal",
   "url": "https://arxiv.org/...",
-  "tags": ["domain", "method", "application"],
-  "reading_status": "unread|reading|completed",
-  "main_claim": "One-sentence summary",
-  "added_at": "YYYY-MM-DD",
-  "related_papers": []
+  "source": "",
+  "notes": ""
 }
 ```
 
+- `url` - Original URL or local filename
+- `source` - Local source document path (e.g., `paper-YYYYMMDD-XXX/paper.html`)
+- `notes` - Reading notes path (e.g., `paper-YYYYMMDD-XXX/notes.md`)
+- Reading status: `notes` empty = unread, `notes` filled = completed
+
 Or use the script:
 ```bash
-python scripts/add_paper.py "Title" "URL" --tags "nlp,transformer" --year 2024
+python scripts/add_paper.py "URL"
 ```
 
 ### Adding Contacts
@@ -208,9 +206,7 @@ Run these to generate insights:
 - `python scripts/content_ideas.py` - Content suggestions from bookmarks
 - `python scripts/stale_contacts.py` - Identify people to reconnect with
 - `python scripts/idea_to_draft.py <idea-id>` - Expand idea into draft
-- `python scripts/add_paper.py "Title" "URL"` - Add paper to reading list
-- `python scripts/search_papers.py --status unread` - Find papers to read
-- `python scripts/update_paper_status.py paper-XXX --status completed` - Update paper status
+- `python scripts/add_paper.py "URL"` - Add paper to reading list
 - `python scripts/transcribe_podcast.py --rss "URL" --count 1` - Transcribe podcast from RSS feed
 - `python scripts/transcribe_podcast.py --audio file.mp3 --title "Title" --show "Show"` - Transcribe local audio
 - `python investment/投资日志整理/scripts/write_trade_journal.py add --品种 BTC --操作 买入 --价格 76653 --数量 0.00391 --金额 299.71 --币种 USD --日期 2025-04-07` - Add trade record

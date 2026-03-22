@@ -65,10 +65,11 @@ JSONL files are **append-only**. Never delete entries:
 digital-brain-of-me/
 ├── identity/     → Voice, brand, values (READ FIRST for content)
 ├── content/      → Ideas, drafts, posts, calendar
-├── knowledge/    → Bookmarks, research, learning, papers
+├── knowledge/    → Bookmarks, research, learning
+├── papers/       → Academic paper reading and notes
+├── podcasts/     → Podcast transcription and notes
 ├── network/      → Contacts, interactions, intros
 ├── operations/   → Todos, goals, meetings, metrics
-├── podcasts/     → Podcast transcription and notes
 ├── investment/   → Trade journal, broker imports, P&L analysis
 └── scripts/      → Automation scripts
 ```

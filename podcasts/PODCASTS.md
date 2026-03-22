@@ -118,13 +118,6 @@ python scripts/transcribe_podcast.py --rss "RSS_URL" --count 1
 grep -r "keyword" podcasts/transcripts/
 ```
 
-## Integration with Other Modules
-
-**podcasts → knowledge**: 播客中的知识点整理到 knowledge
-**podcasts → content**: 播客观点启发内容创作
-**podcasts → papers**: 播客中提到的论文加入阅读列表
-**podcasts → tasks**: 播客中的待办事项记录到 tasks
-
 ## 已验证的 RSS Feed
 
 | Show | RSS Feed | 备注 |

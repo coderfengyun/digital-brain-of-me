@@ -104,29 +104,17 @@ Each entry in `papers.jsonl`:
 
 ### Adding Papers
 
-**CLI** (using scripts):
+**CLI**:
 ```bash
-python scripts/add_paper.py "Title" "URL" --tags "nlp,transformer" --year 2024
+python scripts/add_paper.py "https://arxiv.org/abs/xxxx"
 ```
 
 **Manual**:
 1. Create folder `paper-YYYYMMDD-XXX/`
-2. Copy TEMPLATE.md to `paper-YYYYMMDD-XXX/notes.md`
-3. Download paper HTML to the folder
-4. Append entry to `papers.jsonl` with id, url, html path, and empty notes
-
-
-## Integration with Other Modules
-
-**bookmarks → papers**: Discover papers worth deep reading
-**papers → research**: Synthesize insights across multiple papers
-**papers → ideas**: Paper insights inspire content ideas
-**papers → tasks**: Follow-up actions from paper reading
-**papers → contacts**: Connect with paper authors
+2. Download source document to the folder
+3. Append entry to `papers.jsonl` with id, url, source path, and empty notes
+4. After reading, create `notes.md` and update the notes field
 
 ## Further Reading
 
 - **[EXAMPLE.md](EXAMPLE.md)** - Example: Attention Is All You Need
-- **[QUICKSTART.md](QUICKSTART.md)** - 5-minute tutorial
-- **[OVERVIEW.md](OVERVIEW.md)** - Design philosophy
-- **[INTEGRATION.md](INTEGRATION.md)** - Cross-module workflows

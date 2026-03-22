@@ -164,7 +164,7 @@
 
     <operation name="update-paper-status">
       <trigger>User completes a reading phase or finishes a paper</trigger>
-      <action>Run scripts/update_paper_status.py to update status and metadata</action>
+      <action>Directly update the notes/source fields in papers/papers.jsonl</action>
     </operation>
 
     <operation name="transcribe-podcast">

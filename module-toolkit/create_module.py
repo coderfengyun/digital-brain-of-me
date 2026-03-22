@@ -109,9 +109,9 @@ def update_skill_md(module_name, keyword):
     content = re.sub(trigger_pattern, replacement, content, count=1)
 
     # Add to module overview (after operations module, line ~68)
-    module_section = f"""├── knowledge/    → Bookmarks, research, learning, papers, {module_name}"""
+    module_section = f"""├── knowledge/    → Bookmarks, research, learning, {module_name}"""
     content = content.replace(
-        "├── knowledge/    → Bookmarks, research, learning, papers",
+        "├── knowledge/    → Bookmarks, research, learning",
         module_section
     )
 
@@ -177,8 +177,8 @@ def update_claude_skill_md(module_name, keyword):
     content = skill_path.read_text(encoding='utf-8')
 
     # Add to capabilities list (line ~10)
-    knowledge_line = "3. **Knowledge** - Bookmarks, research, learning materials, and academic papers"
-    new_line = f"3. **Knowledge** - Bookmarks, research, learning materials, academic papers, and {module_name}"
+    knowledge_line = "3. **Knowledge** - Bookmarks, research, and learning materials"
+    new_line = f"3. **Knowledge** - Bookmarks, research, learning materials, and {module_name}"
     content = content.replace(knowledge_line, new_line)
 
     # Add to commands list (around line ~24)

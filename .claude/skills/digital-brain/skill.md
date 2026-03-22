@@ -8,12 +8,13 @@ This skill helps you manage seven key areas plus system extension:
 
 1. **Identity** - Personal brand, voice, and values
 2. **Content** - Ideas, drafts, and publishing pipeline
-3. **Knowledge** - Bookmarks, research, learning materials, and academic papers
-4. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
-5. **Network** - Contacts and relationship management
-6. **Operations** - Goals, tasks, meetings, and metrics
-7. **Investment** - Trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis
-8. **Module Toolkit** - Create new modules and extend functionality
+3. **Knowledge** - Bookmarks, research, and learning materials
+4. **Papers** - Academic paper reading with narrative-driven approach
+5. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
+6. **Network** - Contacts and relationship management
+7. **Operations** - Goals, tasks, meetings, and metrics
+8. **Investment** - Trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis
+9. **Module Toolkit** - Create new modules and extend functionality
 
 ## Commands
 
@@ -50,9 +51,7 @@ Eight Python scripts in `scripts/`:
 3. `stale_contacts.py` - Find contacts to reconnect with
 4. `idea_to_draft.py` - Expand idea into structured draft
 5. `add_paper.py` - Add academic papers to reading list
-6. `search_papers.py` - Search and query papers
-7. `update_paper_status.py` - Update paper reading status
-8. `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
+6. `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
 
 **Investment scripts** in `investment/投资日志整理/scripts/`:
 - `write_trade_journal.py` - Add, import, migrate, and validate trade records
