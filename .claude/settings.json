@@ -18,6 +18,7 @@
       "Bash(git diff-tree:*)",
       "Bash(git -c http.postBuffer=524288000 push)",
       "Bash(sort:*)",
+      "Bash(chmod +x:*)",
       "Skill(update-config)",
       "Skill(update-config:*)"
     ]

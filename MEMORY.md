@@ -1,1 +1,1 @@
-/Users/chentienan/.claude/projects/-Users-chentienan-code-digital-brain-of-me/memory/MEMORY.md
+/Users/yangdoudou/.claude/projects/-Users-yangdoudou-Code-git-GitHub-digital-brain-of-me/memory/MEMORY.md
