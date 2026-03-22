@@ -12,95 +12,23 @@
 
 ---
 
-# Digital Brain - Claude Instructions
+# Digital Brain - Development Guide
 
-This is a Digital Brain personal operating system. When working in this project:
-
-## Core Rules
-
-1. **Always read identity/voice/style.md before writing any content** - Match the user's authentic voice
-2. **Append to JSONL files, never overwrite** - Preserve history
-3. **Update timestamps** when modifying tracked data
-4. **Cross-reference modules** - Knowledge informs content, network informs operations
-5. **Update all references when moving/renaming files** - Search entire repo for references to the old path and update them
-
-## Quick Reference
-
-- **Writing content**: Read `identity/voice/style.md` first, then create drafts in `content/drafts/`
-- **Looking up contacts**: Search `network/contacts/contacts.jsonl`, check `network/relationships/interactions.jsonl` for history
-- **Content ideas**: Check `content/ideas/ideas.jsonl`, run `scripts/content_ideas.py`
-- **Task management**: Use `operations/tasks/tasks.jsonl`, align with `operations/goals/goals.yaml`
-- **Weekly review**: Run `scripts/weekly_review.py`
-- **Investment trades**: Use `investment/投资日志整理/scripts/` for trade journal management and P&L calculation
+> **本文件定位**：开发/扩展 digital-brain 系统时的约定——文件格式、数据 schema、模块创建流程、设计原则。使用 digital-brain 的操作手册（路由表、加载策略、脚本列表）见 `SKILL.md`。
 
 ## File Conventions
 
 - `.jsonl` files: One JSON object per line, append-only
 - `.md` files: Human-readable, freely editable
 - `.yaml` files: Configuration and structured data
+- `.csv` files: Tabular data with schema validation (see `.schema.json`)
 - Template entries in README files: Reference formats, don't modify
 
-## When User Asks To...
+## Data Entry Schemas
 
-| Request | Action |
-|---------|--------|
-| "Write a post about X" | Read `voice/style.md` → Draft → Match voice patterns |
-| "Prepare for meeting with Y" | Look up contact → Get interactions → Summarize |
-| "What should I create?" | Run `content_ideas.py` → Check ideas.jsonl |
-| "Add contact Z" | Append to `contacts.jsonl` with full schema |
-| "Weekly review" | Run `weekly_review.py` → Present insights |
-| "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
-| "Add a task" | Append to `tasks/tasks.jsonl` with priority |
-| "Track a goal" | Update `goals/goals.yaml` with progress |
-| "Add paper to read" | Run `add_paper.py "URL"` → Create paper folder |
-| "Read this paper" | Guide through 2-phase reading → Update status |
-| "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
-| "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
-| "Add trade" / "交易记录" | Use `investment/投资日志整理/scripts/write_trade_journal.py add` |
-| "Import trades from Binance" | Run `fetch_binance_trades.py` → `write_trade_journal.py import-binance` |
-| "Calculate P&L" / "盈亏" | Run `investment/投资日志整理/scripts/calc_pnl.py` |
-| "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
-| "Extend the system" | Follow module creation process → Update system files |
-| "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
+各模块数据条目的标准格式。添加新条目时遵循对应 schema。
 
-## Module Loading Strategy
-
-Use **progressive disclosure**:
-
-1. **Always Load** (L1):
-   - `identity/brand/profile.yaml`
-   - `identity/voice/style.md`
-
-2. **Load on Content Tasks** (L2):
-   - `content/ideas/ideas.jsonl`
-   - `content/published/published.jsonl`
-   - `knowledge/bookmarks/bookmarks.jsonl`
-   - `papers/papers.jsonl` (if paper-related)
-   - `podcasts/podcasts.jsonl` (if podcast-related)
-
-3. **Load on Network Tasks** (L2):
-   - `network/contacts/contacts.jsonl`
-   - `network/relationships/interactions.jsonl`
-
-4. **Load on Operations Tasks** (L2):
-   - `operations/tasks/tasks.jsonl`
-   - `operations/goals/goals.yaml`
-   - `operations/metrics/weekly.jsonl`
-
-5. **Load on Investment Tasks** (L2):
-   - `investment/INVESTMENT.md`
-   - `investment/投资日志整理/交易日志汇总表.csv`
-   - `investment/投资日志整理/交易日志汇总表.schema.json`
-
-6. **Load on Demand** (L3):
-   - Individual draft files
-   - Research notes
-   - Paper notes (`paper-YYYYMMDD-XXX.md`)
-   - Meeting records
-
-## Data Entry Best Practices
-
-### Adding Content Ideas
+### Content Ideas
 
 ```json
 {
@@ -114,7 +42,7 @@ Use **progressive disclosure**:
 }
 ```
 
-### Adding Bookmarks
+### Bookmarks
 
 ```json
 {
@@ -128,7 +56,7 @@ Use **progressive disclosure**:
 }
 ```
 
-### Adding Papers
+### Papers
 
 ```json
 {
@@ -139,17 +67,11 @@ Use **progressive disclosure**:
 }
 ```
 
-- `url` - Original URL or local filename
 - `source` - Local source document path (e.g., `paper-YYYYMMDD-XXX/paper.html`)
 - `notes` - Reading notes path (e.g., `paper-YYYYMMDD-XXX/notes.md`)
 - Reading status: `notes` empty = unread, `notes` filled = completed
 
-Or use the script:
-```bash
-python scripts/add_paper.py "URL"
-```
-
-### Adding Contacts
+### Contacts
 
 ```json
 {
@@ -160,16 +82,11 @@ python scripts/add_paper.py "URL"
   "met_at": "YYYY-MM-DD",
   "last_contact": "YYYY-MM-DD",
   "notes": "Context about this person",
-  "links": {
-    "twitter": "",
-    "linkedin": "",
-    "email": "",
-    "website": ""
-  }
+  "links": { "twitter": "", "linkedin": "", "email": "", "website": "" }
 }
 ```
 
-### Logging Interactions
+### Interactions
 
 ```json
 {
@@ -182,7 +99,7 @@ python scripts/add_paper.py "URL"
 }
 ```
 
-### Adding Tasks
+### Tasks
 
 ```json
 {
@@ -198,60 +115,30 @@ python scripts/add_paper.py "URL"
 }
 ```
 
-## Automation Scripts
+### Investment Trades
 
-Run these to generate insights:
-
-- `python scripts/weekly_review.py` - Weekly productivity summary
-- `python scripts/content_ideas.py` - Content suggestions from bookmarks
-- `python scripts/stale_contacts.py` - Identify people to reconnect with
-- `python scripts/idea_to_draft.py <idea-id>` - Expand idea into draft
-- `python scripts/add_paper.py "URL"` - Add paper to reading list
-- `python scripts/transcribe_podcast.py --rss "URL" --count 1` - Transcribe podcast from RSS feed
-- `python scripts/transcribe_podcast.py --audio file.mp3 --title "Title" --show "Show"` - Transcribe local audio
-- `python investment/投资日志整理/scripts/write_trade_journal.py add --品种 BTC --操作 买入 --价格 76653 --数量 0.00391 --金额 299.71 --币种 USD --日期 2025-04-07` - Add trade record
-- `python investment/投资日志整理/scripts/write_trade_journal.py import-binance /tmp/binance.csv` - Import Binance trades
-- `python investment/投资日志整理/scripts/calc_pnl.py` - Calculate investment P&L
-- `python module-toolkit/check_module_integration.py <module> <keyword>` - Verify module integration completeness
-
-## Voice Consistency Checklist
-
-Before generating any content, verify:
-
-1. Read `identity/voice/style.md`
-2. Checked `identity/brand/profile.yaml` for topic alignment
-3. Reviewed similar content in `content/published/published.jsonl`
-4. Applied voice patterns (tone, vocabulary, structure)
-5. Maintained authenticity and brand positioning
+See `investment/投资日志整理/交易日志汇总表.schema.json` for CSV schema.
 
 ## Module Creation
 
-When creating new modules, follow the complete guide in `module-toolkit/MODULE_CREATION_GUIDE.md`:
+When creating new modules, follow `module-toolkit/MODULE_CREATION_GUIDE.md`:
 
-### 6-Phase Process
-
-1. **Requirements Analysis** (30 min) - Define data model, workflow, and tag system
-2. **Core Files Creation** (2-3 hours) - README, data.jsonl, scripts
-3. **Documentation** (2-3 hours) - Templates, examples, quick start
-4. **System Integration** (1-2 hours) - Update system files:
+1. **Requirements Analysis** - Define data model, workflow, and tag system
+2. **Core Files Creation** - README, data.jsonl, scripts
+3. **Documentation** - Templates, examples, quick start
+4. **System Integration** - Update system files:
    - SKILL.md, CLAUDE.md, README.md
    - knowledge/KNOWLEDGE.md
    - `.claude/skills/digital-brain/skill.md`
-5. **Cross-Module Integration** (1-2 hours) - Define data flows and relationships
-6. **Quality Assurance** (1 hour) - Test and verify with check script
-
-### Integration Verification
+5. **Cross-Module Integration** - Define data flows and relationships
+6. **Quality Assurance** - Test and verify with check script
 
 After creating a module, ALWAYS run:
 ```bash
 python module-toolkit/check_module_integration.py <module_name> <keyword>
 ```
 
-This checks that all system files have been properly updated with sufficient references.
-
-### Common Pitfalls
-
-Most commonly missed files:
+Most commonly missed integration files:
 1. `.claude/skills/digital-brain/skill.md`
 2. Multiple sections in CLAUDE.md
 
@@ -259,11 +146,11 @@ Most commonly missed files:
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: Load only what's needed for current task（三级加载：L1 路由 → L2 模块指令 → L3 数据文件）
+1. **Progressive Disclosure**: L1 路由（SKILL.md）→ L2 模块指令（各模块 README.md）→ L3 数据文件
 2. **Append-Only**: Never delete, always add (mark as archived if needed)
 3. **Cross-Reference**: Link related data across modules（flat-file relational model）
 4. **Voice-First**: Identity always loaded before content generation
-5. **Historical Analysis**: Past data informs future decisions
+5. **Module Separation**: 每个模块独立管理自己的操作细节，上层只做路由
 6. **Complete Integration**: New modules require updating all system files (use guide and checker)
 
 ## Error Prevention
@@ -285,10 +172,4 @@ Most commonly missed files:
 - Search repo with `grep -r "filename"` before moving/renaming files, then update all references
 - Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`)
 - Maintain consistent tagging across modules for better discovery
-- When running scripts, show output to user and explain insights
-- Proactively suggest actions when relevant (e.g., "I noticed you haven't published in a while...")
-- **When a digital-brain operation fails or produces unexpected results**, append the lesson to `.claude/skills/digital-brain/gotchas.md` so future sessions avoid the same mistake
-
----
-
-**Remember**: This is a personal operating system. Maintain the user's authentic voice, preserve their data history, and help them build intentional systems for content, relationships, and productivity.
+- **When a digital-brain operation fails or produces unexpected results**, append the lesson to `.claude/skills/digital-brain/gotchas.md`

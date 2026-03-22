@@ -1,14 +1,10 @@
----
-name: digital-brain
-description: This skill should be used when the user asks to "write a post", "check my voice", "look up contact", "prepare for meeting", "weekly review", "track goals", "add paper", "read paper", "create module", "add module", or mentions personal brand, content creation, network management, academic paper reading, system extension, or voice consistency.
-version: 1.0.0
----
-
 # Digital Brain
 
-A structured personal operating system for managing digital presence, knowledge, relationships, and goals with AI assistance. Designed for founders building in public, content creators growing their audience, and tech-savvy professionals seeking AI-assisted personal management.
+个人数字操作系统：管理数字身份、知识、人脉、目标和投资。
 
-**Important**: This skill uses progressive disclosure. Module-specific instructions are in each subdirectory's `.md` file. Only load what's needed for the current task.
+> **本文件定位**：使用 digital-brain 时的操作手册——路由、加载策略、脚本列表、使用规则。修改/扩展系统本身的开发约定见 `CLAUDE.md`。
+
+Module-specific instructions are in each subdirectory's `.md` file. Only load what's needed for the current task.
 
 ## When to Activate
 
@@ -27,39 +23,9 @@ Activate this skill when the user:
 - Needs to record, import, or analyze investment trades
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "create module", "add module", "extend system"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system"
 
-## Core Concepts
-
-### Progressive Disclosure Architecture
-
-The Digital Brain follows a three-level loading pattern:
-
-| Level | When Loaded | Content |
-|-------|-------------|---------|
-| **L1: Metadata** | Always | This SKILL.md overview |
-| **L2: Module Instructions** | On-demand | `[module]/README.md` files |
-| **L3: Data Files** | As-needed | `.jsonl`, `.yaml`, `.md` data |
-
-### File Format Strategy
-
-Formats chosen for optimal agent parsing:
-
-- **JSONL** (`.jsonl`): Append-only logs - ideas, posts, contacts, interactions
-- **YAML** (`.yaml`): Structured configs - goals, values, circles
-- **Markdown** (`.md`): Narrative content - voice, brand, calendar, todos
-- **XML** (`.xml`): Complex prompts - content generation templates
-
-### Append-Only Data Integrity
-
-JSONL files are **append-only**. Never delete entries:
-- Mark as `"status": "archived"` instead of deleting
-- Preserves history for pattern analysis
-- Enables "what worked" retrospectives
-
-## Detailed Topics
-
-### Module Overview
+## Module Overview
 
 ```
 digital-brain-of-me/
@@ -74,190 +40,100 @@ digital-brain-of-me/
 └── scripts/      → Automation scripts
 ```
 
-### Identity Module (Critical for Content)
+## Request Routing
 
-**Always read `identity/voice/style.md` before generating any content.**
+| Request | Action |
+|---------|--------|
+| "Write a post about X" | Read `voice/style.md` → Draft → Match voice patterns |
+| "Prepare for meeting with Y" | Look up contact → Get interactions → Summarize |
+| "What should I create?" | Run `content_ideas.py` → Check ideas.jsonl |
+| "Add contact Z" | Append to `contacts.jsonl` with full schema |
+| "Weekly review" | Run `weekly_review.py` → Present insights |
+| "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
+| "Add a task" | Append to `tasks/tasks.jsonl` with priority |
+| "Track a goal" | Update `goals/goals.yaml` with progress |
+| "Add paper to read" | Run `add_paper.py "URL"` → Create paper folder |
+| "Read this paper" | Guide through 2-phase reading → Update status |
+| "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
+| "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
+| "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
+| "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
+| "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
 
-Contains:
-- `voice/style.md` - Tone, style, vocabulary, patterns
-- `voice/principles.md` - Core beliefs and principles
-- `brand/profile.yaml` - Positioning, audience, content pillars
+## Module Loading Strategy
 
-### Content Module
+Use **progressive disclosure**:
 
-Pipeline: `ideas.jsonl` → `drafts/` → `published.jsonl`
+1. **Always Load** (L1):
+   - `identity/brand/profile.yaml`
+   - `identity/voice/style.md`
 
-- Capture ideas immediately to `ideas/ideas.jsonl`
-- Develop in `drafts/` using templates
-- Log published content to `published/published.jsonl` with metrics
+2. **Load on Content Tasks** (L2):
+   - `content/ideas/ideas.jsonl`
+   - `content/published/published.jsonl`
+   - `knowledge/bookmarks/bookmarks.jsonl`
+   - `papers/papers.jsonl` (if paper-related)
+   - `podcasts/podcasts.jsonl` (if podcast-related)
 
-### Network Module
+3. **Load on Network Tasks** (L2):
+   - `network/contacts/contacts.jsonl`
+   - `network/relationships/interactions.jsonl`
 
-Personal CRM with relationship tiers:
-- `colleague` - Professional connections
-- `mentor` - Guidance and advice
-- `client` - Business relationships
-- `friend` - Personal relationships
-- `acquaintance` - Casual connections
+4. **Load on Operations Tasks** (L2):
+   - `operations/tasks/tasks.jsonl`
+   - `operations/goals/goals.yaml`
+   - `operations/metrics/weekly.jsonl`
 
-### Operations Module
+5. **Load on Investment Tasks** (L2):
+   - `investment/INVESTMENT.md`
+   - `investment/投资日志整理/交易日志汇总表.csv`
+   - `investment/投资日志整理/交易日志汇总表.schema.json`
 
-Productivity system with priority levels:
-- **high**: Do today, blocking
-- **medium**: This week, important
-- **low**: This month, valuable
+6. **Load on Demand** (L3):
+   - Individual draft files
+   - Research notes
+   - Paper notes (`paper-YYYYMMDD-XXX.md`)
+   - Meeting records
 
-### Investment Module
+## Automation Scripts
 
-Trade journal and P&L analysis:
-- Record trades manually or import from brokers (Binance, Futu)
-- CSV-based trade log with schema validation
-- FIFO-based realized/floating P&L calculation
-- See [investment/INVESTMENT.md](investment/INVESTMENT.md) for details
+`scripts/`:
 
-## Practical Guidance
+- `weekly_review.py` - Weekly productivity summary
+- `content_ideas.py` - Content suggestions from bookmarks
+- `stale_contacts.py` - Identify people to reconnect with
+- `idea_to_draft.py <idea-id>` - Expand idea into draft
+- `add_paper.py "URL"` - Add paper to reading list
+- `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
 
-### Content Creation Workflow
+`investment/投资日志整理/scripts/`:
 
-```
-1. Read identity/voice/style.md (REQUIRED)
-2. Check identity/brand/profile.yaml for topic alignment
-3. Reference content/published/published.jsonl for successful patterns
-4. Draft matching voice attributes
-5. Log to published.jsonl after publishing
-```
+- `write_trade_journal.py` - Add, import, migrate, and validate trade records
+- `fetch_binance_trades.py` - Fetch trades from Binance API
+- `fetch_futu_trades.py` - Fetch trades from Futu OpenD API
+- `fetch_cms_trades.py` - Fetch trades from 招商证券 via Chrome MCP
+- `calc_pnl.py` - FIFO-based P&L calculation
 
-### Pre-Meeting Preparation
+`module-toolkit/`:
 
-```
-1. Look up contact: network/contacts/contacts.jsonl
-2. Get history: network/relationships/interactions.jsonl
-3. Check pending: operations/tasks/tasks.jsonl
-4. Generate brief with context
-```
+- `check_module_integration.py <module> <keyword>` - Verify module integration
 
-### Weekly Review Process
-
-```
-1. Run: python scripts/weekly_review.py
-2. Review metrics in operations/metrics/weekly.jsonl
-3. Check stale contacts: scripts/stale_contacts.py
-4. Update goals progress in operations/goals/goals.yaml
-```
-
-## Examples
-
-### Example: Writing a Blog Post
-
-**Input**: "Help me write a post about AI agents"
-
-**Process**:
-1. Read `identity/voice/style.md` → Extract voice attributes
-2. Check `identity/brand/profile.yaml` → Confirm topic alignment
-3. Reference `content/published/published.jsonl` → Find similar successful posts
-4. Draft post matching voice patterns
-5. Suggest adding to `content/ideas/ideas.jsonl` if not publishing immediately
-
-**Output**: Post draft in user's authentic voice with platform-appropriate format.
-
-### Example: Contact Lookup
-
-**Input**: "Prepare me for my call with Sarah Chen"
-
-**Process**:
-1. Search `network/contacts/contacts.jsonl` for "Sarah Chen"
-2. Get recent entries from `network/relationships/interactions.jsonl`
-3. Check `operations/tasks/tasks.jsonl` for pending items with Sarah
-4. Compile brief: role, context, last discussed, follow-ups
-
-**Output**: Pre-meeting brief with relationship context.
-
-### Example: Academic Paper Reading
-
-**Input**: "I want to read the Attention Is All You Need paper"
-
-**Process**:
-1. Run `scripts/add_paper.py` to add paper to reading list
-2. Open generated `paper-YYYYMMDD-XXX.md` note file
-3. Guide user through Phase 1: Extract narrative (15-30 min)
-   - Read abstract, intro, conclusion
-   - Fill in core narrative section
-   - Draw Mermaid structure diagram
-4. Update status to "reading" with main claim
-5. Later guide through Phase 2: Verify data (1-2 hours)
-   - Find supporting evidence for each claim
-   - Fill data evidence table
-   - Complete critical thinking section
-6. Update status to "completed"
-
-**Output**: Structured paper notes with narrative, evidence, and critical analysis.
-
-### Example: Creating a New Module
-
-**Input**: "I want to create a contacts module to track my professional network"
-
-**Process**:
-1. Open `module-toolkit/MODULE_CREATION_GUIDE.md` for complete checklist
-2. Guide user through 6-phase creation process:
-   - Phase 1: Requirements analysis (30 min)
-   - Phase 2: Core files creation (2-3 hours)
-   - Phase 3: Documentation (2-3 hours)
-   - Phase 4: System integration (1-2 hours) - update 8 files
-   - Phase 5: Cross-module integration (1-2 hours)
-   - Phase 6: Quality assurance (1 hour)
-3. Create necessary files:
-   - `knowledge/contacts/README.md`
-   - `knowledge/contacts/contacts.jsonl`
-   - `scripts/add_contact.py`, `scripts/search_contacts.py`
-4. Update system integration files:
-   - SKILL.md, CLAUDE.md, README.md
-   - README.md, knowledge/KNOWLEDGE.md
-   - `.claude/skills/digital-brain/skill.md`
-5. Run verification: `python module-toolkit/check_module_integration.py contacts contact`
-6. Create COMPLETION_REPORT.md documenting the module
-
-**Output**: Fully integrated new module ready for production use.
-
-## Guidelines
+## Usage Rules
 
 1. **Voice First**: Always read `identity/voice/style.md` before any content generation
-2. **Append Only**: Never delete from JSONL files - archive instead
+2. **Append Only**: Never delete from JSONL files - mark as `"status": "archived"` instead
 3. **Update Timestamps**: Set `updated_at` field when modifying tracked data
 4. **Cross-Reference**: Knowledge informs content, network informs operations, papers inspire ideas
 5. **Log Interactions**: Always log meetings/calls to `interactions.jsonl`
-6. **Preserve History**: Past content in `published.jsonl` informs future performance
-7. **Narrative First**: For papers, extract narrative structure before diving into data details
-8. **Complete Integration**: New modules require updating 8 system files - use module-toolkit/MODULE_CREATION_GUIDE.md and check_module_integration.py
-
-## Integration
-
-This skill integrates context engineering principles:
-
-- **context-fundamentals** - Progressive disclosure, attention budget management
-- **memory-systems** - JSONL for persistent memory, structured recall
-- **tool-design** - Scripts in `scripts/` follow tool design principles
-- **context-optimization** - Module separation prevents context bloat
+6. **Narrative First**: For papers, extract narrative structure before diving into data details
 
 ## References
 
-Internal references:
-- [Identity Module](./identity/voice/principles.md) - Voice and brand details
-- [Content Module](./content/CONTENT.md) - Content pipeline docs
-- [Knowledge Module](./knowledge/KNOWLEDGE.md) - Learning and research
-- [Papers Module](./papers/PAPERS.md) - Academic paper reading
-- [Network Module](./network/NETWORK.md) - CRM documentation
-- [Operations Module](./operations/OPERATIONS.md) - Productivity system
-- [Investment Module](./investment/INVESTMENT.md) - Trade journal and P&L analysis
-- [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md) - How to extend the system
-
-External resources:
-- [Agent Skills for Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering)
-- [Original Digital Brain Skill](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/tree/main/examples/digital-brain-skill)
-
----
-
-## Skill Metadata
-
-**Created**: 2026-02-26
-**Based On**: [Digital Brain Skill by Murat Can Koylan](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/tree/main/examples/digital-brain-skill)
-**Version**: 1.0.0
+- [Identity Module](./identity/voice/principles.md)
+- [Content Module](./content/CONTENT.md)
+- [Knowledge Module](./knowledge/KNOWLEDGE.md)
+- [Papers Module](./papers/PAPERS.md)
+- [Network Module](./network/NETWORK.md)
+- [Operations Module](./operations/OPERATIONS.md)
+- [Investment Module](./investment/INVESTMENT.md)
+- [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md)

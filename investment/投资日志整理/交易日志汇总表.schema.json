@@ -86,6 +86,15 @@
       }
     },
     {
+      "name": "交易平台",
+      "type": "string",
+      "description": "交易发生的平台或券商",
+      "constraints": {
+        "required": true,
+        "enum": ["币安", "富途", "招行", "招商证券", "其他"]
+      }
+    },
+    {
       "name": "备注",
       "type": "string",
       "description": "可选，标注数据来源说明（如"数量由金额÷价格推算"、"价格由国际金价换算"）",

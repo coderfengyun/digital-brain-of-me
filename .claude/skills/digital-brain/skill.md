@@ -15,7 +15,7 @@ This skill helps you manage seven key areas plus system extension:
 5. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
 6. **Network** - Contacts and relationship management
 7. **Operations** - Goals, tasks, meetings, and metrics
-8. **Investment** - Trade journal, broker imports (Binance/Futu), and FIFO-based P&L analysis
+8. **Investment** - Trade journal, broker imports (Binance/Futu/招商证券), and FIFO-based P&L analysis
 9. **Module Toolkit** - Create new modules and extend functionality
 
 ## Commands
@@ -58,7 +58,8 @@ Eight Python scripts in `scripts/`:
 **Investment scripts** in `investment/投资日志整理/scripts/`:
 - `write_trade_journal.py` - Add, import, migrate, and validate trade records
 - `fetch_binance_trades.py` - Fetch trades from Binance API
-- `fetch_futu_trades.py` - Fetch trades from Futu (placeholder)
+- `fetch_futu_trades.py` - Fetch trades from Futu OpenD API
+- `fetch_cms_trades.py` - Fetch trades from 招商证券 via Chrome MCP
 - `calc_pnl.py` - FIFO-based P&L calculation and report generation
 
 **Module toolkit**:
@@ -98,6 +99,10 @@ Eight Python scripts in `scripts/`:
 
 ### Adding an investment trade
 "Add a BTC buy trade: 0.00391 at $76653 on 2025-04-07"
+
+### Updating trades / Importing / P&L
+"更新我XX日期以后的交易记录" / "从招商证券导入" / "Calculate P&L"
+Read `investment/INVESTMENT.md` for all trade operations (add, import, batch update, P&L).
 
 ### Calculating investment P&L
 "Calculate my investment P&L"

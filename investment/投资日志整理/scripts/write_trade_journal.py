@@ -39,10 +39,11 @@ PROJECT_DIR = SCRIPT_DIR.parent  # 投资日志整理/
 CSV_PATH = PROJECT_DIR / "交易日志汇总表.csv"
 SCHEMA_PATH = PROJECT_DIR / "交易日志汇总表.schema.json"
 
-SCHEMA_FIELDS = ["序号", "品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "备注"]
+SCHEMA_FIELDS = ["序号", "品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台", "备注"]
 VALID_CURRENCIES = {"CNY", "USD", "HKD"}
 VALID_OPS = {"买入", "卖出"}
 VALID_PRECISION = {"精确", "周期范围"}
+VALID_PLATFORMS = {"币安", "富途", "招行", "招商证券", "其他"}
 
 
 def load_schema() -> dict:
@@ -79,7 +80,7 @@ def validate_row(row: dict) -> list[str]:
     errors = []
 
     # 必填字段
-    for field in ["品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度"]:
+    for field in ["品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台"]:
         if not row.get(field):
             errors.append(f"缺少必填字段: {field}")
 
@@ -94,6 +95,10 @@ def validate_row(row: dict) -> list[str]:
     # 日期精确度
     if row.get("日期精确度") and row["日期精确度"] not in VALID_PRECISION:
         errors.append(f"日期精确度必须为 精确/周期范围，当前: {row['日期精确度']}")
+
+    # 交易平台
+    if row.get("交易平台") and row["交易平台"] not in VALID_PLATFORMS:
+        errors.append(f"交易平台必须为 {'/'.join(sorted(VALID_PLATFORMS))}，当前: {row['交易平台']}")
 
     # 数值字段不含货币符号或单位
     for field in ["价格", "数量", "金额"]:
@@ -159,6 +164,7 @@ def add_record(
     币种: str,
     日期: str,
     日期精确度: str = "精确",
+    交易平台: str = "其他",
     备注: str = "",
 ) -> dict:
     """构造并校验一条新记录，追加到 CSV。"""
@@ -172,6 +178,7 @@ def add_record(
         "币种": 币种,
         "日期": 日期,
         "日期精确度": 日期精确度,
+        "交易平台": 交易平台,
         "备注": 备注,
     }
     errors = validate_row(row)
@@ -299,6 +306,7 @@ def migrate_csv():
                 "币种": currency,
                 "日期": date_val,
                 "日期精确度": precision,
+                "交易平台": old.get("交易平台", "其他"),
                 "备注": old.get("备注", ""),
             }
 
@@ -445,6 +453,7 @@ def import_binance(csv_path: str):
             "币种": "USD",
             "日期": date_str,
             "日期精确度": "精确",
+            "交易平台": "币安",
             "备注": "币安API精确数据",
         }
 
@@ -458,6 +467,86 @@ def import_binance(csv_path: str):
         existing_rows.append(row)
         new_count += 1
         print(f"  新增: {asset} {order['方向']} {date_str} ${order['金额']:.2f}", file=sys.stderr)
+
+    if new_count > 0:
+        save_csv(existing_rows)
+        print(f"\n新增 {new_count} 条记录", file=sys.stderr)
+    else:
+        print("\n无新记录需要添加", file=sys.stderr)
+
+
+def import_cms(csv_path: str):
+    """从招商证券导出 CSV 导入交易记录。
+
+    招商证券 CSV 格式（由 fetch_cms_trades.py convert 生成）：
+      证券代码,证券名称,成交日期,成交时间,买卖标志,成交价格,成交数量,成交金额,成交编号
+    """
+    input_path = Path(csv_path)
+    if not input_path.exists():
+        print(f"文件不存在: {csv_path}", file=sys.stderr)
+        sys.exit(1)
+
+    with open(input_path, encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        raw_trades = list(reader)
+
+    print(f"读取 {len(raw_trades)} 条招商证券记录", file=sys.stderr)
+
+    existing_rows = load_csv()
+    new_count = 0
+
+    for trade in raw_trades:
+        asset = trade["证券名称"]
+        op = trade["买卖标志"]
+        date_str = trade["成交日期"]
+        price = float(trade["成交价格"])
+        qty = abs(float(trade["成交数量"]))
+        amount = float(trade["成交金额"])
+
+        # 检查是否已存在（同日期、同品种、同方向、金额接近）
+        duplicate = False
+        for existing in existing_rows:
+            if (
+                existing.get("品种") == asset
+                and existing.get("操作类型") == op
+                and existing.get("日期") == date_str
+            ):
+                try:
+                    existing_amount = float(existing.get("金额", 0))
+                    if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
+                        duplicate = True
+                        break
+                except (ValueError, TypeError):
+                    pass
+
+        if duplicate:
+            print(f"  跳过重复: {asset} {op} {date_str} ¥{amount:.2f}", file=sys.stderr)
+            continue
+
+        row = {
+            "序号": "",
+            "品种": asset,
+            "操作类型": op,
+            "价格": str(round(price, 4)),
+            "数量": str(round(qty, 4)),
+            "金额": str(round(amount, 2)),
+            "币种": "CNY",
+            "日期": date_str,
+            "日期精确度": "精确",
+            "交易平台": "招商证券",
+            "备注": "招商证券网页交易数据",
+        }
+
+        errors = validate_row(row)
+        if errors:
+            print(f"  校验失败 ({asset} {date_str}):", file=sys.stderr)
+            for e in errors:
+                print(f"    ✗ {e}", file=sys.stderr)
+            continue
+
+        existing_rows.append(row)
+        new_count += 1
+        print(f"  新增: {asset} {op} {date_str} ¥{amount:.2f}", file=sys.stderr)
 
     if new_count > 0:
         save_csv(existing_rows)
@@ -483,11 +572,16 @@ def parse_args() -> argparse.Namespace:
     add_parser.add_argument("--币种", required=True, choices=["CNY", "USD", "HKD"])
     add_parser.add_argument("--日期", required=True, help="YYYY-MM-DD")
     add_parser.add_argument("--日期精确度", default="精确", choices=["精确", "周期范围"])
+    add_parser.add_argument("--交易平台", default="其他", choices=["币安", "富途", "招行", "招商证券", "其他"])
     add_parser.add_argument("--备注", default="")
 
     # import-binance 命令
     import_parser = subparsers.add_parser("import-binance", help="从币安 CSV 导入")
     import_parser.add_argument("csv_file", help="币安 CSV 文件路径")
+
+    # import-cms 命令
+    cms_parser = subparsers.add_parser("import-cms", help="从招商证券 CSV 导入（由 fetch_cms_trades.py 生成）")
+    cms_parser.add_argument("csv_file", help="招商证券 CSV 文件路径")
 
     # migrate 命令
     subparsers.add_parser("migrate", help="迁移旧格式 CSV 到 schema 格式")
@@ -511,10 +605,13 @@ def main():
             币种=args.币种,
             日期=args.日期,
             日期精确度=args.日期精确度,
+            交易平台=args.交易平台,
             备注=args.备注,
         )
     elif args.command == "import-binance":
         import_binance(args.csv_file)
+    elif args.command == "import-cms":
+        import_cms(args.csv_file)
     elif args.command == "migrate":
         migrate_csv()
     elif args.command == "validate":

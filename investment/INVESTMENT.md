@@ -14,6 +14,7 @@ investment/
 │   │   ├── write_trade_journal.py   # 交易日志写入工具（添加/导入/迁移/校验）
 │   │   ├── fetch_binance_trades.py  # 币安交易记录获取
 │   │   ├── fetch_futu_trades.py     # 富途交易记录获取
+│   │   ├── fetch_cms_trades.py      # 招商证券交易记录获取（Chrome MCP）
 │   │   ├── calc_pnl.py             # 盈亏计算（FIFO 匹配）
 │   │   └── test_*.py               # 测试用例
 │   ├── TASK_盈亏情况统计.md          # 盈亏统计任务定义
@@ -33,7 +34,7 @@ investment/
 交易日志使用 CSV 格式，Schema 定义见 [`交易日志汇总表.schema.json`](投资日志整理/交易日志汇总表.schema.json)。
 
 ```csv
-序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
+序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
 ```
 
 | 字段 | 类型 | 说明 |
@@ -47,6 +48,7 @@ investment/
 | 币种 | enum | `CNY` / `USD` / `HKD` |
 | 日期 | date | `YYYY-MM-DD` |
 | 日期精确度 | enum | `精确` / `周期范围` |
+| 交易平台 | enum | `币安` / `富途` / `招行` / `招商证券` / `其他` |
 | 备注 | string | 可选 |
 
 ## Usage
@@ -71,6 +73,57 @@ python investment/投资日志整理/scripts/fetch_binance_trades.py \
 # 2. 导入到交易日志
 python investment/投资日志整理/scripts/write_trade_journal.py import-binance /tmp/binance_trades.csv
 ```
+
+### 从招商证券导入（Chrome MCP）
+
+```bash
+# 前置：浏览器已登录招商证券网页交易，打开历史成交页面
+# 1. Claude 通过 Chrome MCP evaluate_script 执行 JS 提取数据
+# 2. 将 JSON 转为 CSV
+python investment/投资日志整理/scripts/fetch_cms_trades.py convert \
+  --json-file /tmp/cms_raw.json -o /tmp/cms_trades.csv
+
+# 3. 导入到交易日志
+python investment/投资日志整理/scripts/write_trade_journal.py import-cms /tmp/cms_trades.csv
+```
+
+### 批量更新交易记录
+
+当用户说"更新我 YYYY-MM-DD 以后的交易记录"时，从三个平台拉取并导入：
+
+**币安**（API，自动化）：
+```bash
+python3 fetch_binance_trades.py --start DATE --end TODAY --all -o /tmp/binance.csv
+python3 write_trade_journal.py import-binance /tmp/binance.csv
+```
+
+**富途**（OpenD API，需本地运行 FutuOpenD 且已登录，端口 11111）：
+```bash
+python3 fetch_futu_trades.py --start DATE --end TODAY -o /tmp/futu.csv
+# 导入需手动处理（尚无 import-futu 子命令）
+```
+
+**招商证券**（Chrome MCP，需浏览器已登录 xtrade.newone.com.cn 并打开历史成交页）：
+```javascript
+// 通过 chrome-devtools evaluate_script 执行：
+// 1. 找到 Vue 组件，修改日期范围，触发查询
+const picker = document.querySelector('.cmsui-date-picker.range-picker').__vue__;
+const lscj = picker.$parent;
+lscj.range = { start: 'YYYY-MM-DD', end: 'YYYY-MM-DD' };
+lscj.dateChange(lscj.range);
+lscj.fetchDataLscj();
+// 2. 等待加载后从 .cmsui-table_body tbody 提取行数据
+```
+```bash
+# 将提取的 JSON 转 CSV 后导入
+python3 fetch_cms_trades.py convert --json-file /tmp/cms_raw.json -o /tmp/cms.csv
+python3 write_trade_journal.py import-cms /tmp/cms.csv
+```
+
+**注意事项**：
+- 各 import 子命令自带去重（同日期+同品种+同方向+金额接近 2%）
+- 某个平台不可用时跳过并告知用户
+- 最后运行 `validate` 校验
 
 ### 校验数据
 
