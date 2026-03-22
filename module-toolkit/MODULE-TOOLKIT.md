@@ -51,15 +51,15 @@ python module-toolkit/check_module_integration.py <module_name> <keyword>
 
 ### Integration Requirements
 
-Every module must update 6 files:
+Every module must update 5 files:
 - **3 Core Docs**: SKILL.md, CLAUDE.md, README.md
 - **1 Module Doc**: knowledge/KNOWLEDGE.md
-- **2 Skill Files**: .claude/skills/digital-brain/skill.md, instructions.xml
+- **1 Skill File**: .claude/skills/digital-brain/skill.md
 
 ### Success Criteria
 
 Integration checker must show:
-- ✅ All 6 files pass (100%)
+- ✅ All 5 files pass (100%)
 - ✅ Module files exist (data.jsonl, scripts)
 - ✅ Sufficient keyword references in each file
 

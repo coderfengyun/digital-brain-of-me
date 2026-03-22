@@ -143,28 +143,14 @@ Cross-module relationships
    - 添加新模块说明
    - 更新扩展指南
 
-#### AI Agent Skill (2个)
+#### AI Agent Skill (1个)
 
 5. **.claude/skills/digital-brain/skill.md**
    - 添加操作能力说明
    - 更新命令列表
 
-6. **.claude/skills/digital-brain/instructions.xml**
-   - 添加 `<operation>` 标签
-   - 定义触发器和动作
-   - **单一真相源原则**: 保留 action/workflow/rules 结构，但内容通过锚点指向模块文档
-   ```xml
-   <operation name="read-paper">
-     <trigger>User wants to read or add a paper</trigger>
-     <action>Read papers/PAPERS.md and follow the workflow</action>
-     <workflow>See papers/PAPERS.md #reading-workflow</workflow>
-     <rules>See papers/PAPERS.md #reading-workflow</rules>
-   </operation>
-   ```
-   **锚点定义**: 在模块文档中添加 `<a id="reading-workflow"></a>` 于章节标题前
-
 **⚠️ 最容易遗漏**:
-- `.claude/skills/digital-brain/` 两个文件
+- `.claude/skills/digital-brain/skill.md`
 - CLAUDE.md 的多个位置
 
 **验证命令**:
@@ -207,7 +193,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 python module-toolkit/check_module_integration.py <module> <keyword>
 ```
 
-**期望结果**: ✅ 100% (6/6 files pass)
+**期望结果**: ✅ 100% (5/5 files pass)
 
 ---
 
@@ -215,7 +201,6 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 
 ### 1. AI Skill 文件 (⭐⭐⭐ 最重要)
 - `.claude/skills/digital-brain/skill.md`
-- `.claude/skills/digital-brain/instructions.xml`
 
 ### 2. 多个位置的引用
 - CLAUDE.md 的多个部分

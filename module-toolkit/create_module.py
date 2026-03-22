@@ -190,44 +190,6 @@ def update_claude_skill_md(module_name, keyword):
     return True
 
 
-def update_claude_instructions_xml(module_name, keyword, top_level=False):
-    """Update .claude/skills/digital-brain/instructions.xml"""
-    xml_path = ROOT / ".claude" / "skills" / "digital-brain" / "instructions.xml"
-    content = xml_path.read_text(encoding='utf-8')
-
-    module_path = f"{module_name}/" if top_level else f"knowledge/{module_name}/"
-
-    # Add new module to modules section (after papers module, around line ~44)
-    new_module = f"""
-    <module name="{module_name}">
-      <path>{module_path}</path>
-      <files>
-        <file>{module_name.upper()}.md</file>
-      </files>
-      <purpose>{module_name.capitalize()} management and tracking</purpose>
-    </module>
-"""
-
-    # Find papers module and insert after it
-    papers_pattern = r'(    </module>\s*</modules>)'
-    content = re.sub(papers_pattern, new_module + r'\1', content, count=1)
-
-    # Add new operation (before closing </operations>, around line ~170)
-    new_operation = f"""
-    <operation name="add-{module_name}">
-      <trigger>User wants to add or track {keyword}s</trigger>
-      <action>Append to {module_path}{module_name}.jsonl or update {module_name.upper()}.md</action>
-      <fields>id, title, tags, created_at, status</fields>
-    </operation>
-"""
-
-    operations_pattern = r'(  </operations>)'
-    content = re.sub(operations_pattern, new_operation + r'\1', content, count=1)
-
-    xml_path.write_text(content, encoding='utf-8')
-    return True
-
-
 def create_module(module_name, keyword, top_level=False):
     """Main function to create module and update system files"""
 
@@ -266,7 +228,6 @@ def create_module(module_name, keyword, top_level=False):
         ("README.md", lambda m, k: update_readme_md(m, k)),
         ("knowledge/KNOWLEDGE.md", lambda m, k: update_knowledge_md(m, k)),
         (".claude/skills/digital-brain/skill.md", lambda m, k: update_claude_skill_md(m, k)),
-        (".claude/skills/digital-brain/instructions.xml", lambda m, k: update_claude_instructions_xml(m, k, top_level)),
     ]
 
     for file_name, update_func in files_to_update:

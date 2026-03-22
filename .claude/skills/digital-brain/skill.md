@@ -1,6 +1,8 @@
-# Digital Brain Skill
+---
+description: "Use when: user asks about bookmarks, papers, podcasts, contacts, tasks, goals, investment trades, content ideas, weekly review, reading papers, transcribing podcasts, P&L calculation, adding trades, creating modules, or any personal knowledge management task."
+---
 
-A structured knowledge management system for AI-assisted personal productivity.
+# Digital Brain Skill
 
 ## Core Capabilities
 
@@ -105,6 +107,10 @@ Eight Python scripts in `scripts/`:
 
 ### Verifying module integration
 "Check if the papers module is properly integrated"
+
+## Gotchas
+
+Read [gotchas.md](gotchas.md) before operating on digital-brain data. When an operation fails or produces unexpected results, append the lesson there.
 
 ## Design Principles
 

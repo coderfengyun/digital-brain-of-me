@@ -64,7 +64,6 @@ def main():
         },
         "Claude Code Skill": {
             ".claude/skills/digital-brain/skill.md": 2,
-            ".claude/skills/digital-brain/instructions.xml": 2,
         }
     }
 

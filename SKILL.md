@@ -213,7 +213,6 @@ Trade journal and P&L analysis:
    - SKILL.md, CLAUDE.md, README.md
    - README.md, knowledge/KNOWLEDGE.md
    - `.claude/skills/digital-brain/skill.md`
-   - `.claude/skills/digital-brain/instructions.xml`
 5. Run verification: `python module-toolkit/check_module_integration.py contacts contact`
 6. Create COMPLETION_REPORT.md documenting the module
 

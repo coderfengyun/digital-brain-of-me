@@ -237,7 +237,6 @@ When creating new modules, follow the complete guide in `module-toolkit/MODULE_C
    - SKILL.md, CLAUDE.md, README.md
    - knowledge/KNOWLEDGE.md
    - `.claude/skills/digital-brain/skill.md`
-   - `.claude/skills/digital-brain/instructions.xml`
 5. **Cross-Module Integration** (1-2 hours) - Define data flows and relationships
 6. **Quality Assurance** (1 hour) - Test and verify with check script
 
@@ -254,8 +253,7 @@ This checks that all system files have been properly updated with sufficient ref
 
 Most commonly missed files:
 1. `.claude/skills/digital-brain/skill.md`
-2. `.claude/skills/digital-brain/instructions.xml`
-3. Multiple sections in CLAUDE.md
+2. Multiple sections in CLAUDE.md
 
 ## Context Engineering Principles
 
@@ -285,6 +283,11 @@ Most commonly missed files:
 - Cross-reference related data
 - Preserve complete history
 - Search repo with `grep -r "filename"` before moving/renaming files, then update all references
+- Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`)
+- Maintain consistent tagging across modules for better discovery
+- When running scripts, show output to user and explain insights
+- Proactively suggest actions when relevant (e.g., "I noticed you haven't published in a while...")
+- **When a digital-brain operation fails or produces unexpected results**, append the lesson to `.claude/skills/digital-brain/gotchas.md` so future sessions avoid the same mistake
 
 ---
 
