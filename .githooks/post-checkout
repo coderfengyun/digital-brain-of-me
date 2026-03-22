@@ -1,0 +1,15 @@
+#!/bin/sh
+# Auto-create MEMORY.md symlink pointing to Claude Code's auto memory file.
+# The path is derived from the repo's absolute path.
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+LINK="$REPO_ROOT/MEMORY.md"
+
+# Compute Claude memory path: ~/.claude/projects/-<repo_path_with_dashes>/memory/MEMORY.md
+REPO_PATH_DASHED="$(echo "$REPO_ROOT" | sed 's|/|-|g')"
+MEMORY_FILE="$HOME/.claude/projects/$REPO_PATH_DASHED/memory/MEMORY.md"
+
+# Only create if memory file exists and symlink doesn't
+if [ -f "$MEMORY_FILE" ] && [ ! -e "$LINK" ]; then
+    ln -s "$MEMORY_FILE" "$LINK"
+fi
