@@ -99,8 +99,8 @@ Add links to additional documentation if needed.
 
 
 def update_skill_md(module_name, keyword):
-    """Update SKILL.md with new module references"""
-    skill_path = ROOT / "SKILL.md"
+    """Update .claude/skills/digital-brain/skill.md with new module references"""
+    skill_path = ROOT / ".claude" / "skills" / "digital-brain" / "skill.md"
     content = skill_path.read_text(encoding='utf-8')
 
     # Add to trigger phrases (line ~28)
@@ -223,11 +223,10 @@ def create_module(module_name, keyword, top_level=False):
     print("\n🔗 Integrating into system...")
 
     files_to_update = [
-        ("SKILL.md", lambda m, k: update_skill_md(m, k)),
+        (".claude/skills/digital-brain/skill.md", lambda m, k: update_skill_md(m, k)),
         ("CLAUDE.md", lambda m, k: update_agent_md(m, k)),
         ("README.md", lambda m, k: update_readme_md(m, k)),
         ("knowledge/KNOWLEDGE.md", lambda m, k: update_knowledge_md(m, k)),
-        (".claude/skills/digital-brain/skill.md", lambda m, k: update_claude_skill_md(m, k)),
     ]
 
     for file_name, update_func in files_to_update:

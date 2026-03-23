@@ -120,11 +120,11 @@ Cross-module relationships
 
 ### 阶段三: 系统集成 ⭐ (1-2小时)
 
-**必须更新 6 个文件**:
+**必须更新 5 个文件**:
 
 #### 核心文档 (3个)
 
-1. **SKILL.md**
+1. **.claude/skills/digital-brain/skill.md**
    - 添加触发短语示例
    - 添加操作流程说明
    - 更新模块列表
@@ -143,20 +143,14 @@ Cross-module relationships
    - 添加新模块说明
    - 更新扩展指南
 
-#### AI Agent Skill (1个)
-
-5. **.claude/skills/digital-brain/skill.md**
-   - 添加操作能力说明
-   - 更新命令列表
-
 **⚠️ 最容易遗漏**:
-- `.claude/skills/digital-brain/skill.md`
+- `.claude/skills/digital-brain/skill.md` 的多个位置
 - CLAUDE.md 的多个位置
 
 **验证命令**:
 ```bash
 # 检查每个文件的引用次数
-for file in SKILL.md CLAUDE.md README.md; do
+for file in .claude/skills/digital-brain/skill.md CLAUDE.md README.md; do
   echo "$file: $(grep -c '<keyword>' $file)"
 done
 
@@ -227,10 +221,9 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 - ✅ `scripts/search_<module>.py`
 - ⚪ `scripts/update_<module>_status.py` - 可选
 
-### 系统文档更新 (6个)
-- ✅ 3个核心文档
+### 系统文档更新 (4个)
+- ✅ 3个核心文档 (skill.md, CLAUDE.md, README.md)
 - ✅ 1个模块文档
-- ✅ 2个 AI Skill 文件
 
 ---
 

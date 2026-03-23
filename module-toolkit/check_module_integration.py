@@ -55,16 +55,13 @@ def main():
     # 定义需要检查的文件和最低出现次数
     files_to_check = {
         "系统核心文档": {
-            "SKILL.md": 3,
+            ".claude/skills/digital-brain/skill.md": 3,
             "CLAUDE.md": 3,
             "README.md": 3,
         },
         "模块文档": {
             f"knowledge/KNOWLEDGE.md": 2,
         },
-        "Claude Code Skill": {
-            ".claude/skills/digital-brain/skill.md": 2,
-        }
     }
 
     # 检查模块自身文件

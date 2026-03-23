@@ -2,124 +2,155 @@
 description: "Use when: user asks about bookmarks, papers, podcasts, contacts, tasks, goals, investment trades, content ideas, weekly review, reading papers, transcribing podcasts, P&L calculation, adding trades, creating modules, or any personal knowledge management task."
 ---
 
-# Digital Brain Skill
+# Digital Brain
 
-## Core Capabilities
+个人数字操作系统：管理数字身份、知识、人脉、目标和投资。
 
-This skill helps you manage seven key areas plus system extension:
+> **本文件定位**：使用 digital-brain 时的操作手册——路由、加载策略、脚本列表、使用规则。修改/扩展系统本身的开发约定见 `CLAUDE.md`。
 
-1. **Identity** - Personal brand, voice, and values
-2. **Content** - Ideas, drafts, and publishing pipeline
-3. **Knowledge** - Bookmarks, research, and learning materials
-4. **Papers** - Academic paper reading with narrative-driven approach
-5. **Podcasts** - Podcast transcription via RSS feed or local audio (whisper.cpp)
-6. **Network** - Contacts and relationship management
-7. **Operations** - Goals, tasks, meetings, and metrics
-8. **Investment** - Trade journal, broker imports (Binance/Futu/招商证券), and FIFO-based P&L analysis
-9. **Module Toolkit** - Create new modules and extend functionality
+Module-specific instructions are in each subdirectory's `.md` file. Only load what's needed for the current task.
 
-## Commands
+## When to Activate
 
-When invoked with `/digital-brain`, Claude will help you:
+Activate this skill when the user:
 
-- Add and organize content ideas
-- Log bookmarks and research
-- Add and read academic papers with narrative-driven approach
-- Transcribe podcast episodes from RSS feeds or local audio files
-- Track contacts and interactions
-- Manage tasks and goals
-- Generate weekly reviews
-- Suggest content ideas from your knowledge base
-- Identify contacts to reconnect with
-- Expand ideas into structured drafts
-- Record investment trades manually or import from brokers
-- Calculate realized and floating P&L across all positions
-- Create new modules to extend the system
-- Verify module integration completeness
+- Requests content creation (posts, threads, newsletters) - load identity/voice.md first
+- Asks for help with personal brand or positioning
+- Needs to look up or manage contacts/relationships
+- Wants to capture or develop content ideas
+- Requests meeting preparation or follow-up
+- Asks for weekly reviews or goal tracking
+- Needs to save or retrieve bookmarked resources
+- Wants to organize research or learning materials
+- Needs to add, read, or manage academic papers
+- Wants to transcribe podcast episodes
+- Needs to record, import, or analyze investment trades
+- Wants to extend the system or create new modules
 
-## Data Formats
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system"
 
-- **JSONL**: Append-only logs (bookmarks, contacts, tasks, etc.)
-- **YAML**: Structured configuration (goals, learning progress)
-- **Markdown**: Narrative content (drafts, research notes)
-- **CSV**: Tabular data with schema validation (investment trades)
+## Module Overview
+
+```
+digital-brain-of-me/
+├── identity/     → Voice, brand, values (READ FIRST for content)
+├── content/      → Ideas, drafts, posts, calendar
+├── knowledge/    → Bookmarks, research, learning
+├── papers/       → Academic paper reading and notes
+├── podcasts/     → Podcast transcription and notes
+├── network/      → Contacts, interactions, intros
+├── operations/   → Todos, goals, meetings, metrics
+├── investment/   → Trade journal, broker imports, P&L analysis
+└── scripts/      → Automation scripts
+```
+
+## Request Routing
+
+| Request | Action |
+|---------|--------|
+| "Write a post about X" | Read `voice/style.md` → Draft → Match voice patterns |
+| "Prepare for meeting with Y" | Look up contact → Get interactions → Summarize |
+| "What should I create?" | Run `content_ideas.py` → Check ideas.jsonl |
+| "Add contact Z" | Append to `contacts.jsonl` with full schema |
+| "Weekly review" | Run `weekly_review.py` → Present insights |
+| "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
+| "Add a task" | Append to `tasks/tasks.jsonl` with priority |
+| "Track a goal" | Update `goals/goals.yaml` with progress |
+| "Add paper to read" | Run `add_paper.py "URL"` → Create paper folder |
+| "Read this paper" | Read `papers/PAPERS.md` → Guide through 2-phase reading → Update status |
+| "Show unread papers" | Read `papers/PAPERS.md` → Read `papers/papers.jsonl`, filter entries where `notes` is empty |
+| "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
+| "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
+| "评价这节课" / "批课" | Read `classroom-dialogues/CLASSROOM-DIALOGUES.md` → Analyze dialogue → Generate evaluation report |
+| "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
+| "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
+
+## Module Loading Strategy
+
+Use **progressive disclosure**:
+
+1. **Always Load** (L1):
+   - `identity/brand/profile.yaml`
+   - `identity/voice/style.md`
+
+2. **Load on Content Tasks** (L2):
+   - `content/ideas/ideas.jsonl`
+   - `content/published/published.jsonl`
+   - `knowledge/bookmarks/bookmarks.jsonl`
+   - `papers/PAPERS.md` + `papers/papers.jsonl` (if paper-related)
+   - `podcasts/PODCASTS.md` + `podcasts/podcasts.jsonl` (if podcast-related)
+
+3. **Load on Network Tasks** (L2):
+   - `network/contacts/contacts.jsonl`
+   - `network/relationships/interactions.jsonl`
+
+4. **Load on Operations Tasks** (L2):
+   - `operations/tasks/tasks.jsonl`
+   - `operations/goals/goals.yaml`
+   - `operations/metrics/weekly.jsonl`
+
+5. **Load on Investment Tasks** (L2):
+   - `investment/INVESTMENT.md`
+   - `investment/投资日志整理/交易日志汇总表.csv`
+   - `investment/投资日志整理/交易日志汇总表.schema.json`
+
+6. **Load on Classroom Dialogue Tasks** (L2):
+   - `classroom-dialogues/CLASSROOM-DIALOGUES.md`
+   - `classroom-dialogues/EVALUATION_TEMPLATE.md` (if generating a new evaluation report)
+
+7. **Load on Module Creation / Integration Tasks** (L2):
+   - `module-toolkit/MODULE-TOOLKIT.md`
+   - `module-toolkit/MODULE_CREATION_GUIDE.md` (if creating a new module manually)
+
+8. **Load on Demand** (L3):
+   - Individual draft files
+   - Research notes
+   - Paper notes (`paper-YYYYMMDD-XXX.md`)
+   - Meeting records
 
 ## Automation Scripts
 
-Eight Python scripts in `scripts/`:
+`scripts/`:
 
-1. `weekly_review.py` - Generate weekly productivity review
-2. `content_ideas.py` - Suggest content from knowledge base
-3. `stale_contacts.py` - Find contacts to reconnect with
-4. `idea_to_draft.py` - Expand idea into structured draft
-5. `add_paper.py` - Add academic papers to reading list
-6. `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
+- `weekly_review.py` - Weekly productivity summary
+- `content_ideas.py` - Content suggestions from bookmarks
+- `stale_contacts.py` - Identify people to reconnect with
+- `idea_to_draft.py <idea-id>` - Expand idea into draft
+- `add_paper.py "URL"` - Add paper to reading list
+- `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
 
-**Investment scripts** in `investment/投资日志整理/scripts/`:
+`investment/投资日志整理/scripts/`:
+
 - `write_trade_journal.py` - Add, import, migrate, and validate trade records
 - `fetch_binance_trades.py` - Fetch trades from Binance API
 - `fetch_futu_trades.py` - Fetch trades from Futu OpenD API
 - `fetch_cms_trades.py` - Fetch trades from 招商证券 via Chrome MCP
-- `calc_pnl.py` - FIFO-based P&L calculation and report generation
+- `calc_pnl.py` - FIFO-based P&L calculation
 
-**Module toolkit**:
-- `module-toolkit/check_module_integration.py` - Verify module integration completeness
+`module-toolkit/`:
 
-## Usage Examples
+- `check_module_integration.py <module> <keyword>` - Verify module integration
 
-### Adding a content idea
-"Add a content idea about AI agents"
+## Usage Rules
 
-### Logging a bookmark
-"Save this article about context engineering: https://example.com"
-
-### Adding a contact
-"Add John Doe as a colleague, met at AI conference"
-
-### Running weekly review
-"Generate my weekly review"
-
-### Getting content suggestions
-"What should I write about next?"
-
-### Adding a paper to read
-"Add the Attention Is All You Need paper to my reading list"
-
-### Reading a paper
-"Guide me through reading this paper with the narrative-driven approach"
-
-### Checking unread papers
-"Show me all my unread papers on transformers"
-
-### Transcribing a podcast
-"Transcribe this podcast from RSS: https://example.com/feed.xml"
-
-### Transcribing a local audio file
-"Transcribe this audio file: ~/Downloads/episode.mp3"
-
-### Adding an investment trade
-"Add a BTC buy trade: 0.00391 at $76653 on 2025-04-07"
-
-### Updating trades / Importing / P&L
-"更新我XX日期以后的交易记录" / "从招商证券导入" / "Calculate P&L"
-Read `investment/INVESTMENT.md` for all trade operations (add, import, batch update, P&L).
-
-### Calculating investment P&L
-"Calculate my investment P&L"
-
-### Creating a new module
-"I want to create a projects module to track my side projects"
-
-### Verifying module integration
-"Check if the papers module is properly integrated"
+1. **Voice First**: Always read `identity/voice/style.md` before any content generation
+2. **Append Only**: Never delete from JSONL files - mark as `"status": "archived"` instead
+3. **Update Timestamps**: Set `updated_at` field when modifying tracked data
+4. **Cross-Reference**: Knowledge informs content, network informs operations, papers inspire ideas
+5. **Log Interactions**: Always log meetings/calls to `interactions.jsonl`
+6. **Narrative First**: For papers, extract narrative structure before diving into data details
 
 ## Gotchas
 
 Read [gotchas.md](gotchas.md) before operating on digital-brain data. When an operation fails or produces unexpected results, append the lesson there.
 
-## Design Principles
+## References
 
-- **Progressive disclosure**: Load only what's needed
-- **Append-only**: Preserve history
-- **Module separation**: Independent domains
-- **Voice-first**: Maintain personal brand consistency
+- [Identity Module](./identity/voice/principles.md)
+- [Content Module](./content/CONTENT.md)
+- [Knowledge Module](./knowledge/KNOWLEDGE.md)
+- [Papers Module](./papers/PAPERS.md)
+- [Network Module](./network/NETWORK.md)
+- [Operations Module](./operations/OPERATIONS.md)
+- [Investment Module](./investment/INVESTMENT.md)
+- [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md)

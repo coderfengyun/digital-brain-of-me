@@ -14,7 +14,7 @@
 
 # Digital Brain - Development Guide
 
-> **本文件定位**：开发/扩展 digital-brain 系统时的约定——文件格式、数据 schema、模块创建流程、设计原则。使用 digital-brain 的操作手册（路由表、加载策略、脚本列表）见 `SKILL.md`。
+> **本文件定位**：开发/扩展 digital-brain 系统时的约定——文件格式、数据 schema、模块创建流程、设计原则。使用 digital-brain 的操作手册（路由表、加载策略、脚本列表）见 `.claude/skills/digital-brain/skill.md`。
 
 ## File Conventions
 
@@ -127,9 +127,8 @@ When creating new modules, follow `module-toolkit/MODULE_CREATION_GUIDE.md`:
 2. **Core Files Creation** - README, data.jsonl, scripts
 3. **Documentation** - Templates, examples, quick start
 4. **System Integration** - Update system files:
-   - SKILL.md, CLAUDE.md, README.md
+   - `.claude/skills/digital-brain/skill.md`, CLAUDE.md, README.md
    - knowledge/KNOWLEDGE.md
-   - `.claude/skills/digital-brain/skill.md`
 5. **Cross-Module Integration** - Define data flows and relationships
 6. **Quality Assurance** - Test and verify with check script
 
@@ -146,7 +145,7 @@ Most commonly missed integration files:
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: L1 路由（SKILL.md）→ L2 模块指令（各模块 README.md）→ L3 数据文件
+1. **Progressive Disclosure**: L1 路由（`.claude/skills/digital-brain/skill.md`）→ L2 模块指令（各模块 README.md）→ L3 数据文件
 2. **Append-Only**: Never delete, always add (mark as archived if needed)
 3. **Cross-Reference**: Link related data across modules（flat-file relational model）
 4. **Voice-First**: Identity always loaded before content generation
