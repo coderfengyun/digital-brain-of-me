@@ -20,7 +20,8 @@
       "Bash(sort:*)",
       "Bash(chmod +x:*)",
       "Skill(update-config)",
-      "Skill(update-config:*)"
+      "Skill(update-config:*)",
+      "Bash(mkdir:*)"
     ]
   }
 }
