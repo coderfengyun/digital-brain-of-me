@@ -57,7 +57,6 @@ digital-brain-of-me/
 | "Save this bookmark" | Append to `knowledge/bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `operations/goals/goals.yaml` with progress |
-| "Add paper to read" | Run `scripts/add_paper.py "URL"` → Create paper folder |
 | "Read this paper" | Read `papers/PAPERS.md` → Guide through 2-phase reading → Update status |
 | "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
 | "Transcribe this podcast" | Run `scripts/transcribe_podcast.py` with RSS or audio file |
@@ -117,7 +116,6 @@ Use **progressive disclosure**:
 - `content_ideas.py` - Content suggestions from bookmarks
 - `stale_contacts.py` - Identify people to reconnect with
 - `idea_to_draft.py <idea-id>` - Expand idea into draft
-- `add_paper.py "URL"` - Add paper to reading list
 - `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
 
 `investment/投资日志整理/scripts/`:

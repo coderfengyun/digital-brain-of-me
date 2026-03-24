@@ -100,21 +100,6 @@ Each entry in `papers.jsonl`:
 3. Complete critical thinking section with 3 core questions
 4. Update `notes` field in papers.jsonl with notes.md path
 
-## Usage
-
-### Adding Papers
-
-**CLI**:
-```bash
-python scripts/add_paper.py "https://arxiv.org/abs/xxxx"
-```
-
-**Manual**:
-1. Create folder `paper-YYYYMMDD-XXX/`
-2. Download source document to the folder
-3. Append entry to `papers.jsonl` with id, url, source path, and empty notes
-4. After reading, create `notes.md` and update the notes field
-
 ## Further Reading
 
 - **[EXAMPLE.md](EXAMPLE.md)** - Example: Attention Is All You Need
