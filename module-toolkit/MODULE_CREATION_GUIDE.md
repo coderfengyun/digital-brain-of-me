@@ -34,7 +34,7 @@ python module-toolkit/create_module.py projects project --top-level
 
 **选择目录的建议**:
 - 📁 **knowledge/** - 适合知识管理类模块 (bookmarks, research, learning)
-- 📁 **顶级目录** - 适合独立功能模块 (operations, network, identity, content, papers, classroom-dialogues)
+- 📁 **顶级目录** - 适合独立功能模块 (operations, network, identity, content, papers, investment)
 
 ---
 

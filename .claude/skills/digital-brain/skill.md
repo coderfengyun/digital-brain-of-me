@@ -1,5 +1,6 @@
 ---
-description: "Use when: user asks about bookmarks, papers, podcasts, contacts, tasks, goals, investment trades, content ideas, weekly review, reading papers, transcribing podcasts, P&L calculation, adding trades, creating modules, or any personal knowledge management task."
+name: digital-brain
+description: "Personal knowledge management system. Use when: user asks about bookmarks, papers, podcasts, contacts, tasks, goals, investment trades, content ideas, weekly review, reading papers, transcribing podcasts, P&L calculation, adding trades, creating modules, or any personal knowledge management task. Also trigger on Chinese phrases like 书签, 论文, 播客, 联系人, 任务, 目标, 交易记录, 内容创意, 周报, 盈亏, 更新交易记录, 写一篇文章, 保存这个链接, 我的目标, 添加论文, 读论文. Use this skill even if the user doesn't explicitly mention 'digital brain' — any request involving personal data management, knowledge capture, or content creation should route here."
 ---
 
 # Digital Brain
@@ -14,7 +15,7 @@ Module-specific instructions are in each subdirectory's `.md` file. Only load wh
 
 Activate this skill when the user:
 
-- Requests content creation (posts, threads, newsletters) - load identity/voice.md first
+- Requests content creation (posts, threads, newsletters) - load `identity/voice/style.md` first
 - Asks for help with personal brand or positioning
 - Needs to look up or manage contacts/relationships
 - Wants to capture or develop content ideas
@@ -48,61 +49,61 @@ digital-brain-of-me/
 
 | Request | Action |
 |---------|--------|
-| "Write a post about X" | Read `voice/style.md` → Draft → Match voice patterns |
-| "Prepare for meeting with Y" | Look up contact → Get interactions → Summarize |
-| "What should I create?" | Run `content_ideas.py` → Check ideas.jsonl |
-| "Add contact Z" | Append to `contacts.jsonl` with full schema |
-| "Weekly review" | Run `weekly_review.py` → Present insights |
-| "Save this bookmark" | Append to `bookmarks/bookmarks.jsonl` |
-| "Add a task" | Append to `tasks/tasks.jsonl` with priority |
-| "Track a goal" | Update `goals/goals.yaml` with progress |
-| "Add paper to read" | Run `add_paper.py "URL"` → Create paper folder |
+| "Write a post about X" | Read `identity/voice/style.md` → Draft → Match voice patterns |
+| "Prepare for meeting with Y" | Look up in `network/contacts/contacts.jsonl` → Get `network/relationships/interactions.jsonl` → Summarize |
+| "What should I create?" | Run `scripts/content_ideas.py` → Check `content/ideas/ideas.jsonl` |
+| "Add contact Z" | Append to `network/contacts/contacts.jsonl` with full schema |
+| "Weekly review" | Run `scripts/weekly_review.py` → Present insights |
+| "Save this bookmark" | Append to `knowledge/bookmarks/bookmarks.jsonl` |
+| "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
+| "Track a goal" | Update `operations/goals/goals.yaml` with progress |
+| "Add paper to read" | Run `scripts/add_paper.py "URL"` → Create paper folder |
 | "Read this paper" | Read `papers/PAPERS.md` → Guide through 2-phase reading → Update status |
-| "Show unread papers" | Read `papers/PAPERS.md` → Read `papers/papers.jsonl`, filter entries where `notes` is empty |
-| "Transcribe this podcast" | Run `transcribe_podcast.py` with RSS or audio file |
+| "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
+| "Transcribe this podcast" | Run `scripts/transcribe_podcast.py` with RSS or audio file |
 | "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
-| "评价这节课" / "批课" | Read `classroom-dialogues/CLASSROOM-DIALOGUES.md` → Analyze dialogue → Generate evaluation report |
-| "Create new module" | Open `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through 6 phases |
-| "Check module integration" | Run `check_module_integration.py <module> <keyword>` |
+| "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through phases |
+| "Check module integration" | Run `module-toolkit/check_module_integration.py <module> <keyword>` |
 
 ## Module Loading Strategy
 
 Use **progressive disclosure**:
 
 1. **Always Load** (L1):
+   - `gotchas.md` (check known pitfalls before any operation)
+
+2. **Load on Content Creation Tasks** (L2):
    - `identity/brand/profile.yaml`
    - `identity/voice/style.md`
-
-2. **Load on Content Tasks** (L2):
    - `content/ideas/ideas.jsonl`
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
-   - `papers/PAPERS.md` + `papers/papers.jsonl` (if paper-related)
-   - `podcasts/PODCASTS.md` + `podcasts/podcasts.jsonl` (if podcast-related)
 
-3. **Load on Network Tasks** (L2):
+3. **Load on Paper Tasks** (L2):
+   - `papers/PAPERS.md` + `papers/papers.jsonl`
+
+4. **Load on Podcast Tasks** (L2):
+   - `podcasts/PODCASTS.md` + `podcasts/podcasts.jsonl`
+
+5. **Load on Network Tasks** (L2):
    - `network/contacts/contacts.jsonl`
    - `network/relationships/interactions.jsonl`
 
-4. **Load on Operations Tasks** (L2):
+6. **Load on Operations Tasks** (L2):
    - `operations/tasks/tasks.jsonl`
    - `operations/goals/goals.yaml`
    - `operations/metrics/weekly.jsonl`
 
-5. **Load on Investment Tasks** (L2):
+7. **Load on Investment Tasks** (L2):
    - `investment/INVESTMENT.md`
    - `investment/投资日志整理/交易日志汇总表.csv`
    - `investment/投资日志整理/交易日志汇总表.schema.json`
 
-6. **Load on Classroom Dialogue Tasks** (L2):
-   - `classroom-dialogues/CLASSROOM-DIALOGUES.md`
-   - `classroom-dialogues/EVALUATION_TEMPLATE.md` (if generating a new evaluation report)
-
-7. **Load on Module Creation / Integration Tasks** (L2):
+8. **Load on Module Creation / Integration Tasks** (L2):
    - `module-toolkit/MODULE-TOOLKIT.md`
    - `module-toolkit/MODULE_CREATION_GUIDE.md` (if creating a new module manually)
 
-8. **Load on Demand** (L3):
+9. **Load on Demand** (L3):
    - Individual draft files
    - Research notes
    - Paper notes (`paper-YYYYMMDD-XXX.md`)
@@ -142,7 +143,7 @@ Use **progressive disclosure**:
 
 ## Gotchas
 
-Read [gotchas.md](gotchas.md) before operating on digital-brain data. When an operation fails or produces unexpected results, append the lesson there.
+When an operation fails or produces unexpected results, append the lesson to [gotchas.md](gotchas.md).
 
 ## References
 
