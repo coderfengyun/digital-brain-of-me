@@ -97,6 +97,7 @@ Each entry in `papers.jsonl`:
 1. Create evidence table with columns: 论点 | 创新点 | 支撑数据 | 数据来源 | 说服力评估
 2. For each claim: identify innovation, find supporting data, source, and assess credibility
    - **支撑数据填写规则**: 优先使用定量数据；若论点无明确数据支撑，使用 `**例子**: 具体场景描述` 格式记录论文中的示例
+   - **具体例子引用规则**: 当论文通过具体真实例子来阐释一个概念或方法时（如 checklist 问题、prompt 片段、代码示例、配置项），在支撑数据中直接引用 2-3 个原文例子，帮助读者快速找到作者提出概念的「感觉」，而不只是写概括性描述
 3. Complete critical thinking section with 3 core questions
 4. Update `notes` field in papers.jsonl with notes.md path
 
