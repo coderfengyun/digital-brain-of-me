@@ -7,25 +7,22 @@
 ## 📖 核心叙事 (Narrative)
 
 ### 一句话概括
-> 将 Karpathy 的 autoresearch 循环优化方法应用到 Claude Skills 上，通过「改一点→测一遍→保留/回滚」的自动循环，让 AI agent 自主将 skill 质量从 56% 提升到 92%。
+> 将 Karpathy 的 autoresearch 循环优化方法应用于 Claude Skills：用 yes/no checklist 定义质量标准，让 agent 自动测试、微调、保留/回滚，实现 skill prompt 的无人值守持续改进。
 
 ### 叙事结构
 
 ```
-问题: Claude Skills 的输出质量不稳定，约 30% 的时间会失败，用户往往不自知
+问题: Claude Skills 的输出质量不稳定，可能 30% 的时候失败而用户不自知
 ↓
-观察: Karpathy 发布了 autoresearch 方法——让 AI 在循环中自动做小改动、测量、保留/回滚
+观察: Karpathy 提出了 autoresearch 方法——让 AI agent 在循环中自动改进 ML 代码，每次做一个小改动并用指标判断保留或回滚
 ↓
-假设: 这个方法不只适用于 ML 代码，任何「可度量+可改进」的东西都适用，包括 Claude Skills
+假设: 这个方法不仅适用于 ML 代码，任何「可以被评分」的东西都能用——包括 skill prompt
 ↓
-方法: 构建 autoresearch skill，核心三要素：
-  1. Yes/No checklist 作为评分标准（3-6 个问题）
-  2. 单次改一个变量的循环优化
-  3. 自动保留/回滚机制 + live dashboard
+方法: 构建 autoresearch skill：(1) 用 yes/no checklist 定义质量标准 (2) agent 自动运行 skill 并评分 (3) 每轮改一个变量 (4) 保留提升、回滚退步 (5) 循环直到 95%+ 或手动停止
 ↓
-验证: Landing page copy skill 从 56% → 92%（4 轮，3 保留 1 回滚）
+验证: 作者的 landing page copy skill 从 56% → 92%，4 轮改动中 3 轮保留、1 轮回滚；另一案例网页加载从 1100ms → 67ms（67 轮）
 ↓
-结论: 只要能打分，就能 autoresearch——适用于 skills、网站性能、cold outreach、newsletter 等
+结论: 只要能定义 checklist，就能用 autoresearch 自动优化任何重复使用的 prompt/skill
 ```
 
 ---
@@ -34,11 +31,11 @@
 
 | 论点 | 创新点 | 支撑数据 | 数据来源 | 说服力评估 |
 |------|--------|----------|----------|------------|
-| Skills 输出不稳定 | - | 30% 失败率 | 作者经验估计 | ⭐ 弱（无系统测量） |
-| Autoresearch 可自动优化 skill | 将 ML 领域的循环优化迁移到 prompt engineering | 56% → 92%，4 轮优化 | 作者实测 landing page skill | ⭐⭐ 中（单案例，无对照） |
-| Yes/No checklist 比 1-10 评分更可靠 | 二值化评分消除主观波动 | **例子**: ① "Does the headline include a specific number or result?" ② "Is the copy free of buzzwords like 'revolutionary,' 'synergy,' 'cutting-edge'?" ③ "Does the first line call out a specific pain point?" | 文章论述 | ⭐⭐ 中（直觉合理但无定量对比） |
-| 3-6 个 checklist 问题是最佳数量 | - | 过多会导致 skill "gaming the checklist" | 作者经验 | ⭐ 弱（无实验支撑） |
-| 方法泛化到非 skill 场景 | - | 网站加速 1100ms → 67ms（67 轮） | 引用他人案例 | ⭐⭐ 中（二手数据，未验证） |
+| Skill 可以被自动优化 | 将 autoresearch 从 ML 代码迁移到 prompt/skill 优化 | Landing page skill: 56% → 92%，4 轮改动 | 作者亲测案例 | ⭐⭐ 中（单一案例，无对照组） |
+| Yes/No checklist 是稳定的评分机制 | 用二元 checklist 替代主观评分（如 1-10 分），保证评分一致性 | **例子**: ① "Does the headline include a specific number or result?" ② "Is the copy free of buzzwords like 'revolutionary,' 'synergy,' 'cutting-edge,' 'next-level'?" ③ "Does the CTA use a specific verb phrase?" ④ "Does the first line call out a specific pain point?" ⑤ "Is the total copy under 150 words?" | Checklist 设计示例 | ⭐⭐⭐ 强（checklist 设计思路清晰具体，可直接复用） |
+| 3-6 个 checklist 问题是最佳数量 | 太多会导致 skill "gaming the checklist" | **例子**: 类比为「学生背答案而不理解内容」 | 作者经验 | ⭐⭐ 中（无定量实验支撑最优区间） |
+| 每轮只改一个变量是关键 | 类比做菜：每次换一种调料，测 10 次，保留或回滚 | **例子**: agent 实际做的改动——① 加入 headline 必须含具体数字的规则 ② 加入 banned buzzwords 列表 ③ 加入 worked example 展示好的 landing page ④ 尝试更严格字数限制但因 CTA 受损而回滚 | 作者 landing page skill 的 changelog | ⭐⭐⭐ 强（changelog 详细记录了每一步决策逻辑） |
+| 方法具有通用性 | 可应用于非 prompt 场景 | 网页加载优化: 1100ms → 67ms（67 轮）；cold outreach、newsletter intros 等 | 文中提及案例 | ⭐⭐ 中（网页速度案例说服力强但细节不足，其他为设想） |
 
 ---
 
@@ -46,28 +43,6 @@
 
 | 问题 | 分析 |
 |------|------|
-| 核心假设及失效场景 | 假设: skill 质量可以分解为离散的 yes/no 检查项<br>失效场景: 1) 质量是整体性的（如创意写作的"味道"难以 checklist 化）；2) checklist 本身有缺陷——通过所有检查但整体仍差（Goodhart's Law） |
-| 关键局限 | - 只展示了 1 个案例（landing page），泛化性未验证<br>- 没有说明每轮优化的 token 成本和时间开销<br>- 「谁来评分」的问题——用 LLM 评 LLM 的输出，评分本身可能不可靠<br>- 没有讨论 skill 之间的耦合——优化一个 skill 可能影响依赖它的其他 skill |
-| 实验充分性 | 缺失验证: 1) 多个不同类型 skill 的对比实验；2) 与人工优化的效果对比；3) 优化后的长期稳定性测试；4) 不同 checklist 设计的影响 |
-
----
-
-## 💡 可操作要点
-
-### 方法的核心循环
-1. 定义 3-6 个 yes/no 评分问题
-2. 跑 baseline 得到初始分数
-3. Agent 分析失败项 → 做一个小改动 → 重新测试
-4. 分数提升则保留，下降则回滚
-5. 重复直到 95%+ 连续 3 次，或手动停止
-
-### Agent 实际做的优化类型（从案例中提取）
-- 针对最常见失败项添加具体规则
-- 添加黑名单（banned words list）
-- 添加 worked example（让 skill "看到"好的输出长什么样）
-- 尝试约束性改动但发现副作用后自动回滚
-
-### 对我的启发
-- 可以考虑将这个方法用于 digital-brain 的 skill 优化——特别是 content creation 类的 skill
-- Checklist 设计是关键，本质上是把「品味」形式化为可度量的标准
-- Changelog 的价值 > 最终优化结果——它是一份「什么对这个 skill 有效」的知识库
+| 核心假设及失效场景 | 假设: skill 的质量可以被 yes/no checklist 完整捕获<br>失效场景: 当质量维度难以二元化时（如「文风自然度」「创意性」），checklist 可能无法覆盖真正重要的质量维度，导致优化方向偏离 |
+| 关键局限 | - 仅一个完整案例（landing page skill），样本量不足以证明方法的通用性<br>- 未讨论 LLM-as-judge 的评分稳定性问题（用 LLM 判断 yes/no 本身可能有 variance）<br>- 未涉及 checklist 之间可能存在的冲突（如「简洁」vs「具体」） |
+| 实验充分性 | 缺失验证: 不同类型 skill 的效果对比；checklist 数量对最终质量的影响曲线；与人工优化的效果/效率对比 |
