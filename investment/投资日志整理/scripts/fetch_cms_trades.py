@@ -7,7 +7,7 @@ Chrome DevTools MCP 在已登录的招商证券网页交易页面上执行。
 
 前置条件:
   1. 在浏览器中登录招商证券网页交易: https://xtrade.newone.com.cn
-  2. 导航到 历史成交 页面: #/trade/ptjy/cx?page=lscj
+  2. 导航到 历史成交 页面: https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
   3. Chrome DevTools MCP 已连接到该页面
 
 用法 (由 Claude 调用):

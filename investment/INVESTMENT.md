@@ -60,8 +60,14 @@ investment/
 ```bash
 python investment/投资日志整理/scripts/write_trade_journal.py add \
   --品种 BTC --操作 买入 --价格 76653 --数量 0.00391 --金额 299.71 \
-  --币种 USD --日期 2025-04-07 --备注 "币安API精确数据"
+  --币种 USD --日期 2025-04-07 --交易平台 币安 --备注 "币安API精确数据"
 ```
+
+完整参数列表（`add --help`）：
+- `--品种`、`--操作`、`--价格`、`--数量`、`--金额`、`--币种`、`--日期` — 必填
+- `--交易平台` — 可选，注意**不是** `--平台`
+- `--日期精确度` — 可选，默认 `精确`
+- `--备注` — 可选
 
 ### 从币安导入
 
@@ -76,16 +82,38 @@ python investment/投资日志整理/scripts/write_trade_journal.py import-binan
 
 ### 从招商证券导入（Chrome MCP）
 
+需要 Chrome MCP 连接到已登录的招商证券网页交易页面。完整步骤：
+
+**前置条件**：
+- Chrome 以 `--remote-debugging-port=9222` 启动
+- Chrome MCP 已连接（`claude mcp list` 显示 ✓）
+- 浏览器已登录招商证券
+
+**历史成交页面 URL**（必须含 `/npctrade` 路径前缀）：
+```
+https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
+```
+
+**步骤**：
+
 ```bash
-# 前置：浏览器已登录招商证券网页交易，打开历史成交页面
-# 1. Claude 通过 Chrome MCP evaluate_script 执行 JS 提取数据
-# 2. 将 JSON 转为 CSV
+# Step 1: 使用 chrome-devtools navigate_page 导航到上述 URL（timeout: 60000）
+
+# Step 2: 用 fetch_cms_trades.py 生成提取数据的 JS
+python investment/投资日志整理/scripts/fetch_cms_trades.py js \
+  --start 2026-03-03 --end 2026-03-28
+
+# Step 3: 通过 chrome-devtools evaluate_script 执行该 JS，获取 JSON 结果
+
+# Step 4: 将 JSON 保存到文件并转为 CSV
 python investment/投资日志整理/scripts/fetch_cms_trades.py convert \
   --json-file /tmp/cms_raw.json -o /tmp/cms_trades.csv
 
-# 3. 导入到交易日志
+# Step 5: 导入到交易日志
 python investment/投资日志整理/scripts/write_trade_journal.py import-cms /tmp/cms_trades.csv
 ```
+
+> **注意**：如果数据量只有几条且已存在于日志中，可以跳过 Step 4-5，直接确认无新记录即可。
 
 ### 批量更新交易记录
 
@@ -103,19 +131,15 @@ python3 fetch_futu_trades.py --start DATE --end TODAY -o /tmp/futu.csv
 # 导入需手动处理（尚无 import-futu 子命令）
 ```
 
-**招商证券**（Chrome MCP，需浏览器已登录 xtrade.newone.com.cn 并打开历史成交页）：
-```javascript
-// 通过 chrome-devtools evaluate_script 执行：
-// 1. 找到 Vue 组件，修改日期范围，触发查询
-const picker = document.querySelector('.cmsui-date-picker.range-picker').__vue__;
-const lscj = picker.$parent;
-lscj.range = { start: 'YYYY-MM-DD', end: 'YYYY-MM-DD' };
-lscj.dateChange(lscj.range);
-lscj.fetchDataLscj();
-// 2. 等待加载后从 .cmsui-table_body tbody 提取行数据
-```
+**招商证券**（Chrome MCP，需浏览器已登录）：
 ```bash
-# 将提取的 JSON 转 CSV 后导入
+# 1. navigate_page 到历史成交页（URL 含 /npctrade 前缀！）
+#    url: https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
+#    timeout: 60000
+# 2. 生成 JS 并通过 evaluate_script 执行
+python3 fetch_cms_trades.py js --start DATE --end TODAY
+# 3. evaluate_script 执行生成的 JS，返回 JSON
+# 4. 如有新记录，convert + import-cms
 python3 fetch_cms_trades.py convert --json-file /tmp/cms_raw.json -o /tmp/cms.csv
 python3 write_trade_journal.py import-cms /tmp/cms.csv
 ```
