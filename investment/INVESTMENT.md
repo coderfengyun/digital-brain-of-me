@@ -22,9 +22,9 @@ investment/
 │   ├── 招商证券交易日志/             # 原始交易截图（招商证券）
 │   └── 招行黄金交易日志/             # 原始交易截图（招行黄金）
 ├── 洪灏/                            # 投资分析文章
+├── M_Medi/                          # M_Medi 市场结构分析
 ├── satoshi-cafe-analysis/           # BTC 技术分析
-├── 卢麒元.md                        # 投资笔记
-└── *.md                             # 其他投资研究笔记
+└── 卢麒元/                          # 卢麒元投资笔记与资料
 ```
 
 ## Data Schema
@@ -117,37 +117,40 @@ python investment/投资日志整理/scripts/write_trade_journal.py import-cms /
 
 ### 批量更新交易记录
 
-当用户说"更新我 YYYY-MM-DD 以后的交易记录"时，从三个平台拉取并导入：
+当用户说"更新交易记录"时：
 
-**币安**（API，自动化）：
+**Step 0**：用 `tail -1 交易日志汇总表.csv` 确定最后记录日期，次日作为起始日期。
+
+**Step 1：币安**（API）
 ```bash
-python3 fetch_binance_trades.py --start DATE --end TODAY --all -o /tmp/binance.csv
+# ⚠️ 不要用 --all（400+ 交易对会触发限速），指定近期活跃品种
+python3 fetch_binance_trades.py --start DATE --end TODAY \
+  --symbol BTCUSDT XRPUSDT ETHUSDT SOLUSDT ZBTUSDT -o /tmp/binance.csv
 python3 write_trade_journal.py import-binance /tmp/binance.csv
 ```
+> 如果 import 因金额偏差 >1% 跳过记录（手续费导致），用 `add` 手动添加。
 
-**富途**（OpenD API，需本地运行 FutuOpenD 且已登录，端口 11111）：
+**Step 2：富途**（需 FutuOpenD 运行，端口 11111；连接被拒绝则跳过）
 ```bash
 python3 fetch_futu_trades.py --start DATE --end TODAY -o /tmp/futu.csv
-# 导入需手动处理（尚无 import-futu 子命令）
+# 无 import-futu 子命令，有新记录时用 add 逐条添加
 ```
 
-**招商证券**（Chrome MCP，需浏览器已登录）：
+**Step 3：招商证券**（Chrome MCP，需浏览器已登录）
 ```bash
-# 1. navigate_page 到历史成交页（URL 含 /npctrade 前缀！）
-#    url: https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
-#    timeout: 60000
-# 2. 生成 JS 并通过 evaluate_script 执行
+# 1. navigate_page → https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj (timeout: 60000)
+# 2. 生成+执行 JS
 python3 fetch_cms_trades.py js --start DATE --end TODAY
-# 3. evaluate_script 执行生成的 JS，返回 JSON
-# 4. 如有新记录，convert + import-cms
+# 3. evaluate_script 执行 JS，获取 JSON
+# 4. 有新记录则 convert + import-cms
 python3 fetch_cms_trades.py convert --json-file /tmp/cms_raw.json -o /tmp/cms.csv
 python3 write_trade_journal.py import-cms /tmp/cms.csv
 ```
+> 页面"服务异常"或有错误弹窗 = 会话过期，提示用户重新登录。用 `take_snapshot` 确认。
 
-**注意事项**：
-- 各 import 子命令自带去重（同日期+同品种+同方向+金额接近 2%）
-- 某个平台不可用时跳过并告知用户
-- 最后运行 `validate` 校验
+**Step 4**：`python3 write_trade_journal.py validate`
+
+**注意**：import 自带去重；平台不可用时跳过并告知用户。
 
 ### 校验数据
 
