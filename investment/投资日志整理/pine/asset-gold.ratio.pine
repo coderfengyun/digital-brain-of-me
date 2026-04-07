@@ -1,0 +1,36 @@
+//@version=6
+indicator("Asset / Gold Ratio", overlay = false, precision = 6)
+
+// --- 1. 获取黄金数据 (分母) ---
+goldPrice = request.security("OANDA:XAUUSD", timeframe.period, close, gaps = barmerge.gaps_off)
+
+// --- 2. 品种识别 ---
+ticker = syminfo.tickerid
+isSilver = str.contains(ticker, "XAG") or str.contains(ticker, "SI1!") or str.contains(ticker, "SLV")
+isOil    = str.contains(ticker, "BRN") or str.contains(ticker, "BNO") or str.contains(ticker, "USO") or str.contains(ticker, "UKOIL") or str.contains(ticker, "CL1!")
+isBTC    = str.contains(ticker, "BTC")
+
+assetName = str.contains(ticker, "SLV") ? "SLV" :
+           str.contains(ticker, "USO") ? "USO" :
+           str.contains(ticker, "BNO") ? "BNO" :
+           isBTC    ? "BTC" :
+           isSilver ? "XAG" :
+           isOil    ? "OIL" : "ASSET"
+
+// --- 3. 计算比率与手动修复 NaN ---
+rawRatio = close / goldPrice
+
+var float ratio = 0.0
+ratio := na(rawRatio) ? ratio[1] : rawRatio
+
+// --- 4. 颜色配置 ---
+ratioColor = isBTC ? #FF9800 : isOil ? #00E676 : isSilver ? #C0C0C0 : #2962FF
+
+// --- 5. 绘图 ---
+plot(ratio, "Asset / Gold", color=ratioColor, linewidth=2)
+
+// --- 6. 动态标签 ---
+if barstate.islast and not na(ratio)
+    format = isBTC ? "#.##" : "#.######"
+    txt = assetName + " / GOLD: " + str.tostring(ratio, format)
+    label.new(bar_index, ratio, txt, style=label.style_label_left, color=color.new(ratioColor, 0), textcolor=color.white)

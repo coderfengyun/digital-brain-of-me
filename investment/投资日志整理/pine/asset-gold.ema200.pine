@@ -1,0 +1,56 @@
+//@version=6
+indicator("EMA200|850(asset/Gold) * Gold", overlay = true, precision = 3)
+
+// --- 1. 获取黄金数据 (分母) ---
+goldPrice = request.security("OANDA:XAUUSD", timeframe.period, close, gaps = barmerge.gaps_off)
+
+// --- 2. 品种识别 ---
+ticker = syminfo.tickerid
+isSilver = str.contains(ticker, "XAG") or str.contains(ticker, "SI1!") or str.contains(ticker, "SLV")
+isOil    = str.contains(ticker, "BRN") or str.contains(ticker, "BNO") or str.contains(ticker, "USO") or str.contains(ticker, "UKOIL") or str.contains(ticker, "CL1!")
+isBTC    = str.contains(ticker, "BTC")
+
+assetName = str.contains(ticker, "SLV") ? "SLV" : 
+           str.contains(ticker, "USO") ? "USO" : 
+           str.contains(ticker, "BNO") ? "BNO" : 
+           isBTC    ? "BTC" :
+           isSilver ? "XAG" : 
+           isOil    ? "OIL" : "ASSET"
+
+// --- 3. 计算比率与手动修复 NaN (替代 ta.fixnan) ---
+rawRatio = close / goldPrice
+
+// 手动平滑处理空值：如果当前是空，就取上一个有效值
+var float cleanRatio = 0.0
+cleanRatio := na(rawRatio) ? cleanRatio[1] : rawRatio
+
+// --- 4. 数据起始保护 (防止 EMA 畸变) ---
+// 只有当有足够的数据根数时，才开始计算 EMA，避免 800+ 这种离谱数值
+// 我们确保只有在 cleanRatio 有实际意义后才计算
+var float ema200Ratio = na
+var float ema850Ratio = na
+
+if not na(cleanRatio) and cleanRatio > 0
+    ema200Ratio := ta.ema(cleanRatio, 200)
+    ema850Ratio := ta.ema(cleanRatio, 850)
+
+target200 = ema200Ratio * goldPrice
+target850 = ema850Ratio * goldPrice
+
+// --- 5. 颜色配置 ---
+color200 = isBTC ? #FF9800 : isOil ? #00E676 : #2962FF
+color850 = isBTC ? #9C27B0 : isOil ? #FFD600 : #FF5252
+
+// --- 6. 绘图 (加入有效性检查) ---
+// 如果 target850 算出来明显不符合逻辑（比如比当前价高出 5 倍以上），则不画线
+plot(target200, "EMA200 目标", color=color.new(color200, 0), linewidth=2)
+plot(target850, "EMA850 目标", color=color.new(color850, 0), linewidth=2)
+
+// --- 7. 动态公式标签 ---
+if barstate.islast and not na(target850)
+    format = isBTC ? "#" : "#.##"
+    txt200 = "EMA200(" + assetName + "/GOLD) * GOLD: " + str.tostring(target200, format)
+    txt850 = "EMA850(" + assetName + "/GOLD) * GOLD: " + str.tostring(target850, format)
+
+    label.new(bar_index, target200, txt200, style=label.style_label_left, color=color.new(color200, 0), textcolor=isSilver ? color.white : color.black)
+    label.new(bar_index, target850, txt850, style=label.style_label_left, color=color.new(color850, 0), textcolor=isSilver ? color.white : color.black)
