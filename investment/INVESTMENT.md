@@ -152,6 +152,39 @@ python3 write_trade_journal.py import-cms /tmp/cms.csv
 
 **注意**：import 自带去重；平台不可用时跳过并告知用户。
 
+### OCR 长图识别（投研策略图片）
+
+部分投研作者（如洪灏）以长图形式发布研报。碰到这类长图，统一用 EasyOCR 识别为 Markdown 文本。
+
+**环境**：`~/ocr-env` 虚拟环境（已安装 easyocr）
+
+**流程**：
+
+```bash
+# 1. 激活环境并运行 OCR
+source ~/ocr-env/bin/activate && python3 -c "
+import easyocr
+reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+results = reader.readtext('<图片路径>', detail=0, paragraph=True)
+for p in results:
+    print(p)
+    print()
+"
+```
+
+```bash
+# 2. 将识别结果整理后保存为 Markdown
+# 命名规则：与原图同名 + _OCR 后缀
+# 例如：史诗级TACO.jpg → 史诗级TACO_OCR.md
+# 保存位置：与原图同目录
+```
+
+**整理要求**：
+- OCR 原始输出有断行和识别误差，需人工修正断句、补全缺字
+- 保留原文结构（标题、段落、列表）
+- 不添加额外分析或总结，忠于原文
+- 文件开头注明来源和日期
+
 ### 校验数据
 
 ```bash

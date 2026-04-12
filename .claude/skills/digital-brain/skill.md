@@ -28,7 +28,7 @@ Activate this skill when the user:
 - Needs to record, import, or analyze investment trades
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system", "识别这张图", "OCR", "读一下这张图"
 
 ## Module Overview
 
@@ -61,6 +61,7 @@ digital-brain-of-me/
 | "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
 | "Transcribe this podcast" | Run `scripts/transcribe_podcast.py` with RSS or audio file |
 | "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
+| 识别长图 / OCR 投研图片 / "读一下这张图" | Read `investment/INVESTMENT.md` → 按 OCR 长图流程处理 |
 | "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through phases |
 | "Check module integration" | Run `module-toolkit/check_module_integration.py <module> <keyword>` |
 
