@@ -42,7 +42,29 @@
 }
 ```
 
+### Sources (unified: papers, podcasts)
+
+External inputs that go through a processing pipeline live in `sources/sources.jsonl`. All types share the same schema — source (input) → processing → output (.md).
+
+```json
+{
+  "id": "paper-YYYYMMDD-XXX | pod-YYYYMMDD-XXX",
+  "type": "paper | podcast",
+  "source": "https://... | sources/paper-XXX.pdf",
+  "title": "Title",
+  "tags": [],
+  "added_at": "YYYY-MM-DD",
+  "output": "papers/paper-XXX/notes.md"
+}
+```
+
+- `source` — URL or local file path in `sources/` directory (file inputs use `sources/{id}.ext`)
+- `output` empty = 待处理, filled = 已完成
+- Processing artifacts (downloaded HTML, audio files) live in conventional locations but are NOT tracked in sources.jsonl
+
 ### Bookmarks
+
+Bookmarks don't have a processing pipeline, so they live separately in `knowledge/bookmarks/bookmarks.jsonl`.
 
 ```json
 {
@@ -55,21 +77,6 @@
   "category": "article|video|tool|paper|documentation"
 }
 ```
-
-### Papers
-
-```json
-{
-  "id": "paper-YYYYMMDD-XXX",
-  "url": "https://arxiv.org/...",
-  "source": "",
-  "notes": ""
-}
-```
-
-- `source` - Local source document path (e.g., `paper-YYYYMMDD-XXX/paper.html`)
-- `notes` - Reading notes path (e.g., `paper-YYYYMMDD-XXX/notes.md`)
-- Reading status: `notes` empty = unread, `notes` filled = completed
 
 ### Contacts
 
@@ -150,7 +157,8 @@ Most commonly missed integration files:
 3. **Cross-Reference**: Link related data across modules（flat-file relational model）
 4. **Voice-First**: Identity always loaded before content generation
 5. **Module Separation**: 每个模块独立管理自己的操作细节，上层只做路由
-6. **Complete Integration**: New modules require updating all system files (use guide and checker)
+6. **Flat Routing**: skill.md 路由表的 Action 列只写 `Read <模块入口文件>`，不展开处理步骤；每个请求直接指向最终处理它的模块，避免中间跳转
+7. **Complete Integration**: New modules require updating all system files (use guide and checker)
 
 ## Error Prevention
 

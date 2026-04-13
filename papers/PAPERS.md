@@ -6,7 +6,6 @@ Systematic academic paper reading with a narrative-driven approach. Focus on und
 
 ```
 papers/
-├── papers.jsonl           # Paper metadata (append-only)
 ├── paper-YYYYMMDD-XXX/    # Individual paper folder
 │   ├── notes.md           # Reading notes
 │   └── source.*           # Source document (paper.html | source.md | source.pdf)
@@ -19,25 +18,30 @@ papers/
 
 ## Data Schema
 
-Each entry in `papers.jsonl`:
+Paper metadata lives in `sources/sources.jsonl` (type: `"paper"`).
 
 ```json
 {
   "id": "paper-YYYYMMDD-XXX",
-  "url": "https://arxiv.org/abs/...",
-  "source": "",
-  "notes": ""
+  "type": "paper",
+  "source": "https://arxiv.org/abs/... | sources/paper-XXX.pdf",
+  "title": "Paper title",
+  "tags": [],
+  "added_at": "YYYY-MM-DD",
+  "output": "papers/paper-YYYYMMDD-XXX/notes.md"
 }
 ```
 
 ### Fields
-- `url` - Original URL or local filename
-- `source` - Local source document path (ONE of: `paper.html` | `source.md` | `source.pdf`)
-- `notes` - Reading notes path (e.g., `"paper-YYYYMMDD-XXX/notes.md"`)
+- `source` - URL or local file path (`sources/{id}.ext` for file inputs)
+- `output` - Reading notes path relative to project root
 
 ### Reading Status
-- `notes` empty = Not read yet
-- `notes` filled = Reading completed
+- `output` empty = Not read yet
+- `output` filled = Reading completed
+
+### Processing Artifacts (not tracked in sources.jsonl)
+- Source documents: `papers/paper-YYYYMMDD-XXX/paper.html` or `source.md` or `source.pdf`
 
 ## Paper Note Templates
 
@@ -59,14 +63,14 @@ Each entry in `papers.jsonl`:
 - ALWAYS obtain source document locally before reading
 - ALWAYS read from local source, NOT from web fetch
 - ALWAYS choose the appropriate template based on paper type (see Paper Note Templates)
-- ALWAYS update `papers.jsonl` after each phase
+- ALWAYS update `sources.jsonl` after each phase
 
 ### Phase 0: Obtain Source Document
 
 **Process**:
 1. For arxiv papers: Download HTML to `paper-YYYYMMDD-XXX/paper.html`
 2. For provided documents: Save to `paper-YYYYMMDD-XXX/source.md` or `source.pdf`
-3. Update `source` field in papers.jsonl with the path
+3. Source document is saved by convention — no need to update sources.jsonl
 
 ### Phase 1: Extract Narrative (1-2 hours)
 
@@ -99,7 +103,7 @@ Each entry in `papers.jsonl`:
    - **支撑数据填写规则**: 优先使用定量数据；若论点无明确数据支撑，使用 `**例子**: 具体场景描述` 格式记录论文中的示例
    - **具体例子引用规则**: 当论文通过具体真实例子来阐释一个概念或方法时（如 checklist 问题、prompt 片段、代码示例、配置项），在支撑数据中直接引用 2-3 个原文例子，帮助读者快速找到作者提出概念的「感觉」，而不只是写概括性描述
 3. Complete critical thinking section with 3 core questions
-4. Update `notes` field in papers.jsonl with notes.md path
+4. Update `output` field in sources.jsonl with notes.md path
 
 ## Further Reading
 

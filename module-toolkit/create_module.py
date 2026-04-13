@@ -141,14 +141,13 @@ def update_readme_md(module_name, keyword):
     content = readme_path.read_text(encoding='utf-8')
 
     # Update structure diagram (around line ~31)
-    papers_line = "├── papers/           # Academic paper reading (JSONL + Markdown)"
-    new_structure = f"""├── papers/           # Academic paper reading (JSONL + Markdown)
-│   ├── papers.jsonl  # Paper metadata
+    papers_line = "├── papers/           # Academic paper reading"
+    new_structure = f"""├── papers/           # Academic paper reading
 │   └── paper-*.md    # Reading notes
 ├── knowledge/{module_name}/    # {module_name.capitalize()} management
 │   └── {module_name.upper()}.md        # Module documentation"""
 
-    content = content.replace(papers_line + "\n│   ├── papers.jsonl  # Paper metadata\n│   └── paper-*.md    # Reading notes", new_structure)
+    content = content.replace(papers_line + "\n│   └── paper-*.md    # Reading notes", new_structure)
 
     readme_path.write_text(content, encoding='utf-8')
     return True

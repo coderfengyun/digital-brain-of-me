@@ -21,7 +21,9 @@
       "Bash(chmod +x:*)",
       "Skill(update-config)",
       "Skill(update-config:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(rm:*)"
     ]
   }
 }

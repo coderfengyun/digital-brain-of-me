@@ -28,15 +28,16 @@ Activate this skill when the user:
 - Needs to record, import, or analyze investment trades
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system", "识别这张图", "OCR", "读一下这张图"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "who is [name]", "prepare for meeting", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "add source", "读一下这篇", "这篇文章", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system", "识别这张图", "OCR", "读一下这张图"
 
 ## Module Overview
 
 ```
 digital-brain-of-me/
+├── sources/      → 外部输入（注册表 + 文件）
 ├── identity/     → Voice, brand, values (READ FIRST for content)
 ├── content/      → Ideas, drafts, posts, calendar
-├── knowledge/    → Bookmarks, research, learning
+├── knowledge/    → Bookmarks, research, learning, web-clippings
 ├── papers/       → Academic paper reading and notes
 ├── podcasts/     → Podcast transcription and notes
 ├── network/      → Contacts, interactions, intros
@@ -57,9 +58,9 @@ digital-brain-of-me/
 | "Save this bookmark" | Append to `knowledge/bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `operations/goals/goals.yaml` with progress |
-| "Read this paper" | Read `papers/PAPERS.md` → Guide through 2-phase reading → Update status |
-| "Show unread papers" | Read `papers/papers.jsonl`, filter entries where `notes` is empty |
-| "Transcribe this podcast" | Run `scripts/transcribe_podcast.py` with RSS or audio file |
+| "Add source" / URL / 文件 | Read `sources/SOURCES.md` |
+| "Read paper" / "读一下这篇" / "Show unread papers" | Read `papers/PAPERS.md` |
+| "Transcribe podcast" | Read `podcasts/PODCASTS.md` |
 | "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
 | 识别长图 / OCR 投研图片 / "读一下这张图" | Read `investment/INVESTMENT.md` → 按 OCR 长图流程处理 |
 | "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through phases |
@@ -79,11 +80,10 @@ Use **progressive disclosure**:
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
 
-3. **Load on Paper Tasks** (L2):
-   - `papers/PAPERS.md` + `papers/papers.jsonl`
-
-4. **Load on Podcast Tasks** (L2):
-   - `podcasts/PODCASTS.md` + `podcasts/podcasts.jsonl`
+3. **Load on Source / Paper / Podcast Tasks** (L2):
+   - `sources/SOURCES.md`（统一入口：注册、类型判断、路由）
+   - Paper 处理细节：`papers/PAPERS.md`
+   - Podcast 处理细节：`podcasts/PODCASTS.md`
 
 5. **Load on Network Tasks** (L2):
    - `network/contacts/contacts.jsonl`
@@ -146,10 +146,12 @@ When an operation fails or produces unexpected results, append the lesson to [go
 
 ## References
 
+- [Sources Module](./sources/SOURCES.md) — 外部输入统一管理（source → output）
 - [Identity Module](./identity/voice/principles.md)
 - [Content Module](./content/CONTENT.md)
 - [Knowledge Module](./knowledge/KNOWLEDGE.md)
 - [Papers Module](./papers/PAPERS.md)
+- [Podcasts Module](./podcasts/PODCASTS.md)
 - [Network Module](./network/NETWORK.md)
 - [Operations Module](./operations/OPERATIONS.md)
 - [Investment Module](./investment/INVESTMENT.md)

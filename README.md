@@ -8,6 +8,9 @@ Inspired by [Agent Skills for Context Engineering](https://github.com/muratcanko
 
 ```
 digital-brain-of-me/
+├── sources/          # 外部输入统一管理（source → output）
+│   ├── sources.jsonl # 注册表（paper + podcast）
+│   └── *.pdf/*.docx  # 本地文件类输入
 ├── identity/          # Your personal brand and voice
 │   ├── brand/        # Profile, values, expertise
 │   └── voice/        # Writing style and principles
@@ -19,8 +22,8 @@ digital-brain-of-me/
 │   ├── bookmarks/    # Saved links (JSONL)
 │   ├── research/     # Deep research notes (Markdown)
 │   └── learning/     # Courses, books, skills (YAML)
-├── papers/           # Academic paper reading (JSONL + Markdown)
-├── podcasts/         # Podcast transcription (RSS + whisper.cpp)
+├── papers/           # Academic paper reading → source output
+├── podcasts/         # Podcast transcription → source output
 ├── investment/       # Investment trade journal and P&L analysis
 │   ├── 投资日志整理/ # Trade records, scripts, schema
 │   └── *.md          # Investment research notes
@@ -43,7 +46,9 @@ digital-brain-of-me/
 3. **Use with Claude Code**: Say things like "add a content idea about X" or "weekly review"
 
 详细的数据格式、脚本列表和使用指南见 [CLAUDE.md](CLAUDE.md)。
-各模块的详细说明见对应目录下的大写 `.md` 文件（如 `investment/INVESTMENT.md`、`papers/PAPERS.md`）。
+各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`papers/PAPERS.md`、`investment/INVESTMENT.md`）。
+
+所有外部输入（论文、播客等）统一通过 [sources/SOURCES.md](sources/SOURCES.md) 管理，遵循 **source → processing → output** 模型。
 
 ## Extending the System
 

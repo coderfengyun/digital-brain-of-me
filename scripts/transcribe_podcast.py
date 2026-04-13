@@ -29,7 +29,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PODCASTS_DIR = PROJECT_ROOT / "podcasts"
 TRANSCRIPTS_DIR = PODCASTS_DIR / "transcripts"
-PODCASTS_JSONL = PODCASTS_DIR / "podcasts.jsonl"
+SOURCES_JSONL = PROJECT_ROOT / "sources" / "sources.jsonl"
 
 # Whisper model search paths
 MODEL_SEARCH_PATHS = [
@@ -118,8 +118,8 @@ def generate_id() -> str:
     date_str = datetime.now().strftime('%Y%m%d')
     # Find existing IDs for today
     existing = set()
-    if PODCASTS_JSONL.exists():
-        with open(PODCASTS_JSONL, 'r') as f:
+    if SOURCES_JSONL.exists():
+        with open(SOURCES_JSONL, 'r') as f:
             for line in f:
                 line = line.strip()
                 if line:
@@ -132,11 +132,17 @@ def generate_id() -> str:
     return f'pod-{date_str}-{seq:03d}'
 
 
-def save_transcript_md(transcript: str, episode_data: dict, model_name: str) -> Path:
-    """Save transcript as markdown file."""
+def save_transcript_md(transcript: str, episode_data: dict, model_name: str,
+                       show: str = 'Unknown', language: str = 'auto',
+                       description: str = '') -> Path:
+    """Save transcript as markdown file.
+
+    show/language/description are processing-time metadata written into the .md
+    header but NOT stored in sources.jsonl.
+    """
     TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    safe_show = sanitize_filename(episode_data.get('show', 'Unknown'))
+    safe_show = sanitize_filename(show)
     safe_title = sanitize_filename(episode_data.get('title', 'Untitled'))
     episode_id = episode_data['id']
     filename = f"{safe_show}_{safe_title}_{episode_id}.md"
@@ -145,14 +151,14 @@ def save_transcript_md(transcript: str, episode_data: dict, model_name: str) -> 
     formatted = format_transcript(transcript)
 
     content = f"# {episode_data.get('title', 'Untitled')}\n\n"
-    content += f"**Show:** {episode_data.get('show', 'Unknown')}\n"
+    content += f"**Show:** {show}\n"
     content += f"**Date:** {datetime.now().strftime('%Y-%m-%d')}\n"
-    if episode_data.get('url'):
-        content += f"**Source:** [{episode_data['url']}]({episode_data['url']})\n"
-    content += f"**Language:** {episode_data.get('language', 'auto')}\n"
+    if episode_data.get('source'):
+        content += f"**Source:** [{episode_data['source']}]({episode_data['source']})\n"
+    content += f"**Language:** {language}\n"
     content += f"**Model:** whisper-{model_name}\n\n"
-    if episode_data.get('description'):
-        content += f"## Description\n\n{episode_data['description']}\n\n"
+    if description:
+        content += f"## Description\n\n{description}\n\n"
     content += f"## Transcript\n\n{formatted}\n"
 
     output_path.write_text(content, encoding='utf-8')
@@ -160,8 +166,8 @@ def save_transcript_md(transcript: str, episode_data: dict, model_name: str) -> 
 
 
 def append_jsonl(episode_data: dict):
-    """Append episode metadata to podcasts.jsonl."""
-    with open(PODCASTS_JSONL, 'a') as f:
+    """Append episode metadata to sources.jsonl."""
+    with open(SOURCES_JSONL, 'a') as f:
         f.write(json.dumps(episode_data, ensure_ascii=False) + '\n')
 
 
@@ -245,20 +251,18 @@ def transcribe_from_rss(rss_url: str, count: int, model: str, language: str | No
         # Save results
         episode_data = {
             'id': episode_id,
+            'type': 'podcast',
+            'source': link,
             'title': title,
-            'show': show_name,
-            'url': link,
-            'rss_feed': rss_url,
-            'audio_file': '',
-            'transcript': '',
             'tags': [],
-            'language': language or 'auto',
             'added_at': datetime.now().strftime('%Y-%m-%d'),
-            'status': 'completed',
+            'output': '',
         }
 
-        output_path = save_transcript_md(transcript, episode_data, model)
-        episode_data['transcript'] = str(output_path.relative_to(PROJECT_ROOT))
+        output_path = save_transcript_md(
+            transcript, episode_data, model,
+            show=show_name, language=language or 'auto', description=description)
+        episode_data['output'] = str(output_path.relative_to(PROJECT_ROOT))
         append_jsonl(episode_data)
 
         print(f"  Saved: {output_path.relative_to(PROJECT_ROOT)}")
@@ -292,20 +296,18 @@ def transcribe_from_file(audio_path: str, title: str, show: str, model: str,
 
     episode_data = {
         'id': episode_id,
+        'type': 'podcast',
+        'source': url or '',
         'title': title,
-        'show': show,
-        'url': url or '',
-        'rss_feed': '',
-        'audio_file': str(audio_path),
-        'transcript': '',
         'tags': tags,
-        'language': language or 'auto',
         'added_at': datetime.now().strftime('%Y-%m-%d'),
-        'status': 'completed',
+        'output': '',
     }
 
-    output_path = save_transcript_md(transcript, episode_data, model)
-    episode_data['transcript'] = str(output_path.relative_to(PROJECT_ROOT))
+    output_path = save_transcript_md(
+        transcript, episode_data, model,
+        show=show, language=language or 'auto')
+    episode_data['output'] = str(output_path.relative_to(PROJECT_ROOT))
     append_jsonl(episode_data)
 
     print(f"  Saved: {output_path.relative_to(PROJECT_ROOT)}")

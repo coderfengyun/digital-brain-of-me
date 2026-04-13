@@ -6,7 +6,6 @@
 
 ```
 podcasts/
-├── podcasts.jsonl              # 播客元数据（append-only）
 ├── transcripts/                # 转录文本存放目录
 │   └── show-name_episode-title_ID.md
 ├── PODCASTS.md                 # 本文件
@@ -15,34 +14,31 @@ podcasts/
 
 ## Data Schema
 
-Each entry in `podcasts.jsonl`:
+Podcast metadata lives in `sources/sources.jsonl` (type: `"podcast"`).
 
 ```json
 {
   "id": "pod-YYYYMMDD-XXX",
+  "type": "podcast",
+  "source": "https://open.spotify.com/episode/... | sources/pod-XXX.ogg",
   "title": "Episode title",
-  "show": "Podcast show name",
-  "url": "https://open.spotify.com/episode/...",
-  "rss_feed": "https://example.com/feed.xml",
-  "audio_file": "path/to/local/audio.mp3",
-  "transcript": "transcripts/show-name_episode-title_pod-YYYYMMDD-XXX.md",
   "tags": ["topic1", "topic2"],
-  "language": "en",
   "added_at": "YYYY-MM-DD",
-  "status": "pending|transcribing|completed"
+  "output": "podcasts/transcripts/show-name_episode-title_pod-YYYYMMDD-XXX.md"
 }
 ```
 
 ### Fields
-- `url` - Spotify 或其他平台链接（可选）
-- `rss_feed` - 播客 RSS feed URL（用于自动下载音频）
-- `audio_file` - 本地音频文件路径（手动提供时使用）
-- `transcript` - 转录 Markdown 文件路径
-- `status` - pending（待转录）| transcribing（转录中）| completed（已完成）
+- `source` - URL 或本地文件路径（文件输入放 `sources/{id}.ext`）
+- `output` - 转录 Markdown 文件路径（相对于项目根目录）
 
 ### Status
-- `transcript` empty = 未转录
-- `transcript` filled = 转录完成
+- `output` empty = 未转录
+- `output` filled = 转录完成
+
+### Processing Artifacts (not tracked in sources.jsonl)
+- 音频文件: `podcasts/audio/` 目录下
+- show name, language, rss_feed 等处理参数写入转录 .md header，不在 jsonl 中记录
 
 <a id="transcription-workflow"></a>
 ## Transcription Workflow
