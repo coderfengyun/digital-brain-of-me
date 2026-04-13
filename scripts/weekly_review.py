@@ -73,15 +73,6 @@ def generate_weekly_review():
         print(f"  - {item.get('title', 'Untitled')} ({item.get('platform', 'unknown')})")
     print()
 
-    # New contacts
-    contacts = load_jsonl('network/contacts/contacts.jsonl')
-    new_contacts = filter_by_week(contacts, 'met_at', week_start)
-
-    print(f"## New Contacts: {len(new_contacts)}")
-    for contact in new_contacts:
-        print(f"  - {contact.get('name', 'Unknown')} ({contact.get('relationship', 'unknown')})")
-    print()
-
     # Meetings
     meetings = load_jsonl('operations/meetings/meetings.jsonl')
     meetings_this_week = filter_by_week(meetings, 'date', week_start)

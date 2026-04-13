@@ -27,9 +27,6 @@ digital-brain-of-me/
 ├── investment/       # Investment trade journal and P&L analysis
 │   ├── 投资日志整理/ # Trade records, scripts, schema
 │   └── *.md          # Investment research notes
-├── network/          # Relationship management
-│   ├── contacts/     # Professional network (JSONL)
-│   └── relationships/ # Interactions log (JSONL)
 ├── operations/       # Goals and productivity
 │   ├── goals/        # Yearly/quarterly/monthly goals (YAML)
 │   ├── tasks/        # Action items (JSONL)

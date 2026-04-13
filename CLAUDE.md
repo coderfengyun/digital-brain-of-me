@@ -78,34 +78,6 @@ Bookmarks don't have a processing pipeline, so they live separately in `knowledg
 }
 ```
 
-### Contacts
-
-```json
-{
-  "id": "contact-XXX",
-  "name": "Full Name",
-  "relationship": "colleague|mentor|client|friend|acquaintance",
-  "tags": ["tag1", "tag2"],
-  "met_at": "YYYY-MM-DD",
-  "last_contact": "YYYY-MM-DD",
-  "notes": "Context about this person",
-  "links": { "twitter": "", "linkedin": "", "email": "", "website": "" }
-}
-```
-
-### Interactions
-
-```json
-{
-  "id": "interaction-XXX",
-  "contact_id": "contact-XXX",
-  "date": "YYYY-MM-DD",
-  "type": "meeting|email|call|message|event",
-  "summary": "What you discussed",
-  "follow_up": "Any action items"
-}
-```
-
 ### Tasks
 
 ```json
