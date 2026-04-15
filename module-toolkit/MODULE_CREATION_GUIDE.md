@@ -238,7 +238,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 ### 2. 对比现有模块
 ```bash
 # 对比文档结构
-diff <(grep "^##" papers/PAPERS.md) \
+diff <(grep "^##" knowledge/papers/PAPERS.md) \
      <(grep "^##" knowledge/KNOWLEDGE.md)
 ```
 
@@ -260,7 +260,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 ## 📚 参考资料
 
 ### 成功案例: Papers 模块
-- **位置**: `papers/`
+- **位置**: `knowledge/papers/`
 - **特点**: 完整的两阶段读取流程
 - **文件数**: 20个 (12新增 + 8更新)
 - **集成度**: 100%

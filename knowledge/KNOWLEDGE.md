@@ -29,12 +29,12 @@ Track courses, books, and skills you're developing in `courses.yaml`.
 ### web-clippings/
 Saved web pages converted to Markdown for offline reading.
 
+## Sub-Modules
+
+- **papers/** - Paper reading notes. See [papers/PAPERS.md](papers/PAPERS.md). Workflow in `paper-reading` skill.
+
 ## Related Top-Level Modules
 
-These modules were originally under `knowledge/` but are now independent top-level modules:
-
-- **papers/** - Academic paper reading. See [../papers/PAPERS.md](../papers/PAPERS.md)
-- **podcasts/** - Podcast transcription. See [../podcasts/PODCASTS.md](../podcasts/PODCASTS.md)
 - **investment/** - Investment trade journal. See [../investment/INVESTMENT.md](../investment/INVESTMENT.md)
 
 ## Usage Tips

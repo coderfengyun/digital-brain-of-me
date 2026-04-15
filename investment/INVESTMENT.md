@@ -1,27 +1,22 @@
 # Investment — 交易日志 + 投研内容
 
-本模块管理两类内容：
+本目录存放两类数据：
 
-1. **交易日志** — 从各券商/交易所获取交易记录，汇总到统一日志，计算盈亏（`投资日志整理/`）
-2. **投研内容** — 长期跟踪的投研作者观点库，每人一个目录，以 `{作者名}.md` 索引文件为入口，汇聚该作者散落在多模块（investment、podcasts、papers、sources）的全部内容
+1. **交易日志** — 统一的现货交易记录（`投资日志整理/`）
+2. **投研内容** — 长期跟踪的投研作者观点库，每人一个目录
+
+交易操作和投研管理流程由 `investment` skill 驱动。
 
 ## Structure
 
 ```
 investment/
-├── INVESTMENT.md                    # 本文件（模块入口）
+├── INVESTMENT.md                    # 本文件（数据目录说明）
 │
 │  ── 交易日志 ──
 ├── 投资日志整理/
 │   ├── 交易日志汇总表.csv           # 核心数据：全部现货交易记录
 │   ├── 交易日志汇总表.schema.json   # CSV Schema (Frictionless Table Schema)
-│   ├── scripts/                     # 自动化脚本
-│   │   ├── write_trade_journal.py   # 交易日志写入工具（添加/导入/迁移/校验）
-│   │   ├── fetch_binance_trades.py  # 币安交易记录获取
-│   │   ├── fetch_futu_trades.py     # 富途交易记录获取
-│   │   ├── fetch_cms_trades.py      # 招商证券交易记录获取（Chrome MCP）
-│   │   ├── calc_pnl.py             # 盈亏计算（FIFO 匹配）
-│   │   └── test_*.py               # 测试用例
 │   ├── TASK_盈亏情况统计.md          # 盈亏统计任务定义
 │   ├── DESIGN_盈亏统计系统设计.md    # 系统设计文档
 │   ├── 招商证券交易日志/             # 原始交易截图（招商证券）
@@ -36,8 +31,6 @@ investment/
 ```
 
 ## Data Schema
-
-<a id="data-schema"></a>
 
 交易日志使用 CSV 格式，Schema 定义见 [`交易日志汇总表.schema.json`](投资日志整理/交易日志汇总表.schema.json)。
 
@@ -59,182 +52,7 @@ investment/
 | 交易平台 | enum | `币安` / `富途` / `招行` / `招商证券` / `其他` |
 | 备注 | string | 可选 |
 
-## 投研内容
+## 投研作者索引
 
-每位长期跟踪的作者在 `investment/` 下有独立目录，以 `{作者名}.md` 为索引。索引文件汇聚该作者在整个 repo 中的全部内容（研究文章、OCR 转换、podcast 转录、原始发言等），是查找某位作者观点的唯一入口。
-
-**现有作者索引**：
 - [`洪灏/洪灏.md`](洪灏/洪灏.md) — 宏观分析、地缘-能源-通胀传导、黄金/美元结构性分析
 - [`卢麒元/卢麒元.md`](卢麒元/卢麒元.md) — 马克思资本论框架、货币体系、资产配置三三四原则
-
-**新建作者索引时**：
-1. 在 `investment/{作者名}/` 下创建 `{作者名}.md`
-2. 开头用 blockquote 简述身份、分析风格、核心关注领域
-3. 按内容类型分节（Podcast 转录 / 研究文章 / 投资研究 / 一手发言等），用相对路径链接到实际文件
-4. 附"关键观点速查"表格（主题 / 观点 / 出处）
-5. 更新本文件 Structure 目录树和上方作者列表
-
-**向已有作者添加新内容时**：
-1. 内容文件放到该作者目录下（或其他模块的对应位置）
-2. 更新该作者的索引文件，添加链接
-3. 如果是新文件类型或目录，同步更新本文件 Structure 目录树
-
-### OCR 长图识别（投研策略图片）
-
-部分投研作者（如洪灏）以长图形式发布研报。碰到这类长图，统一用 EasyOCR 识别为 Markdown 文本。
-
-**环境**：`~/ocr-env` 虚拟环境（已安装 easyocr）
-
-**流程**：
-
-```bash
-# 1. 激活环境并运行 OCR
-source ~/ocr-env/bin/activate && python3 -c "
-import easyocr
-reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
-results = reader.readtext('<图片路径>', detail=0, paragraph=True)
-for p in results:
-    print(p)
-    print()
-"
-```
-
-```bash
-# 2. 将识别结果整理后保存为 Markdown
-# 命名规则：与原图同名 + _OCR 后缀
-# 例如：史诗级TACO.jpg → 史诗级TACO_OCR.md
-# 保存位置：与原图同目录
-```
-
-**整理要求**：
-- OCR 原始输出有断行和识别误差，需人工修正断句、补全缺字
-- 保留原文结构（标题、段落、列表）
-- 不添加额外分析或总结，忠于原文
-- 文件开头注明来源和日期
-
----
-
-## 交易日志
-
-<a id="usage"></a>
-
-### 添加交易记录
-
-```bash
-python investment/投资日志整理/scripts/write_trade_journal.py add \
-  --品种 BTC --操作 买入 --价格 76653 --数量 0.00391 --金额 299.71 \
-  --币种 USD --日期 2025-04-07 --交易平台 币安 --备注 "币安API精确数据"
-```
-
-完整参数列表（`add --help`）：
-- `--品种`、`--操作`、`--价格`、`--数量`、`--金额`、`--币种`、`--日期` — 必填
-- `--交易平台` — 可选，注意**不是** `--平台`
-- `--日期精确度` — 可选，默认 `精确`
-- `--备注` — 可选
-
-### 从币安导入
-
-```bash
-# 1. 获取币安交易记录
-python investment/投资日志整理/scripts/fetch_binance_trades.py \
-  --start 2025-04-01 --end 2025-10-31 -o /tmp/binance_trades.csv
-
-# 2. 导入到交易日志
-python investment/投资日志整理/scripts/write_trade_journal.py import-binance /tmp/binance_trades.csv
-```
-
-### 从招商证券导入（Chrome MCP）
-
-需要 Chrome MCP 连接到已登录的招商证券网页交易页面。完整步骤：
-
-**前置条件**：
-- Chrome 以 `--remote-debugging-port=9222` 启动
-- Chrome MCP 已连接（`claude mcp list` 显示 ✓）
-- 浏览器已登录招商证券
-
-**历史成交页面 URL**（必须含 `/npctrade` 路径前缀）：
-```
-https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
-```
-
-**步骤**：
-
-```bash
-# Step 1: 使用 chrome-devtools navigate_page 导航到上述 URL（timeout: 60000）
-
-# Step 2: 用 fetch_cms_trades.py 生成提取数据的 JS
-python investment/投资日志整理/scripts/fetch_cms_trades.py js \
-  --start 2026-03-03 --end 2026-03-28
-
-# Step 3: 通过 chrome-devtools evaluate_script 执行该 JS，获取 JSON 结果
-
-# Step 4: 将 JSON 保存到文件并转为 CSV
-python investment/投资日志整理/scripts/fetch_cms_trades.py convert \
-  --json-file /tmp/cms_raw.json -o /tmp/cms_trades.csv
-
-# Step 5: 导入到交易日志
-python investment/投资日志整理/scripts/write_trade_journal.py import-cms /tmp/cms_trades.csv
-```
-
-> **注意**：如果数据量只有几条且已存在于日志中，可以跳过 Step 4-5，直接确认无新记录即可。
-
-### 批量更新交易记录
-
-当用户说"更新交易记录"时：
-
-**Step 0**：用 `tail -1 交易日志汇总表.csv` 确定最后记录日期，次日作为起始日期。
-
-**Step 1：币安**（API）
-```bash
-# ⚠️ 不要用 --all（400+ 交易对会触发限速），指定近期活跃品种
-python3 fetch_binance_trades.py --start DATE --end TODAY \
-  --symbol BTCUSDT XRPUSDT ETHUSDT SOLUSDT ZBTUSDT -o /tmp/binance.csv
-python3 write_trade_journal.py import-binance /tmp/binance.csv
-```
-> 如果 import 因金额偏差 >1% 跳过记录（手续费导致），用 `add` 手动添加。
-
-**Step 2：富途**（需 FutuOpenD 运行，端口 11111；连接被拒绝则跳过）
-```bash
-python3 fetch_futu_trades.py --start DATE --end TODAY -o /tmp/futu.csv
-# 无 import-futu 子命令，有新记录时用 add 逐条添加
-```
-
-**Step 3：招商证券**（Chrome MCP，需浏览器已登录）
-```bash
-# 1. navigate_page → https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj (timeout: 60000)
-# 2. 生成+执行 JS
-python3 fetch_cms_trades.py js --start DATE --end TODAY
-# 3. evaluate_script 执行 JS，获取 JSON
-# 4. 有新记录则 convert + import-cms
-python3 fetch_cms_trades.py convert --json-file /tmp/cms_raw.json -o /tmp/cms.csv
-python3 write_trade_journal.py import-cms /tmp/cms.csv
-```
-> 页面"服务异常"或有错误弹窗 = 会话过期，提示用户重新登录。用 `take_snapshot` 确认。
-
-**Step 4**：`python3 write_trade_journal.py validate`
-
-**注意**：import 自带去重；平台不可用时跳过并告知用户。
-
-### 校验数据
-
-```bash
-python investment/投资日志整理/scripts/write_trade_journal.py validate
-```
-
-### 盈亏计算
-
-```bash
-python investment/投资日志整理/scripts/calc_pnl.py
-```
-
-### 运行测试
-
-```bash
-cd investment/投资日志整理/scripts && python3 -m pytest -v
-```
-
-## Integration with Other Modules
-
-- **Operations**: 投资决策可关联到 `operations/goals/` 中的财务目标
-- **Knowledge**: 投资研究文章（`investment/*.md`）可作为 knowledge 模块的补充
-- **Content**: 投资分析可转化为 content 创作素材

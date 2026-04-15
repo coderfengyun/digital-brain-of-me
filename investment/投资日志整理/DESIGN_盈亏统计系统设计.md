@@ -13,14 +13,14 @@
        │
        ▼
 ┌──────────────────────────┐
-│ 上游：交易记录获取 & 写入   │  scripts/fetch_binance_trades.py
-│ (程序化执行)               │  scripts/fetch_futu_trades.py
-│                            │  scripts/write_trade_journal.py
+│ 上游：交易记录获取 & 写入   │  .claude/skills/investment/scripts/
+│ (程序化执行)               │    write_trade_journal.py
+│                            │
 └─────────┬────────────────┘
           │ 输出：交易日志汇总表.csv（严格遵循 Schema）
           ▼
 ┌──────────────────────────┐
-│ 下游：盈亏计算脚本          │  scripts/calc_pnl.py
+│ 下游：盈亏计算脚本          │  .claude/skills/investment/scripts/calc_pnl.py
 │ (纯程序执行)               │
 └─────────┬────────────────┘
           │ 输出：盈亏统计报告.md
@@ -130,13 +130,12 @@ investment/投资日志整理/
 ├── DESIGN_盈亏统计系统设计.md      # 本文件
 ├── 交易日志汇总表.schema.json      # CSV Schema 机器可读定义 (Frictionless Table Schema)
 ├── 交易日志汇总表.csv              # 数据文件
-├── scripts/
-│   ├── write_trade_journal.py      # 交易日志写入工具
-│   ├── fetch_binance_trades.py     # 币安交易记录获取
-│   ├── fetch_futu_trades.py        # 富途交易记录获取
-│   ├── calc_pnl.py                 # 盈亏计算脚本
-│   └── test_*.py                   # 测试用例
 └── 盈亏统计报告.md                 # 输出报告（由脚本生成）
+
+.claude/skills/investment/scripts/
+├── write_trade_journal.py          # 交易日志写入工具
+├── calc_pnl.py                     # 盈亏计算脚本
+└── test_calc_pnl.py                # 测试用例
 ```
 
 ## 7. 扩展点

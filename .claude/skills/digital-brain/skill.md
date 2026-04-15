@@ -1,15 +1,13 @@
 ---
 name: digital-brain
-description: "Personal knowledge management system. Use when: user asks about bookmarks, papers, podcasts, tasks, goals, investment trades, content ideas, weekly review, reading papers, transcribing podcasts, P&L calculation, adding trades, creating modules, or any personal knowledge management task. Also trigger on Chinese phrases like 书签, 论文, 播客, 任务, 目标, 交易记录, 内容创意, 周报, 盈亏, 更新交易记录, 写一篇文章, 保存这个链接, 我的目标, 添加论文, 读论文. Use this skill even if the user doesn't explicitly mention 'digital brain' — any request involving personal data management, knowledge capture, or content creation should route here."
+description: "Personal knowledge management system. Use when: user asks about bookmarks, tasks, goals, content ideas, weekly review, or any personal knowledge management task. Also trigger on Chinese phrases like 书签, 任务, 目标, 内容创意, 周报, 写一篇文章, 保存这个链接, 我的目标. Handles: content creation (with voice/identity), bookmarks, task tracking, goal management, weekly reviews, source registration/routing, and module creation. Note: paper reading, investment operations, and podcast transcription are handled by their own dedicated skills."
 ---
 
 # Digital Brain
 
-个人数字操作系统：管理数字身份、知识、目标和投资。
+个人数字操作系统：管理数字身份、知识、目标。
 
 > **本文件定位**：使用 digital-brain 时的操作手册——路由、加载策略、脚本列表、使用规则。修改/扩展系统本身的开发约定见 `CLAUDE.md`。
-
-Module-specific instructions are in each subdirectory's `.md` file. Only load what's needed for the current task.
 
 ## When to Activate
 
@@ -21,25 +19,27 @@ Activate this skill when the user:
 - Asks for weekly reviews or goal tracking
 - Needs to save or retrieve bookmarked resources
 - Wants to organize research or learning materials
-- Needs to add, read, or manage academic papers
-- Wants to transcribe podcast episodes
-- Needs to record, import, or analyze investment trades
+- Wants to add a new external source (routes to appropriate skill)
 - Wants to extend the system or create new modules
 
-**Trigger phrases**: "write a post", "my voice", "content ideas", "weekly review", "save this", "my goals", "add paper", "read paper", "paper reading", "add source", "读一下这篇", "这篇文章", "transcribe podcast", "podcast transcript", "交易记录", "investment", "盈亏", "add trade", "import trades", "更新交易记录", "create module", "add module", "extend system", "识别这张图", "OCR", "读一下这张图"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "weekly review", "save this", "my goals", "add source", "create module", "add module", "extend system"
+
+**Not handled here** (dedicated skills):
+- Paper reading → `paper-reading` skill
+- Investment operations → `investment` skill
+- Podcast transcription → `podcast-transcribe` skill
 
 ## Module Overview
 
 ```
 digital-brain-of-me/
-├── sources/      → 外部输入（注册表 + 文件）
+├── sources/      → 外部输入注册表
 ├── identity/     → Voice, brand, values (READ FIRST for content)
 ├── content/      → Ideas, drafts, posts, calendar
 ├── knowledge/    → Bookmarks, research, learning, web-clippings
-├── papers/       → Academic paper reading and notes
-├── podcasts/     → Podcast transcription and notes
+│   └── papers/   → Paper reading notes (data only)
 ├── operations/   → Todos, goals, meetings, metrics
-├── investment/   → Trade journal, broker imports, P&L analysis
+├── investment/   → Trade journal + research (data only)
 └── scripts/      → Automation scripts
 ```
 
@@ -53,12 +53,8 @@ digital-brain-of-me/
 | "Save this bookmark" | Append to `knowledge/bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `operations/goals/goals.yaml` with progress |
-| "Add source" / URL / 文件 | Read `sources/SOURCES.md` |
-| "Read paper" / "读一下这篇" / "Show unread papers" | Read `papers/PAPERS.md` |
-| "Transcribe podcast" | Read `podcasts/PODCASTS.md` |
-| "Add trade" / "交易记录" / "更新交易记录" / "盈亏" | Read `investment/INVESTMENT.md` for usage instructions |
-| 识别长图 / OCR 投研图片 / "读一下这张图" | Read `investment/INVESTMENT.md` → 按 OCR 长图流程处理 |
-| "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` → Guide through phases |
+| "Add source" / URL / 文件 | Read `sources/SOURCES.md`（判断类型后路由到对应 skill） |
+| "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` |
 | "Check module integration" | Run `module-toolkit/check_module_integration.py <module> <keyword>` |
 
 ## Module Loading Strategy
@@ -72,29 +68,21 @@ Use **progressive disclosure**:
    - `content/published/published.jsonl`
    - `knowledge/bookmarks/bookmarks.jsonl`
 
-3. **Load on Source / Paper / Podcast Tasks** (L2):
-   - `sources/SOURCES.md`（统一入口：注册、类型判断、路由）
-   - Paper 处理细节：`papers/PAPERS.md`
-   - Podcast 处理细节：`podcasts/PODCASTS.md`
+2. **Load on Source Registration** (L2):
+   - `sources/SOURCES.md`（统一入口：注册、类型判断、路由到对应 skill）
 
-4. **Load on Operations Tasks** (L2):
+3. **Load on Operations Tasks** (L2):
    - `operations/tasks/tasks.jsonl`
    - `operations/goals/goals.yaml`
    - `operations/metrics/weekly.jsonl`
 
-7. **Load on Investment Tasks** (L2):
-   - `investment/INVESTMENT.md`
-   - `investment/投资日志整理/交易日志汇总表.csv`
-   - `investment/投资日志整理/交易日志汇总表.schema.json`
-
-8. **Load on Module Creation / Integration Tasks** (L2):
+4. **Load on Module Creation / Integration Tasks** (L2):
    - `module-toolkit/MODULE-TOOLKIT.md`
-   - `module-toolkit/MODULE_CREATION_GUIDE.md` (if creating a new module manually)
+   - `module-toolkit/MODULE_CREATION_GUIDE.md`
 
-9. **Load on Demand** (L3):
+5. **Load on Demand** (L3):
    - Individual draft files
    - Research notes
-   - Paper notes (`paper-YYYYMMDD-XXX.md`)
    - Meeting records
 
 ## Automation Scripts
@@ -104,15 +92,6 @@ Use **progressive disclosure**:
 - `weekly_review.py` - Weekly productivity summary
 - `content_ideas.py` - Content suggestions from bookmarks
 - `idea_to_draft.py <idea-id>` - Expand idea into draft
-- `transcribe_podcast.py` - Transcribe podcasts from RSS or local audio
-
-`investment/投资日志整理/scripts/`:
-
-- `write_trade_journal.py` - Add, import, migrate, and validate trade records
-- `fetch_binance_trades.py` - Fetch trades from Binance API
-- `fetch_futu_trades.py` - Fetch trades from Futu OpenD API
-- `fetch_cms_trades.py` - Fetch trades from 招商证券 via Chrome MCP
-- `calc_pnl.py` - FIFO-based P&L calculation
 
 `module-toolkit/`:
 
@@ -124,7 +103,6 @@ Use **progressive disclosure**:
 2. **Append Only**: Never delete from JSONL files - mark as `"status": "archived"` instead
 3. **Update Timestamps**: Set `updated_at` field when modifying tracked data
 4. **Cross-Reference**: Knowledge informs content, papers inspire ideas
-5. **Narrative First**: For papers, extract narrative structure before diving into data details
 
 ## Gotchas
 
@@ -132,12 +110,12 @@ Use **progressive disclosure**:
 
 ## References
 
-- [Sources Module](./sources/SOURCES.md) — 外部输入统一管理（source → output）
-- [Identity Module](./identity/voice/principles.md)
-- [Content Module](./content/CONTENT.md)
-- [Knowledge Module](./knowledge/KNOWLEDGE.md)
-- [Papers Module](./papers/PAPERS.md)
-- [Podcasts Module](./podcasts/PODCASTS.md)
-- [Operations Module](./operations/OPERATIONS.md)
-- [Investment Module](./investment/INVESTMENT.md)
-- [Module Creation Guide](./module-toolkit/MODULE_CREATION_GUIDE.md)
+Data directories:
+- [Sources](./sources/SOURCES.md) — 外部输入注册表
+- [Identity](./identity/voice/principles.md)
+- [Content](./content/CONTENT.md)
+- [Knowledge](./knowledge/KNOWLEDGE.md)
+- [Papers](./knowledge/papers/PAPERS.md) — data only, workflow in `paper-reading` skill
+- [Operations](./operations/OPERATIONS.md)
+- [Investment](./investment/INVESTMENT.md) — data only, workflow in `investment` skill
+- [Module Toolkit](./module-toolkit/MODULE_CREATION_GUIDE.md)

@@ -13,18 +13,16 @@ sources/
 └── pod-XXX.ogg
 ```
 
-处理产物和输出分布在对应模块目录：
+处理产物和输出分布在对应目录：
 
 ```
-papers/                 ← paper 的处理产物 + 输出
+knowledge/papers/       ← paper 的处理产物 + 输出
 └── paper-XXX/
     ├── source.*        ← 处理产物（下载的 HTML/转换的文本）
     └── notes.md        ← 输出
-podcasts/               ← podcast 的处理产物 + 输出
-├── audio/              ← 处理产物（下载的音频）
-└── transcripts/        ← 输出
-    └── xxx.md
 ```
+
+Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪灏/`），由 `podcast-transcribe` skill 处理。
 
 ## Data Schema
 
@@ -38,7 +36,7 @@ podcasts/               ← podcast 的处理产物 + 输出
   "title": "标题",
   "tags": [],
   "added_at": "YYYY-MM-DD",
-  "output": "papers/{id}/notes.md | podcasts/transcripts/xxx.md"
+  "output": "knowledge/papers/{id}/notes.md | investment/洪灏/xxx.md"
 }
 ```
 
@@ -89,8 +87,8 @@ podcasts/               ← podcast 的处理产物 + 输出
 
 根据 type 路由到对应的处理流程：
 
-- **paper** → 读 `papers/PAPERS.md`，按 Phase 0 → Phase 1 → Phase 2 执行
-- **podcast** → 运行 `scripts/transcribe_podcast.py` 或按 `podcasts/PODCASTS.md` 手动处理
+- **paper** → 读 `knowledge/papers/PAPERS.md`，按 Phase 0 → Phase 1 → Phase 2 执行
+- **podcast** → 使用 `podcast-transcribe` skill（运行 `.claude/skills/podcast-transcribe/transcribe_podcast.py --output-dir <目标目录>`）
 
 **Step 4: 更新 output**
 
@@ -119,25 +117,21 @@ with open('sources/sources.jsonl') as f:
             status = 'done' if e.get('output') else 'pending'
             print(f'[{status}] {e[\"id\"]}  {e[\"title\"][:50]}')
 "
-
-# 搜索内容（在 output 文件中 grep）
-grep -r "关键词" papers/*/notes.md podcasts/transcripts/
 ```
 
 ## Integration with Other Modules
 
 | 模块 | 关系 |
 |------|------|
-| `papers/` | paper 类型的处理流程和输出目录，详见 `papers/PAPERS.md` |
-| `podcasts/` | podcast 类型的处理流程和输出目录，详见 `podcasts/PODCASTS.md` |
+| `knowledge/papers/` | paper 类型的输出目录，详见 `knowledge/papers/PAPERS.md` |
 | `knowledge/bookmarks/` | 纯链接收藏，不经过处理流程，独立管理 |
 | `content/ideas/` | 阅读笔记和转录文本可以启发内容创意 |
-| `scripts/` | `transcribe_podcast.py` 自动完成 podcast 的注册+转录+更新 output |
+| `podcast-transcribe` skill | 独立 skill，完成 podcast 的转录+注册+更新 output |
 
 ## 设计原则
 
 1. **输入统一**：无论 URL 还是文件，都是 source，注册在同一个 jsonl
 2. **处理临时**：中间产物不进 jsonl，处理参数写进 output 的 .md header
 3. **输出统一**：所有类型的最终产物都是 .md 文件
-4. **按约定组织**：文件位置可从 ID 推导，减少需要显式记录的路径
+4. **输出归属内容**：podcast 转录产物放到内容所属目录（如 `investment/洪灏/`），而非统一的转录目录
 5. **Bookmark 不属于 sources**：没有处理流程的纯链接收藏，独立管理在 `knowledge/bookmarks/bookmarks.jsonl`

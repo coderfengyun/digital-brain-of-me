@@ -42,7 +42,7 @@
 }
 ```
 
-### Sources (unified: papers, podcasts)
+### Sources (papers, podcasts)
 
 External inputs that go through a processing pipeline live in `sources/sources.jsonl`. All types share the same schema — source (input) → processing → output (.md).
 
@@ -54,13 +54,15 @@ External inputs that go through a processing pipeline live in `sources/sources.j
   "title": "Title",
   "tags": [],
   "added_at": "YYYY-MM-DD",
-  "output": "papers/paper-XXX/notes.md"
+  "output": "knowledge/papers/paper-XXX/notes.md"
 }
 ```
 
 - `source` — URL or local file path in `sources/` directory (file inputs use `sources/{id}.ext`)
 - `output` empty = 待处理, filled = 已完成
 - Processing artifacts (downloaded HTML, audio files) live in conventional locations but are NOT tracked in sources.jsonl
+
+Note: Podcast transcription is handled by the standalone `podcast-transcribe` skill, which writes to sources.jsonl for tracking.
 
 ### Bookmarks
 
@@ -124,13 +126,14 @@ Most commonly missed integration files:
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: L1 路由（`.claude/skills/digital-brain/skill.md`）→ L2 模块指令（各模块 README.md）→ L3 数据文件
-2. **Append-Only**: Never delete, always add (mark as archived if needed)
-3. **Cross-Reference**: Link related data across modules（flat-file relational model）
-4. **Voice-First**: Identity always loaded before content generation
-5. **Module Separation**: 每个模块独立管理自己的操作细节，上层只做路由
-6. **Flat Routing**: skill.md 路由表的 Action 列只写 `Read <模块入口文件>`，不展开处理步骤；每个请求直接指向最终处理它的模块，避免中间跳转
-7. **Complete Integration**: New modules require updating all system files (use guide and checker)
+1. **Progressive Disclosure**: Skill description（触发匹配）→ skill.md（操作指令）→ 数据文件。简单模块（content, knowledge, operations）由 `digital-brain` skill 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
+2. **Data/Skill Separation**: 数据目录（`knowledge/papers/`, `investment/`, `sources/`）只存数据 + schema 文档；工作流指令和脚本在 `.claude/skills/` 下对应目录
+3. **Append-Only**: Never delete, always add (mark as archived if needed)
+4. **Cross-Reference**: Link related data across modules（flat-file relational model）
+5. **Voice-First**: Identity always loaded before content generation
+6. **Module Separation**: 每个模块独立管理自己的操作细节，上层只做路由
+7. **Flat Routing**: skill.md 路由表的 Action 列只写 `Read <模块入口文件>`，不展开处理步骤；每个请求直接指向最终处理它的模块，避免中间跳转
+8. **Complete Integration**: New modules require updating all system files (use guide and checker)
 
 ## Error Prevention
 
