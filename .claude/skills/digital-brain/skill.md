@@ -65,10 +65,7 @@ digital-brain-of-me/
 
 Use **progressive disclosure**:
 
-1. **Always Load** (L1):
-   - `gotchas.md` (check known pitfalls before any operation)
-
-2. **Load on Content Creation Tasks** (L2):
+1. **Load on Content Creation Tasks** (L2):
    - `identity/brand/profile.yaml`
    - `identity/voice/style.md`
    - `content/ideas/ideas.jsonl`
@@ -131,7 +128,7 @@ Use **progressive disclosure**:
 
 ## Gotchas
 
-When an operation fails or produces unexpected results, append the lesson to [gotchas.md](gotchas.md).
+操作失败时，优先修复相关模块的设计/指令。如果是跨模块的、暂时无法通过设计消除的问题，临时记到 [gotchas.md](gotchas.md)，修复后删除。
 
 ## References
 

@@ -151,4 +151,4 @@ Most commonly missed integration files:
 - Search repo with `grep -r "filename"` before moving/renaming files, then update all references
 - Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`)
 - Maintain consistent tagging across modules for better discovery
-- **When a digital-brain operation fails or produces unexpected results**, append the lesson to `.claude/skills/digital-brain/gotchas.md`
+- **When a digital-brain operation fails or produces unexpected results**，优先修复相关模块的设计/指令；仅当问题跨模块且暂时无法通过设计消除时，临时记到 `.claude/skills/digital-brain/gotchas.md`，修复后删除

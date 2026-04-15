@@ -1,12 +1,17 @@
-# Investment - 投资交易记录与盈亏分析
+# Investment — 交易日志 + 投研内容
 
-个人投资交易的结构化管理：从各券商/交易所获取交易记录，汇总到统一的交易日志，计算盈亏统计。
+本模块管理两类内容：
+
+1. **交易日志** — 从各券商/交易所获取交易记录，汇总到统一日志，计算盈亏（`投资日志整理/`）
+2. **投研内容** — 长期跟踪的投研作者观点库，每人一个目录，以 `{作者名}.md` 索引文件为入口，汇聚该作者散落在多模块（investment、podcasts、papers、sources）的全部内容
 
 ## Structure
 
 ```
 investment/
-├── INVESTMENT.md                    # 本文件
+├── INVESTMENT.md                    # 本文件（模块入口）
+│
+│  ── 交易日志 ──
 ├── 投资日志整理/
 │   ├── 交易日志汇总表.csv           # 核心数据：全部现货交易记录
 │   ├── 交易日志汇总表.schema.json   # CSV Schema (Frictionless Table Schema)
@@ -21,10 +26,13 @@ investment/
 │   ├── DESIGN_盈亏统计系统设计.md    # 系统设计文档
 │   ├── 招商证券交易日志/             # 原始交易截图（招商证券）
 │   └── 招行黄金交易日志/             # 原始交易截图（招行黄金）
-├── 洪灏/                            # 投资分析文章
+│
+│  ── 投研内容 ──
+├── 洪灏/洪灏.md                     # 索引：宏观分析、地缘-能源-通胀、黄金/美元
+├── 卢麒元/卢麒元.md                  # 索引：资本论框架、货币体系、三三四原则
 ├── M_Medi/                          # M_Medi 市场结构分析
 ├── satoshi-cafe-analysis/           # BTC 技术分析
-└── 卢麒元/                          # 卢麒元投资笔记与资料
+└── 石油专题投资计划.md               # 基于卢麒元框架的石油投资策略
 ```
 
 ## Data Schema
@@ -51,7 +59,62 @@ investment/
 | 交易平台 | enum | `币安` / `富途` / `招行` / `招商证券` / `其他` |
 | 备注 | string | 可选 |
 
-## Usage
+## 投研内容
+
+每位长期跟踪的作者在 `investment/` 下有独立目录，以 `{作者名}.md` 为索引。索引文件汇聚该作者在整个 repo 中的全部内容（研究文章、OCR 转换、podcast 转录、原始发言等），是查找某位作者观点的唯一入口。
+
+**现有作者索引**：
+- [`洪灏/洪灏.md`](洪灏/洪灏.md) — 宏观分析、地缘-能源-通胀传导、黄金/美元结构性分析
+- [`卢麒元/卢麒元.md`](卢麒元/卢麒元.md) — 马克思资本论框架、货币体系、资产配置三三四原则
+
+**新建作者索引时**：
+1. 在 `investment/{作者名}/` 下创建 `{作者名}.md`
+2. 开头用 blockquote 简述身份、分析风格、核心关注领域
+3. 按内容类型分节（Podcast 转录 / 研究文章 / 投资研究 / 一手发言等），用相对路径链接到实际文件
+4. 附"关键观点速查"表格（主题 / 观点 / 出处）
+5. 更新本文件 Structure 目录树和上方作者列表
+
+**向已有作者添加新内容时**：
+1. 内容文件放到该作者目录下（或其他模块的对应位置）
+2. 更新该作者的索引文件，添加链接
+3. 如果是新文件类型或目录，同步更新本文件 Structure 目录树
+
+### OCR 长图识别（投研策略图片）
+
+部分投研作者（如洪灏）以长图形式发布研报。碰到这类长图，统一用 EasyOCR 识别为 Markdown 文本。
+
+**环境**：`~/ocr-env` 虚拟环境（已安装 easyocr）
+
+**流程**：
+
+```bash
+# 1. 激活环境并运行 OCR
+source ~/ocr-env/bin/activate && python3 -c "
+import easyocr
+reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+results = reader.readtext('<图片路径>', detail=0, paragraph=True)
+for p in results:
+    print(p)
+    print()
+"
+```
+
+```bash
+# 2. 将识别结果整理后保存为 Markdown
+# 命名规则：与原图同名 + _OCR 后缀
+# 例如：史诗级TACO.jpg → 史诗级TACO_OCR.md
+# 保存位置：与原图同目录
+```
+
+**整理要求**：
+- OCR 原始输出有断行和识别误差，需人工修正断句、补全缺字
+- 保留原文结构（标题、段落、列表）
+- 不添加额外分析或总结，忠于原文
+- 文件开头注明来源和日期
+
+---
+
+## 交易日志
 
 <a id="usage"></a>
 
@@ -151,39 +214,6 @@ python3 write_trade_journal.py import-cms /tmp/cms.csv
 **Step 4**：`python3 write_trade_journal.py validate`
 
 **注意**：import 自带去重；平台不可用时跳过并告知用户。
-
-### OCR 长图识别（投研策略图片）
-
-部分投研作者（如洪灏）以长图形式发布研报。碰到这类长图，统一用 EasyOCR 识别为 Markdown 文本。
-
-**环境**：`~/ocr-env` 虚拟环境（已安装 easyocr）
-
-**流程**：
-
-```bash
-# 1. 激活环境并运行 OCR
-source ~/ocr-env/bin/activate && python3 -c "
-import easyocr
-reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
-results = reader.readtext('<图片路径>', detail=0, paragraph=True)
-for p in results:
-    print(p)
-    print()
-"
-```
-
-```bash
-# 2. 将识别结果整理后保存为 Markdown
-# 命名规则：与原图同名 + _OCR 后缀
-# 例如：史诗级TACO.jpg → 史诗级TACO_OCR.md
-# 保存位置：与原图同目录
-```
-
-**整理要求**：
-- OCR 原始输出有断行和识别误差，需人工修正断句、补全缺字
-- 保留原文结构（标题、段落、列表）
-- 不添加额外分析或总结，忠于原文
-- 文件开头注明来源和日期
 
 ### 校验数据
 
