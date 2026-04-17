@@ -159,3 +159,23 @@
 
 **M_Medi 03:25**
 > the move to 74k and the pullback it had is something i am still looking at myself, of course there are many indicators that show it as a big resistance, but our system works with with high accuracy and 74k is not accurate in our system so we are still looking and waiting for what happens now to have more context why 74k was so accurately respected by the market or market maker
+
+---
+
+## 2026年4月16日
+
+**IronMan_CH**
+> How to identify a Swing?
+
+**M_Medi**
+> sorry for the late answer
+> a swing is a move which created a local new high or new low
+> if a move did a new high
+> the start point of that move is the start of the swing
+
+**M_Medi**
+> A swing can only end once it has happened. you cannot predict perfectly when a swing will end, but once initial impulse has ended and the market retrace or goes side way that is when the swing is finished
+> at that point either you wait for continuation or reversal
+
+**M_Medi**
+> To say it an other way. when market structure changes
