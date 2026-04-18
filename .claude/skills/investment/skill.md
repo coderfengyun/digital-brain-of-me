@@ -20,7 +20,9 @@ All scripts live in `.claude/skills/investment/scripts/`:
 
 - `write_trade_journal.py` — 交易日志写入工具（添加/导入/迁移/校验）
 - `fetch_binance_trades.py` — 币安交易记录获取
+- `fetch_binance_balances.py` — 币安账户全部资产余额及 USD 估值
 - `fetch_futu_trades.py` — 富途交易记录获取
+- `fetch_futu_positions.py` — 富途账户持仓及资金概览
 - `fetch_cms_trades.py` — 招商证券交易记录获取（Chrome MCP）
 - `calc_pnl.py` — 盈亏计算（FIFO 匹配）
 
