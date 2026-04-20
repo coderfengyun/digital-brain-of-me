@@ -1,6 +1,6 @@
 ---
 name: digital-brain
-description: "Personal knowledge management system. Use when: user asks about bookmarks, tasks, goals, content ideas, weekly review, or any personal knowledge management task. Also trigger on Chinese phrases like 书签, 任务, 目标, 内容创意, 周报, 写一篇文章, 保存这个链接, 我的目标. Handles: content creation (with voice/identity), bookmarks, task tracking, goal management, weekly reviews, source registration/routing, and module creation. Note: paper reading, investment operations, and podcast transcription are handled by their own dedicated skills."
+description: "Personal knowledge management system. Use when: user asks about bookmarks, tasks, goals, content ideas, weekly review, or any personal knowledge management task. Also trigger on Chinese phrases like 书签, 任务, 目标, 内容创意, 周报, 写一篇文章, 保存这个链接, 我的目标. Handles: content creation (with voice/identity), bookmarks, task tracking, goal management, weekly reviews, and source registration/routing. Note: paper reading, investment operations, podcast transcription, and module creation are handled by their own dedicated skills."
 ---
 
 # Digital Brain
@@ -20,14 +20,13 @@ Activate this skill when the user:
 - Needs to save or retrieve bookmarked resources
 - Wants to organize research or learning materials
 - Wants to add a new external source (routes to appropriate skill)
-- Wants to extend the system or create new modules
-
-**Trigger phrases**: "write a post", "my voice", "content ideas", "weekly review", "save this", "my goals", "add source", "create module", "add module", "extend system"
+**Trigger phrases**: "write a post", "my voice", "content ideas", "weekly review", "save this", "my goals", "add source"
 
 **Not handled here** (dedicated skills):
 - Paper reading → `paper-reading` skill
 - Investment operations → `investment` skill
 - Podcast transcription → `podcast-transcribe` skill
+- Module creation / system extension → `module-toolkit` skill
 
 ## Module Overview
 
@@ -54,8 +53,8 @@ digital-brain-of-me/
 | "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `operations/goals/goals.yaml` with progress |
 | "Add source" / URL / 文件 | Read `sources/SOURCES.md`（判断类型后路由到对应 skill） |
-| "Create new module" | Read `module-toolkit/MODULE_CREATION_GUIDE.md` |
-| "Check module integration" | Run `module-toolkit/check_module_integration.py <module> <keyword>` |
+| "Create new module" | → `module-toolkit` skill |
+| "Check module integration" | → `module-toolkit` skill |
 
 ## Module Loading Strategy
 
@@ -76,11 +75,7 @@ Use **progressive disclosure**:
    - `operations/goals/goals.yaml`
    - `operations/metrics/weekly.jsonl`
 
-4. **Load on Module Creation / Integration Tasks** (L2):
-   - `module-toolkit/MODULE-TOOLKIT.md`
-   - `module-toolkit/MODULE_CREATION_GUIDE.md`
-
-5. **Load on Demand** (L3):
+4. **Load on Demand** (L3):
    - Individual draft files
    - Research notes
    - Meeting records
@@ -92,10 +87,6 @@ Use **progressive disclosure**:
 - `weekly_review.py` - Weekly productivity summary
 - `content_ideas.py` - Content suggestions from bookmarks
 - `idea_to_draft.py <idea-id>` - Expand idea into draft
-
-`module-toolkit/`:
-
-- `check_module_integration.py <module> <keyword>` - Verify module integration
 
 ## Usage Rules
 
@@ -118,4 +109,4 @@ Data directories:
 - [Papers](./knowledge/papers/PAPERS.md) — data only, workflow in `paper-reading` skill
 - [Operations](./operations/OPERATIONS.md)
 - [Investment](./investment/INVESTMENT.md) — data only, workflow in `investment` skill
-- [Module Toolkit](./module-toolkit/MODULE_CREATION_GUIDE.md)
+- [Module Toolkit](./module-toolkit/MODULE-TOOLKIT.md) — workflow in `module-toolkit` skill
