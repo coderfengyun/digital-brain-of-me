@@ -1,6 +1,6 @@
 ---
 name: investment
-description: "Investment trade journal, P&L calculation, broker imports, and research content management. Use when: user wants to add/import/update trade records, calculate profit/loss, fetch trades from brokers (Binance, Futu, CMS/招商证券), or manage investment research authors. Trigger on phrases like '交易记录', 'investment', '盈亏', 'add trade', 'import trades', '更新交易记录', 'P&L', '导入交易', '币安', '富途', '招商证券'. Use this skill even for partial matches like asking about specific assets (BTC, gold, oil) in a trading context. Note: image OCR is handled by the standalone 'ocr' skill."
+description: "Investment trade journal, P&L calculation, broker imports, and research content management. Use when: user wants to add/import/update trade records, calculate profit/loss, fetch trades from brokers (Binance, Futu, CMS/招商证券), or manage investment research authors. Trigger on phrases like '交易记录', 'investment', '盈亏', 'add trade', 'import trades', '更新交易记录', 'P&L', '导入交易', '币安', '富途', '招商证券'. Use this skill even for partial matches like asking about specific assets (BTC, gold, oil) in a trading context. Also trigger when user wants to download/save research articles or image posts from Weibo (微博) for tracked authors like 洪灏. Trigger on '下载微博', '洪灏最新', '研报', '微博研报'. Note: image OCR is handled by the standalone 'ocr' skill."
 ---
 
 # Investment
@@ -30,7 +30,7 @@ All scripts live in `.claude/skills/investment/scripts/`:
 
 ## 交易日志操作
 
-### 添加交易记录
+### 添加单条记录
 
 ```bash
 python .claude/skills/investment/scripts/write_trade_journal.py add \
@@ -38,112 +38,19 @@ python .claude/skills/investment/scripts/write_trade_journal.py add \
   --币种 USD --日期 2025-04-07 --交易平台 币安 --备注 "币安API精确数据"
 ```
 
-完整参数列表（`add --help`）：
-- `--品种`、`--操作`、`--价格`、`--数量`、`--金额`、`--币种`、`--日期` — 必填
-- `--交易平台` — 可选，注意**不是** `--平台`
-- `--日期精确度` — 可选，默认 `精确`
-- `--备注` — 可选
-
-### 从币安导入
-
-```bash
-# 1. 获取币安交易记录
-python .claude/skills/investment/scripts/fetch_binance_trades.py \
-  --start 2025-04-01 --end 2025-10-31 -o /tmp/binance_trades.csv
-
-# 2. 导入到交易日志
-python .claude/skills/investment/scripts/write_trade_journal.py import-binance /tmp/binance_trades.csv
-```
-
-### 从招商证券导入（Chrome MCP）
-
-需要 Chrome MCP 连接到已登录的招商证券网页交易页面。完整步骤：
-
-**前置条件**：
-- Chrome 以 `--remote-debugging-port=9222` 启动
-- Chrome MCP 已连接（`claude mcp list` 显示 ✓）
-- 浏览器已登录招商证券
-
-**历史成交页面 URL**（必须含 `/npctrade` 路径前缀）：
-```
-https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
-```
-
-**步骤**：
-
-```bash
-# Step 1: 使用 chrome-devtools navigate_page 导航到上述 URL（timeout: 60000）
-
-# Step 2: 用 fetch_cms_trades.py 生成提取数据的 JS
-python .claude/skills/investment/scripts/fetch_cms_trades.py js \
-  --start 2026-03-03 --end 2026-03-28
-
-# Step 3: 通过 chrome-devtools evaluate_script 执行该 JS，获取 JSON 结果
-
-# Step 4: 将 JSON 保存到文件并转为 CSV
-python .claude/skills/investment/scripts/fetch_cms_trades.py convert \
-  --json-file /tmp/cms_raw.json -o /tmp/cms_trades.csv
-
-# Step 5: 导入到交易日志
-python .claude/skills/investment/scripts/write_trade_journal.py import-cms /tmp/cms_trades.csv
-```
-
-> **注意**：如果数据量只有几条且已存在于日志中，可以跳过 Step 4-5，直接确认无新记录即可。
+必填：`--品种`、`--操作`、`--价格`、`--数量`、`--金额`、`--币种`、`--日期`。可选：`--交易平台`（注意不是 `--平台`）、`--日期精确度`、`--备注`。完整参数见 `add --help`。
 
 ### 批量更新交易记录
 
-当用户说"更新交易记录"时：
+当用户说"更新交易记录"时，按顺序拉取三个平台（币安 → 富途 → 招商证券）。详细步骤见 [`references/trade-import.md`](references/trade-import.md)。
 
-**Step 0**：用 `tail -1 investment/投资日志整理/交易日志汇总表.csv` 确定最后记录日期，次日作为起始日期。
+### 工具命令
 
-**Step 1：币安**（API）
-```bash
-# 不要用 --all（400+ 交易对会触发限速），指定近期活跃品种
-python3 .claude/skills/investment/scripts/fetch_binance_trades.py --start DATE --end TODAY \
-  --symbol BTCUSDT XRPUSDT ETHUSDT SOLUSDT ZBTUSDT -o /tmp/binance.csv
-python3 .claude/skills/investment/scripts/write_trade_journal.py import-binance /tmp/binance.csv
-```
-> 如果 import 因金额偏差 >1% 跳过记录（手续费导致），用 `add` 手动添加。
-
-**Step 2：富途**（需 FutuOpenD 运行，端口 11111；连接被拒绝则跳过）
-```bash
-python3 .claude/skills/investment/scripts/fetch_futu_trades.py --start DATE --end TODAY -o /tmp/futu.csv
-# 无 import-futu 子命令，有新记录时用 add 逐条添加
-```
-
-**Step 3：招商证券**（Chrome MCP，需浏览器已登录）
-```bash
-# 1. navigate_page → https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj (timeout: 60000)
-# 2. 生成+执行 JS
-python3 .claude/skills/investment/scripts/fetch_cms_trades.py js --start DATE --end TODAY
-# 3. evaluate_script 执行 JS，获取 JSON
-# 4. 有新记录则 convert + import-cms
-python3 .claude/skills/investment/scripts/fetch_cms_trades.py convert --json-file /tmp/cms_raw.json -o /tmp/cms.csv
-python3 .claude/skills/investment/scripts/write_trade_journal.py import-cms /tmp/cms.csv
-```
-> 页面"服务异常"或有错误弹窗 = 会话过期，提示用户重新登录。用 `take_snapshot` 确认。
-
-**Step 4**：`python3 .claude/skills/investment/scripts/write_trade_journal.py validate`
-
-**注意**：import 自带去重；平台不可用时跳过并告知用户。
-
-### 校验数据
-
-```bash
-python .claude/skills/investment/scripts/write_trade_journal.py validate
-```
-
-### 盈亏计算
-
-```bash
-python .claude/skills/investment/scripts/calc_pnl.py
-```
-
-### 运行测试
-
-```bash
-cd .claude/skills/investment/scripts && python3 -m pytest -v
-```
+| 操作 | 命令 |
+|------|------|
+| 校验数据 | `python3 .claude/skills/investment/scripts/write_trade_journal.py validate` |
+| 盈亏计算 | `python3 .claude/skills/investment/scripts/calc_pnl.py` |
+| 运行测试 | `cd .claude/skills/investment/scripts && python3 -m pytest -v` |
 
 ---
 
@@ -165,3 +72,64 @@ cd .claude/skills/investment/scripts && python3 -m pytest -v
 **向已有作者添加新内容时**：
 1. 内容文件放到该作者目录下
 2. 更新该作者的索引文件，添加链接
+
+### 获取微博研报（端到端 pipeline）
+
+当用户说"帮我获取一下XX最新研报"时，执行完整流程：下载 → OCR转录 → 生成结构化笔记。
+
+**前置知识**：微博图片带签名认证（ssig），外部 curl 无法下载。必须通过 Chrome DevTools MCP 的 `get_network_request` 从浏览器网络请求缓存中提取图片响应体。
+
+**常见作者微博主页**：
+- 洪灏：`https://weibo.com/u/7799274131`
+
+---
+
+#### Phase 1：下载文本和图片
+
+1. **导航到作者主页**：`navigate_page` → 作者微博主页 URL
+2. **找到目标帖**：
+   - 在"微博"tab（不是"文章"tab）的搜索框搜关键词
+   - 如果用户没指定具体文章，浏览最新帖子，选择长文分析类研报（跳过转发、短评）
+   - 点击进入目标帖
+3. **获取全文**：
+   - 长帖先点"展开"
+   - `take_snapshot` 获取正文
+4. **下载配图**（关键步骤，不能用 curl）：
+   - 点击任一配图 → 点"查看大图" → 让浏览器加载 `mw2000` 分辨率图片
+   - `list_network_requests(resourceTypes=["image"])` → 找 URL 含 `mw2000` 的请求 reqid
+   - 逐个 `get_network_request(reqid=xxx, responseFilePath=本地路径)` 保存
+   - 保存目录：`investment/{作者名}/{文章简短标题}/`
+5. **写 article.md**：在同一子目录创建，包含：
+   - 元信息 blockquote（来源、日期、链接）
+   - 正文
+   - 配图引用（`![image_N](image_N.jpg)`）
+
+#### Phase 2：OCR 图片转录
+
+对每张配图，使用 `ocr` skill 转录为纯文本：
+
+```bash
+source ~/ocr-env/bin/activate && python3 -c "
+import easyocr, sys
+reader = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+results = reader.readtext('IMAGE_PATH', paragraph=True)
+print('\n\n'.join([r[1] for r in results]))
+" > IMAGE_OCR_PATH
+```
+
+- 输出文件命名：`image_N_OCR.md`，与图片同目录
+- 人工校对 OCR 结果，修正识别错误
+- 将所有 OCR 文本按图片顺序合并，得到图片中的完整文字内容
+
+#### Phase 3：合成完整文本 + 生成笔记
+
+1. **合成研报全文**：将 article.md 正文 + 所有 OCR 转录文本合并为一份完整的研报文本
+2. **更新作者索引**：在 `investment/{作者名}/{作者名}.md` 中添加新文章链接
+3. **调用 paper-reading skill 生成笔记**：
+   - 为研报分配 ID（`paper-YYYYMMDD-XXX`）
+   - 将合成全文作为 source 存入 `knowledge/papers/paper-YYYYMMDD-XXX/source.md`
+   - 更新 `sources/sources.jsonl`
+   - 按 paper-reading skill 的三阶段流程（全局扫描 → 叙事提取 + 证据验证 → 批判思考）生成 `notes.md`
+   - 模板选择：洪灏的研报通常用 **Narrative**（叙事型，时间/事件驱动分析）
+
+> **注意**：如果用户只要求下载不需要笔记，执行到 Phase 1 即可。如果图片中没有文字内容（纯图表），Phase 2 可跳过。向用户确认是否需要完整 pipeline。
