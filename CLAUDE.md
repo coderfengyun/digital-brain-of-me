@@ -102,7 +102,7 @@ See `investment/投资日志整理/交易日志汇总表.schema.json` for CSV sc
 
 ## Module Creation
 
-When creating new modules, follow `module-toolkit/MODULE_CREATION_GUIDE.md`:
+When creating new modules, follow `.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md`:
 
 1. **Requirements Analysis** - Define data model, workflow, and tag system
 2. **Core Files Creation** - README, data.jsonl, scripts
@@ -115,7 +115,7 @@ When creating new modules, follow `module-toolkit/MODULE_CREATION_GUIDE.md`:
 
 After creating a module, ALWAYS run:
 ```bash
-python module-toolkit/check_module_integration.py <module_name> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
 Most commonly missed integration files:

@@ -32,7 +32,7 @@ digital-brain-of-me/
 │   ├── meetings/     # Meeting notes (JSONL)
 │   └── metrics/      # Weekly metrics (JSONL)
 ├── scripts/          # Automation tools
-└── module-toolkit/   # Module creation guide and scripts
+└── .claude/skills/module-toolkit/  # Module creation skill (scripts + guides)
 ```
 
 ## Quick Start
@@ -48,16 +48,16 @@ digital-brain-of-me/
 
 ## Extending the System
 
-See [module-toolkit/MODULE_CREATION_GUIDE.md](module-toolkit/MODULE_CREATION_GUIDE.md).
+See [MODULE_CREATION_GUIDE.md](.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md).
 
 ```bash
-python module-toolkit/check_module_integration.py <module_name> [keyword]
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]
 ```
 
 ## Learn More
 
 - [Original Digital Brain Skill](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/tree/main/examples/digital-brain-skill)
-- [Module Creation Guide](module-toolkit/MODULE_CREATION_GUIDE.md)
+- [Module Creation Guide](.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md)
 
 ## License
 

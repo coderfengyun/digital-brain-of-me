@@ -45,4 +45,4 @@ Saved web pages converted to Markdown for offline reading.
 
 ## Extending
 
-Want to add new knowledge types? Follow the [Module Creation Guide](../module-toolkit/MODULE_CREATION_GUIDE.md).
+Want to add new knowledge types? Follow the [Module Creation Guide](../.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md).

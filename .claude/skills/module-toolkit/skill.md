@@ -13,16 +13,28 @@ Digital Brain 系统的模块创建与集成工具包。负责新建模块、验
 - 用户要检查某个模块的集成完整性
 - 用户问如何创建模块、模块命名规范、集成要求等
 
+## Skill Structure
+
+```
+.claude/skills/module-toolkit/
+├── skill.md                              # This file
+├── scripts/
+│   ├── create_module.py                  # Automated module creator
+│   └── check_module_integration.py       # Integration checker
+└── references/
+    └── MODULE_CREATION_GUIDE.md          # Complete 5-phase creation guide
+```
+
 ## 核心工具
 
 ### 1. 自动创建模块
 
 ```bash
 # knowledge/ 子目录下创建（默认）
-python module-toolkit/create_module.py <module_name> <keyword>
+python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
 
 # 顶级目录创建
-python module-toolkit/create_module.py <module_name> <keyword> --top-level
+python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
 ```
 
 自动完成:
@@ -32,7 +44,7 @@ python module-toolkit/create_module.py <module_name> <keyword> --top-level
 ### 2. 检查集成完整性
 
 ```bash
-python module-toolkit/check_module_integration.py <module_name> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
 检查项:
@@ -54,7 +66,7 @@ python module-toolkit/check_module_integration.py <module_name> <keyword>
 
 ### 手动创建（高级）
 
-完整的 5 阶段流程见 `module-toolkit/MODULE_CREATION_GUIDE.md`:
+完整的 5 阶段流程见 `references/MODULE_CREATION_GUIDE.md`:
 1. 需求分析 — 数据模型、工作流、标签体系
 2. 核心文件 — `<MODULE>.md` + 可选 `.jsonl`
 3. 系统集成 — 更新 4 个系统文件
@@ -83,9 +95,15 @@ python module-toolkit/check_module_integration.py <module_name> <keyword>
 - 只说明如何使用模块（数据格式、使用方法、目录结构）
 - 不包含开发指南、系统架构等内容
 
+## Quick Reference
+
+| Task | Command |
+|------|---------|
+| Create module (auto) | `python .claude/skills/module-toolkit/scripts/create_module.py <name> <keyword>` |
+| Create module (manual) | Read `references/MODULE_CREATION_GUIDE.md` |
+| Check integration | `python .claude/skills/module-toolkit/scripts/check_module_integration.py <name> <keyword>` |
+
 ## 参考
 
-- 完整创建指南: `module-toolkit/MODULE_CREATION_GUIDE.md`
-- 创建脚本源码: `module-toolkit/create_module.py`
-- 检查脚本源码: `module-toolkit/check_module_integration.py`
+- 完整创建指南: `references/MODULE_CREATION_GUIDE.md`
 - 成功案例: `knowledge/papers/` 模块

@@ -3,11 +3,11 @@
 检查新模块是否完全集成到Digital Brain系统中
 
 Usage:
-    python scripts/check_module_integration.py <module_name> [keyword]
+    python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]
 
 Example:
-    python scripts/check_module_integration.py papers paper
-    python scripts/check_module_integration.py contacts contact
+    python .claude/skills/module-toolkit/scripts/check_module_integration.py papers paper
+    python .claude/skills/module-toolkit/scripts/check_module_integration.py contacts contact
 """
 
 import sys
@@ -15,7 +15,7 @@ from pathlib import Path
 from collections import defaultdict
 
 # Paths
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent.parent.parent
 
 
 def count_occurrences(filepath, keyword):
@@ -38,9 +38,9 @@ def check_file_exists(filepath):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python scripts/check_module_integration.py <module_name> [keyword]")
+        print("Usage: python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]")
         print("\nExample:")
-        print("  python scripts/check_module_integration.py papers paper")
+        print("  python .claude/skills/module-toolkit/scripts/check_module_integration.py papers paper")
         sys.exit(1)
 
     module_name = sys.argv[1]

@@ -109,4 +109,4 @@ Data directories:
 - [Papers](./knowledge/papers/PAPERS.md) — data only, workflow in `paper-reading` skill
 - [Operations](./operations/OPERATIONS.md)
 - [Investment](./investment/INVESTMENT.md) — data only, workflow in `investment` skill
-- [Module Toolkit](./module-toolkit/MODULE-TOOLKIT.md) — workflow in `module-toolkit` skill
+- Module Toolkit — workflow in `module-toolkit` skill (`.claude/skills/module-toolkit/`)

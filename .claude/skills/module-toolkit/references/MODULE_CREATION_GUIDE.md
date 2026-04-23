@@ -8,17 +8,17 @@
 
 ```bash
 # 默认: 在 knowledge/ 子目录下创建
-python module-toolkit/create_module.py <module_name> <keyword>
+python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
 
 # 例如:
-python module-toolkit/create_module.py tasks task
+python .claude/skills/module-toolkit/scripts/create_module.py tasks task
 # 创建: knowledge/tasks/TASKS.md
 
 # 顶级目录: 使用 --top-level 标志
-python module-toolkit/create_module.py <module_name> <keyword> --top-level
+python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
 
 # 例如:
-python module-toolkit/create_module.py projects project --top-level
+python .claude/skills/module-toolkit/scripts/create_module.py projects project --top-level
 # 创建: projects/PROJECTS.md
 ```
 
@@ -30,7 +30,7 @@ python module-toolkit/create_module.py projects project --top-level
 **后续步骤**:
 1. 编辑 `<MODULE>.md` 定义数据模型
 2. 如需要,创建 `<module>.jsonl`: `touch <module_path>/<module>.jsonl`
-3. 验证集成: `python module-toolkit/check_module_integration.py <module> <keyword>`
+3. 验证集成: `python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>`
 
 **选择目录的建议**:
 - 📁 **knowledge/** - 适合知识管理类模块 (bookmarks, research, learning)
@@ -55,7 +55,7 @@ python module-toolkit/create_module.py projects project --top-level
 
 **检查方法**:
 ```bash
-python module-toolkit/check_module_integration.py <module_name> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
 ---
@@ -89,7 +89,7 @@ knowledge/<module>/
 
 **⛔ 避免**:
 - 多个 README 类文件
-- 开发文档 (归属 module-toolkit/)
+- 开发文档 (归属 module-toolkit skill)
 - 超过2个文档文件
 
 **主文档标准结构** (100-150行):
@@ -155,7 +155,7 @@ for file in .claude/skills/digital-brain/skill.md CLAUDE.md README.md; do
 done
 
 # 运行自动检查
-python module-toolkit/check_module_integration.py <module> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 ---
@@ -184,7 +184,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 
 **集成检查**:
 ```bash
-python module-toolkit/check_module_integration.py <module> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 **期望结果**: ✅ 100% (5/5 files pass)
@@ -251,7 +251,7 @@ diff <(grep "^##" knowledge/papers/PAPERS.md) \
 
 ### 集成检查: ✅ 100%
 ```bash
-python module-toolkit/check_module_integration.py <module> <keyword>
+python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 
@@ -273,7 +273,7 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 
 ### 其他模块
 - **knowledge/** - 简洁的父模块设计
-- **module-toolkit/** - 工具模块模式
+- **module-toolkit skill** - 工具模块模式
 
 ---
 
@@ -285,4 +285,4 @@ python module-toolkit/check_module_integration.py <module> <keyword>
 - 改进脚本功能
 - 更新本指南
 
-**记录问题**: 在 module-toolkit/ 中记录遇到的问题和解决方案，帮助改进未来的模块创建过程。
+**记录问题**: 记录遇到的问题和解决方案，帮助改进未来的模块创建过程。
