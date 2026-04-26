@@ -23,6 +23,7 @@ digital-brain-of-me/
 │   ├── papers/       # Paper reading notes
 │   ├── research/     # Deep research notes (Markdown)
 │   └── learning/     # Courses, books, skills (YAML)
+├── weekly-review/    # 周记&月结归档（投资/学习/工作/生活回顾）
 ├── investment/       # Investment trade journal and P&L analysis
 │   ├── 投资日志整理/ # Trade records, scripts, schema
 │   └── *.md          # Investment research notes
@@ -39,10 +40,11 @@ digital-brain-of-me/
 
 1. **Set up identity**: Edit `identity/brand/profile.yaml` and `identity/voice/style.md`
 2. **Start capturing**: Add ideas, bookmarks, contacts via JSONL append or scripts
-3. **Use with Claude Code**: Say things like "add a content idea about X" or "weekly review"
+3. **Review past journals**: Browse `weekly-review/` for historical weekly reviews and reflections
+4. **Use with Claude Code**: Say things like "add a content idea about X" or "周记"
 
 详细的数据格式、脚本列表和使用指南见 [CLAUDE.md](CLAUDE.md)。
-各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`knowledge/papers/PAPERS.md`、`investment/INVESTMENT.md`）。
+各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`knowledge/papers/PAPERS.md`、`investment/INVESTMENT.md`、`weekly-review/WEEKLY-REVIEW.md`）。
 
 所有外部输入（论文等）统一通过 [sources/SOURCES.md](sources/SOURCES.md) 管理，遵循 **source → processing → output** 模型。播客转录由独立的 `podcast-transcribe` skill 处理，产出物归入对应内容目录。
 

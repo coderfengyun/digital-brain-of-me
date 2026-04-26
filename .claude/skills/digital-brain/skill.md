@@ -38,6 +38,7 @@ digital-brain-of-me/
 ├── knowledge/    → Bookmarks, research, learning, web-clippings
 │   └── papers/   → Paper reading notes (data only)
 ├── operations/   → Todos, goals, meetings, metrics
+├── weekly-review/ → 周记&月结归档
 ├── investment/   → Trade journal + research (data only)
 └── scripts/      → Automation scripts
 ```
@@ -48,7 +49,7 @@ digital-brain-of-me/
 |---------|--------|
 | "Write a post about X" | Read `identity/voice/style.md` |
 | "What should I create?" | Run `scripts/content_ideas.py` |
-| "Weekly review" | Run `scripts/weekly_review.py` → Present insights |
+| "Weekly review" / "周记" | Read `weekly-review/WEEKLY-REVIEW.md` |
 | "Save this bookmark" | Append to `knowledge/bookmarks/bookmarks.jsonl` |
 | "Add a task" | Append to `operations/tasks/tasks.jsonl` with priority |
 | "Track a goal" | Update `operations/goals/goals.yaml` with progress |
@@ -108,5 +109,6 @@ Data directories:
 - [Knowledge](./knowledge/KNOWLEDGE.md)
 - [Papers](./knowledge/papers/PAPERS.md) — data only, workflow in `paper-reading` skill
 - [Operations](./operations/OPERATIONS.md)
+- [Weekly Review](./weekly-review/WEEKLY-REVIEW.md) — 周记&月结归档
 - [Investment](./investment/INVESTMENT.md) — data only, workflow in `investment` skill
 - Module Toolkit — workflow in `module-toolkit` skill (`.claude/skills/module-toolkit/`)

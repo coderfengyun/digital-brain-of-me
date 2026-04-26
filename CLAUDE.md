@@ -96,6 +96,14 @@ Bookmarks don't have a processing pipeline, so they live separately in `knowledg
 }
 ```
 
+### Weekly Review
+
+周记为自由格式 Markdown 文件，存放在 `weekly-review/` 目录下。
+
+- 文件命名：`YYYY-MM-DD~MM-DD.md`
+- 内容结构：投资、修行&内观、学习、接下来的调整
+- 详见 `weekly-review/WEEKLY-REVIEW.md`
+
 ### Investment Trades
 
 See `investment/投资日志整理/交易日志汇总表.schema.json` for CSV schema.
@@ -126,7 +134,7 @@ Most commonly missed integration files:
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: Skill description（触发匹配）→ skill.md（操作指令）→ 数据文件。简单模块（content, knowledge, operations）由 `digital-brain` skill 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
+1. **Progressive Disclosure**: Skill description（触发匹配）→ skill.md（操作指令）→ 数据文件。简单模块（content, knowledge, operations, weekly-review）由 `digital-brain` skill 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
 2. **Data/Skill Separation**: 数据目录（`knowledge/papers/`, `investment/`, `sources/`）只存数据 + schema 文档；工作流指令和脚本在 `.claude/skills/` 下对应目录
 3. **Append-Only**: Never delete, always add (mark as archived if needed)
 4. **Cross-Reference**: Link related data across modules（flat-file relational model）
@@ -152,6 +160,6 @@ Most commonly missed integration files:
 - Cross-reference related data
 - Preserve complete history
 - Search repo with `grep -r "filename"` before moving/renaming files, then update all references
-- Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`)
+- Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`); weekly-review 文件用 `YYYY-MM-DD~MM-DD.md` 命名
 - Maintain consistent tagging across modules for better discovery
 - **When a digital-brain operation fails or produces unexpected results**，优先修复相关模块的设计/指令；仅当问题跨模块且暂时无法通过设计消除时，临时记到 `.claude/skills/digital-brain/gotchas.md`，修复后删除
