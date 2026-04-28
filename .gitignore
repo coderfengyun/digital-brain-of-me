@@ -4,3 +4,4 @@ package-lock.json
 __pycache__/
 .env
 MEMORY.md
+.claude/.auto-commit-daemon.pid
