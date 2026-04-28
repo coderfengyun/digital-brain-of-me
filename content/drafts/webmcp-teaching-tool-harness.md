@@ -70,22 +70,26 @@ navigator.ai.tools.register({
 
 这与教具设计原则中"状态 = 数学模型 + 视觉呈现"一致。前端负责把 DOM 翻译成领域语言。
 
-#### 3.2 动作执行（带结构化返回）
+#### 3.2 动作执行回溯
 
-与 AI Teacher 的 function call 同名，但增加执行结果返回：
+AI Teacher 的教具动作不是 function call，而是发言文本中嵌入的 XML 标签——发出后没有返回值，前端静默执行。策略迭代 Agent 需要的能力是：**指定一个已执行的动作，回查它对页面的实际影响和是否报错。**
 
 ```json
 {
-  "tool": "coordinate_grid.placeMarker",
-  "params": {"x": 3, "y": 2, "type": "teacher"},
+  "tool": "coordinate_grid.inspectAction",
+  "params": { "action_index": 2, "turn_id": "ai-turn-003" },
   "response": {
-    "success": true,
-    "state_change": { "before": {"markers_count": 1}, "after": {"markers_count": 2} }
+    "action": "<place-marker x=\"3\" y=\"2\" type=\"teacher\" />",
+    "executed": true,
+    "error": null,
+    "state_diff": {
+      "markers": { "added": [{"position": [3, 2], "type": "teacher"}] }
+    }
   }
 }
 ```
 
-当前 function call 无返回值，只能靠预测。有了 MCP 层，每个动作都有明确的状态变更记录。
+这补上了当前缺失的一环：动作发出后，前端到底发生了什么——执行成功还是静默失败、状态变更是否符合预期。
 
 #### 3.3 断言检查
 
