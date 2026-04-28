@@ -54,8 +54,9 @@ navigator.ai.tools.register({
 
 #### 3.1 状态查询
 
-每个教具暴露 `getState()`，返回**领域模型状态**（不是 DOM dump）。以坐标网格为例：
+每个教具暴露 `getState()`，返回**领域模型状态**（不是 DOM dump）。支持两种查询方式：
 
+**查询当前状态：**
 ```json
 {
   "tool": "coordinate_grid.getState",
@@ -68,7 +69,18 @@ navigator.ai.tools.register({
 }
 ```
 
-这与教具设计原则中"状态 = 数学模型 + 视觉呈现"一致。前端负责把 DOM 翻译成领域语言。
+**查询某个时间点的状态**（如某个动作执行前后）：
+```json
+{
+  "tool": "coordinate_grid.getState",
+  "params": { "at": { "turn_id": "ai-turn-003", "moment": "after_action", "action_index": 2 } },
+  "response": { "...同上结构..." }
+}
+```
+
+这意味着前端需要保留状态快照历史。成本不高——教具状态本身很轻量，每次动作执行时记录一份 snapshot 即可。
+
+状态结构与教具设计原则中"状态 = 数学模型 + 视觉呈现"一致。前端负责把 DOM 翻译成领域语言。
 
 #### 3.2 动作执行回溯
 
