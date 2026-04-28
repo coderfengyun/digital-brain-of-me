@@ -38,7 +38,7 @@ navigator.ai.tools.register({
 
 "策略"指 Prompt 中的教学行为规则。理想迭代闭环：策略定义 → 执行 → 效果观测 → 信号判定 → 修改。**断在"效果观测"和"信号判定"两个环节。**
 
-**观测断裂：** AI Teacher 调用 `showGrid()` → `highlightColumn(3)` → `placeMarker(3, 2)`，效果全在前端页面上。但策略迭代 Agent 只能看到 function call 参数，**看不到前端实际渲染了什么**——网格是否出现、highlight 是否生效、学生看到了什么。
+**观测断裂：** AI Teacher 的教具操作是嵌入在发言文本中的 XML 标签，如 `<show-grid />` → `<highlight-column index="3" />` → `<place-marker x="3" y="2" />`。这些标签由前端静默解析执行，没有返回值。效果全在前端页面上，但策略迭代 Agent 只能看到 AI 的发言文本，**看不到前端实际渲染了什么**——网格是否出现、highlight 是否生效、标签是否被正确执行。
 
 这与教具设计中的核心矛盾一致：AI Teacher 基于**预测状态**决策，但预测和真实状态可能有偏差，而策略迭代 Agent 连预测状态都看不到。
 
@@ -50,7 +50,7 @@ navigator.ai.tools.register({
 
 ## 三、方案：Teaching Tool MCP
 
-让教具前端主动暴露三类 tool：**状态查询**、**动作执行（带返回值）**、**断言检查**。
+让教具前端主动暴露三类 tool：**状态查询**、**动作执行回溯**、**断言检查**。
 
 #### 3.1 状态查询
 
