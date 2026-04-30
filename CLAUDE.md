@@ -14,7 +14,23 @@
 
 # Digital Brain - Development Guide
 
-> **本文件定位**：开发/扩展 digital-brain 系统时的约定——文件格式、数据 schema、模块创建流程、设计原则。使用 digital-brain 的操作手册（路由表、加载策略、脚本列表）见 `.claude/skills/digital-brain/skill.md`。
+> **本文件定位**：digital-brain 系统的操作指南和开发约定——模块导航、文件格式、数据 schema、模块创建流程、设计原则。
+
+## Module Navigation
+
+用户请求涉及数据操作时，直接读取对应模块入口文件了解格式和操作方式：
+
+| 请求类型 | 入口文件 |
+|---------|---------|
+| 内容创作（写文章、post） | 先读 `identity/voice/style.md`，再看 `content/CONTENT.md` |
+| 内容创意 | 运行 `scripts/content_ideas.py` 或读 `content/ideas/ideas.jsonl` |
+| 书签/链接保存 | `knowledge/KNOWLEDGE.md` |
+| 任务管理 | `operations/OPERATIONS.md` |
+| 目标跟踪 | `operations/goals/goals.yaml` |
+| 周记/周报 | `weekly-review/WEEKLY-REVIEW.md` |
+| 添加外部来源（论文/播客） | `sources/SOURCES.md`（注册后路由到对应 skill） |
+
+**关键规则**：内容创作类任务必须先读 `identity/voice/style.md` 再动笔。
 
 ## File Conventions
 
@@ -116,7 +132,7 @@ When creating new modules, follow `.claude/skills/module-toolkit/references/MODU
 2. **Core Files Creation** - README, data.jsonl, scripts
 3. **Documentation** - Templates, examples, quick start
 4. **System Integration** - Update system files:
-   - `.claude/skills/digital-brain/skill.md`, CLAUDE.md, README.md
+   - CLAUDE.md (Module Navigation 表 + Data Entry Schemas), README.md
    - knowledge/KNOWLEDGE.md
 5. **Cross-Module Integration** - Define data flows and relationships
 6. **Quality Assurance** - Test and verify with check script
@@ -126,22 +142,18 @@ After creating a module, ALWAYS run:
 python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
-Most commonly missed integration files:
-1. `.claude/skills/digital-brain/skill.md`
-2. Multiple sections in CLAUDE.md
-
 ## Context Engineering Principles
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: Skill description（触发匹配）→ skill.md（操作指令）→ 数据文件。简单模块（content, knowledge, operations, weekly-review）由 `digital-brain` skill 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
-2. **Data/Skill Separation**: 数据目录（`knowledge/papers/`, `investment/`, `sources/`）只存数据 + schema 文档；工作流指令和脚本在 `.claude/skills/` 下对应目录
+1. **Progressive Disclosure**: CLAUDE.md（路由 + 约定）→ 模块入口 README → 数据文件。简单模块（content, knowledge, operations, weekly-review）由 CLAUDE.md Module Navigation 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
+2. **Data/Skill Separation**: 数据目录（`knowledge/papers/`, `investment/`, `sources/`）只存数据 + schema 文档；复杂工作流的指令和脚本在 `.claude/skills/` 下对应目录
 3. **Append-Only**: Never delete, always add (mark as archived if needed)
 4. **Cross-Reference**: Link related data across modules（flat-file relational model）
 5. **Voice-First**: Identity always loaded before content generation
-6. **Module Separation**: 每个模块独立管理自己的操作细节，上层只做路由
-7. **Flat Routing**: skill.md 路由表的 Action 列只写 `Read <模块入口文件>`，不展开处理步骤；每个请求直接指向最终处理它的模块，避免中间跳转
-8. **Complete Integration**: New modules require updating all system files (use guide and checker)
+6. **Module Separation**: 每个模块独立管理自己的操作细节，CLAUDE.md 只做路由索引
+7. **Flat Routing**: 路由表的 Action 列只指向模块入口文件，不展开处理步骤；每个请求直接指向最终处理它的模块，避免中间跳转
+8. **Complete Integration**: New modules require updating CLAUDE.md and relevant system files (use guide and checker)
 
 ## Error Prevention
 
@@ -162,4 +174,4 @@ Most commonly missed integration files:
 - Search repo with `grep -r "filename"` before moving/renaming files, then update all references
 - Generate unique IDs for new entries (format: `type-XXX`, e.g., `idea-001`, `paper-YYYYMMDD-XXX`); weekly-review 文件用 `YYYY-MM-DD~MM-DD.md` 命名
 - Maintain consistent tagging across modules for better discovery
-- **When a digital-brain operation fails or produces unexpected results**，优先修复相关模块的设计/指令；仅当问题跨模块且暂时无法通过设计消除时，临时记到 `.claude/skills/digital-brain/gotchas.md`，修复后删除
+- **When a digital-brain operation fails or produces unexpected results**，优先修复相关模块的设计/指令
