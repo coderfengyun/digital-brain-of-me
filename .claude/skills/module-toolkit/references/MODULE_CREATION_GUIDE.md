@@ -120,37 +120,32 @@ Cross-module relationships
 
 ### 阶段三: 系统集成 ⭐ (1-2小时)
 
-**必须更新 5 个文件**:
+**必须更新 3 个文件**:
 
-#### 核心文档 (3个)
+#### 核心文档 (2个)
 
-1. **.claude/skills/digital-brain/skill.md**
-   - 添加触发短语示例
-   - 添加操作流程说明
-   - 更新模块列表
-
-2. **CLAUDE.md**
-   - 添加快速参考表
+1. **CLAUDE.md**
+   - Module Navigation 表添加新模块入口
+   - Data Entry Schemas 添加数据格式（如有 JSONL）
    - 添加自动化脚本列表
 
-3. **README.md**
+2. **README.md**
    - 更新目录结构图
    - 添加脚本列表
 
 #### 模块文档 (1个)
 
-4. **knowledge/KNOWLEDGE.md** (或对应父模块)
+3. **knowledge/KNOWLEDGE.md** (或对应父模块)
    - 添加新模块说明
    - 更新扩展指南
 
 **⚠️ 最容易遗漏**:
-- `.claude/skills/digital-brain/skill.md` 的多个位置
-- CLAUDE.md 的多个位置
+- CLAUDE.md 的多个位置（Module Navigation + Schemas）
 
 **验证命令**:
 ```bash
 # 检查每个文件的引用次数
-for file in .claude/skills/digital-brain/skill.md CLAUDE.md README.md; do
+for file in CLAUDE.md README.md; do
   echo "$file: $(grep -c '<keyword>' $file)"
 done
 
@@ -187,18 +182,19 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
-**期望结果**: ✅ 100% (5/5 files pass)
+**期望结果**: ✅ 100% (all files pass)
 
 ---
 
 ## 🔍 最容易遗漏的检查项
 
-### 1. AI Skill 文件 (⭐⭐⭐ 最重要)
-- `.claude/skills/digital-brain/skill.md`
+### 1. CLAUDE.md 多个位置 (⭐⭐⭐ 最重要)
+- Module Navigation 表
+- Data Entry Schemas（如有新数据格式）
 
-### 2. 多个位置的引用
-- CLAUDE.md 的多个部分
-- README.md 的不同区块
+### 2. README.md 的不同区块
+- 目录结构图
+- 脚本列表
 
 ### 3. 命名规范
 - 主文档使用大写: `<MODULE>.md`

@@ -98,25 +98,6 @@ Add links to additional documentation if needed.
     return template
 
 
-def update_skill_md(module_name, keyword):
-    """Update .claude/skills/digital-brain/skill.md with new module references"""
-    skill_path = ROOT / ".claude" / "skills" / "digital-brain" / "skill.md"
-    content = skill_path.read_text(encoding='utf-8')
-
-    # Add to trigger phrases (line ~28)
-    trigger_pattern = r'(\*\*Trigger phrases\*\*:.*?)"'
-    replacement = r'\1, "add ' + keyword + r'", "search ' + keyword + r's"'
-    content = re.sub(trigger_pattern, replacement, content, count=1)
-
-    # Add to module overview (after operations module, line ~68)
-    module_section = f"""├── knowledge/    → Bookmarks, research, learning, {module_name}"""
-    content = content.replace(
-        "├── knowledge/    → Bookmarks, research, learning",
-        module_section
-    )
-
-    skill_path.write_text(content, encoding='utf-8')
-    return True
 
 
 def update_agent_md(module_name, keyword):
@@ -170,23 +151,6 @@ def update_knowledge_md(module_name, keyword):
     return True
 
 
-def update_claude_skill_md(module_name, keyword):
-    """Update .claude/skills/digital-brain/skill.md"""
-    skill_path = ROOT / ".claude" / "skills" / "digital-brain" / "skill.md"
-    content = skill_path.read_text(encoding='utf-8')
-
-    # Add to capabilities list (line ~10)
-    knowledge_line = "3. **Knowledge** - Bookmarks, research, and learning materials"
-    new_line = f"3. **Knowledge** - Bookmarks, research, learning materials, and {module_name}"
-    content = content.replace(knowledge_line, new_line)
-
-    # Add to commands list (around line ~24)
-    commands_addition = f"- Add and manage {keyword}s\n"
-    pattern = r'(- Add and read academic papers with narrative-driven approach)'
-    content = re.sub(pattern, r'\1\n' + commands_addition.rstrip(), content, count=1)
-
-    skill_path.write_text(content, encoding='utf-8')
-    return True
 
 
 def create_module(module_name, keyword, top_level=False):
@@ -222,7 +186,6 @@ def create_module(module_name, keyword, top_level=False):
     print("\n🔗 Integrating into system...")
 
     files_to_update = [
-        (".claude/skills/digital-brain/skill.md", lambda m, k: update_skill_md(m, k)),
         ("CLAUDE.md", lambda m, k: update_agent_md(m, k)),
         ("README.md", lambda m, k: update_readme_md(m, k)),
         ("knowledge/KNOWLEDGE.md", lambda m, k: update_knowledge_md(m, k)),

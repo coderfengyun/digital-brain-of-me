@@ -39,7 +39,7 @@ python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <key
 
 自动完成:
 - 创建 `<MODULE>.md` 模板文档
-- 更新 4 个系统集成文件（skill.md, CLAUDE.md, README.md, KNOWLEDGE.md）
+- 更新 3 个系统集成文件（CLAUDE.md, README.md, KNOWLEDGE.md）
 
 ### 2. 检查集成完整性
 
@@ -48,7 +48,7 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 ```
 
 检查项:
-- 4 个系统文档中是否有足够的关键词引用
+- 3 个系统文档中是否有足够的关键词引用
 - 模块主文档和数据文件是否存在
 - 脚本文件是否存在
 
@@ -86,10 +86,9 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 
 ### 集成要求
 每个模块必须在以下文件中有引用:
-1. `.claude/skills/digital-brain/skill.md` (≥3 次)
-2. `CLAUDE.md` (≥3 次)
-3. `README.md` (≥3 次)
-4. `knowledge/KNOWLEDGE.md` (≥2 次)
+1. `CLAUDE.md` (≥3 次, 包含 Module Navigation 表)
+2. `README.md` (≥3 次)
+3. `knowledge/KNOWLEDGE.md` (≥2 次)
 
 ### 入口文件职责
 - 只说明如何使用模块（数据格式、使用方法、目录结构）

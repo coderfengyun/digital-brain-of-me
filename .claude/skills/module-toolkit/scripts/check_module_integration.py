@@ -55,7 +55,6 @@ def main():
     # 定义需要检查的文件和最低出现次数
     files_to_check = {
         "系统核心文档": {
-            ".claude/skills/digital-brain/skill.md": 3,
             "CLAUDE.md": 3,
             "README.md": 3,
         },
