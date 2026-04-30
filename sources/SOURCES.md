@@ -149,7 +149,7 @@ with open('sources/sources.jsonl') as f:
 ## 设计原则
 
 1. **输入统一**：无论 URL 还是文件，都是 source，注册在同一个 jsonl
-2. **处理类型不等于内容归属**：`paper` 表示长文本阅读流程，不表示输出到 `knowledge/papers/`
+2. **处理类型不等于内容归属**：`paper` 表示长文本阅读流程，不表示某个存储目录
 3. **输出统一**：所有类型的最终产物都是 .md 文件
 4. **输出归属语境**：最终产物放到未来最可能被调用的领域目录
 5. **Bookmark 不属于 sources**：没有处理流程的纯链接收藏，独立管理在 `knowledge/bookmarks/bookmarks.jsonl`

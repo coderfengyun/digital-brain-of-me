@@ -34,7 +34,7 @@ python .claude/skills/module-toolkit/scripts/create_module.py projects project -
 
 **选择目录的建议**:
 - 📁 **knowledge/** - 适合知识管理类模块 (bookmarks, research, learning)
-- 📁 **顶级目录** - 适合独立功能模块 (operations, network, identity, content, papers, investment)
+- 📁 **顶级目录** - 适合独立功能模块 (operations, network, identity, content, investment)
 
 ---
 
@@ -44,7 +44,7 @@ python .claude/skills/module-toolkit/scripts/create_module.py projects project -
 
 ```
 ✅ 正确: <MODULE>.md  (模块名全大写 + .md)
-   示例: PAPERS.md, KNOWLEDGE.md, MODULE-TOOLKIT.md
+   示例: AI.md, KNOWLEDGE.md, MODULE-TOOLKIT.md
 
 ❌ 错误: README.md, readme.md, Papers.md, papers.md
 ```
@@ -234,7 +234,7 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 ### 2. 对比现有模块
 ```bash
 # 对比文档结构
-diff <(grep "^##" knowledge/papers/PAPERS.md) \
+diff <(grep "^##" knowledge/ai/AI.md) \
      <(grep "^##" knowledge/KNOWLEDGE.md)
 ```
 
@@ -255,11 +255,11 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 
 ## 📚 参考资料
 
-### 成功案例: Papers 模块
-- **位置**: `knowledge/papers/`
-- **特点**: 完整的两阶段读取流程
-- **文件数**: 20个 (12新增 + 8更新)
-- **集成度**: 100%
+### 成功案例: AI 模块
+- **位置**: `knowledge/ai/`
+- **特点**: 领域归属清晰，长文处理结果由 `sources/sources.jsonl` 索引
+- **文件数**: 按主题目录增长
+- **集成度**: 由 `sources` 账本和 `knowledge/KNOWLEDGE.md` 共同保证
 
 **可参考**:
 - 数据模型设计

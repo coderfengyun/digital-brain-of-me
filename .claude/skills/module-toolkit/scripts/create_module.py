@@ -121,14 +121,13 @@ def update_readme_md(module_name, keyword):
     readme_path = ROOT / "README.md"
     content = readme_path.read_text(encoding='utf-8')
 
-    # Update structure diagram (around line ~31)
-    papers_line = "├── papers/           # Academic paper reading"
-    new_structure = f"""├── papers/           # Academic paper reading
-│   └── paper-*.md    # Reading notes
-├── knowledge/{module_name}/    # {module_name.capitalize()} management
-│   └── {module_name.upper()}.md        # Module documentation"""
+    # Update structure diagram inside knowledge/
+    anchor_line = "│   ├── research/     # Temporary research incubation"
+    new_structure = f"""│   ├── {module_name}/    # {module_name.capitalize()} management
+│   │   └── {module_name.upper()}.md        # Module documentation
+{anchor_line}"""
 
-    content = content.replace(papers_line + "\n│   └── paper-*.md    # Reading notes", new_structure)
+    content = content.replace(anchor_line, new_structure)
 
     readme_path.write_text(content, encoding='utf-8')
     return True

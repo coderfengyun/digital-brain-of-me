@@ -39,7 +39,6 @@ Saved web pages converted to Markdown for offline reading.
 
 - **ai/** - AI、agent、context engineering、AI 产品和 developer tools。
 - **organizations/** - 组织管理、决策机制和协作方式。
-- **papers/** - Legacy reading archive. New `paper` outputs should go to domain directories; see [papers/PAPERS.md](papers/PAPERS.md).
 
 ## Related Top-Level Modules
 

@@ -54,7 +54,7 @@
 ## 💡 与我的 digital-brain 系统的关联
 
 回看自己的 `digital-brain` skill，可以识别出多种模式的组合运用：
-- **Tool Wrapper**: 各模块 README 充当按需加载的领域知识（如 PAPERS.md、INVESTMENT.md）
+- **Tool Wrapper**: 各模块入口文档充当按需加载的领域知识（如 AI.md、INVESTMENT.md）
 - **Generator**: Paper 阅读使用模板驱动（TEMPLATE-METHOD.md 等）
 - **Pipeline**: Paper 阅读流程的 Phase 0 → Phase 1 → Phase 2 就是带检查点的管道
 - **Inversion**: 尚未显式使用，但可以考虑在内容创作前加入结构化采访步骤

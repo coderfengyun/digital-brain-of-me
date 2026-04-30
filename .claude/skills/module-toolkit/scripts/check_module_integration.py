@@ -69,7 +69,7 @@ def main():
     module_upper = module_name.upper()  # papers -> PAPERS
 
     # 优先检查大写命名(新规范),降级到README.md(旧规范)
-    # 支持顶层模块(如papers/)和knowledge子模块(如knowledge/bookmarks/)
+    # 支持顶层模块(如investment/)和knowledge子模块(如knowledge/bookmarks/)
     main_doc_path = f"{module_name}/{module_upper}.md"
     data_file_path = f"{module_name}/{module_name}.jsonl"
 
@@ -163,7 +163,7 @@ def main():
         print("\n💡 建议:")
         print("   1. 查看 MODULE_CREATION_GUIDE.md 了解完整步骤")
         print("   2. 使用检查清单逐项完成")
-        print("   3. 参考 papers/ 作为完整示例")
+        print("   3. 参考 knowledge/ai/ 作为领域模块示例")
 
     print("="*70)
 

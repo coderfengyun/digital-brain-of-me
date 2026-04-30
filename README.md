@@ -22,7 +22,6 @@ digital-brain-of-me/
 │   ├── bookmarks/    # Saved links (JSONL)
 │   ├── ai/           # AI, agents, context engineering, developer tools
 │   ├── organizations/# Organization design, decision-making, collaboration
-│   ├── papers/       # Legacy reading archive; new notes go to domains
 │   ├── research/     # Temporary research incubation
 │   └── learning/     # Courses, books, skills (YAML)
 ├── weekly-review/    # 周记&月结归档（投资/学习/工作/生活回顾）

@@ -105,4 +105,4 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 ## 参考
 
 - 完整创建指南: `references/MODULE_CREATION_GUIDE.md`
-- 成功案例: `knowledge/papers/` 模块
+- 成功案例: `knowledge/ai/` 模块
