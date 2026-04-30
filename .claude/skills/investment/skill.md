@@ -127,9 +127,10 @@ print('\n\n'.join([r[1] for r in results]))
 2. **更新作者索引**：在 `investment/{作者名}/{作者名}.md` 中添加新文章链接
 3. **调用 paper-reading skill 生成笔记**：
    - 为研报分配 ID（`paper-YYYYMMDD-XXX`）
-   - 将合成全文作为 source 存入 `knowledge/papers/paper-YYYYMMDD-XXX/source.md`
+   - 将合成全文保存在 `investment/{作者名}/{文章简短标题}/article.md` 或 `source.md`
    - 更新 `sources/sources.jsonl`
-   - 按 paper-reading skill 的三阶段流程（全局扫描 → 叙事提取 + 证据验证 → 批判思考）生成 `notes.md`
+   - 按 paper-reading skill 的三阶段流程（全局扫描 → 叙事提取 + 证据验证 → 批判思考）在同一目录生成 `notes.md`
+   - `sources.jsonl` 的 `output` 指向 `investment/{作者名}/{文章简短标题}/notes.md`
    - 模板选择：洪灏的研报通常用 **Narrative**（叙事型，时间/事件驱动分析）
 
 > **注意**：如果用户只要求下载不需要笔记，执行到 Phase 1 即可。如果图片中没有文字内容（纯图表），Phase 2 可跳过。向用户确认是否需要完整 pipeline。

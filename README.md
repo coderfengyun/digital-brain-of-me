@@ -20,13 +20,15 @@ digital-brain-of-me/
 │   └── published/    # Published content log (JSONL)
 ├── knowledge/        # Learning and research
 │   ├── bookmarks/    # Saved links (JSONL)
-│   ├── papers/       # Paper reading notes
-│   ├── research/     # Deep research notes (Markdown)
+│   ├── ai/           # AI, agents, context engineering, developer tools
+│   ├── organizations/# Organization design, decision-making, collaboration
+│   ├── papers/       # Legacy reading archive; new notes go to domains
+│   ├── research/     # Temporary research incubation
 │   └── learning/     # Courses, books, skills (YAML)
 ├── weekly-review/    # 周记&月结归档（投资/学习/工作/生活回顾）
 ├── investment/       # Investment trade journal and P&L analysis
 │   ├── 投资日志整理/ # Trade records, scripts, schema
-│   └── *.md          # Investment research notes
+│   └── 作者/文章主题/ # Investment research by author/source
 ├── operations/       # Goals and productivity
 │   ├── goals/        # Yearly/quarterly/monthly goals (YAML)
 │   ├── tasks/        # Action items (JSONL)
@@ -44,9 +46,9 @@ digital-brain-of-me/
 4. **Use with Claude Code**: Say things like "add a content idea about X" or "周记"
 
 详细的数据格式、脚本列表和使用指南见 [CLAUDE.md](CLAUDE.md)。
-各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`knowledge/papers/PAPERS.md`、`investment/INVESTMENT.md`、`weekly-review/WEEKLY-REVIEW.md`）。
+各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`knowledge/KNOWLEDGE.md`、`investment/INVESTMENT.md`、`weekly-review/WEEKLY-REVIEW.md`）。
 
-所有外部输入（论文等）统一通过 [sources/SOURCES.md](sources/SOURCES.md) 管理，遵循 **source → processing → output** 模型。播客转录由独立的 `podcast-transcribe` skill 处理，产出物归入对应内容目录。
+所有外部输入（论文、文章、研报、播客等）统一通过 [sources/SOURCES.md](sources/SOURCES.md) 管理，遵循 **source → processing → domain output** 模型。`paper` 和 `podcast` 是处理类型，产出物归入对应领域目录。
 
 ## Extending the System
 

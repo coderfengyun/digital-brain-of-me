@@ -1,6 +1,8 @@
-# Sources — 外部输入统一管理
+# Sources — 外部输入来源账本
 
-所有需要处理的外部输入（论文、文章、播客、讲座录音等）统一注册在 `sources/sources.jsonl`，遵循 **source (输入) → processing (处理) → output (输出)** 模型。
+所有需要处理的外部输入（论文、文章、研报、播客、讲座录音等）统一注册在 `sources/sources.jsonl`，遵循 **source (输入) → processing (处理) → output (领域归属)** 模型。
+
+`sources/` 只负责记录来源和处理结果位置，不决定内容归属。最终产物应放在真实语境目录里，例如 `investment/洪灏/半导体超级周期/notes.md` 或 `knowledge/ai/autoharness/notes.md`。
 
 ## Structure
 
@@ -13,16 +15,15 @@ sources/
 └── pod-XXX.ogg
 ```
 
-处理产物和输出分布在对应目录：
+输出分布在对应领域目录：
 
 ```
-knowledge/papers/       ← paper 的处理产物 + 输出
-└── paper-XXX/
-    ├── source.*        ← 处理产物（下载的 HTML/转换的文本）
-    └── notes.md        ← 输出
+investment/作者/文章主题/      ← 投资研报、宏观、地缘、资产配置
+knowledge/ai/文章主题/         ← AI、agent、context engineering、AI 产品、developer tools、persona
+knowledge/organizations/主题/   ← 组织管理、决策机制、协作方式
 ```
 
-Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪灏/`），由 `podcast-transcribe` skill 处理。
+`paper` 和 `podcast` 都是处理类型，不是存储目录。处理完成后，`output` 指向最终领域目录中的 `.md` 文件。
 
 ## Data Schema
 
@@ -36,7 +37,7 @@ Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪�
   "title": "标题",
   "tags": [],
   "added_at": "YYYY-MM-DD",
-  "output": "knowledge/papers/{id}/notes.md | investment/洪灏/xxx.md"
+  "output": "investment/洪灏/文章主题/notes.md | knowledge/ai/文章主题/notes.md"
 }
 ```
 
@@ -45,7 +46,7 @@ Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪�
 | 字段 | 含义 | 规则 |
 |------|------|------|
 | `id` | 唯一标识 | `paper-YYYYMMDD-XXX` 或 `pod-YYYYMMDD-XXX`，序号从 001 起 |
-| `type` | 处理类型 | `paper`（阅读）或 `podcast`（转录） |
+| `type` | 处理类型 | `paper`（长文本阅读）或 `podcast`（转录） |
 | `source` | 输入来源 | URL 原样存；本地文件放 `sources/{id}.ext` |
 | `title` | 标题 | 必填 |
 | `tags` | 检索标签 | 可选，`[]` 表示无标签 |
@@ -55,7 +56,7 @@ Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪�
 ### 不在 jsonl 中记录的内容
 
 - 处理中间产物（下载的 HTML、转换的 WAV、音频文件等）
-- 处理参数（whisper 模型、语言、RSS feed URL 等）
+- 处理参数（模板、whisper 模型、语言、RSS feed URL 等）
 - 状态字段（由 `output` 是否为空推导）
 
 这些信息要么是临时的（处理完即无用），要么写在 output 的 .md header 中。
@@ -83,14 +84,28 @@ Podcast 转录产物直接输出到内容所属的目录（如 `investment/洪�
 {"id": "paper-20260413-001", "type": "paper", "source": "https://example.com/article", "title": "文章标题", "tags": [], "added_at": "2026-04-13", "output": ""}
 ```
 
-**Step 3: 处理**
+**Step 3: 判断输出归属**
+
+先判断材料未来最可能在哪个语境下被再次调用：
+
+| 内容类型 | 输出位置 |
+|---------|----------|
+| 投资、宏观、地缘、能源、货币、资产配置、研报 | `investment/{作者或机构}/{文章主题}/notes.md` |
+| AI、agent、context engineering、AI 产品、developer tools、persona | `knowledge/ai/{文章主题}/notes.md` |
+| 组织管理、决策机制、协作方式 | `knowledge/organizations/{主题}/notes.md` |
+| 课程、书籍、系统学习 | `knowledge/learning/` |
+| 尚未成熟的探索性主题 | `knowledge/research/`（临时缓冲，后续迁出） |
+
+投资类文章优先按作者/机构归档。无明确作者时使用机构名；确实无法识别时暂放 `investment/unknown/{文章主题}/`，后续补充来源信息。
+
+**Step 4: 处理**
 
 根据 type 路由到对应的处理流程：
 
-- **paper** → 读 `knowledge/papers/PAPERS.md`，按 Phase 0 → Phase 1 → Phase 2 执行
+- **paper** → 使用 `paper-reading` skill，按 Phase 0 → Phase 1 → Phase 2 → Phase 3 执行
 - **podcast** → 使用 `podcast-transcribe` skill（运行 `.claude/skills/podcast-transcribe/transcribe_podcast.py --output-dir <目标目录>`）
 
-**Step 4: 更新 output**
+**Step 5: 更新 output**
 
 处理完成后，将 output 路径写回 `sources.jsonl` 中对应条目。
 
@@ -123,7 +138,10 @@ with open('sources/sources.jsonl') as f:
 
 | 模块 | 关系 |
 |------|------|
-| `knowledge/papers/` | paper 类型的输出目录，详见 `knowledge/papers/PAPERS.md` |
+| `paper-reading` skill | paper 类型的处理流程；输出到领域目录 |
+| `investment/` | 投资、宏观、地缘、能源、研报的主要归属地 |
+| `knowledge/ai/` | AI、agent、context engineering、AI 产品与工具的归属地 |
+| `knowledge/organizations/` | 组织管理、决策机制、协作方式的归属地 |
 | `knowledge/bookmarks/` | 纯链接收藏，不经过处理流程，独立管理 |
 | `content/ideas/` | 阅读笔记和转录文本可以启发内容创意 |
 | `podcast-transcribe` skill | 独立 skill，完成 podcast 的转录+注册+更新 output |
@@ -131,7 +149,7 @@ with open('sources/sources.jsonl') as f:
 ## 设计原则
 
 1. **输入统一**：无论 URL 还是文件，都是 source，注册在同一个 jsonl
-2. **处理临时**：中间产物不进 jsonl，处理参数写进 output 的 .md header
+2. **处理类型不等于内容归属**：`paper` 表示长文本阅读流程，不表示输出到 `knowledge/papers/`
 3. **输出统一**：所有类型的最终产物都是 .md 文件
-4. **输出归属内容**：podcast 转录产物放到内容所属目录（如 `investment/洪灏/`），而非统一的转录目录
+4. **输出归属语境**：最终产物放到未来最可能被调用的领域目录
 5. **Bookmark 不属于 sources**：没有处理流程的纯链接收藏，独立管理在 `knowledge/bookmarks/bookmarks.jsonl`

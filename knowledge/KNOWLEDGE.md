@@ -1,6 +1,6 @@
 # Knowledge Module
 
-This module organizes bookmarks, research notes, and learning materials.
+This module organizes bookmarks, AI knowledge, organization notes, research notes, and learning materials.
 
 ## Structure
 
@@ -20,8 +20,14 @@ Save interesting links and resources in `bookmarks.jsonl`.
 }
 ```
 
+### ai/
+AI、agent、context engineering、AI 产品、developer tools、persona、认知模拟等内容。长文/论文通过 `paper-reading` skill 处理后，输出到对应主题目录。
+
+### organizations/
+组织管理、决策机制、协作方式、公司生产力等内容。与 AI 强相关但重点在 AI 机制的文章，优先放 `ai/`；重点在组织管理的文章放这里。
+
 ### research/
-Deep research notes on specific topics. Create separate markdown files for each research area.
+Deep research notes on specific topics. This is a temporary incubation area; mature topics should move to a stable domain like `ai/`, `organizations/`, or `investment/`.
 
 ### learning/
 Track courses, books, and skills you're developing in `courses.yaml`.
@@ -31,7 +37,9 @@ Saved web pages converted to Markdown for offline reading.
 
 ## Sub-Modules
 
-- **papers/** - Paper reading notes. See [papers/PAPERS.md](papers/PAPERS.md). Workflow in `paper-reading` skill.
+- **ai/** - AI、agent、context engineering、AI 产品和 developer tools。
+- **organizations/** - 组织管理、决策机制和协作方式。
+- **papers/** - Legacy reading archive. New `paper` outputs should go to domain directories; see [papers/PAPERS.md](papers/PAPERS.md).
 
 ## Related Top-Level Modules
 

@@ -10,8 +10,8 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 ## Data Location
 
 - 元数据注册：`sources/sources.jsonl`（type: `"paper"`）
-- 阅读笔记：`knowledge/papers/paper-YYYYMMDD-XXX/notes.md`
-- 源文件：`knowledge/papers/paper-YYYYMMDD-XXX/source.*`
+- 阅读笔记：输出到真实领域目录（如 `knowledge/ai/autoharness/notes.md`、`investment/洪灏/半导体超级周期/notes.md`）
+- 源文件：优先与笔记同目录保存为 `source.md`、`article.md`、`paper.html` 或 `source.*`
 - 模板文件：`.claude/skills/paper-reading/TEMPLATE-*.md`
 
 ## Paper Note Templates
@@ -32,6 +32,7 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 **Critical Rules**:
 - ALWAYS obtain source document locally before reading
 - ALWAYS read from local source, NOT from web fetch
+- ALWAYS decide the domain output path before saving notes
 - ALWAYS choose the appropriate template based on paper type
 - ALWAYS update `sources.jsonl` after each phase
 
@@ -39,16 +40,21 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 
 **Adding a new paper**:
 1. Generate ID: `paper-YYYYMMDD-XXX`（检查当日已有序号，递增）
-2. If source is a file: copy to `sources/{id}.ext`
-3. Append to `sources/sources.jsonl`:
+2. Decide output domain:
+   - 投资、宏观、地缘、能源、货币、资产配置、研报 → `investment/{作者或机构}/{文章主题}/notes.md`
+   - AI、agent、context engineering、AI 产品、developer tools、persona → `knowledge/ai/{文章主题}/notes.md`
+   - 组织管理、决策机制、协作方式 → `knowledge/organizations/{主题}/notes.md`
+   - 尚未成熟的探索性主题 → `knowledge/research/`（临时）
+3. If source is a file: copy to `sources/{id}.ext` or the domain folder if it belongs with the notes
+4. Append to `sources/sources.jsonl`:
    ```json
    {"id": "paper-20260413-001", "type": "paper", "source": "https://example.com/article", "title": "文章标题", "tags": [], "added_at": "2026-04-13", "output": ""}
    ```
 
 **Obtaining the source**:
-1. For arxiv papers: Download HTML to `knowledge/papers/paper-YYYYMMDD-XXX/paper.html`
-2. For web articles: Use Chrome MCP (navigate_page + take_snapshot) to save to `knowledge/papers/paper-YYYYMMDD-XXX/source.md`
-3. For provided documents: Save to `knowledge/papers/paper-YYYYMMDD-XXX/source.pdf` or `source.md`
+1. For arxiv papers: Download HTML to the chosen domain folder as `paper.html`
+2. For web articles: Use Chrome MCP (navigate_page + take_snapshot) to save to the chosen domain folder as `source.md` or `article.md`
+3. For provided documents: Save to `sources/{id}.ext` when it is an immutable original, or to the domain folder as `source.*` when it should travel with the notes
 
 Source document is saved by convention — no need to update sources.jsonl at this phase.
 
