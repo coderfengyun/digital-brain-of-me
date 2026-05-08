@@ -24,47 +24,6 @@ REPO_ROOT = Path(__file__).resolve().parents[4]  # .claude/skills/investment/eva
 SKILL_PATH = REPO_ROOT / ".claude" / "skills" / "investment" / "SKILL.md"
 EVALS_PATH = REPO_ROOT / ".claude" / "skills" / "investment" / "evals" / "evals.json"
 
-# 每个 eval 需要定义：哪个 commit 作为起始状态
-EVAL_FIXTURES = {
-    1: {
-        "base_commit": "8e71757",  # 04-18 已添加但 04-26 还没有
-        "checks": [
-            {
-                "name": "content_appended",
-                "type": "file_contains",
-                "file": "investment/卢麒元/微博VIP群发言.md",
-                "contains": "## 2026-04-26",
-            },
-            {
-                "name": "correct_order",
-                "type": "line_order",
-                "file": "investment/卢麒元/微博VIP群发言.md",
-                "first": "2026-04-26",
-                "second": "2026-04-18",
-            },
-            {
-                "name": "index_updated",
-                "type": "file_contains",
-                "file": "investment/卢麒元/卢麒元.md",
-                "contains": "04-26",
-            },
-            {
-                "name": "has_strong_dollar_insight",
-                "type": "file_contains",
-                "file": "investment/卢麒元/卢麒元.md",
-                "contains": "强美元",
-            },
-            {
-                "name": "no_duplicate_collapse",
-                "type": "count_max",
-                "file": "investment/卢麒元/卢麒元.md",
-                "pattern": "向心坍缩",
-                "max_count": 3,  # 原有2条 + 最多1条新增（如果措辞够新）
-            },
-        ],
-    }
-}
-
 
 def create_worktree(base_commit: str) -> str:
     """创建临时 worktree 并返回路径。"""
@@ -96,7 +55,7 @@ def cleanup_worktree(worktree_path: str):
 
 
 def run_claude(prompt: str, worktree_path: str) -> bool:
-    """用 claude -p --bare 在 worktree 中执行 prompt，返回是否成功。"""
+    """用 claude -p 在 worktree 中执行 prompt，返回是否成功。"""
     full_prompt = (
         f"你有一个 investment skill 在 .claude/skills/investment/SKILL.md，"
         f"请先读取它，然后按照其指令完成以下任务：\n\n{prompt}"
@@ -148,9 +107,8 @@ def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
     return False, "Unknown check type"
 
 
-def run_single_eval(eval_id: int, prompt: str) -> dict:
+def run_single_eval(fixture: dict, prompt: str) -> dict:
     """执行单次评测，返回结果。"""
-    fixture = EVAL_FIXTURES[eval_id]
     worktree_path = create_worktree(fixture["base_commit"])
 
     try:
@@ -192,8 +150,9 @@ def main():
     for eval_case in evals:
         eval_id = eval_case["id"]
         prompt = eval_case["prompt"]
+        fixture = eval_case.get("fixture")
 
-        if eval_id not in EVAL_FIXTURES:
+        if not fixture:
             print(f"⚠️  Eval {eval_id}: no fixture defined, skipping")
             continue
 
@@ -207,7 +166,7 @@ def main():
 
         with ThreadPoolExecutor(max_workers=args.runs) as executor:
             futures = {
-                executor.submit(run_single_eval, eval_id, prompt): i
+                executor.submit(run_single_eval, fixture, prompt): i
                 for i in range(args.runs)
             }
             for future in as_completed(futures):
@@ -229,15 +188,14 @@ def main():
         print(f"Results summary (total {elapsed:.0f}s):")
         print(f"{'─'*60}")
 
-        check_names = [c["name"] for c in EVAL_FIXTURES[eval_id]["checks"]]
+        check_names = [c["name"] for c in fixture["checks"]]
 
         for name in check_names:
             passes = sum(
                 1 for r in all_results if r["success"] and r["checks"].get(name, (False,))[0]
             )
-            rate = passes / args.runs
             bar = "█" * passes + "░" * (args.runs - passes)
-            status = "✓" if rate == 1.0 else ("△" if rate > 0 else "✗")
+            status = "✓" if passes == args.runs else ("△" if passes > 0 else "✗")
             print(f"  {status} {name:<35} {bar} {passes}/{args.runs}")
 
         overall_pass = sum(

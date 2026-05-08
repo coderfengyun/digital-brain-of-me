@@ -13,7 +13,17 @@
         "investment/卢麒元/卢麒元.md 关键观点速查表中出现 '微博 04-26' 来源标记",
         "关键观点速查表中包含'强美元'相关新观点",
         "没有将已有观点（如'向心坍缩预判2027年'）重复添加到速查表"
-      ]
+      ],
+      "fixture": {
+        "base_commit": "8e71757",
+        "checks": [
+          {"name": "content_appended", "type": "file_contains", "file": "investment/卢麒元/微博VIP群发言.md", "contains": "## 2026-04-26"},
+          {"name": "correct_order", "type": "line_order", "file": "investment/卢麒元/微博VIP群发言.md", "first": "2026-04-26", "second": "2026-04-18"},
+          {"name": "index_updated", "type": "file_contains", "file": "investment/卢麒元/卢麒元.md", "contains": "04-26"},
+          {"name": "has_strong_dollar_insight", "type": "file_contains", "file": "investment/卢麒元/卢麒元.md", "contains": "强美元"},
+          {"name": "no_duplicate_collapse", "type": "count_max", "file": "investment/卢麒元/卢麒元.md", "pattern": "向心坍缩", "max_count": 3}
+        ]
+      }
     }
   ]
 }
