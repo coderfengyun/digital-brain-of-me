@@ -1,6 +1,6 @@
 ---
 name: investment
-description: "Investment trade journal, P&L calculation, broker imports, and research content management. Use when: user wants to add/import/update trade records, calculate profit/loss, fetch trades from brokers (Binance, Futu, CMS/招商证券), or manage investment research authors. Trigger on phrases like '交易记录', 'investment', '盈亏', 'add trade', 'import trades', '更新交易记录', 'P&L', '导入交易', '币安', '富途', '招商证券'. Use this skill even for partial matches like asking about specific assets (BTC, gold, oil) in a trading context. Also trigger when user wants to download/save research articles or image posts from Weibo (微博) for tracked authors like 洪灏. Trigger on '下载微博', '洪灏最新', '研报', '微博研报'. Also trigger whenever '洪灏' or '洪浩' (common misspelling) is mentioned in any context — reading his articles, discussing his views, updating his index, or any task related to this author. Note: image OCR is handled by the standalone 'ocr' skill."
+description: "投资交易日志、盈亏计算、券商导入、投研作者管理。触发场景：交易记录相关（'交易记录', '添加交易', '记录一下', '买入', '卖出', '开仓', '平仓', '更新交易', '导入交易', '拉一下交易'）；盈亏与持仓（'盈亏', '算算收益', '持仓', '仓位', 'P&L'）；券商（'币安', '富途', '招商证券', 'Binance', 'Futu'）；投研作者——提到 '洪灏'/'洪浩'/'卢麒元' 任何上下文都触发（读文章、讨论观点、更新索引）；研报（'研报', '微博研报', '下载微博', '最新文章'）。Note: image OCR is handled by the standalone 'ocr' skill."
 ---
 
 # Investment
