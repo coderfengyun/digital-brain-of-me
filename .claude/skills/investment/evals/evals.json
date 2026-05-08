@@ -1,0 +1,46 @@
+{
+  "skill_name": "investment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "增加一下卢麒元 04-26 在微博 vip 群的发言：\n## 2026-04-26\n下文，可能在下周的东京。日元连续冲击160，下周要给一个说法。贝嫂不介意日元冲击180。然而，日本通胀已经接近临界点了。植田和男敢不敢加息或抛售美债呢？如果敢，月底的戏就精彩了。\n事实上，一切大宗商品皆密切相关能源价格。以往，东大会先吞下通胀，给西方一个缓冲时间。这一次，东大不会再输出通缩了。因为，东大已经懂得使用汇率工具了。人民币稳定升值，进出口自动完成平衡。相反，适度输出通胀，有利于内部产业结构调整和升级转型。\n\n意思是，由中东的廉价能源和中国廉价商品构成的强美元的基座开始崩塌了。全世界（除中国），将于下半年陷入恶性通胀周期。恶性通胀将螺旋式发散，导致中小经济体陷入危机。最终，会反噬美国的资本市场。\n\n我大体上完成了十八个月资本流转的沙盘推演。我惊叹巴菲特和李嘉诚的先知先觉。我约略看到贝森特和沃什的未来操作。当沃什准备缩表的时候，我预感到了向心坍缩的时间节点。\n最近，鸭梨山大，原因在于一些人不想让我说话。或者，不希望一些信息传到决策层耳中。因为，未来十八个月，最大的变量就是中国的经济政策。\n好吧，不理会外部干扰。我们先做好我们自己的事。从短股长金到金转油，逻辑是明晰而精准的。请按既定方针办。\n至于，向心坍缩的相关准备，不用向巴菲特那样前置和极端。能源和粮食这一波次应该拿下，其余的安排还有时间和空间。\n感谢有你们同行，感谢与你们共同观赏这百年难遇的世纪风光。",
+      "expected_output": "1. 将发言追加到 investment/卢麒元/微博VIP群发言.md 顶部（倒序）\n2. 更新 investment/卢麒元/卢麒元.md 关键观点速查表（新观点：强美元基座崩塌、中国输出通胀、沃什缩表→向心坍缩时点）",
+      "assertions": [
+        {
+          "name": "skill_triggered",
+          "type": "manual",
+          "description": "investment skill 被触发（通过 Skill tool 调用）"
+        },
+        {
+          "name": "content_appended_to_weibo_file",
+          "type": "file_contains",
+          "file": "investment/卢麒元/微博VIP群发言.md",
+          "contains": "## 2026-04-26"
+        },
+        {
+          "name": "content_in_correct_position",
+          "type": "file_check",
+          "description": "04-26 的内容出现在 04-18 之前（倒序排列）"
+        },
+        {
+          "name": "index_updated_with_new_insights",
+          "type": "file_contains",
+          "file": "investment/卢麒元/卢麒元.md",
+          "contains": "微博 04-26"
+        },
+        {
+          "name": "key_insight_strong_dollar_collapse",
+          "type": "file_contains",
+          "file": "investment/卢麒元/卢麒元.md",
+          "contains": "强美元"
+        },
+        {
+          "name": "no_duplicate_existing_insights",
+          "type": "manual",
+          "description": "没有把已有观点（如'向心坍缩预判2027年'）重复添加到速查表"
+        }
+      ],
+      "files": []
+    }
+  ]
+}
