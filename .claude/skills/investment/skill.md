@@ -1,6 +1,6 @@
 ---
 name: investment
-description: "Investment trade journal, P&L calculation, broker imports, and research content management. Use when: user wants to add/import/update trade records, calculate profit/loss, fetch trades from brokers (Binance, Futu, CMS/招商证券), or manage investment research authors. Trigger on phrases like '交易记录', 'investment', '盈亏', 'add trade', 'import trades', '更新交易记录', 'P&L', '导入交易', '币安', '富途', '招商证券'. Use this skill even for partial matches like asking about specific assets (BTC, gold, oil) in a trading context. Also trigger when user wants to download/save research articles or image posts from Weibo (微博) for tracked authors like 洪灏. Trigger on '下载微博', '洪灏最新', '研报', '微博研报'. Note: image OCR is handled by the standalone 'ocr' skill."
+description: "Investment trade journal, P&L calculation, broker imports, and research content management. Use when: user wants to add/import/update trade records, calculate profit/loss, fetch trades from brokers (Binance, Futu, CMS/招商证券), or manage investment research authors. Trigger on phrases like '交易记录', 'investment', '盈亏', 'add trade', 'import trades', '更新交易记录', 'P&L', '导入交易', '币安', '富途', '招商证券'. Use this skill even for partial matches like asking about specific assets (BTC, gold, oil) in a trading context. Also trigger when user wants to download/save research articles or image posts from Weibo (微博) for tracked authors like 洪灏. Trigger on '下载微博', '洪灏最新', '研报', '微博研报'. Also trigger whenever '洪灏' or '洪浩' (common misspelling) is mentioned in any context — reading his articles, discussing his views, updating his index, or any task related to this author. Note: image OCR is handled by the standalone 'ocr' skill."
 ---
 
 # Investment
@@ -72,6 +72,7 @@ python .claude/skills/investment/scripts/write_trade_journal.py add \
 **向已有作者添加新内容时**：
 1. 内容文件放到该作者目录下
 2. 更新该作者的索引文件，添加链接
+3. 判断是否更新"关键观点速查"表：只有**新的分析框架、新指标、或与已有观点矛盾/显著升级的判断**才追加；已有观点的重复验证或应用实例不追加
 
 ### 获取微博研报（端到端 pipeline）
 
