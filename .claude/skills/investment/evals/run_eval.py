@@ -104,7 +104,6 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
     result = subprocess.run(
         [
             "claude", "-p", full_prompt,
-            "--bare",
             "--allowedTools", "Read,Edit,Write,Bash,Glob,Grep",
         ],
         cwd=worktree_path,
