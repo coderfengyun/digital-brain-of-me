@@ -16,6 +16,8 @@ import subprocess
 import sys
 import tempfile
 import shutil
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[4]  # .claude/skills/investment/evals -> repo root
@@ -194,27 +196,36 @@ def main():
 
         print(f"\n{'='*60}")
         print(f"Eval {eval_id}: {eval_case.get('expected_output', '')[:60]}...")
-        print(f"Running {args.runs} times...")
+        print(f"Running {args.runs} times (parallel)...")
         print(f"{'='*60}")
 
-        all_results = []
-        for run_num in range(1, args.runs + 1):
-            print(f"\n  Run {run_num}/{args.runs}...", end=" ", flush=True)
-            result = run_single_eval(eval_id, prompt)
-            all_results.append(result)
-            if result["success"]:
-                passed = sum(1 for v in result["checks"].values() if v[0])
-                total = len(result["checks"])
-                print(f"✓ ({passed}/{total} checks passed)")
-            else:
-                print(f"✗ (execution failed: {result.get('error', 'unknown')})")
+        t0 = time.time()
+        all_results = [None] * args.runs
+
+        with ThreadPoolExecutor(max_workers=args.runs) as executor:
+            futures = {
+                executor.submit(run_single_eval, eval_id, prompt): i
+                for i in range(args.runs)
+            }
+            for future in as_completed(futures):
+                run_idx = futures[future]
+                result = future.result()
+                all_results[run_idx] = result
+                run_num = run_idx + 1
+                if result["success"]:
+                    passed = sum(1 for v in result["checks"].values() if v[0])
+                    total = len(result["checks"])
+                    print(f"  Run {run_num}/{args.runs} ✓ ({passed}/{total} checks passed)")
+                else:
+                    print(f"  Run {run_num}/{args.runs} ✗ ({result.get('error', 'unknown')})")
+
+        elapsed = time.time() - t0
 
         # 汇总
         print(f"\n{'─'*60}")
-        print("Results summary:")
+        print(f"Results summary (total {elapsed:.0f}s):")
         print(f"{'─'*60}")
 
-        check_names = list(EVAL_FIXTURES[eval_id]["checks"])
         check_names = [c["name"] for c in EVAL_FIXTURES[eval_id]["checks"]]
 
         for name in check_names:
