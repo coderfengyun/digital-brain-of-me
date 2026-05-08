@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "investment skill 被触发（通过 Skill tool 调用，而非直接编辑文件）",
+      "passed": false,
+      "evidence": "Baseline run: no skill was provided. Agent worked directly without skill guidance."
+    },
+    {
+      "text": "发言内容被写入 investment/卢麒元/微博VIP群发言.md",
+      "passed": true,
+      "evidence": "grep confirms '## 2026-04-26' exists in the file"
+    },
+    {
+      "text": "新发言 2026-04-26 出现在 2026-04-18 之前（文件按日期倒序排列）",
+      "passed": true,
+      "evidence": "line 7: ## 2026-04-26, line 21: ## 2026-04-18 — correct reverse chronological order"
+    },
+    {
+      "text": "investment/卢麒元/卢麒元.md 关键观点速查表中出现 '微博 04-26' 来源标记",
+      "passed": true,
+      "evidence": "grep shows 4 entries with '微博 04-26' source marker"
+    },
+    {
+      "text": "关键观点速查表中包含'强美元'相关新观点",
+      "passed": true,
+      "evidence": "Found: '强美元基座崩塌 | 中东廉价能源+中国廉价商品构成的强美元基座崩塌...'"
+    },
+    {
+      "text": "没有将已有观点（如'向心坍缩预判2027年'）重复添加到速查表",
+      "passed": false,
+      "evidence": "Added '向心坍缩时间节点' as a new entry even though '向心坍缩 | 预判 2027 年爆发' already existed. The 04-26 mention adds the detail about 沃什缩表 as a trigger, which is arguably new — but the skill's guidance says 'only add if it's a new analytical framework or significantly upgrades existing judgment'. The without-skill agent also added '日本央行' which is more of a situational remark than a durable analytical insight."
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 2,
+    "total": 6,
+    "pass_rate": 0.67
+  }
+}
