@@ -96,13 +96,17 @@ def cleanup_worktree(worktree_path: str):
 
 
 def run_claude(prompt: str, worktree_path: str) -> bool:
-    """用 claude -p 在 worktree 中执行 prompt，返回是否成功。"""
+    """用 claude -p --bare 在 worktree 中执行 prompt，返回是否成功。"""
     full_prompt = (
         f"你有一个 investment skill 在 .claude/skills/investment/SKILL.md，"
         f"请先读取它，然后按照其指令完成以下任务：\n\n{prompt}"
     )
     result = subprocess.run(
-        ["claude", "-p", full_prompt, "--allowedTools", "Read,Edit,Write,Bash,Glob,Grep"],
+        [
+            "claude", "-p", full_prompt,
+            "--bare",
+            "--allowedTools", "Read,Edit,Write,Bash,Glob,Grep",
+        ],
         cwd=worktree_path,
         capture_output=True,
         text=True,
