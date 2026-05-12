@@ -10,6 +10,7 @@ Investment skill 评测脚本。
 """
 
 import argparse
+import glob as globmod
 import json
 import os
 import subprocess
@@ -73,15 +74,50 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
     return result.returncode == 0
 
 
+def _glob_matches(worktree_path: str, pattern: str) -> list[str]:
+    """返回 worktree 下匹配 glob pattern 的文件列表。"""
+    return globmod.glob(os.path.join(worktree_path, pattern), recursive=True)
+
+
 def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
     """验证单条断言，返回 (passed, evidence)。"""
+    check_type = check["type"]
+
+    # glob 类型断言
+    if check_type == "glob_exists":
+        matches = _glob_matches(worktree_path, check["pattern"])
+        passed = len(matches) > 0
+        evidence = f"{'Matched' if passed else 'No match'}: {check['pattern']}"
+        if passed:
+            evidence += f" -> {[os.path.relpath(m, worktree_path) for m in matches]}"
+        return passed, evidence
+
+    if check_type == "glob_not_exists":
+        matches = _glob_matches(worktree_path, check["pattern"])
+        passed = len(matches) == 0
+        evidence = f"{'Correctly no match' if passed else 'Unexpected match'}: {check['pattern']}"
+        if not passed:
+            evidence += f" -> {[os.path.relpath(m, worktree_path) for m in matches]}"
+        return passed, evidence
+
+    if check_type == "glob_file_contains":
+        matches = _glob_matches(worktree_path, check["pattern"])
+        if not matches:
+            return False, f"No files matched: {check['pattern']}"
+        for m in matches:
+            with open(m, "r") as f:
+                if check["contains"] in f.read():
+                    return True, f"Found '{check['contains']}' in {os.path.relpath(m, worktree_path)}"
+        return False, f"'{check['contains']}' not found in any of {[os.path.relpath(m, worktree_path) for m in matches]}"
+
+    # file 类型断言
     filepath = os.path.join(worktree_path, check["file"])
 
-    if check["type"] == "file_exists":
+    if check_type == "file_exists":
         passed = os.path.exists(filepath)
         return passed, f"{'Exists' if passed else 'Not found'}: {check['file']}"
 
-    if check["type"] == "file_not_exists":
+    if check_type == "file_not_exists":
         passed = not os.path.exists(filepath)
         return passed, f"{'Correctly absent' if passed else 'Unexpectedly exists'}: {check['file']}"
 
@@ -91,12 +127,12 @@ def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
     with open(filepath, "r") as f:
         content = f.read()
 
-    if check["type"] == "file_contains":
+    if check_type == "file_contains":
         passed = check["contains"] in content
         evidence = f"{'Found' if passed else 'Not found'}: '{check['contains']}'"
         return passed, evidence
 
-    elif check["type"] == "line_order":
+    elif check_type == "line_order":
         lines = content.split("\n")
         first_line = next((i for i, l in enumerate(lines) if check["first"] in l), -1)
         second_line = next((i for i, l in enumerate(lines) if check["second"] in l), -1)
@@ -106,7 +142,7 @@ def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
         evidence = f"'{check['first']}' at line {first_line}, '{check['second']}' at line {second_line}"
         return passed, evidence
 
-    elif check["type"] == "count_max":
+    elif check_type == "count_max":
         count = content.count(check["pattern"])
         passed = count <= check["max_count"]
         evidence = f"'{check['pattern']}' appears {count} times (max allowed: {check['max_count']})"

@@ -62,7 +62,7 @@
     },
     "check": {
       "type": "object",
-      "required": ["name", "type", "file"],
+      "required": ["name", "type"],
       "properties": {
         "name": {
           "type": "string",
@@ -73,17 +73,17 @@
           "enum": ["file_contains", "file_exists", "file_not_exists", "glob_exists", "glob_not_exists", "glob_file_contains", "line_order", "count_max"],
           "description": "断言类型"
         },
+        "file": {
+          "type": "string",
+          "description": "[file_*|line_order|count_max] 待检查文件路径（相对于 worktree 根目录）"
+        },
         "pattern": {
           "type": "string",
           "description": "[glob_*] glob pattern (相对于 worktree 根目录) 或 [count_max] 要计数的字符串"
         },
-        "file": {
-          "type": "string",
-          "description": "待检查文件路径（相对于 worktree 根目录）"
-        },
         "contains": {
           "type": "string",
-          "description": "[file_contains] 文件须包含此字符串"
+          "description": "[file_contains|glob_file_contains] 文件须包含此字符串"
         },
         "first": {
           "type": "string",
@@ -92,10 +92,6 @@
         "second": {
           "type": "string",
           "description": "[line_order] 须后出现的字符串"
-        },
-        "pattern": {
-          "type": "string",
-          "description": "[count_max] 要计数的字符串"
         },
         "max_count": {
           "type": "integer",
