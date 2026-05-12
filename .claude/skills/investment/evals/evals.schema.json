@@ -70,8 +70,12 @@
         },
         "type": {
           "type": "string",
-          "enum": ["file_contains", "file_exists", "file_not_exists", "line_order", "count_max"],
+          "enum": ["file_contains", "file_exists", "file_not_exists", "glob_exists", "glob_not_exists", "glob_file_contains", "line_order", "count_max"],
           "description": "断言类型"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "[glob_*] glob pattern (相对于 worktree 根目录) 或 [count_max] 要计数的字符串"
         },
         "file": {
           "type": "string",
