@@ -77,6 +77,14 @@ def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
     """验证单条断言，返回 (passed, evidence)。"""
     filepath = os.path.join(worktree_path, check["file"])
 
+    if check["type"] == "file_exists":
+        passed = os.path.exists(filepath)
+        return passed, f"{'Exists' if passed else 'Not found'}: {check['file']}"
+
+    if check["type"] == "file_not_exists":
+        passed = not os.path.exists(filepath)
+        return passed, f"{'Correctly absent' if passed else 'Unexpectedly exists'}: {check['file']}"
+
     if not os.path.exists(filepath):
         return False, f"File not found: {check['file']}"
 

@@ -17,6 +17,21 @@
           {"name": "no_duplicate_collapse", "type": "count_max", "file": "investment/卢麒元/卢麒元.md", "pattern": "向心坍缩", "max_count": 3}
         ]
       }
+    },
+    {
+      "id": 2,
+      "prompt": "这是洪灏 2026-05-12 在海外财经频道的电视采访转录（英文），主题是半导体超级周期。请按照 investment skill 的要求保存到正确位置并更新索引。\n\n转录内容：\nHost: The enthusiasm really is with the AI trade. How is it the same or different than the huge rally in Korean markets?\n\nHao Hong: The small indices in China tracking the tech sector is closely correlated with the KOSPI. As long as SK Hynix is going up, the semiconductor sector is going to go up. But this is a different ecosystem being built out in China.\n\nHost: At what point does this parabolic move become unsustainable?\n\nHao Hong: We know that this is a bubble. The valuation is still not as high as March 2000 — back then 50 plus times, now 40 plus times. If you use March 2000 as benchmark, we have another 20-25% to go.\n\n中文翻译：\n主持人：市场热情集中在AI交易上。这与韩国市场的大涨有何异同？\n洪灏：中国追踪科技板块的小型指数与KOSPI高度相关。只要SK海力士在涨，半导体板块就会涨。但中国在构建不同的生态系统。\n主持人：这种抛物线式上涨何时变得不可持续？\n洪灏：我们知道这是泡沫。估值还没到2000年3月那么高——那时50多倍，现在40多倍。以2000年3月为基准，还有20-25%上涨空间。",
+      "expected_output": "1. 文件保存到 investment/洪灏/ 下（而非 sources/ 或其他位置）\n2. sources/ 目录下不应出现该文件\n3. 更新 investment/洪灏/洪灏.md 索引，添加该采访链接",
+      "files": [],
+      "fixture": {
+        "base_commit": "a54d1f2",
+        "checks": [
+          {"name": "file_in_investment_dir", "type": "file_exists", "file": "investment/洪灏/半导体超级周期/interview-20260512.md"},
+          {"name": "not_in_sources", "type": "file_not_exists", "file": "sources/honghao-semiconductor-supercycle-20260512-transcript.md"},
+          {"name": "index_updated", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "interview-20260512"},
+          {"name": "has_chinese_translation", "type": "file_contains", "file": "investment/洪灏/半导体超级周期/interview-20260512.md", "contains": "泡沫"}
+        ]
+      }
     }
   ]
 }
