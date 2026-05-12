@@ -70,7 +70,7 @@
         },
         "type": {
           "type": "string",
-          "enum": ["file_contains", "line_order", "count_max"],
+          "enum": ["file_contains", "file_exists", "file_not_exists", "line_order", "count_max"],
           "description": "断言类型"
         },
         "file": {
