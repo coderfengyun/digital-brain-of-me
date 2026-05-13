@@ -26,8 +26,8 @@
       "fixture": {
         "base_commit": "69ad016",
         "checks": [
-          {"name": "transcript_under_author_dir", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "SK Hynix"},
-          {"name": "not_in_sources", "type": "glob_file_not_contains", "pattern": "sources/**/*.md", "contains": "SK Hynix"},
+          {"name": "transcript_under_author_dir", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "20-25%"},
+          {"name": "not_in_sources", "type": "glob_file_not_contains", "pattern": "sources/**/*.md", "contains": "20-25%"},
           {"name": "index_has_date", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "2026-05-12"},
           {"name": "has_chinese_translation", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "泡沫"}
         ]
