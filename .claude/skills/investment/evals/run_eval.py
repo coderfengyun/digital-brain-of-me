@@ -67,12 +67,14 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
         f"你有一个 investment skill 在 .claude/skills/investment/SKILL.md，"
         f"请先读取它，然后按照其指令完成以下任务。"
         f"注意：这是离线 eval 环境，禁止访问网络（无浏览器、无 curl、无 API 调用）。"
-        f"所有需要的输入数据已在本地文件中提供。\n\n{prompt}"
+        f"所有需要的输入数据已在本地文件中提供。"
+        f"请高效完成，不要做多余的探索。\n\n{prompt}"
     )
     result = subprocess.run(
         [
             "claude", "-p", full_prompt,
             "--allowedTools", "Read,Edit,Write,Bash,Glob,Grep",
+            "--effort", "low",
         ],
         cwd=worktree_path,
         capture_output=True,
