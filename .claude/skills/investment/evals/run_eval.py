@@ -113,10 +113,20 @@ def check_assertion(worktree_path: str, check: dict) -> tuple[bool, str]:
         if not matches:
             return False, f"No files matched: {check['pattern']}"
         for m in matches:
-            with open(m, "r") as f:
+            with open(m, "r", errors="ignore") as f:
                 if check["contains"] in f.read():
                     return True, f"Found '{check['contains']}' in {os.path.relpath(m, worktree_path)}"
         return False, f"'{check['contains']}' not found in any of {[os.path.relpath(m, worktree_path) for m in matches]}"
+
+    if check_type == "glob_file_not_contains":
+        matches = _glob_matches(worktree_path, check["pattern"])
+        if not matches:
+            return True, f"No files matched pattern: {check['pattern']} (vacuously true)"
+        for m in matches:
+            with open(m, "r", errors="ignore") as f:
+                if check["contains"] in f.read():
+                    return False, f"Unexpectedly found '{check['contains']}' in {os.path.relpath(m, worktree_path)}"
+        return True, f"'{check['contains']}' correctly absent from all {len(matches)} files matching {check['pattern']}"
 
     # file 类型断言
     filepath = os.path.join(worktree_path, check["file"])
