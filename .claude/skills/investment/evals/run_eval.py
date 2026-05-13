@@ -36,10 +36,16 @@ def create_worktree(base_commit: str) -> str:
         capture_output=True,
         check=True,
     )
-    # 复制最新 SKILL.md 到 worktree
-    dest = Path(worktree_path) / ".claude" / "skills" / "investment" / "SKILL.md"
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(SKILL_PATH, dest)
+    # 复制最新 skill 目录到 worktree（包含 SKILL.md、evals/fixtures 等）
+    skill_src = REPO_ROOT / ".claude" / "skills" / "investment"
+    skill_dst = Path(worktree_path) / ".claude" / "skills" / "investment"
+    if skill_dst.exists():
+        shutil.rmtree(skill_dst)
+    shutil.copytree(skill_src, skill_dst)
+    # 复制 CLAUDE.md 到 worktree（提供路由上下文）
+    claude_md = REPO_ROOT / "CLAUDE.md"
+    if claude_md.exists():
+        shutil.copy2(claude_md, Path(worktree_path) / "CLAUDE.md")
     return worktree_path
 
 
@@ -59,7 +65,9 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
     """用 claude -p 在 worktree 中执行 prompt，返回是否成功。"""
     full_prompt = (
         f"你有一个 investment skill 在 .claude/skills/investment/SKILL.md，"
-        f"请先读取它，然后按照其指令完成以下任务：\n\n{prompt}"
+        f"请先读取它，然后按照其指令完成以下任务。"
+        f"注意：这是离线 eval 环境，禁止访问网络（无浏览器、无 curl、无 API 调用）。"
+        f"所有需要的输入数据已在本地文件中提供。\n\n{prompt}"
     )
     result = subprocess.run(
         [
