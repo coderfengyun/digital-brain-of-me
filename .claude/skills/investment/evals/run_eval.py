@@ -69,7 +69,7 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
         cwd=worktree_path,
         capture_output=True,
         text=True,
-        timeout=180,
+        timeout=600,
     )
     return result.returncode == 0
 
