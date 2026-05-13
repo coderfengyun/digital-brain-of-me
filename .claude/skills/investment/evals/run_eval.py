@@ -189,15 +189,6 @@ def run_single_eval(fixture: dict, prompt: str) -> dict:
             if not passed:
                 print(f"    FAIL {check['name']}: {evidence}", file=sys.stderr)
 
-        # 诊断：列出关键目录下所有文件
-        for diag_dir in ["investment/洪灏", "sources"]:
-            full = os.path.join(worktree_path, diag_dir)
-            if os.path.exists(full):
-                for root, dirs, files in os.walk(full):
-                    for f in files:
-                        rel = os.path.relpath(os.path.join(root, f), worktree_path)
-                        print(f"    [diag] {rel}", file=sys.stderr)
-
         return {"success": True, "checks": results}
     finally:
         cleanup_worktree(worktree_path)
