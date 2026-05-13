@@ -64,9 +64,7 @@ def cleanup_worktree(worktree_path: str):
 def run_claude(prompt: str, worktree_path: str) -> bool:
     """用 claude -p 在 worktree 中执行 prompt，返回是否成功。"""
     full_prompt = (
-        f"你有一个 investment skill 在 .claude/skills/investment/SKILL.md，"
-        f"请先读取它，然后按照其指令完成以下任务。"
-        f"注意：这是离线 eval 环境，禁止访问网络（无浏览器、无 curl、无 API 调用）。"
+        f"这是离线环境，禁止访问网络（无浏览器、无 curl、无 API 调用）。"
         f"所有需要的输入数据已在本地文件中提供。"
         f"请高效完成，不要做多余的探索。\n\n{prompt}"
     )
