@@ -176,6 +176,18 @@ def run_single_eval(fixture: dict, prompt: str) -> dict:
         for check in fixture["checks"]:
             passed, evidence = check_assertion(worktree_path, check)
             results[check["name"]] = (passed, evidence)
+            if not passed:
+                print(f"    FAIL {check['name']}: {evidence}", file=sys.stderr)
+
+        # 诊断：列出 investment/ 下新建的文件
+        invest_dir = os.path.join(worktree_path, "investment")
+        if os.path.exists(invest_dir):
+            new_files = subprocess.run(
+                ["git", "diff", "--name-only", "--diff-filter=A", "HEAD"],
+                cwd=worktree_path, capture_output=True, text=True
+            )
+            if new_files.stdout.strip():
+                print(f"    New files: {new_files.stdout.strip()}", file=sys.stderr)
 
         return {"success": True, "checks": results}
     finally:
