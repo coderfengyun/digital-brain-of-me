@@ -75,13 +75,14 @@ def run_claude(prompt: str, worktree_path: str) -> bool:
             "claude", "-p", full_prompt,
             "--allowedTools", "Read,Edit,Write,Bash,Glob,Grep",
             "--effort", "low",
+            "--output-format", "json",
         ],
         cwd=worktree_path,
         capture_output=True,
         text=True,
         timeout=600,
     )
-    return result.returncode == 0
+    return result.returncode == 0, result.stdout
 
 
 def _glob_matches(worktree_path: str, pattern: str) -> list[str]:
