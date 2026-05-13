@@ -20,7 +20,7 @@
     },
     {
       "id": 2,
-      "prompt": "weibo 页面里是洪灏最新的采访视频，转录一下，翻译成中文，并读一下。https://weibo.com/7799274131/QF15AxiAv\n\n（注意：由于 eval 环境无法访问浏览器和视频，转录已完成并保存在 .claude/skills/investment/evals/fixtures/eval_2_transcript.md，请读取该文件内容后按正确方式保存到项目中）",
+      "prompt": "weibo 页面里是洪灏最新的采访视频，转录一下，翻译成中文，并读一下。https://weibo.com/7799274131/QF15AxiAv\n\n（eval 环境无法访问浏览器和视频，转录结果在 .claude/skills/investment/evals/fixtures/eval_2_transcript.md）",
       "expected_output": "1. 文件保存到 investment/洪灏/ 下（而非 sources/ 或其他位置）\n2. sources/ 目录下不应出现该文件\n3. 更新 investment/洪灏/洪灏.md 索引，添加该采访链接",
       "files": [],
       "fixture": {
