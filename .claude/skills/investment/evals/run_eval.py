@@ -177,12 +177,13 @@ def run_single_eval(fixture: dict, prompt: str) -> dict:
     worktree_path = create_worktree(fixture["base_commit"])
 
     try:
-        success = run_claude(prompt, worktree_path)
+        success, claude_output = run_claude(prompt, worktree_path)
         if not success:
             return {
                 "success": False,
                 "error": "claude -p failed",
                 "checks": {c["name"]: (False, "claude execution failed") for c in fixture["checks"]},
+                "claude_output": claude_output,
             }
 
         results = {}
@@ -192,7 +193,7 @@ def run_single_eval(fixture: dict, prompt: str) -> dict:
             if not passed:
                 print(f"    FAIL {check['name']}: {evidence}", file=sys.stderr)
 
-        return {"success": True, "checks": results}
+        return {"success": True, "checks": results, "claude_output": claude_output}
     finally:
         cleanup_worktree(worktree_path)
 
