@@ -4,6 +4,8 @@
 
 | 日期 | 标题 | 笔记 |
 |------|------|------|
+| 2026-05-15 | Testing Agent Skills Systematically with Evals | [notes](eval-agent-skills/notes.md) |
+| 2026-05-15 | 工程技术：在智能体优先的世界中利用 Codex | [notes](harness-engineering-openai/notes.md) |
 | 2026-05-15 | Extreme Harness Engineering for Token Billionaires - Ryan Lopopolo on Latent Space | [notes](harness-engineering-latentspace/notes.md) |
 | 2026-05-15 | Coding Will Eat All Knowledge Work - Peter Yang on a16z Show | [notes](coding-will-eat-all-knowledge-work/notes.md) |
 | 2026-05-12 | Interaction Models: A Scalable Approach to Human-AI Collaboration | [notes](interaction-models/notes.md) |
