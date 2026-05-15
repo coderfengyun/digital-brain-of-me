@@ -2,9 +2,10 @@
 
 **Author**: Peter Yang (@petergyang)
 **Source**: https://substack.com/@petergyang/note/c-239371366
-**Date**: Apr 7, 2026
-**Platform**: Substack Note + YouTube (a16z Show)
+**Date**: Apr 6-7, 2026
+**Platform**: a16z Show (YouTube, 29 min) + Substack Note (摘要)
 **Video**: https://www.youtube.com/watch?v=UE8jx4dvlSQ
+**Full transcript**: transcript_clean.txt (同目录)
 
 ---
 
