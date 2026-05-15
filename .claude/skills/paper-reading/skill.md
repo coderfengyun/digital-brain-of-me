@@ -58,6 +58,8 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 
 Source document is saved by convention — no need to update sources.jsonl at this phase.
 
+**Translation step**: If the source document is NOT in Chinese, generate a Chinese translation and save it alongside the original as `source-zh.md` (or `article-zh.md`, matching the original's naming pattern). This is a faithful, complete translation of the full article — not a summary. Preserve all structure, code blocks, links, and formatting from the original. The original source file is always kept as-is.
+
 ### Phase 1: 全局扫描
 
 **Goal**: 通读全文，产出段落分类和结构地图，为后续变速阅读做准备
