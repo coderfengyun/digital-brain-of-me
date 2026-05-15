@@ -112,6 +112,9 @@ Source document is saved by convention — no need to update sources.jsonl at th
 **Process**:
 1. Complete critical thinking section with 3 core questions
 2. Update `output` field in sources.jsonl with notes.md path
+3. Update domain INDEX.md: insert new article at the **top** of the table
+   - `knowledge/ai/` 的文章 → 更新 `knowledge/ai/INDEX.md`
+   - 其他领域如有 INDEX.md 同理
 
 ## Querying
 
