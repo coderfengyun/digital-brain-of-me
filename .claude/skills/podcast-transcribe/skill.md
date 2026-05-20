@@ -56,11 +56,16 @@ python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://ex
 python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --language zh --output-dir knowledge/research/
 ```
 
-### 方式三：通过本地音频文件转录
+### 方式三：通过本地音频/视频文件转录
+
+`--audio` 接受音频（.mp3, .wav, .m4a）和视频（.mp4, .webm）文件，ffmpeg 自动提取音频。
 
 ```bash
 # 转录本地音频文件
 python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
+
+# 转录本地视频文件（自动提取音频）
+python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/video.mp4 --title "视频标题" --show "作者名" --url "https://weibo.com/..." --tags "标签1,标签2" --language zh --output-dir investment/洪灏/视频主题/
 
 # 指定模型和语言
 python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
