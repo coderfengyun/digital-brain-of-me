@@ -1,13 +1,13 @@
 ---
-name: podcast-transcribe
-description: "Podcast/video audio transcription tool using whisper.cpp. Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Note: the --audio flag accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles audio extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
+name: transcribe
+description: "Audio/video transcription tool using whisper.cpp. Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
 ---
 
-# Podcast Transcribe
+# Transcribe
 
-将播客/音频转录为文字的独立工具。
+将音频/视频转录为文字的独立工具。
 
-输入 Spotify URL、RSS feed 或本地音频文件，输出 Markdown 格式的转录文本。
+输入 Spotify URL、RSS feed、本地音频或视频文件，输出 Markdown 格式的转录文本。
 
 ## 核心流程
 
@@ -40,20 +40,20 @@ https://itunes.apple.com/search?term=<Show+Name>&entity=podcast&limit=5
 **Step 3: 运行转录脚本**
 
 ```bash
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "<RSS_URL>" --count 1 --model base --output-dir investment/洪灏/
+python .claude/skills/transcribe/transcribe_podcast.py --rss "<RSS_URL>" --count 1 --model base --output-dir investment/洪灏/
 ```
 
 ### 方式二：通过 RSS Feed 转录
 
 ```bash
 # 转录最新 1 集，输出到指定目录
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
+python .claude/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
 
 # 转录最新 3 集，使用 small 模型（更高质量）
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 3 --model small --output-dir investment/洪灏/
+python .claude/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 3 --model small --output-dir investment/洪灏/
 
 # 指定语言
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --language zh --output-dir knowledge/research/
+python .claude/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --language zh --output-dir knowledge/research/
 ```
 
 ### 方式三：通过本地音频/视频文件转录
@@ -62,13 +62,13 @@ python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://ex
 
 ```bash
 # 转录本地音频文件
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
+python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
 
 # 转录本地视频文件（自动提取音频）
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/video.mp4 --title "视频标题" --show "作者名" --url "https://weibo.com/..." --tags "标签1,标签2" --language zh --output-dir investment/洪灏/视频主题/
+python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/video.mp4 --title "视频标题" --show "作者名" --url "https://weibo.com/..." --tags "标签1,标签2" --language zh --output-dir investment/洪灏/视频主题/
 
 # 指定模型和语言
-python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
+python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
 ```
 
 ## 输出

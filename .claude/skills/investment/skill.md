@@ -141,7 +141,7 @@ print('\n\n'.join([r[1] for r in results]))
 当用户分享微博视频链接，或 `take_snapshot` 发现帖子是视频（有"播放视频"按钮）而非图文时：
 
 1. 点击"播放视频" → `list_network_requests(resourceTypes=["media"])` 获取 `.mp4` URL → `curl -L -H "Referer: https://weibo.com/"` 下载到 `investment/{作者名}/{主题}/video.mp4`
-2. 触发 `podcast-transcribe` skill 对 `video.mp4` 进行转录（输出到同一目录）
+2. 触发 `transcribe` skill 对 `video.mp4` 进行转录（输出到同一目录）
 3. 基于转录内容直接生成精读笔记 `notes-YYYYMMDD.md`（不询问用户）
 4. 更新作者索引，按规则判断是否更新"关键观点速查"表
 5. 清理 `video.mp4`

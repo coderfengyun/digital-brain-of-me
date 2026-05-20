@@ -79,7 +79,7 @@ External inputs that go through a processing pipeline live in `sources/sources.j
 - `type` 是处理类型，不是内容归属；`paper` 输出到未来最可能被调用的领域目录
 - Processing artifacts (downloaded HTML, audio files) live in conventional locations but are NOT tracked in sources.jsonl
 
-Note: Podcast transcription is handled by the standalone `podcast-transcribe` skill, which writes to sources.jsonl for tracking.
+Note: Audio/video transcription is handled by the standalone `transcribe` skill, which writes to sources.jsonl for tracking.
 
 ### Bookmarks
 
@@ -147,7 +147,7 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
 
-1. **Progressive Disclosure**: CLAUDE.md（路由 + 约定）→ 模块入口 README → 数据文件。简单模块（content, knowledge, operations, weekly-review）由 CLAUDE.md Module Navigation 路由；复杂工作流（paper-reading, investment, podcast-transcribe）各自独立 skill
+1. **Progressive Disclosure**: CLAUDE.md（路由 + 约定）→ 模块入口 README → 数据文件。简单模块（content, knowledge, operations, weekly-review）由 CLAUDE.md Module Navigation 路由；复杂工作流（paper-reading, investment, transcribe）各自独立 skill
 2. **Data/Skill Separation**: 数据目录（`knowledge/ai/`, `knowledge/organizations/`, `investment/`, `sources/`）只存数据 + schema 文档；复杂工作流的指令和脚本在 `.claude/skills/` 下对应目录。`paper-reading` 是处理流程，不是内容归属目录
 3. **Append-Only**: Never delete, always add (mark as archived if needed)
 4. **Cross-Reference**: Link related data across modules（flat-file relational model）

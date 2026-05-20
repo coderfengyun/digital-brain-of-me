@@ -103,7 +103,7 @@ knowledge/organizations/主题/   ← 组织管理、决策机制、协作方式
 根据 type 路由到对应的处理流程：
 
 - **paper** → 使用 `paper-reading` skill，按 Phase 0 → Phase 1 → Phase 2 → Phase 3 执行
-- **podcast** → 使用 `podcast-transcribe` skill（运行 `.claude/skills/podcast-transcribe/transcribe_podcast.py --output-dir <目标目录>`）
+- **podcast** → 使用 `transcribe` skill（运行 `.claude/skills/transcribe/transcribe_podcast.py --output-dir <目标目录>`）
 
 **Step 5: 更新 output**
 
@@ -144,7 +144,7 @@ with open('sources/sources.jsonl') as f:
 | `knowledge/organizations/` | 组织管理、决策机制、协作方式的归属地 |
 | `knowledge/bookmarks/` | 纯链接收藏，不经过处理流程，独立管理 |
 | `content/ideas/` | 阅读笔记和转录文本可以启发内容创意 |
-| `podcast-transcribe` skill | 独立 skill，完成 podcast 的转录+注册+更新 output |
+| `transcribe` skill | 独立 skill，完成音频/视频的转录+注册+更新 output |
 
 ## 设计原则
 
