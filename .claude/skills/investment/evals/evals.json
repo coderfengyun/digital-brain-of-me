@@ -32,6 +32,23 @@
           {"name": "has_chinese_translation", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "泡沫"}
         ]
       }
+    },
+    {
+      "id": 3,
+      "prompt": "洪灏发了个微博视频，标题《半导体超级周期？？》，链接 https://weibo.com/7799274131/R099O5G2T，发布于2026-05-19。\n\n（eval 环境无法访问浏览器和视频，转录结果已在 .claude/skills/investment/evals/fixtures/eval_3_video_transcript.md）\n\n请基于转录内容完成完整流程：生成精读笔记，更新洪灏索引。",
+      "expected_output": "1. 在 investment/洪灏/ 下某子目录生成精读笔记（notes*.md）\n2. 笔记包含核心观点（债息、半导体、15%调整、沃什缩表、60/40失效）\n3. 更新 investment/洪灏/洪灏.md 索引，包含视频链接和笔记链接\n4. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "d383279",
+        "checks": [
+          {"name": "notes_file_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes*.md"},
+          {"name": "notes_has_debt_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "债息"},
+          {"name": "notes_has_semiconductor", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "半导体"},
+          {"name": "notes_has_adjustment", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "15%"},
+          {"name": "index_updated_with_video", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "R099O5G2T"},
+          {"name": "sources_updated", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "R099O5G2T"}
+        ]
+      }
     }
   ]
 }
