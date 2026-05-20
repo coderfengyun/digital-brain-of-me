@@ -1,6 +1,6 @@
 ---
 name: podcast-transcribe
-description: "Podcast audio transcription tool using whisper.cpp. Use when: user wants to transcribe a podcast episode, convert audio to text, get a transcript from Spotify/RSS/local audio file. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', or any request involving converting spoken audio content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription."
+description: "Podcast/video audio transcription tool using whisper.cpp. Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Note: the --audio flag accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles audio extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
 ---
 
 # Podcast Transcribe
