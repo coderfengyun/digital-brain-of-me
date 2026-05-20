@@ -327,7 +327,7 @@ def main():
     # Input source (mutually exclusive)
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--rss', help='RSS feed URL to download and transcribe episodes')
-    source.add_argument('--audio', help='Path to local audio file')
+    source.add_argument('--audio', help='Path to local audio or video file (ffmpeg extracts audio automatically)')
 
     # RSS options
     parser.add_argument('--count', type=int, default=1, help='Number of episodes to transcribe from RSS (default: 1)')
