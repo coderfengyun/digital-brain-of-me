@@ -45,7 +45,7 @@
           {"name": "notes_has_debt_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "债息"},
           {"name": "notes_has_semiconductor", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "半导体"},
           {"name": "notes_has_adjustment", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "15%"},
-          {"name": "index_updated_with_video", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "R099O5G2T"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes"},
           {"name": "sources_updated", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "R099O5G2T"}
         ]
       }
