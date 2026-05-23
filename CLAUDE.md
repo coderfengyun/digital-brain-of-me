@@ -10,11 +10,28 @@
 ## Conventions
 - 流程图只保存 Mermaid 源代码（.mmd 文件），不保存生成的图片
 
-## Python Environment
-- 包管理使用 **uv**（`pyproject.toml` + `uv.lock`）
-- 执行 Python 脚本统一用 `uv run <script.py>`，**不使用系统 `python3`**
-- 首次 clone 或新机器：`bash setup.sh`（自动安装 uv → 下载 Python 3.13 → 创建 .venv → 安装依赖）
-- 新增依赖：`uv add <package>`（自动更新 pyproject.toml + uv.lock）
+## Environment & Dependencies
+
+项目的所有依赖通过 `bash setup.sh` 一键安装，新机器从零开始只需 `git clone && bash setup.sh`。
+
+**设计原则**：
+- 项目可在任意新机器上零配置复现，`setup.sh` 是唯一入口
+- 每类依赖有明确的管理工具，lockfile 保证跨机器一致性
+- 已安装的依赖自动跳过，脚本幂等安全
+
+**依赖分层**：
+
+| 层级 | 管理方式 | 配置文件 |
+|------|---------|---------|
+| Python 包 | uv | `pyproject.toml` + `uv.lock` |
+| Node.js 包 | npm | `package.json` |
+| 系统工具 | brew / apt | `setup.sh` 中声明 |
+| 模型文件 | curl 下载 | `setup.sh` 中声明 |
+
+**日常操作**：
+- 执行 Python 脚本：`uv run <script.py>`（不使用系统 `python3`）
+- 新增 Python 依赖：`uv add <package>`
+- 新增系统工具依赖：在 `setup.sh` 的"系统工具"段落添加检测+安装逻辑
 
 ---
 
