@@ -1,40 +1,123 @@
 #!/usr/bin/env bash
 #
-# Digital Brain 环境初始化
+# Digital Brain 全量环境初始化
 # 用法: bash setup.sh
 #
-# 功能:
-#   1. 确保 uv 已安装（没有则自动安装）
-#   2. uv sync：自动下载 Python 3.13 + 创建 .venv + 按 lockfile 安装依赖
+# 一键安装所有依赖：
+#   1. uv → Python 3.13 + .venv + Python 包
+#   2. Node.js + npm 包
+#   3. 系统工具：ffmpeg, whisper-cpp
+#   4. Whisper 模型文件
 #
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
-# --- Step 1: Ensure uv is available ---
+WHISPER_MODEL_DIR="$HOME/.cache/whisper-cpp"
+WHISPER_MODEL="ggml-base.bin"
+
+# ─────────────────────────────────────────────
+# Helpers
+# ─────────────────────────────────────────────
+
+info()  { echo "  ✓ $1"; }
+warn()  { echo "  ⚠ $1"; }
+step()  { echo ""; echo "[$1]"; }
+
+install_brew_pkg() {
+    local pkg="$1"
+    if command -v brew &>/dev/null; then
+        brew install "$pkg"
+    elif command -v apt-get &>/dev/null; then
+        sudo apt-get update -qq && sudo apt-get install -y "$pkg"
+    else
+        echo "ERROR: 无法自动安装 $pkg（未检测到 brew 或 apt-get）"
+        echo "请手动安装后重新运行此脚本"
+        exit 1
+    fi
+}
+
+# ─────────────────────────────────────────────
+# 1. Python (uv)
+# ─────────────────────────────────────────────
+
+step "Python"
 
 if ! command -v uv &>/dev/null; then
-    # Check ~/.local/bin (uv default install location)
     if [[ -x "$HOME/.local/bin/uv" ]]; then
         export PATH="$HOME/.local/bin:$PATH"
     else
-        echo "安装 uv..."
+        echo "  安装 uv..."
         curl -LsSf https://astral.sh/uv/install.sh | sh
         export PATH="$HOME/.local/bin:$PATH"
     fi
 fi
+info "uv $(uv --version | awk '{print $2}')"
 
-echo "✓ uv $(uv --version | awk '{print $2}')"
+uv sync --quiet
+info "Python $(.venv/bin/python3 --version | awk '{print $2}') + 依赖已同步"
 
-# --- Step 2: uv sync (Python + venv + deps) ---
+# ─────────────────────────────────────────────
+# 2. Node.js
+# ─────────────────────────────────────────────
 
-echo "同步环境..."
-uv sync
+step "Node.js"
+
+if ! command -v node &>/dev/null; then
+    echo "  安装 Node.js..."
+    install_brew_pkg node
+fi
+info "node $(node --version)"
+
+if [[ -f package.json ]]; then
+    if [[ ! -d node_modules ]]; then
+        npm install --silent
+    fi
+    info "npm 依赖已就绪"
+fi
+
+# ─────────────────────────────────────────────
+# 3. 系统工具
+# ─────────────────────────────────────────────
+
+step "系统工具"
+
+if ! command -v ffmpeg &>/dev/null; then
+    echo "  安装 ffmpeg..."
+    install_brew_pkg ffmpeg
+fi
+info "ffmpeg $(ffmpeg -version 2>&1 | head -1 | awk '{print $3}')"
+
+if ! command -v whisper-cli &>/dev/null; then
+    echo "  安装 whisper-cpp..."
+    install_brew_pkg whisper-cpp
+fi
+info "whisper-cli 已就绪"
+
+# ─────────────────────────────────────────────
+# 4. Whisper 模型
+# ─────────────────────────────────────────────
+
+step "Whisper 模型"
+
+if [[ ! -f "$WHISPER_MODEL_DIR/$WHISPER_MODEL" ]]; then
+    echo "  下载 $WHISPER_MODEL..."
+    mkdir -p "$WHISPER_MODEL_DIR"
+    curl -L -o "$WHISPER_MODEL_DIR/$WHISPER_MODEL" \
+        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/$WHISPER_MODEL"
+fi
+info "$WHISPER_MODEL ($(du -h "$WHISPER_MODEL_DIR/$WHISPER_MODEL" | awk '{print $1}'))"
+
+# ─────────────────────────────────────────────
+# Done
+# ─────────────────────────────────────────────
+
 echo ""
 echo "=========================================="
-echo "  环境就绪！"
-echo "  Python: $(.venv/bin/python3 --version)"
-echo "  路径:   $SCRIPT_DIR/.venv/bin/python3"
-echo "  运行:   uv run <script.py>"
+echo "  Digital Brain 环境就绪！"
+echo ""
+echo "  Python:  uv run <script.py>"
+echo "  Node:    npx defuddle <url>"
+echo "  Audio:   whisper-cli / ffmpeg"
 echo "=========================================="
