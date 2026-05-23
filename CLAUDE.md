@@ -10,6 +10,12 @@
 ## Conventions
 - 流程图只保存 Mermaid 源代码（.mmd 文件），不保存生成的图片
 
+## Python Environment
+- 项目使用 `.venv/`（Python 3.13）作为唯一 Python 运行环境
+- 执行任何 Python 脚本时使用 `.venv/bin/python3`，**不使用系统 `python3`**
+- 首次 clone 或新机器上运行 `bash setup.sh` 初始化环境（自动安装 Python 3.13 + 创建 venv + 装依赖）
+- 新增第三方依赖时更新 `requirements.txt` 并重跑 `bash setup.sh`
+
 ---
 
 # Digital Brain - Development Guide
