@@ -483,6 +483,138 @@ def import_binance(csv_path: str):
         print("\n无新记录需要添加", file=sys.stderr)
 
 
+def import_futu(csv_path: str):
+    """从富途导出 CSV 导入交易记录。
+
+    富途 CSV 格式（由 fetch_futu_trades.py 生成）：
+      成交时间,方向,代码,名称,数量,成交价,成交编号,订单编号,状态
+
+    代码前缀决定币种：US.→USD, HK.→HKD, SH./SZ.→CNY。
+    同一秒内同一代码同一方向的记录会合并。
+    """
+    input_path = Path(csv_path)
+    if not input_path.exists():
+        print(f"文件不存在: {csv_path}", file=sys.stderr)
+        sys.exit(1)
+
+    with open(input_path, encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        raw_trades = list(reader)
+
+    print(f"读取 {len(raw_trades)} 条富途原始记录", file=sys.stderr)
+
+    # 按秒级时间戳 + 代码 + 方向聚合（拆单合并）
+    aggregated: dict[str, dict] = {}
+    for t in raw_trades:
+        ts = t["成交时间"][:19]  # 截断毫秒
+        code = t["代码"]
+        side = t["方向"]
+        key = f"{ts}|{code}|{side}"
+
+        qty = float(t["数量"])
+        price = float(t["成交价"])
+        amount = qty * price
+
+        if key not in aggregated:
+            aggregated[key] = {
+                "成交时间": ts,
+                "代码": code,
+                "名称": t["名称"],
+                "方向": side,
+                "数量": 0.0,
+                "金额": 0.0,
+            }
+        aggregated[key]["数量"] += qty
+        aggregated[key]["金额"] += amount
+
+    orders = []
+    for v in aggregated.values():
+        qty = v["数量"]
+        amount = v["金额"]
+        avg_price = amount / qty if qty > 0 else 0
+        orders.append({**v, "均价": avg_price})
+
+    orders.sort(key=lambda x: x["成交时间"])
+    print(f"聚合为 {len(orders)} 笔订单", file=sys.stderr)
+
+    # 代码前缀 → 币种
+    def get_currency(code: str) -> str:
+        prefix = code.split(".")[0] if "." in code else ""
+        if prefix == "US":
+            return "USD"
+        elif prefix == "HK":
+            return "HKD"
+        elif prefix in ("SH", "SZ"):
+            return "CNY"
+        return "USD"
+
+    existing_rows = load_csv()
+    new_count = 0
+
+    for order in orders:
+        code = order["代码"]
+        asset = order["名称"]
+        op = order["方向"]
+        date_str = order["成交时间"][:10]
+        price = order["均价"]
+        qty = order["数量"]
+        amount = order["金额"]
+        currency = get_currency(code)
+
+        # 去重：同日期、同品种、同方向、金额接近
+        duplicate = False
+        for existing in existing_rows:
+            if (
+                existing.get("品种") == asset
+                and existing.get("操作类型") == op
+                and existing.get("日期") == date_str
+            ):
+                try:
+                    existing_amount = float(existing.get("金额", 0))
+                    if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
+                        duplicate = True
+                        break
+                except (ValueError, TypeError):
+                    pass
+
+        if duplicate:
+            symbol = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
+            print(f"  跳过重复: {asset} {op} {date_str} {symbol}{amount:.2f}", file=sys.stderr)
+            continue
+
+        row = {
+            "序号": "",
+            "品种": asset,
+            "操作类型": op,
+            "价格": str(round(price, 4)),
+            "数量": str(round(qty, 4)),
+            "金额": str(round(amount, 2)),
+            "币种": currency,
+            "日期": date_str,
+            "日期精确度": "精确",
+            "交易平台": "富途",
+            "备注": f"{code} 富途API数据",
+        }
+
+        errors = validate_row(row)
+        if errors:
+            print(f"  校验失败 ({asset} {date_str}):", file=sys.stderr)
+            for e in errors:
+                print(f"    ✗ {e}", file=sys.stderr)
+            continue
+
+        existing_rows.append(row)
+        new_count += 1
+        symbol = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
+        print(f"  新增: {asset} {op} {date_str} {symbol}{amount:.2f}", file=sys.stderr)
+
+    if new_count > 0:
+        save_csv(existing_rows)
+        print(f"\n新增 {new_count} 条记录", file=sys.stderr)
+    else:
+        print("\n无新记录需要添加", file=sys.stderr)
+
+
 def import_cms(csv_path: str):
     """从招商证券导出 CSV 导入交易记录。
 
@@ -587,6 +719,10 @@ def parse_args() -> argparse.Namespace:
     import_parser = subparsers.add_parser("import-binance", help="从币安 CSV 导入")
     import_parser.add_argument("csv_file", help="币安 CSV 文件路径")
 
+    # import-futu 命令
+    futu_parser = subparsers.add_parser("import-futu", help="从富途 CSV 导入（由 fetch_futu_trades.py 生成）")
+    futu_parser.add_argument("csv_file", help="富途 CSV 文件路径")
+
     # import-cms 命令
     cms_parser = subparsers.add_parser("import-cms", help="从招商证券 CSV 导入（由 fetch_cms_trades.py 生成）")
     cms_parser.add_argument("csv_file", help="招商证券 CSV 文件路径")
@@ -618,6 +754,8 @@ def main():
         )
     elif args.command == "import-binance":
         import_binance(args.csv_file)
+    elif args.command == "import-futu":
+        import_futu(args.csv_file)
     elif args.command == "import-cms":
         import_cms(args.csv_file)
     elif args.command == "migrate":
@@ -625,7 +763,7 @@ def main():
     elif args.command == "validate":
         validate_csv()
     else:
-        print("请指定子命令: add, import-binance, migrate, validate", file=sys.stderr)
+        print("请指定子命令: add, import-binance, import-futu, import-cms, migrate, validate", file=sys.stderr)
         print("使用 --help 查看用法", file=sys.stderr)
         sys.exit(1)
 
