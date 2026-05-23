@@ -47,7 +47,7 @@ PROJECT_DIR = REPO_ROOT / "investment" / "投资日志整理"
 CSV_PATH = PROJECT_DIR / "交易日志汇总表.csv"
 SCHEMA_PATH = PROJECT_DIR / "交易日志汇总表.schema.json"
 
-SCHEMA_FIELDS = ["序号", "品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台", "备注"]
+SCHEMA_FIELDS = ["序号", "品种", "代码", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台", "备注"]
 VALID_CURRENCIES = {"CNY", "USD", "HKD"}
 VALID_OPS = {"买入", "卖出"}
 VALID_PRECISION = {"精确", "周期范围"}
@@ -171,14 +171,16 @@ def add_record(
     金额: float,
     币种: str,
     日期: str,
+    代码: str = "",
     日期精确度: str = "精确",
     交易平台: str = "其他",
     备注: str = "",
 ) -> dict:
     """构造并校验一条新记录，追加到 CSV。"""
     row = {
-        "序号": "",  # 保存时自动编号
+        "序号": "",
         "品种": 品种,
+        "代码": 代码,
         "操作类型": 操作类型,
         "价格": str(价格),
         "数量": str(数量),
@@ -431,14 +433,12 @@ def import_binance(csv_path: str):
         asset = symbol_to_asset.get(symbol, symbol.replace("USDT", ""))
         date_str = order["成交时间"][:10]  # YYYY-MM-DD
 
-        # 检查是否已存在（同日期、同品种、同方向、金额接近）
+        # 去重：按代码+日期+方向+金额
         duplicate = False
         for existing in existing_rows:
-            if (
-                existing.get("品种") == asset
-                and existing.get("操作类型") == order["方向"]
-                and existing.get("日期") == date_str
-            ):
+            if existing.get("操作类型") != order["方向"] or existing.get("日期") != date_str:
+                continue
+            if existing.get("代码") == symbol or existing.get("品种") == asset:
                 try:
                     existing_amount = float(existing.get("金额", 0))
                     if abs(existing_amount - order["金额"]) / max(order["金额"], 0.01) < 0.02:
@@ -454,6 +454,7 @@ def import_binance(csv_path: str):
         row = {
             "序号": "",
             "品种": asset,
+            "代码": symbol,
             "操作类型": order["方向"],
             "价格": str(round(order["均价"], 2)),
             "数量": str(round(order["数量"], 8)),
@@ -462,7 +463,7 @@ def import_binance(csv_path: str):
             "日期": date_str,
             "日期精确度": "精确",
             "交易平台": "币安",
-            "备注": "币安API精确数据",
+            "备注": "",
         }
 
         errors = validate_row(row)
@@ -568,22 +569,19 @@ def import_futu(csv_path: str):
         amount = order["金额"]
         currency = get_currency(code)
 
-        # 去重：同日期、同方向、金额接近，匹配品种名或备注中的代码
+        # 去重：按代码+日期+方向+金额
         duplicate = False
         for existing in existing_rows:
             if existing.get("操作类型") != op or existing.get("日期") != date_str:
                 continue
-            name_match = existing.get("品种") == asset
-            code_match = code in existing.get("备注", "")
-            if not (name_match or code_match):
-                continue
-            try:
-                existing_amount = float(existing.get("金额", 0))
-                if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
-                    duplicate = True
-                    break
-            except (ValueError, TypeError):
-                pass
+            if existing.get("代码") == code or existing.get("品种") == asset:
+                try:
+                    existing_amount = float(existing.get("金额", 0))
+                    if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
+                        duplicate = True
+                        break
+                except (ValueError, TypeError):
+                    pass
 
         if duplicate:
             sym = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
@@ -593,6 +591,7 @@ def import_futu(csv_path: str):
         row = {
             "序号": "",
             "品种": asset,
+            "代码": code,
             "操作类型": op,
             "价格": str(round(price, 4)),
             "数量": str(round(qty, 4)),
@@ -601,7 +600,7 @@ def import_futu(csv_path: str):
             "日期": date_str,
             "日期精确度": "精确",
             "交易平台": "富途",
-            "备注": f"{code} {order['名称']}",
+            "备注": "",
         }
 
         errors = validate_row(row)
@@ -644,6 +643,7 @@ def import_cms(csv_path: str):
     new_count = 0
 
     for trade in raw_trades:
+        code = trade["证券代码"]
         asset = trade["证券名称"]
         op = trade["买卖标志"]
         date_str = trade["成交日期"]
@@ -651,14 +651,12 @@ def import_cms(csv_path: str):
         qty = abs(float(trade["成交数量"]))
         amount = float(trade["成交金额"])
 
-        # 检查是否已存在（同日期、同品种、同方向、金额接近）
+        # 去重：按代码+日期+方向+金额
         duplicate = False
         for existing in existing_rows:
-            if (
-                existing.get("品种") == asset
-                and existing.get("操作类型") == op
-                and existing.get("日期") == date_str
-            ):
+            if existing.get("操作类型") != op or existing.get("日期") != date_str:
+                continue
+            if existing.get("代码") == code or existing.get("品种") == asset:
                 try:
                     existing_amount = float(existing.get("金额", 0))
                     if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
@@ -674,6 +672,7 @@ def import_cms(csv_path: str):
         row = {
             "序号": "",
             "品种": asset,
+            "代码": code,
             "操作类型": op,
             "价格": str(round(price, 4)),
             "数量": str(round(qty, 4)),
@@ -682,7 +681,7 @@ def import_cms(csv_path: str):
             "日期": date_str,
             "日期精确度": "精确",
             "交易平台": "招商证券",
-            "备注": "招商证券网页交易数据",
+            "备注": "",
         }
 
         errors = validate_row(row)
@@ -713,6 +712,7 @@ def parse_args() -> argparse.Namespace:
     # add 命令
     add_parser = subparsers.add_parser("add", help="手动添加一条记录")
     add_parser.add_argument("--品种", required=True)
+    add_parser.add_argument("--代码", default="", help="资产代码（如 US.SLV, HK.00883, 512400, BTCUSDT）")
     add_parser.add_argument("--操作", required=True, choices=["买入", "卖出"])
     add_parser.add_argument("--价格", type=float, required=True)
     add_parser.add_argument("--数量", type=float, required=True)
@@ -756,6 +756,7 @@ def main():
             金额=args.金额,
             币种=args.币种,
             日期=args.日期,
+            代码=args.代码,
             日期精确度=args.日期精确度,
             交易平台=args.交易平台,
             备注=args.备注,

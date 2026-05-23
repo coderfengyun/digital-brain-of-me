@@ -16,10 +16,18 @@
     {
       "name": "品种",
       "type": "string",
-      "description": "资产名称，需全局统一命名（同一资产在不同周记中必须使用完全相同的名称）",
+      "description": "资产名称，人类可读的中文简称",
       "constraints": {
         "required": true,
         "minLength": 1
+      }
+    },
+    {
+      "name": "代码",
+      "type": "string",
+      "description": "资产唯一标识代码。美股: US.XXX, 港股: HK.XXXXX, A股: 6位数字, 加密货币: 交易对如BTCUSDT",
+      "constraints": {
+        "required": false
       }
     },
     {
