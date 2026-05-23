@@ -27,20 +27,24 @@ PROJECT_DIR = REPO_ROOT / "investment" / "投资日志整理"
 CSV_PATH = PROJECT_DIR / "交易日志汇总表.csv"
 REPORT_PATH = PROJECT_DIR / "盈亏统计报告.md"
 
-EXPECTED_COLUMNS = ["序号", "品种", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台", "备注"]
+EXPECTED_COLUMNS = ["序号", "品种", "代码", "操作类型", "价格", "数量", "金额", "币种", "日期", "日期精确度", "交易平台", "备注"]
 VALID_OPS = {"买入", "卖出"}
 VALID_CURRENCIES = {"CNY", "USD", "HKD"}
 VALID_DATE_PRECISION = {"精确", "周期范围"}
 AMOUNT_TOLERANCE = 0.01
 
-EXCLUDED_ASSETS = {"BTC", "ETH"}
+EXCLUDED_CODES = {"BTCUSDT", "ETHUSDT"}
 
 TICKER_MAP = {
-    "白银ETF (SLV)": "SLV",
-    "有色金属ETF": "512400.SS",
-    "有色ETF (大成)": "159980.SZ",
+    "iShares白银ETF": "SLV",
+    "有色金属ETF(南方)": "512400.SS",
+    "有色ETF(大成)": "159980.SZ",
+    "工业有色ETF(万家)": "560860.SZ",
     "恒生科技ETF": "3032.HK",
-    "USO (石油ETF)": "USO",
+    "中海油": "0883.HK",
+    "美国原油基金(USO)": "USO",
+    "BNO(布伦特原油ETF)": "BNO",
+    "阿里巴巴(BABA)": "BABA",
 }
 
 FX_TICKERS = {
@@ -115,6 +119,11 @@ def validate_and_load(csv_path: Path) -> pd.DataFrame:
     df["数量"] = df["数量"].astype(float)
     df["金额"] = df["金额"].astype(float)
     df["日期"] = pd.to_datetime(df["日期"])
+
+    # Use 代码 as grouping key; fallback to 品种 when 代码 is empty
+    df["_group_key"] = df.apply(
+        lambda r: r["代码"] if r["代码"] else r["品种"], axis=1
+    )
 
     return df
 
@@ -217,14 +226,15 @@ def fifo_match(df: pd.DataFrame, asset: str) -> tuple[list[RealizedTrade], list[
 
 
 def run_fifo_all(df: pd.DataFrame) -> tuple[list[RealizedTrade], list[OpenPosition], list[UnmatchedSell]]:
-    """Run FIFO matching for all assets."""
+    """Run FIFO matching for all assets, grouped by 代码 (fallback to 品种)."""
     all_realized: list[RealizedTrade] = []
     all_open: list[OpenPosition] = []
     all_unmatched: list[UnmatchedSell] = []
 
-    for asset in df["品种"].unique():
-        asset_df = df[df["品种"] == asset]
-        r, o, u = fifo_match(asset_df, asset)
+    for group_key in df["_group_key"].unique():
+        group_df = df[df["_group_key"] == group_key]
+        display_name = group_df.iloc[-1]["品种"]
+        r, o, u = fifo_match(group_df, display_name)
         all_realized.extend(r)
         all_open.extend(o)
         all_unmatched.extend(u)
@@ -485,11 +495,11 @@ def main():
 
     print(f"共 {len(df)} 条交易记录")
 
-    excluded = df[df["品种"].isin(EXCLUDED_ASSETS)]
+    excluded = df[df["_group_key"].isin(EXCLUDED_CODES)]
     if not excluded.empty:
-        print(f"排除品种 ({', '.join(EXCLUDED_ASSETS)}): {len(excluded)} 条")
-    df = df[~df["品种"].isin(EXCLUDED_ASSETS)]
-    print(f"参与计算: {len(df)} 条，品种: {', '.join(df['品种'].unique())}")
+        print(f"排除品种 ({', '.join(EXCLUDED_CODES)}): {len(excluded)} 条")
+    df = df[~df["_group_key"].isin(EXCLUDED_CODES)]
+    print(f"参与计算: {len(df)} 条，品种: {', '.join(df['_group_key'].unique())}")
 
     date_min = df["日期"].min().strftime("%Y-%m-%d")
     date_max = df["日期"].max().strftime("%Y-%m-%d")
