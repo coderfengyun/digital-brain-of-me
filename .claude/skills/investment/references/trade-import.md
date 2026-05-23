@@ -35,10 +35,13 @@ python3 .claude/skills/investment/scripts/write_trade_journal.py import-binance 
 ```bash
 python3 .claude/skills/investment/scripts/fetch_futu_trades.py \
   --start START_DATE --end END_DATE -o /tmp/futu.csv
+
+python3 .claude/skills/investment/scripts/write_trade_journal.py import-futu /tmp/futu.csv
 ```
 
 - 连接被拒绝 = FutuOpenD 未运行，跳过并告知用户
-- 无 `import-futu` 子命令，有新记录时用 `add` 逐条添加
+- `import-futu` 自带去重、品种名映射（`FUTU_NAME_MAP`）和代码字段填充
+- 新品种首次导入时，如映射表中没有对应中文名，会使用富途原始英文名；后续可在映射表中补充
 
 ### Step 3：招商证券（Chrome MCP）
 
