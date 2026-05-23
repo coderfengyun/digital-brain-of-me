@@ -492,6 +492,14 @@ def import_futu(csv_path: str):
     代码前缀决定币种：US.→USD, HK.→HKD, SH./SZ.→CNY。
     同一秒内同一代码同一方向的记录会合并。
     """
+    # 富途代码 → 中文品种名映射（保持与手动记录一致）
+    FUTU_NAME_MAP = {
+        "US.SLV": "iShares白银ETF",
+        "HK.00883": "中海油",
+        "HK.03032": "恒生科技ETF",
+        "US.BABA": "阿里巴巴(BABA)",
+    }
+
     input_path = Path(csv_path)
     if not input_path.exists():
         print(f"文件不存在: {csv_path}", file=sys.stderr)
@@ -506,7 +514,7 @@ def import_futu(csv_path: str):
     # 按秒级时间戳 + 代码 + 方向聚合（拆单合并）
     aggregated: dict[str, dict] = {}
     for t in raw_trades:
-        ts = t["成交时间"][:19]  # 截断毫秒
+        ts = t["成交时间"][:19]
         code = t["代码"]
         side = t["方向"]
         key = f"{ts}|{code}|{side}"
@@ -537,7 +545,6 @@ def import_futu(csv_path: str):
     orders.sort(key=lambda x: x["成交时间"])
     print(f"聚合为 {len(orders)} 笔订单", file=sys.stderr)
 
-    # 代码前缀 → 币种
     def get_currency(code: str) -> str:
         prefix = code.split(".")[0] if "." in code else ""
         if prefix == "US":
@@ -553,7 +560,7 @@ def import_futu(csv_path: str):
 
     for order in orders:
         code = order["代码"]
-        asset = order["名称"]
+        asset = FUTU_NAME_MAP.get(code, order["名称"])
         op = order["方向"]
         date_str = order["成交时间"][:10]
         price = order["均价"]
@@ -561,25 +568,26 @@ def import_futu(csv_path: str):
         amount = order["金额"]
         currency = get_currency(code)
 
-        # 去重：同日期、同品种、同方向、金额接近
+        # 去重：同日期、同方向、金额接近，匹配品种名或备注中的代码
         duplicate = False
         for existing in existing_rows:
-            if (
-                existing.get("品种") == asset
-                and existing.get("操作类型") == op
-                and existing.get("日期") == date_str
-            ):
-                try:
-                    existing_amount = float(existing.get("金额", 0))
-                    if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
-                        duplicate = True
-                        break
-                except (ValueError, TypeError):
-                    pass
+            if existing.get("操作类型") != op or existing.get("日期") != date_str:
+                continue
+            name_match = existing.get("品种") == asset
+            code_match = code in existing.get("备注", "")
+            if not (name_match or code_match):
+                continue
+            try:
+                existing_amount = float(existing.get("金额", 0))
+                if abs(existing_amount - amount) / max(amount, 0.01) < 0.02:
+                    duplicate = True
+                    break
+            except (ValueError, TypeError):
+                pass
 
         if duplicate:
-            symbol = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
-            print(f"  跳过重复: {asset} {op} {date_str} {symbol}{amount:.2f}", file=sys.stderr)
+            sym = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
+            print(f"  跳过重复: {asset} {op} {date_str} {sym}{amount:.2f}", file=sys.stderr)
             continue
 
         row = {
@@ -593,7 +601,7 @@ def import_futu(csv_path: str):
             "日期": date_str,
             "日期精确度": "精确",
             "交易平台": "富途",
-            "备注": f"{code} 富途API数据",
+            "备注": f"{code} {order['名称']}",
         }
 
         errors = validate_row(row)
@@ -605,8 +613,8 @@ def import_futu(csv_path: str):
 
         existing_rows.append(row)
         new_count += 1
-        symbol = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
-        print(f"  新增: {asset} {op} {date_str} {symbol}{amount:.2f}", file=sys.stderr)
+        sym = "$" if currency == "USD" else "HK$" if currency == "HKD" else "¥"
+        print(f"  新增: {asset} {op} {date_str} {sym}{amount:.2f}", file=sys.stderr)
 
     if new_count > 0:
         save_csv(existing_rows)
