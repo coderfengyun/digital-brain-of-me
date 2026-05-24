@@ -142,6 +142,7 @@ def main():
     print(f"  Language: {args.language}, Speakers: {args.speakers}")
 
     config = aai.TranscriptionConfig(
+        speech_models=["universal-3-pro", "universal-2"],
         speaker_labels=True,
         speakers_expected=args.speakers,
     )
