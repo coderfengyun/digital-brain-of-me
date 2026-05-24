@@ -70,6 +70,7 @@
 | 目标跟踪 | `operations/goals/goals.yaml` |
 | 周记/周报 | `weekly-review/WEEKLY-REVIEW.md` |
 | 添加外部来源（论文/文章/研报/播客） | `sources/SOURCES.md`（注册后路由到对应 skill，输出到领域目录） |
+| 探索性项目/技术实验 | `labs/`（每个子目录一个独立探索，含 README） |
 
 **关键规则**：内容创作类任务必须先读 `identity/voice/style.md` 再动笔。
 
