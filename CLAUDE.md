@@ -73,24 +73,6 @@
 
 **关键规则**：内容创作类任务必须先读 `identity/voice/style.md` 再动笔。
 
-## Module Creation
-
-When creating new modules, follow `.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md`:
-
-1. **Requirements Analysis** - Define data model, workflow, and tag system
-2. **Core Files Creation** - README, data.jsonl, scripts
-3. **Documentation** - Templates, examples, quick start
-4. **System Integration** - Update system files:
-   - CLAUDE.md (Module Navigation 表 + Data Entry Schemas), README.md
-   - knowledge/KNOWLEDGE.md
-5. **Cross-Module Integration** - Define data flows and relationships
-6. **Quality Assurance** - Test and verify with check script
-
-After creating a module, ALWAYS run:
-```bash
-python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
-```
-
 ## Context Engineering Principles
 
 本系统的设计理念源自 [The File System Is the New Database](the-file-system-is-the-new-database.md)——核心思想是 context engineering 而非 prompt engineering：不是优化单次提问，而是设计信息架构让 AI 每次都能做出正确决策。
