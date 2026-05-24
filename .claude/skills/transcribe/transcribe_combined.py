@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """
-Combined transcription: AssemblyAI (speaker diarization) + Qwen3-ASR (text quality) + Forced Aligner (alignment).
+Combined transcription: AssemblyAI (speaker diarization) + Qwen3-ASR (text quality).
 
-Flow:
-1. AssemblyAI → speaker segments with timestamps
-2. Qwen3-ASR → high-quality full transcript text
-3. Qwen3 Forced Aligner → character-level timestamps for the transcript
-4. Merge: assign each character to a speaker based on time overlap
+Plan A: Use AssemblyAI for speaker time segments, then cut audio by those segments
+and transcribe each segment with Qwen3-ASR for higher quality text.
 
 Usage:
-    python3 .claude/skills/transcribe/transcribe_combined.py \
+    uv run .claude/skills/transcribe/transcribe_combined.py \
         --audio ~/Downloads/podcast.mp3 \
+        --title "对话标题" \
+        --show "节目名" \
+        --output-dir investment/洪灏/
+
+    # Reuse saved speaker segments (skip AssemblyAI):
+    uv run .claude/skills/transcribe/transcribe_combined.py \
+        --audio ~/Downloads/podcast.mp3 \
+        --speaker-json /tmp/speakers.json \
         --title "对话标题" \
         --show "节目名" \
         --output-dir investment/洪灏/
@@ -20,12 +25,13 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime
 from pathlib import Path
 
-import numpy as np
 from dotenv import load_dotenv
 
 
@@ -91,7 +97,7 @@ def get_speaker_segments(audio_path: str, speakers: int | None) -> list[dict]:
         config.speakers_expected = speakers
 
     transcriber = aai.Transcriber(config=config)
-    print("  [Step 1/3] AssemblyAI: uploading and getting speaker segments...")
+    print("  [Step 1/2] AssemblyAI: getting speaker segments...")
     transcript = transcriber.transcribe(audio_path)
 
     if transcript.status == aai.TranscriptStatus.error:
@@ -102,7 +108,7 @@ def get_speaker_segments(audio_path: str, speakers: int | None) -> list[dict]:
     for utt in transcript.utterances:
         segments.append({
             "speaker": utt.speaker,
-            "start": utt.start / 1000.0,  # ms -> seconds
+            "start": utt.start / 1000.0,
             "end": utt.end / 1000.0,
         })
 
@@ -111,89 +117,56 @@ def get_speaker_segments(audio_path: str, speakers: int | None) -> list[dict]:
     return segments
 
 
-# --- Step 2: Qwen3-ASR full transcription ---
+# --- Step 2: Cut audio + Qwen3-ASR per segment ---
 
-def transcribe_qwen3(audio_path: str, model_path: str, language: str) -> str:
-    """Get full transcript text from Qwen3-ASR."""
+def cut_audio_segment(audio_path: str, start: float, end: float, output_path: str) -> bool:
+    """Cut a segment from audio using ffmpeg."""
+    duration = end - start
+    cmd = [
+        "ffmpeg", "-i", audio_path,
+        "-ss", str(start), "-t", str(duration),
+        "-ar", "16000", "-ac", "1", "-c:a", "pcm_s16le",
+        "-y", output_path
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    return result.returncode == 0
+
+
+def transcribe_segments_qwen3(
+    audio_path: str, speaker_segments: list[dict], model_path: str, language: str
+) -> list[dict]:
+    """Transcribe each speaker segment with Qwen3-ASR.
+
+    Returns list of {speaker, text} dicts.
+    """
     from mlx_audio.stt.utils import load_model
 
-    print(f"  [Step 2/3] Qwen3-ASR: transcribing full audio...")
+    print(f"  [Step 2/2] Qwen3-ASR: transcribing {len(speaker_segments)} segments...")
     model = load_model(model_path)
-    result = model.generate(audio_path, language=language)
-    print(f"  Qwen3-ASR done: {len(result.text)} chars")
-    return result.text
 
+    results = []
+    with tempfile.TemporaryDirectory() as tmpdir:
+        for i, seg in enumerate(speaker_segments):
+            seg_path = os.path.join(tmpdir, f"seg_{i:04d}.wav")
 
-# --- Step 3: Forced Aligner ---
+            if not cut_audio_segment(audio_path, seg["start"], seg["end"], seg_path):
+                print(f"    Warning: ffmpeg failed for segment {i}, skipping")
+                continue
 
-def align_text(audio_path: str, text: str, aligner_model_path: str, language: str) -> list[dict]:
-    """Get character-level timestamps via forced aligner.
+            duration = seg["end"] - seg["start"]
+            if duration < 0.3:
+                results.append({"speaker": seg["speaker"], "text": ""})
+                continue
 
-    Returns list of {text, start_time, end_time} dicts.
-    """
-    from mlx_audio.stt.utils import load_model
+            result = model.generate(seg_path, language=language)
+            text = result.text.strip()
+            results.append({"speaker": seg["speaker"], "text": text})
 
-    print(f"  [Step 3/3] Forced Aligner: aligning {len(text)} chars to audio...")
-    model = load_model(aligner_model_path)
+            if (i + 1) % 50 == 0:
+                print(f"    Processed {i + 1}/{len(speaker_segments)} segments...")
 
-    lang_map = {"zh": "Chinese", "en": "English", "ja": "Japanese", "ko": "Korean"}
-    lang_name = lang_map.get(language, "Chinese")
-
-    result = model.generate(audio_path, text=text, language=lang_name)
-
-    items = [{"text": item.text, "start": item.start_time, "end": item.end_time}
-             for item in result.items]
-    print(f"  Aligner done: {len(items)} aligned tokens")
-    return items
-
-
-# --- Step 4: Merge ---
-
-def merge_speakers_and_text(speaker_segments: list[dict], aligned_chars: list[dict]) -> list[dict]:
-    """Assign each aligned character to a speaker based on time overlap.
-
-    Returns list of {speaker, text} segments (consecutive same-speaker chars merged).
-    """
-    if not aligned_chars or not speaker_segments:
-        return []
-
-    def find_speaker(char_start: float, char_end: float) -> str:
-        char_mid = (char_start + char_end) / 2
-        for seg in speaker_segments:
-            if seg["start"] <= char_mid <= seg["end"]:
-                return seg["speaker"]
-        # Fallback: find closest segment
-        min_dist = float('inf')
-        closest = speaker_segments[0]["speaker"]
-        for seg in speaker_segments:
-            dist = min(abs(seg["start"] - char_mid), abs(seg["end"] - char_mid))
-            if dist < min_dist:
-                min_dist = dist
-                closest = seg["speaker"]
-        return closest
-
-    # Assign speaker to each char
-    labeled_chars = []
-    for ch in aligned_chars:
-        speaker = find_speaker(ch["start"], ch["end"])
-        labeled_chars.append({"speaker": speaker, "text": ch["text"]})
-
-    # Merge consecutive same-speaker chars into segments
-    merged = []
-    current_speaker = labeled_chars[0]["speaker"]
-    current_text = []
-
-    for lc in labeled_chars:
-        if lc["speaker"] != current_speaker:
-            merged.append({"speaker": current_speaker, "text": "".join(current_text)})
-            current_speaker = lc["speaker"]
-            current_text = []
-        current_text.append(lc["text"])
-
-    if current_text:
-        merged.append({"speaker": current_speaker, "text": "".join(current_text)})
-
-    return merged
+    print(f"  Qwen3-ASR done: {len(results)} segments transcribed")
+    return results
 
 
 # --- Output ---
@@ -202,7 +175,7 @@ def format_diarized_transcript(segments: list[dict]) -> str:
     lines = []
     for seg in segments:
         if seg["text"].strip():
-            lines.append(f"**Speaker {seg['speaker']}:** {seg['text'].strip()}")
+            lines.append(f"**Speaker {seg['speaker']}:** {seg['text']}")
     return "\n\n".join(lines)
 
 
@@ -244,7 +217,7 @@ def append_jsonl(episode_data: dict):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Combined transcription: Qwen3-ASR text + AssemblyAI speakers'
+        description='Combined transcription: AssemblyAI speakers + Qwen3-ASR text'
     )
     parser.add_argument('--audio', required=True, help='Path to local audio/video file')
     parser.add_argument('--title', required=True, help='Recording title')
@@ -254,8 +227,10 @@ def main():
     parser.add_argument('--speakers', type=int, default=None, help='Expected speakers (auto if omitted)')
     parser.add_argument('--asr-model', default='~/Models/Qwen3-ASR-1.7B-4bit',
                         help='Qwen3-ASR model path')
-    parser.add_argument('--aligner-model', default='mlx-community/Qwen3-ForcedAligner-0.5B-4bit',
-                        help='Forced aligner model path or HF repo')
+    parser.add_argument('--speaker-json', default=None,
+                        help='Path to saved speaker segments JSON (skip AssemblyAI)')
+    parser.add_argument('--save-speakers', default=None,
+                        help='Save AssemblyAI speaker segments to this JSON path')
     parser.add_argument('--url', default=None, help='Source URL (optional)')
     parser.add_argument('--tags', default='', help='Comma-separated tags')
 
@@ -279,25 +254,31 @@ def main():
 
     start_time = time.time()
 
-    # Step 1: AssemblyAI speaker segments
-    speaker_segments = get_speaker_segments(str(audio_path), args.speakers)
+    # Step 1: Get speaker segments
+    if args.speaker_json:
+        print(f"  Loading speaker segments from {args.speaker_json}...")
+        with open(args.speaker_json, 'r') as f:
+            speaker_segments = json.load(f)
+        actual_speakers = len(set(s["speaker"] for s in speaker_segments))
+        print(f"  Loaded: {len(speaker_segments)} utterances, {actual_speakers} speakers")
+    else:
+        speaker_segments = get_speaker_segments(str(audio_path), args.speakers)
 
-    # Step 2: Qwen3-ASR transcription
-    transcript_text = transcribe_qwen3(str(audio_path), asr_model, args.language)
+    # Save speaker segments if requested
+    if args.save_speakers:
+        with open(args.save_speakers, 'w') as f:
+            json.dump(speaker_segments, f, ensure_ascii=False, indent=2)
+        print(f"  Speaker segments saved to {args.save_speakers}")
 
-    # Step 3: Forced alignment
-    aligned_chars = align_text(str(audio_path), transcript_text, args.aligner_model, args.language)
+    # Step 2: Transcribe each segment with Qwen3-ASR
+    results = transcribe_segments_qwen3(str(audio_path), speaker_segments, asr_model, args.language)
 
-    # Step 4: Merge
-    print("  Merging speaker labels with aligned text...")
-    merged = merge_speakers_and_text(speaker_segments, aligned_chars)
-
-    actual_speakers = len(set(s["speaker"] for s in merged))
+    actual_speakers = len(set(r["speaker"] for r in results if r["text"]))
     elapsed = time.time() - start_time
-    print(f"  Merge done: {len(merged)} segments, {actual_speakers} speakers ({elapsed:.1f}s total)")
+    print(f"\n  Total: {actual_speakers} speakers, {elapsed:.1f}s elapsed")
 
     # Output
-    formatted = format_diarized_transcript(merged)
+    formatted = format_diarized_transcript(results)
     episode_id = generate_id()
     episode_data = {
         'id': episode_id,
@@ -317,7 +298,7 @@ def main():
     episode_data['output'] = str(output_path.relative_to(PROJECT_ROOT))
     append_jsonl(episode_data)
 
-    print(f"\n  Saved: {output_path.relative_to(PROJECT_ROOT)}")
+    print(f"  Saved: {output_path.relative_to(PROJECT_ROOT)}")
     print("Done!")
 
 
