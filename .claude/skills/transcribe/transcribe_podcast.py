@@ -37,8 +37,17 @@ def _find_project_root() -> Path:
 PROJECT_ROOT = _find_project_root()
 SOURCES_JSONL = PROJECT_ROOT / "sources" / "sources.jsonl"
 
-# Whisper model search paths
-MODEL_SEARCH_PATHS = [
+# Load .env from project root
+_env_file = PROJECT_ROOT / ".env"
+if _env_file.exists():
+    from dotenv import load_dotenv
+    load_dotenv(_env_file)
+
+# Whisper model search paths (MODELS_DIR from .env takes highest priority)
+MODEL_SEARCH_PATHS = []
+if os.environ.get("MODELS_DIR"):
+    MODEL_SEARCH_PATHS.append(Path(os.environ["MODELS_DIR"]).expanduser())
+MODEL_SEARCH_PATHS += [
     Path.home() / ".cache" / "whisper-cpp",
     Path("/opt/homebrew/share/whisper-cpp"),
     Path("/usr/local/share/whisper-cpp"),
