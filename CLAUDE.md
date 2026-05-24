@@ -55,6 +55,17 @@
 
 **关键规则**：内容创作类任务必须先读 `identity/voice/style.md` 再动笔。
 
+## Cross-Module Collaboration
+
+当一个任务需要多个模块/skill 组合完成时，在确定方案前必须先完成以下梳理：
+
+1. **设计协作方式**：明确各模块之间的数据流向和配合模式（谁产出什么、谁消费什么、什么顺序）
+2. **反推模块要求**：从协作方式推导出对每个模块的具体要求（输入格式、输出格式、能力边界）
+3. **验证可行性**：检查每个模块当前是否能满足这些要求（读模块入口文件确认）
+4. **识别缺口**：如有模块无法满足要求，明确指出缺口并提出解决方案（扩展模块 or 调整协作方式）
+
+先把这个分析呈现给用户，确认后再执行。
+
 ## Module Creation
 
 When creating new modules, follow `.claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md`:
