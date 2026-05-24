@@ -15,4 +15,5 @@ dependencies = [
     "modelscope>=1.37.1",
     "torchaudio>=2.11.0",
     "assemblyai>=0.64.3",
+    "httpx[socks]>=0.28.1",
 ]

@@ -114,7 +114,7 @@ def main():
     parser.add_argument('--show', required=True, help='Show or author name')
     parser.add_argument('--output-dir', required=True, help='Output directory for transcript')
     parser.add_argument('--language', default='zh', help='Language code (default: zh). Use "auto" for auto-detection.')
-    parser.add_argument('--speakers', type=int, default=2, help='Expected number of speakers (default: 2)')
+    parser.add_argument('--speakers', type=int, default=None, help='Expected number of speakers (auto-detect if not specified)')
     parser.add_argument('--url', default=None, help='Source URL (optional)')
     parser.add_argument('--tags', default='', help='Comma-separated tags')
 
@@ -139,13 +139,14 @@ def main():
     tags = [t.strip() for t in args.tags.split(',') if t.strip()] if args.tags else []
 
     print(f"Transcribing: {audio_path.name}")
-    print(f"  Language: {args.language}, Speakers: {args.speakers}")
+    print(f"  Language: {args.language}, Speakers: {args.speakers or 'auto-detect'}")
 
     config = aai.TranscriptionConfig(
         speech_models=["universal-3-pro", "universal-2"],
         speaker_labels=True,
-        speakers_expected=args.speakers,
     )
+    if args.speakers:
+        config.speakers_expected = args.speakers
 
     if args.language == "auto":
         config.language_detection = True
