@@ -16,4 +16,5 @@ dependencies = [
     "torchaudio>=2.11.0",
     "google-cloud-speech>=2.39.0",
     "google-cloud-storage>=3.10.1",
+    "assemblyai>=0.64.3",
 ]
