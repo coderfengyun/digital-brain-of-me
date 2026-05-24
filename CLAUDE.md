@@ -22,35 +22,18 @@ digital-brain-of-me/
 
 ## 各目录说明
 
-### `identity/`
-用户身份定义。内容创作前必须先读 `identity/voice/style.md`。
-
-### `content/`
-入口：`content/CONTENT.md`。管理创意（ideas）→ 草稿（drafts）→ 发布（published）的完整流程。
-
-### `knowledge/`
-入口：`knowledge/KNOWLEDGE.md`。书签、学习笔记、AI/组织研究等知识沉淀。
-
-### `investment/`
-入口：`investment/INVESTMENT.md`。投资研究、交易日志、盈亏计算。由 `.claude/skills/investment/` 的 skill 驱动复杂工作流。
-
-### `sources/`
-入口：`sources/SOURCES.md`。外部来源（论文、播客、文章、研报）的注册表，注册后路由到对应 skill 处理，输出到领域目录。
-
-### `operations/`
-入口：`operations/OPERATIONS.md`。任务管理、目标跟踪、会议记录、生产力指标。
-
-### `weekly-review/`
-入口：`weekly-review/WEEKLY-REVIEW.md`。周记文件命名格式：`YYYY-MM-DD~MM-DD.md`。
-
-### `labs/`
-进行中的探索性技术实验。每个子目录是一个独立探索项目，各含 README。
-
-### `scripts/`
-通用脚本工具（content_ideas.py, weekly_review.py 等），用 `uv run` 执行。
-
-### `work-standard/`
-工作标准、对话示例、技术及管理文章参考。
+| 目录 | 职责 | 入口文件 |
+|------|------|---------|
+| `identity/` | 用户身份定义与表达风格 | `identity/voice/style.md`（内容创作前必读） |
+| `content/` | 创意 → 草稿 → 发布的完整内容流程 | `content/CONTENT.md` |
+| `knowledge/` | 书签、学习笔记、AI/组织研究等知识沉淀 | `knowledge/KNOWLEDGE.md` |
+| `investment/` | 投资研究、交易日志、盈亏计算 | `investment/INVESTMENT.md`（复杂工作流由 `.claude/skills/investment/` 驱动） |
+| `sources/` | 外部来源（论文、播客、文章）注册表 | `sources/SOURCES.md`（注册后路由到对应 skill） |
+| `operations/` | 任务管理、目标跟踪、会议记录、指标 | `operations/OPERATIONS.md` |
+| `weekly-review/` | 周记 | `weekly-review/WEEKLY-REVIEW.md`（文件命名：`YYYY-MM-DD~MM-DD.md`） |
+| `labs/` | 进行中的探索性技术实验 | 每个子目录含 README |
+| `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
+| `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
 
 ### 根目录文档
 
