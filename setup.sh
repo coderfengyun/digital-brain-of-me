@@ -110,6 +110,36 @@ fi
 info "$WHISPER_MODEL ($(du -h "$WHISPER_MODEL_DIR/$WHISPER_MODEL" | awk '{print $1}'))"
 
 # ─────────────────────────────────────────────
+# 5. 本地配置 (.env)
+# ─────────────────────────────────────────────
+
+step "本地配置"
+
+if [[ ! -f .env ]]; then
+    cp .env.example .env
+    info "已从 .env.example 创建 .env"
+fi
+
+if ! grep -q "^MODELS_DIR=" .env; then
+    echo ""
+    echo "  请指定本机模型文件目录（用于 whisper 等本地模型）"
+    printf "  路径 [默认: ~/models]: "
+    read -r models_dir
+    models_dir="${models_dir:-$HOME/models}"
+    # Expand ~ for validation but store as-is
+    eval expanded_dir="$models_dir"
+    if [[ ! -d "$expanded_dir" ]]; then
+        warn "目录 $models_dir 不存在，将在首次使用时查找"
+    fi
+    echo "" >> .env
+    echo "# Local paths (machine-specific, set during setup)" >> .env
+    echo "MODELS_DIR=$models_dir" >> .env
+    info "MODELS_DIR=$models_dir 已写入 .env"
+else
+    info "MODELS_DIR 已配置: $(grep '^MODELS_DIR=' .env | cut -d= -f2)"
+fi
+
+# ─────────────────────────────────────────────
 # Done
 # ─────────────────────────────────────────────
 
