@@ -66,7 +66,6 @@ digital-brain-of-me/
 
 ### 操作纪律
 - 写之前先读（不覆盖已有数据）
-- 生成内容前先读 `identity/voice/style.md`
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令
 
