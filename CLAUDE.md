@@ -16,6 +16,7 @@ digital-brain-of-me/
 ├── labs/              进行中的探索性项目
 ├── scripts/           通用脚本工具
 ├── work-standard/     工作标准与示例
+├── env/               环境与依赖管理
 ├── .claude/skills/    复杂工作流的指令和脚本
 └── *.md               设计文档与方法论
 ```
@@ -34,6 +35,7 @@ digital-brain-of-me/
 | `labs/` | 进行中的探索性技术实验 | 每个子目录含 README |
 | `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
 | `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
+| `env/` | 环境与依赖管理（setup.sh、依赖分层、日常操作） | `env/ENV.md` |
 
 ### 根目录文档
 
@@ -66,19 +68,3 @@ digital-brain-of-me/
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令
 
----
-
-## 环境
-
-项目所有依赖通过 `bash setup.sh` 一键安装（幂等）。
-
-| 层级 | 管理方式 | 配置文件 |
-|------|---------|---------|
-| Python 包 | uv | `pyproject.toml` + `uv.lock` |
-| Node.js 包 | npm | `package.json` |
-| 系统工具 | brew / apt | `setup.sh` 中声明 |
-| 模型文件 | curl 下载 | `setup.sh` 中声明 |
-
-- 执行 Python 脚本：`uv run <script.py>`（不使用系统 `python3`）
-- 新增 Python 依赖：`uv add <package>`
-- 新增系统工具：在 `setup.sh` 添加检测+安装逻辑
