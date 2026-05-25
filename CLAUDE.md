@@ -17,8 +17,9 @@ digital-brain-of-me/
 ├── scripts/           通用脚本工具
 ├── work-standard/     工作标准与示例
 ├── env/               环境与依赖管理
+├── docs/              设计文档与方法论
 ├── .claude/skills/    复杂工作流的指令和脚本
-└── *.md               设计文档与方法论
+└── CLAUDE.md          本文件（项目结构与约束）
 ```
 
 ## 各目录说明
@@ -36,13 +37,14 @@ digital-brain-of-me/
 | `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
 | `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
 | `env/` | 环境与依赖管理（setup.sh、依赖分层、日常操作） | `env/ENV.md` |
+| `docs/` | 设计文档与方法论（见下表） | — |
 
-### 根目录文档
+### `docs/` 文件说明
 
-| 文件 | 用途 |
-|------|------|
-| `the-file-system-is-the-new-database.md` | 系统设计哲学（context engineering、progressive disclosure） |
-| `multi-component-design.md` | 多组件协作设计方法论（涉及多组件集成时读此文档） |
+| 文件 | 用途 | 何时读 |
+|------|------|--------|
+| `the-file-system-is-the-new-database.md` | 系统设计哲学（context engineering、progressive disclosure） | 理解系统为什么这样设计时 |
+| `multi-component-design.md` | 多组件协作设计方法论（协作方式 → 反推要求 → 验证 → 识别缺口） | 涉及多组件集成的任务时 |
 
 ---
 
