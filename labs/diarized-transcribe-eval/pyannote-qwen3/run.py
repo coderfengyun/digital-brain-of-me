@@ -30,7 +30,7 @@ def get_speaker_segments(audio_path: str) -> list[dict]:
     print("  [1/3] pyannote: loading pipeline...")
     pipeline = Pipeline.from_pretrained(
         "pyannote/speaker-diarization-3.1",
-        use_auth_token=hf_token,
+        token=hf_token,
     )
 
     device = "mps" if torch.backends.mps.is_available() else "cpu"
