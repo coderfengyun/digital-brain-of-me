@@ -15,7 +15,8 @@
 | 方案 | 目录 | ASR 模型 | 说话人识别 | 状态 |
 |------|------|----------|-----------|------|
 | FunASR (Paraformer + cam++) | `funasr-paraformer-campp/` | speech_seaco_paraformer_large | cam++ | 已完成 |
-| AssemblyAI + Qwen3-ASR | `assemblyai-qwen3/` | Qwen3-ASR-1.7B-4bit | AssemblyAI universal-3-pro | 待运行 |
+| AssemblyAI + Qwen3-ASR | `assemblyai-qwen3/` | Qwen3-ASR-1.7B-4bit | AssemblyAI universal-3-pro | 已完成 |
+| AssemblyAI + MIMO-v2.5-ASR | `assemblyai-mimo/` | MIMO-v2.5-ASR | AssemblyAI universal-3-pro | 待运行 |
 | pyannote + Qwen3-ASR | `pyannote-qwen3/` | Qwen3-ASR-1.7B-4bit | pyannote/speaker-diarization-3.1 | 待运行 |
 | Qwen3-ASR (MLX) | - | Qwen3-ASR-1.7B-4bit | 无 | 仅转录，无说话人 |
 
