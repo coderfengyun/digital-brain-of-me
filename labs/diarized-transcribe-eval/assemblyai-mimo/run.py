@@ -93,10 +93,9 @@ def transcribe_segments(audio_path: str, segments: list[dict]) -> list[dict]:
                 continue
 
             result = model.generate(seg_path, language="zh")
-            results.append({**seg, "text": result.text.strip()})
-
-            if (i + 1) % 50 == 0:
-                print(f"    Processed {i + 1}/{len(segments)}...")
+            text = result.text.strip()
+            results.append({**seg, "text": text})
+            print(f"    [{i + 1}/{len(segments)}] Speaker {seg['speaker']} ({duration_ms}ms): {text[:60]}")
 
     return results
 
