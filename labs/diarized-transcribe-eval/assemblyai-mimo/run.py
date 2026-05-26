@@ -127,6 +127,10 @@ def main():
             json.dump(segments, f, ensure_ascii=False, indent=2)
         print(f"  Speaker segments saved to speakers.json")
 
+    if max_segments:
+        print(f"  Limiting to first {max_segments} segments (eval mode)")
+        segments = segments[:max_segments]
+
     results = transcribe_segments(audio_path, segments)
     elapsed = time.time() - start
 
