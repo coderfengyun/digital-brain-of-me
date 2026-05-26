@@ -107,11 +107,13 @@ def main():
     print(f"Audio: {audio_path}")
     start = time.time()
 
-    # Try to reuse speaker segments from assemblyai-qwen3 if available
+    # Try to reuse speaker segments (own cache first, then assemblyai-qwen3)
+    own_speakers = EVAL_DIR / "speakers.json"
     reuse_path = EVAL_DIR.parent / "assemblyai-qwen3" / "speakers.json"
-    if reuse_path.exists():
-        print(f"  Reusing speaker segments from assemblyai-qwen3/speakers.json")
-        with open(reuse_path, encoding="utf-8") as f:
+    cached = own_speakers if own_speakers.exists() else (reuse_path if reuse_path.exists() else None)
+    if cached:
+        print(f"  Reusing speaker segments from {cached.relative_to(EVAL_DIR.parent)}")
+        with open(cached, encoding="utf-8") as f:
             segments = json.load(f)
         speakers = len(set(s["speaker"] for s in segments))
         print(f"  Loaded: {len(segments)} utterances, {speakers} speakers")
