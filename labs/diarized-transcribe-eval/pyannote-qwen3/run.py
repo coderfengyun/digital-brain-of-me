@@ -97,6 +97,16 @@ def transcribe_segments(audio_path: str, segments: list[dict]) -> list[dict]:
     return results
 
 
+def prepare_wav(audio_path: str) -> str:
+    """Convert audio to 16kHz mono WAV for pyannote compatibility."""
+    if audio_path.endswith(".wav"):
+        return audio_path
+    wav_path = str(EVAL_DIR / "input_16k.wav")
+    cmd = ["ffmpeg", "-i", audio_path, "-ar", "16000", "-ac", "1", "-y", wav_path]
+    subprocess.run(cmd, capture_output=True, check=True)
+    return wav_path
+
+
 def main():
     audio_path = sys.argv[1] if len(sys.argv) > 1 else str(DEFAULT_AUDIO)
     output_txt = EVAL_DIR / "transcript.txt"
@@ -106,7 +116,9 @@ def main():
     print(f"Audio: {audio_path}")
     start = time.time()
 
-    segments = get_speaker_segments(audio_path)
+    wav_path = prepare_wav(audio_path)
+    print(f"  Prepared WAV: {wav_path}")
+    segments = get_speaker_segments(wav_path)
 
     # Save speaker segments for potential reuse
     speakers_json = EVAL_DIR / "speakers.json"
@@ -114,7 +126,7 @@ def main():
         json.dump(segments, f, ensure_ascii=False, indent=2)
     print(f"  Speaker segments saved to speakers.json")
 
-    results = transcribe_segments(audio_path, segments)
+    results = transcribe_segments(wav_path, segments)
     elapsed = time.time() - start
 
     with open(output_json, "w", encoding="utf-8") as f:
