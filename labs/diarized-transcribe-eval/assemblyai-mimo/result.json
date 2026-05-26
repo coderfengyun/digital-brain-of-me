@@ -1,0 +1,122 @@
+[
+  {
+    "speaker": "A",
+    "start_ms": 328,
+    "end_ms": 4491,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 4491,
+    "end_ms": 12416,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 12416,
+    "end_ms": 34308,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 34308,
+    "end_ms": 41334,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 41334,
+    "end_ms": 81497,
+    "text": ""
+  },
+  {
+    "speaker": "C",
+    "start_ms": 81497,
+    "end_ms": 86225,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 86225,
+    "end_ms": 103256,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 103256,
+    "end_ms": 109940,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 109940,
+    "end_ms": 112819,
+    "text": ""
+  },
+  {
+    "speaker": "D",
+    "start_ms": 112819,
+    "end_ms": 122382,
+    "text": ""
+  },
+  {
+    "speaker": "C",
+    "start_ms": 122382,
+    "end_ms": 124123,
+    "text": ""
+  },
+  {
+    "speaker": "E",
+    "start_ms": 124123,
+    "end_ms": 125363,
+    "text": ""
+  },
+  {
+    "speaker": "D",
+    "start_ms": 125363,
+    "end_ms": 154594,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 154594,
+    "end_ms": 158475,
+    "text": ""
+  },
+  {
+    "speaker": "D",
+    "start_ms": 158475,
+    "end_ms": 160456,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 160456,
+    "end_ms": 168779,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 171195,
+    "end_ms": 171495,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 171495,
+    "end_ms": 175797,
+    "text": ""
+  },
+  {
+    "speaker": "B",
+    "start_ms": 175797,
+    "end_ms": 184341,
+    "text": ""
+  },
+  {
+    "speaker": "A",
+    "start_ms": 184341,
+    "end_ms": 185922,
+    "text": ""
+  }
+]

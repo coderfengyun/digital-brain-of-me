@@ -101,7 +101,7 @@ def transcribe_segments(audio_path: str, segments: list[dict]) -> list[dict]:
 
 
 def main():
-    audio_path = sys.argv[1] if len(sys.argv) > 1 else str(DEFAULT_AUDIO)
+    audio_path = sys.argv[1] if len(sys.argv) > 1 and sys.argv[1] else str(DEFAULT_AUDIO)
     max_segments = int(sys.argv[2]) if len(sys.argv) > 2 else None
     output_txt = EVAL_DIR / "transcript.txt"
     output_json = EVAL_DIR / "result.json"
