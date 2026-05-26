@@ -6,7 +6,10 @@ import subprocess
 import sys
 import tempfile
 import time
+from functools import partial
 from pathlib import Path
+
+print = partial(print, flush=True)
 
 from dotenv import load_dotenv
 
