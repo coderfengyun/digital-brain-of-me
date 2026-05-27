@@ -4,6 +4,7 @@
 
 | 日期 | 标题 | 笔记 |
 |------|------|------|
+| 2026-05-26 | /canvas：不止是更漂亮的输出，而是下一代人机协作 | [notes](canvas-agentic-ui/notes.md) |
 | 2026-05-15 | Testing Agent Skills Systematically with Evals | [notes](eval-agent-skills/notes.md) |
 | 2026-05-15 | 工程技术：在智能体优先的世界中利用 Codex | [notes](harness-engineering-openai/notes.md) |
 | 2026-05-15 | Extreme Harness Engineering for Token Billionaires - Ryan Lopopolo on Latent Space | [notes](harness-engineering-latentspace/notes.md) |
