@@ -36,7 +36,7 @@ digital-brain-of-me/
 | `labs/` | 进行中的探索性技术实验 | 每个子目录含 README |
 | `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
 | `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
-| `env/` | 环境与依赖管理（setup.sh、依赖分层、日常操作） | `env/ENV.md` |
+| `env/` | 环境与依赖管理（setup.sh、依赖分层、日常操作） | `env/ENV.md`（执行脚本/安装依赖前必读） |
 | `docs/` | 设计文档与方法论（见下表） | — |
 
 ### `docs/` 文件说明
