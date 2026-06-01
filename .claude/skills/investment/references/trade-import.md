@@ -8,13 +8,16 @@
 
 当用户说"更新交易记录"时，按顺序执行以下步骤。
 
-### Step 0：确定起始日期
+### Step 0：确定各平台起始日期
+
+每个平台的 `START_DATE` 独立计算：取该平台在 CSV 中最后一笔记录日期的次日。`END_DATE` 统一为今天。
 
 ```bash
-tail -1 investment/投资日志整理/交易日志汇总表.csv
+# 各平台最后记录日期（grep 平台名，取最后一行的日期列）
+grep '币安' investment/投资日志整理/交易日志汇总表.csv | tail -1
+grep '富途' investment/投资日志整理/交易日志汇总表.csv | tail -1
+grep '招商证券' investment/投资日志整理/交易日志汇总表.csv | tail -1
 ```
-
-取最后记录日期的次日作为 `START_DATE`，`END_DATE` 为今天。
 
 ### Step 1：币安（API）
 
