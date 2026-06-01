@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Investment Skill Evals",
+  "description": "评测用例定义。run_eval.py 从此文件读取 prompt 和 fixture 执行自动化验证。",
+  "type": "object",
+  "required": ["skill_name", "evals"],
+  "properties": {
+    "skill_name": {
+      "type": "string",
+      "const": "investment"
+    },
+    "evals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eval_case"
+      }
+    }
+  },
+  "$defs": {
+    "eval_case": {
+      "type": "object",
+      "required": ["id", "prompt", "expected_output", "fixture"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "唯一标识符"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "喂给 claude -p 的用户输入"
+        },
+        "expected_output": {
+          "type": "string",
+          "description": "人类可读的期望结果描述"
+        },
+        "files": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "输入文件路径（相对于 skill 根目录）"
+        },
+        "fixture": {
+          "$ref": "#/$defs/fixture"
+        }
+      }
+    },
+    "fixture": {
+      "type": "object",
+      "required": ["base_commit", "checks"],
+      "properties": {
+        "base_commit": {
+          "type": "string",
+          "description": "git commit hash，作为测试起始状态（worktree 从此 commit checkout）"
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/check"
+          },
+          "description": "执行后的自动化断言列表"
+        }
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "断言名称（显示在结果中）"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["file_contains", "file_exists", "file_not_exists", "glob_exists", "glob_not_exists", "glob_file_contains", "glob_file_not_contains", "line_order", "count_max"],
+          "description": "断言类型"
+        },
+        "file": {
+          "type": "string",
+          "description": "[file_*|line_order|count_max] 待检查文件路径（相对于 worktree 根目录）"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "[glob_*] glob pattern (相对于 worktree 根目录) 或 [count_max] 要计数的字符串"
+        },
+        "contains": {
+          "type": "string",
+          "description": "[file_contains|glob_file_contains] 文件须包含此字符串"
+        },
+        "first": {
+          "type": "string",
+          "description": "[line_order] 须先出现的字符串"
+        },
+        "second": {
+          "type": "string",
+          "description": "[line_order] 须后出现的字符串"
+        },
+        "max_count": {
+          "type": "integer",
+          "description": "[count_max] 允许的最大出现次数"
+        }
+      }
+    }
+  }
+}
