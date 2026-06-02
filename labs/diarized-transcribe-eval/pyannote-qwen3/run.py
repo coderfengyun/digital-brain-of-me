@@ -37,7 +37,7 @@ def get_speaker_segments(audio_path: str) -> list[dict]:
     pipeline.to(torch.device(device))
     print(f"  pyannote: running on {device}...")
 
-    output = pipeline(audio_path)
+    output = pipeline(audio_path, max_speakers=6)
     diarization = output.speaker_diarization
 
     segments = []
