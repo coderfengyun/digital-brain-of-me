@@ -4,6 +4,7 @@
 
 | 日期 | 标题 | 笔记 |
 |------|------|------|
+| 2026-06-03 | A harness for every task: dynamic workflows in Claude Code | [notes](dynamic-workflows-claude-code/notes.md) |
 | 2026-05-26 | /canvas：不止是更漂亮的输出，而是下一代人机协作 | [notes](canvas-agentic-ui/notes.md) |
 | 2026-05-15 | Testing Agent Skills Systematically with Evals | [notes](eval-agent-skills/notes.md) |
 | 2026-05-15 | 工程技术：在智能体优先的世界中利用 Codex | [notes](harness-engineering-openai/notes.md) |
