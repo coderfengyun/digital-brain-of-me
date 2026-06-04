@@ -19,6 +19,8 @@
 | AssemblyAI + MIMO-v2.5-ASR | `assemblyai-mimo/` | MIMO-v2.5-ASR | AssemblyAI universal-3-pro | 待运行 |
 | FunASR VAD + cam++ + Qwen3-ASR | `funasr-vad-campp-qwen3/` | Qwen3-ASR-1.7B-4bit | fsmn-vad + cam++ 聚类 | 待运行 |
 | pyannote + Qwen3-ASR | `pyannote-qwen3/` | Qwen3-ASR-1.7B-4bit | pyannote/speaker-diarization-3.1 | 已完成 |
+| AssemblyAI 独立 | `assemblyai-standalone/` | AssemblyAI universal-3-pro | AssemblyAI universal-3-pro | 已完成 |
+| Qwen3.5-Omni | `qwen35-omni/` | Qwen3.5-Omni (API) | Qwen3.5-Omni (API) | 待运行（需 API key） |
 | Qwen3-ASR (MLX) | - | Qwen3-ASR-1.7B-4bit | 无 | 仅转录，无说话人 |
 
 ## 评估维度
