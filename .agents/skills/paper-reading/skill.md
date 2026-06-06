@@ -40,10 +40,10 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 
 **Adding a new paper**:
 1. Generate ID: `paper-YYYYMMDD-XXX`（检查当日已有序号，递增）
-2. Decide output domain:
-   - 投资、宏观、地缘、能源、货币、资产配置、研报 → `investment/{作者或机构}/{文章主题}/notes.md`
+2. Decide output domain and create folder using **`YYYYMMDD-slug`** 命名（发布日期 + 英文短标题，同日多篇追加字母 a/b/c）:
+   - 投资、宏观、地缘、能源、货币、资产配置、研报 → `investment/{作者或机构}/YYYYMMDD-文章主题/notes.md`
    - AI、agent、context engineering、AI 产品、developer tools、persona → `knowledge/ai/YYYYMMDD-文章主题/notes.md`
-   - 组织管理、决策机制、协作方式 → `knowledge/organizations/{主题}/notes.md`
+   - 组织管理、决策机制、协作方式 → `knowledge/organizations/YYYYMMDD-主题/notes.md`
    - 尚未成熟的探索性主题 → `knowledge/research/`（临时）
 3. If source is a file: copy to `sources/{id}.ext` or the domain folder if it belongs with the notes
 4. Append to `sources/sources.jsonl`:
