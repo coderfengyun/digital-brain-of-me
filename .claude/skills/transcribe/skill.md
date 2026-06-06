@@ -71,6 +71,22 @@ python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/video
 python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
 ```
 
+## 翻译规则
+
+**英文内容必须翻译为中文**。转录完成后，如果原始内容为英文（通过 `--language en` 指定或从转录结果判断），执行以下步骤：
+
+1. 保留原始英文转录文件不变（作为原文留存）
+2. 在同一目录生成中文翻译版本，文件名在原文件名后追加 `_zh`（如 `transcript.md` → `transcript_zh.md`）
+3. 翻译要求：
+   - 保持专业术语准确（金融/宏观/技术领域）
+   - 人名、公司名保留英文原文并括注中文（如 Jensen Huang（黄仁勋））
+   - 保持段落结构一致
+   - 语言自然流畅，不要翻译腔
+4. 翻译版的 Markdown header 中 `**Language:**` 改为 `zh (translated from en)`
+5. 索引文件中链接指向翻译版（`_zh` 文件），原文作为参考保留
+
+对于中文内容或中英混合（以中文为主）的内容，无需翻译。
+
 ## 输出
 
 `--output-dir` 是必填参数，指定转录产物保存的目录。转录产物应放到内容所属的分类目录（如 `investment/洪灏/`），而非统一的转录目录。
