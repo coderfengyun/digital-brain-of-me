@@ -34,8 +34,8 @@ description = "通义千问 ASR，52语言，速度优先"
 path = "Qwen3-ASR-1.7B-4bit"
 size = "1.5GB"
 url = "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-4bit"
-required = false
-description = "通义千问 ASR 4bit 量化版，精度/速度平衡（transcribe_combined 默认）"
+required = true
+description = "通义千问 ASR 4bit 量化版，转录默认模型（优先于 whisper）"
 
 [asr.mimo-v2_5-mlx]
 path = "MiMo-V2.5-ASR-MLX"
