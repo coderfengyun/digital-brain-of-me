@@ -14,7 +14,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
-WHISPER_MODEL_DIR="$HOME/.cache/whisper-cpp"
 WHISPER_MODEL="ggml-base.bin"
 
 # ─────────────────────────────────────────────
@@ -96,21 +95,7 @@ fi
 info "whisper-cli 已就绪"
 
 # ─────────────────────────────────────────────
-# 4. Whisper 模型
-# ─────────────────────────────────────────────
-
-step "Whisper 模型"
-
-if [[ ! -f "$WHISPER_MODEL_DIR/$WHISPER_MODEL" ]]; then
-    echo "  下载 $WHISPER_MODEL..."
-    mkdir -p "$WHISPER_MODEL_DIR"
-    curl -L -o "$WHISPER_MODEL_DIR/$WHISPER_MODEL" \
-        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/$WHISPER_MODEL"
-fi
-info "$WHISPER_MODEL ($(du -h "$WHISPER_MODEL_DIR/$WHISPER_MODEL" | awk '{print $1}'))"
-
-# ─────────────────────────────────────────────
-# 5. 本地配置 (.env)
+# 4. 本地配置 (.env)
 # ─────────────────────────────────────────────
 
 step "本地配置"
@@ -123,13 +108,13 @@ fi
 if ! grep -q "^MODELS_DIR=" .env; then
     echo ""
     echo "  请指定本机模型文件目录（用于 whisper 等本地模型）"
-    printf "  路径 [默认: ~/models]: "
+    printf "  路径 [默认: ~/Models]: "
     read -r models_dir
-    models_dir="${models_dir:-$HOME/models}"
-    # Expand ~ for validation but store as-is
+    models_dir="${models_dir:-$HOME/Models}"
     eval expanded_dir="$models_dir"
     if [[ ! -d "$expanded_dir" ]]; then
-        warn "目录 $models_dir 不存在，将在首次使用时查找"
+        mkdir -p "$expanded_dir"
+        info "已创建目录 $models_dir"
     fi
     echo "" >> .env
     echo "# Local paths (machine-specific, set during setup)" >> .env
@@ -138,6 +123,26 @@ if ! grep -q "^MODELS_DIR=" .env; then
 else
     info "MODELS_DIR 已配置: $(grep '^MODELS_DIR=' .env | cut -d= -f2)"
 fi
+
+# Resolve MODELS_DIR for subsequent steps
+MODELS_DIR="$(grep '^MODELS_DIR=' .env | cut -d= -f2)"
+eval MODELS_DIR="$MODELS_DIR"
+
+# ─────────────────────────────────────────────
+# 5. 模型文件（required = true in models.toml）
+# ─────────────────────────────────────────────
+
+step "模型文件"
+
+WHISPER_MODEL_DIR="$MODELS_DIR/whisper-cpp"
+
+if [[ ! -f "$WHISPER_MODEL_DIR/$WHISPER_MODEL" ]]; then
+    echo "  下载 $WHISPER_MODEL..."
+    mkdir -p "$WHISPER_MODEL_DIR"
+    curl -L -o "$WHISPER_MODEL_DIR/$WHISPER_MODEL" \
+        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/$WHISPER_MODEL"
+fi
+info "$WHISPER_MODEL ($(du -h "$WHISPER_MODEL_DIR/$WHISPER_MODEL" | awk '{print $1}'))"
 
 # ─────────────────────────────────────────────
 # Done

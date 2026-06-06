@@ -9,35 +9,15 @@
 | Python 包 | uv | `pyproject.toml` + `uv.lock` |
 | Node.js 包 | npm | `package.json` |
 | 系统工具 | brew / apt | `env/setup.sh` 中声明 |
-| 模型文件 | curl 下载到本地缓存 | `env/setup.sh` 中声明 |
+| 模型文件 | curl / huggingface-cli | `env/models.toml` |
 
 ### 模型文件
 
-本地推理用的预训练模型权重，体积大（GB级）且不入 git。分两类存放：
+本地推理用的预训练模型权重，统一存放在 `MODELS_DIR` 指向的根目录（默认 `~/Models`）。
 
-**1. Whisper.cpp 模型（`~/.cache/whisper-cpp/`）**
-
-`transcribe_podcast.py` 使用的轻量语音转文字模型，由 `setup.sh` 自动下载。
-
-| 模型 | 大小 | 质量 | 用途 |
-|------|------|------|------|
-| `ggml-base.bin`（默认） | 141MB | 良好 | 日常单人转录 |
-| `ggml-small.bin` | 244MB | 很好 | 正式转录 |
-| `ggml-large.bin` | 1.5GB | 最佳 | 高质量需求 |
-
-转录时通过 `--model base/small/large` 切换。
-
-**2. ASR 大模型（`~/Models/`，由 `.env` 中 `MODELS_DIR` 指向）**
-
-`transcribe_combined.py`（AssemblyAI 说话人分离 + 本地 ASR 高质量转录）使用的模型。适合多人对话、需要区分说话人的场景。
-
-| 模型 | 大小 | 说明 |
-|------|------|------|
-| `Qwen3-ASR-0.6B` | 1.8GB | 通义千问 ASR，52语言，速度优先 |
-| `Qwen3-ASR-1.7B-4bit` | 1.5GB | 同上 4bit 量化版，精度/速度平衡（默认） |
-| `MiMo-V2.5-ASR-MLX` | 5.1GB | 小米 MiMo，MLX 格式，中英双语，复杂声学场景鲁棒 |
-
-这些模型需手动从 HuggingFace（或 hf-mirror）下载，`setup.sh` 不自动管理。
+- 清单文件：`env/models.toml`（列出所有模型的路径、大小、下载地址、是否必需）
+- `setup.sh` 自动下载 `required = true` 的模型
+- 其余模型按需手动下载（`huggingface-cli download` 或 `wget`）
 
 ## 日常操作
 
