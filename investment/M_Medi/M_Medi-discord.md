@@ -179,3 +179,28 @@
 
 **M_Medi**
 > To say it an other way. when market structure changes
+
+---
+
+## 2026年3月16日（群聊）
+
+**PF 21:51**
+> @Mercator Moderatus medi老师，怎样阅读计算流动性呢
+
+**Mercator Moderatus 22:03**
+> @PF First you have to identify structure and then you look for a trap or resting liquidity compression and then you calculate based on what position has been taken the target or said structure
+
+**Mercator Moderatus 22:04**
+> I have been trying to show how to identify structure on discord because without this basic skill I cannot teach liquidity calculations
+
+**Mercator Moderatus 22:06**
+> I cannot show it if you have no in depth understanding of structure, it would be confusing for everyone
+
+**Mercator Moderatus 22:07**
+> and most examples are best made at live situations
+
+**Mercator Moderatus 22:07**
+> which structure to identify as your base and main liquidity
+
+**Mercator Moderatus 22:08**
+> liquidity is key to any asset
