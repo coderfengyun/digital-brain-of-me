@@ -204,3 +204,20 @@
 
 **Mercator Moderatus 22:08**
 > liquidity is key to any asset
+
+---
+
+## 2026年3月11-12日（群聊）— XRP 买入逻辑
+
+**金诗钰叶 2026-3-11 23:09**
+> M老师，支撑位在哪里呢
+> *(引用 Mercator Moderatus: once xrp lose the structure I will exit, but the last month it has been holding it, so for me we hav...)*
+
+**Mercator Moderatus 2026-3-12 00:10**
+> @金诗钰叶 it varies the lv is maybe not even made yet, that is why I said I went with spot, this trade I have is because we held 1.28 -1.25 region, which is the last bear market swing to the downside
+
+**Mercator Moderatus 00:11**
+> so if we want to reverse we long the start of the last bear market as support
+
+**Mercator Moderatus 00:11**
+> this is the bigger time frame support
