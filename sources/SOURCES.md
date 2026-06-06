@@ -2,7 +2,7 @@
 
 所有需要处理的外部输入（论文、文章、研报、播客、讲座录音等）统一注册在 `sources/sources.jsonl`，遵循 **source (输入) → processing (处理) → output (领域归属)** 模型。
 
-`sources/` 只负责记录来源和处理结果位置，不决定内容归属。最终产物应放在真实语境目录里，例如 `investment/洪灏/#010-半导体超级周期/notes.md` 或 `knowledge/ai/autoharness/notes.md`。
+`sources/` 只负责记录来源和处理结果位置，不决定内容归属。最终产物应放在真实语境目录里，例如 `investment/洪灏/20260427-半导体超级周期/notes.md` 或 `knowledge/ai/autoharness/notes.md`。
 
 ## Structure
 

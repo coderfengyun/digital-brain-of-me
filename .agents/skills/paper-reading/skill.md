@@ -10,7 +10,7 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 ## Data Location
 
 - 元数据注册：`sources/sources.jsonl`（type: `"paper"`）
-- 阅读笔记：输出到真实领域目录（如 `knowledge/ai/autoharness/notes.md`、`investment/洪灏/#010-半导体超级周期/notes.md`）
+- 阅读笔记：输出到真实领域目录（如 `knowledge/ai/autoharness/notes.md`、`investment/洪灏/20260427-半导体超级周期/notes.md`）
 - 源文件：优先与笔记同目录保存为 `source.md`、`article.md`、`paper.html` 或 `source.*`
 - 模板文件：`.Codex/skills/paper-reading/TEMPLATE-*.md`
 
