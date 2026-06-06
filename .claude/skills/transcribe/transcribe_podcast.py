@@ -43,10 +43,10 @@ if _env_file.exists():
     from dotenv import load_dotenv
     load_dotenv(_env_file)
 
-# Whisper model search paths (MODELS_DIR from .env takes highest priority)
+# Whisper model search paths (MODELS_DIR/whisper-cpp takes highest priority)
 MODEL_SEARCH_PATHS = []
 if os.environ.get("MODELS_DIR"):
-    MODEL_SEARCH_PATHS.append(Path(os.environ["MODELS_DIR"]).expanduser())
+    MODEL_SEARCH_PATHS.append(Path(os.environ["MODELS_DIR"]).expanduser() / "whisper-cpp")
 MODEL_SEARCH_PATHS += [
     Path.home() / ".cache" / "whisper-cpp",
     Path("/opt/homebrew/share/whisper-cpp"),
