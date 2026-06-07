@@ -130,12 +130,12 @@ def convert_to_wav(audio_path: str, wav_path: str) -> bool:
     return result.returncode == 0
 
 
-def transcribe_audio(wav_path: str, model_name: str, language: str | None = None) -> str | None:
+def transcribe_audio_whisper(wav_path: str, model_name: str, language: str | None = None) -> str | None:
     """Run whisper-cli on a WAV file and return transcript text."""
-    model_path = find_model(model_name)
+    model_path = find_whisper_model(model_name)
     if not model_path:
         print(f"Error: Model ggml-{model_name}.bin not found.")
-        print(f"Download it: curl -L -o ~/.cache/whisper-cpp/ggml-{model_name}.bin "
+        print(f"Download it: curl -L -o ~/Models/whisper-cpp/ggml-{model_name}.bin "
               f"https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-{model_name}.bin")
         return None
 
@@ -150,7 +150,6 @@ def transcribe_audio(wav_path: str, model_name: str, language: str | None = None
         print(f"  Error: whisper-cli failed: {result.stderr[:500]}")
         return None
 
-    # Parse output: skip lines starting with [ (timestamp lines) and blank lines
     lines = []
     for line in result.stdout.strip().split('\n'):
         line = line.strip()
@@ -158,6 +157,18 @@ def transcribe_audio(wav_path: str, model_name: str, language: str | None = None
             lines.append(line)
 
     return '\n\n'.join(lines) if lines else result.stdout.strip()
+
+
+def transcribe_audio(audio_path: str, engine: str, model_name: str, language: str | None = None) -> str | None:
+    """Transcribe audio with the selected engine (qwen3 or whisper)."""
+    if engine == "qwen3":
+        result = transcribe_audio_qwen3(audio_path, language)
+        if result:
+            return result
+        print("  Qwen3-ASR failed, falling back to whisper...")
+        engine = "whisper"
+
+    return transcribe_audio_whisper(audio_path, model_name, language)
 
 
 def format_transcript(text: str) -> str:
@@ -191,7 +202,7 @@ def generate_id() -> str:
     return f'pod-{date_str}-{seq:03d}'
 
 
-def save_transcript_md(transcript: str, episode_data: dict, model_name: str,
+def save_transcript_md(transcript: str, episode_data: dict, engine: str, model_name: str,
                        output_dir: Path, show: str = 'Unknown',
                        language: str = 'auto', description: str = '') -> Path:
     """Save transcript as markdown file.
@@ -209,13 +220,15 @@ def save_transcript_md(transcript: str, episode_data: dict, model_name: str,
 
     formatted = format_transcript(transcript)
 
+    model_label = QWEN3_MODEL_NAME if engine == "qwen3" else f"whisper-{model_name}"
+
     content = f"# {episode_data.get('title', 'Untitled')}\n\n"
     content += f"**Show:** {show}\n"
     content += f"**Date:** {datetime.now().strftime('%Y-%m-%d')}\n"
     if episode_data.get('source'):
         content += f"**Source:** [{episode_data['source']}]({episode_data['source']})\n"
     content += f"**Language:** {language}\n"
-    content += f"**Model:** whisper-{model_name}\n\n"
+    content += f"**Model:** {model_label}\n\n"
     if description:
         content += f"## Description\n\n{description}\n\n"
     content += f"## Transcript\n\n{formatted}\n"
@@ -230,7 +243,8 @@ def append_jsonl(episode_data: dict):
         f.write(json.dumps(episode_data, ensure_ascii=False) + '\n')
 
 
-def transcribe_from_rss(rss_url: str, count: int, model: str, language: str | None, output_dir: Path):
+def transcribe_from_rss(rss_url: str, count: int, engine: str, model: str,
+                        language: str | None, output_dir: Path):
     """Download and transcribe episodes from RSS feed."""
     try:
         import feedparser
@@ -254,7 +268,7 @@ def transcribe_from_rss(rss_url: str, count: int, model: str, language: str | No
     show_name = feed.feed.get('title', 'Unknown Show')
     print(f"Show: {show_name}")
     print(f"Episodes available: {len(feed.entries)}")
-    print(f"Transcribing latest {count} episode(s)...\n")
+    print(f"Transcribing latest {count} episode(s) [engine: {engine}]...\n")
 
     for i, entry in enumerate(feed.entries[:count]):
         title = entry.get('title', f'Episode {i+1}')
@@ -303,7 +317,7 @@ def transcribe_from_rss(rss_url: str, count: int, model: str, language: str | No
                 print(f"  Error: ffmpeg conversion failed")
                 continue
 
-            transcript = transcribe_audio(wav_path, model, language)
+            transcript = transcribe_audio(wav_path, engine, model, language)
             if not transcript:
                 continue
 
