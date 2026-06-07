@@ -11,7 +11,7 @@ description: "Audio/video transcription tool (Qwen3-ASR default, whisper.cpp fal
 
 ## 引擎优先级
 
-**Qwen3-ASR > whisper.cpp**。脚本自动检测 `$MODELS_DIR/Qwen3-ASR-1.7B-4bit` 是否存在，存在则默认使用，否则 fallback 到 whisper.cpp。可通过 `--engine whisper` 强制使用 whisper。
+**Qwen3-ASR > whisper.cpp**。脚本自动检测 Qwen3-ASR 模型是否存在（路径见 `env/models.toml`），存在则默认使用，否则 fallback 到 whisper.cpp。可通过 `--engine whisper` 强制使用 whisper。
 
 ## 核心流程
 
