@@ -115,7 +115,7 @@ python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episo
 
 ## 模型选择
 
-默认引擎 Qwen3-ASR 无需选择模型（使用 `$MODELS_DIR/Qwen3-ASR-1.7B-4bit`）。
+默认引擎 Qwen3-ASR 无需选择模型（自动从 `env/models.toml` 中定义的路径加载）。
 
 当使用 `--engine whisper` 时，通过 `--model` 指定 whisper 模型：
 
