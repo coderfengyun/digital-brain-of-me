@@ -1,6 +1,7 @@
 # 本地模型依赖清单
-# 所有模型统一存放在 MODELS_DIR（默认 ~/Models）下
-# 程序通过 MODELS_DIR 环境变量定位模型根目录
+# 根目录：$MODELS_DIR（.env 中配置，默认 ~/Models）
+# 完整路径 = $MODELS_DIR / path
+# 程序通过 MODELS_DIR 环境变量定位
 
 [whisper-cpp.ggml-base]
 path = "whisper-cpp/ggml-base.bin"

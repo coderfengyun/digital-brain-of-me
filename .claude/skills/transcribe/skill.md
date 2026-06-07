@@ -141,15 +141,13 @@ brew install whisper-cpp ffmpeg
 # Python 依赖（uv 管理）
 uv add feedparser requests mlx-audio
 
-# 模型（详见 env/models.toml）
-# Qwen3-ASR（默认引擎，required）：放在 $MODELS_DIR/Qwen3-ASR-1.7B-4bit/
-# Whisper（fallback）：放在 $MODELS_DIR/whisper-cpp/ggml-base.bin
+# 模型：见 env/models.toml（位置、下载地址、是否 required 全在里面）
 ```
 
 ## 技术备忘
 
 - 引擎优先级：Qwen3-ASR（`mlx_audio.stt.utils.load_model`）> whisper-cli
 - whisper-cpp 安装后的命令是 `whisper-cli`（不是 `whisper-cpp`）
-- 模型文件统一存放在 `$MODELS_DIR`（默认 `~/Models`），详见 `env/models.toml`
+- 模型位置：统一查 `env/models.toml`
 - ffmpeg 会将音频预处理为 16kHz 单声道 WAV（whisper/qwen3 的输入要求）
 - 可通过 `--engine whisper` 强制使用 whisper 引擎
