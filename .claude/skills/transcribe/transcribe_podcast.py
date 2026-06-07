@@ -333,7 +333,7 @@ def transcribe_from_rss(rss_url: str, count: int, engine: str, model: str,
         }
 
         output_path = save_transcript_md(
-            transcript, episode_data, model, output_dir=output_dir,
+            transcript, episode_data, engine, model, output_dir=output_dir,
             show=show_name, language=language or 'auto', description=description)
         episode_data['output'] = str(output_path.relative_to(PROJECT_ROOT))
         append_jsonl(episode_data)
@@ -344,7 +344,7 @@ def transcribe_from_rss(rss_url: str, count: int, engine: str, model: str,
     print("Done!")
 
 
-def transcribe_from_file(audio_path: str, title: str, show: str, model: str,
+def transcribe_from_file(audio_path: str, title: str, show: str, engine: str, model: str,
                          language: str | None, url: str | None, tags: list[str],
                          output_dir: Path):
     """Transcribe a local audio file."""
@@ -364,7 +364,7 @@ def transcribe_from_file(audio_path: str, title: str, show: str, model: str,
             print("  Error: ffmpeg conversion failed")
             sys.exit(1)
 
-        transcript = transcribe_audio(wav_path, model, language)
+        transcript = transcribe_audio(wav_path, engine, model, language)
         if not transcript:
             sys.exit(1)
 
@@ -379,7 +379,7 @@ def transcribe_from_file(audio_path: str, title: str, show: str, model: str,
     }
 
     output_path = save_transcript_md(
-        transcript, episode_data, model, output_dir=output_dir,
+        transcript, episode_data, engine, model, output_dir=output_dir,
         show=show, language=language or 'auto')
     episode_data['output'] = str(output_path.relative_to(PROJECT_ROOT))
     append_jsonl(episode_data)
@@ -389,7 +389,7 @@ def transcribe_from_file(audio_path: str, title: str, show: str, model: str,
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Transcribe podcast episodes using whisper.cpp')
+    parser = argparse.ArgumentParser(description='Transcribe audio/video (Qwen3-ASR default, whisper fallback)')
 
     # Input source (mutually exclusive)
     source = parser.add_mutually_exclusive_group(required=True)
@@ -409,9 +409,11 @@ def main():
     parser.add_argument('--output-dir', required=True,
                         help='Directory to save transcript files (e.g., investment/洪灏/)')
 
-    # Whisper options
+    # Engine options
+    parser.add_argument('--engine', choices=['auto', 'qwen3', 'whisper'], default='auto',
+                        help='Transcription engine (default: auto = qwen3 if available, else whisper)')
     parser.add_argument('--model', default='base', choices=['tiny', 'base', 'small', 'medium', 'large'],
-                        help='Whisper model size (default: base)')
+                        help='Whisper model size, only used when engine=whisper (default: base)')
     parser.add_argument('--language', '-l', help='Language code (e.g., en, zh, ja). Auto-detect if not specified.')
 
     args = parser.parse_args()
@@ -421,22 +423,25 @@ def main():
     if not output_dir.is_absolute():
         output_dir = PROJECT_ROOT / output_dir
 
-    # Verify whisper-cli is available
-    if not shutil.which("whisper-cli"):
-        print("Error: whisper-cli not found. Install with: brew install whisper-cpp")
-        sys.exit(1)
+    # Resolve engine
+    engine = args.engine if args.engine != 'auto' else resolve_engine()
 
     # Verify ffmpeg is available
     if not shutil.which("ffmpeg"):
         print("Error: ffmpeg not found. Install with: brew install ffmpeg")
         sys.exit(1)
 
+    # Verify whisper-cli if needed
+    if engine == "whisper" and not shutil.which("whisper-cli"):
+        print("Error: whisper-cli not found. Install with: brew install whisper-cpp")
+        sys.exit(1)
+
     tags = [t.strip() for t in args.tags.split(',') if t.strip()] if args.tags else []
 
     if args.rss:
-        transcribe_from_rss(args.rss, args.count, args.model, args.language, output_dir)
+        transcribe_from_rss(args.rss, args.count, engine, args.model, args.language, output_dir)
     else:
-        transcribe_from_file(args.audio, args.title, args.show, args.model,
+        transcribe_from_file(args.audio, args.title, args.show, engine, args.model,
                              args.language, args.url, tags, output_dir)
 
 
