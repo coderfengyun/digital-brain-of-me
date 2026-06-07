@@ -1,6 +1,6 @@
 ---
 name: transcribe
-description: "Audio/video transcription tool using whisper.cpp. Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
+description: "Audio/video transcription tool (Qwen3-ASR default, whisper.cpp fallback). Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
 ---
 
 # Transcribe
@@ -9,12 +9,16 @@ description: "Audio/video transcription tool using whisper.cpp. Use when: user w
 
 输入 Spotify URL、RSS feed、本地音频或视频文件，输出 Markdown 格式的转录文本。
 
+## 引擎优先级
+
+**Qwen3-ASR > whisper.cpp**。脚本自动检测 `$MODELS_DIR/Qwen3-ASR-1.7B-4bit` 是否存在，存在则默认使用，否则 fallback 到 whisper.cpp。可通过 `--engine whisper` 强制使用 whisper。
+
 ## 核心流程
 
 ```
-Spotify URL → 查 RSS feed → 下载音频 → whisper.cpp 转录 → Markdown
-RSS URL → 下载音频 → whisper.cpp 转录 → Markdown
-本地音频 → whisper.cpp 转录 → Markdown
+Spotify URL → 查 RSS feed → 下载音频 → Qwen3-ASR/whisper 转录 → Markdown
+RSS URL → 下载音频 → Qwen3-ASR/whisper 转录 → Markdown
+本地音频 → Qwen3-ASR/whisper 转录 → Markdown
 ```
 
 ## 使用方式
@@ -109,12 +113,16 @@ python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episo
 
 同时会在 `sources/sources.jsonl` 中注册一条记录，用于追踪处理过的外部输入。
 
-## Whisper 模型选择
+## 模型选择
+
+默认引擎 Qwen3-ASR 无需选择模型（使用 `$MODELS_DIR/Qwen3-ASR-1.7B-4bit`）。
+
+当使用 `--engine whisper` 时，通过 `--model` 指定 whisper 模型：
 
 | 模型 | 大小 | 速度 | 质量 | 建议场景 |
 |------|------|------|------|----------|
 | `tiny` | 74MB | 最快 | 一般 | 快速预览 |
-| `base` | 141MB | 快 | 良好 | 日常使用（默认） |
+| `base` | 141MB | 快 | 良好 | whisper 默认 |
 | `small` | 244MB | 中等 | 很好 | 正式转录 |
 | `large` | 1550MB | 慢 | 最佳 | 高质量需求 |
 
@@ -127,21 +135,21 @@ python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episo
 ## Prerequisites
 
 ```bash
-# macOS
+# 系统工具
 brew install whisper-cpp ffmpeg
 
-# 下载 Whisper 模型（目前已安装 base 模型）
-mkdir -p ~/.cache/whisper-cpp
-curl -L -o ~/.cache/whisper-cpp/ggml-base.bin \
-  "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin"
+# Python 依赖（uv 管理）
+uv add feedparser requests mlx-audio
 
-# Python 依赖
-python3 -m pip install feedparser requests
+# 模型（详见 env/models.toml）
+# Qwen3-ASR（默认引擎，required）：放在 $MODELS_DIR/Qwen3-ASR-1.7B-4bit/
+# Whisper（fallback）：放在 $MODELS_DIR/whisper-cpp/ggml-base.bin
 ```
 
 ## 技术备忘
 
+- 引擎优先级：Qwen3-ASR（`mlx_audio.stt.utils.load_model`）> whisper-cli
 - whisper-cpp 安装后的命令是 `whisper-cli`（不是 `whisper-cpp`）
-- 模型文件存放在 `~/.cache/whisper-cpp/ggml-<model>.bin`
-- ffmpeg 会将音频预处理为 16kHz 单声道 WAV（whisper.cpp 的输入要求）
-- 用户机器上有多个 Python 版本，安装依赖用 `python3 -m pip install` 确保一致
+- 模型文件统一存放在 `$MODELS_DIR`（默认 `~/Models`），详见 `env/models.toml`
+- ffmpeg 会将音频预处理为 16kHz 单声道 WAV（whisper/qwen3 的输入要求）
+- 可通过 `--engine whisper` 强制使用 whisper 引擎
