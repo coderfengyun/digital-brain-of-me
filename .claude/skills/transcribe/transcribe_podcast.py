@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Podcast transcription script using whisper.cpp.
+Podcast/audio transcription script.
+
+Engine priority: Qwen3-ASR (if available) > whisper.cpp (fallback).
 
 Supports two modes:
 1. RSS feed: Download audio from podcast RSS feed and transcribe
@@ -8,10 +10,13 @@ Supports two modes:
 
 Usage:
     # From RSS feed (--output-dir is required)
-    python .claude/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
+    python .claude/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
 
     # From local audio file
-    python .claude/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
+    python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
+
+    # Force whisper engine
+    python .claude/skills/transcribe/transcribe_podcast.py --audio file.mp3 --engine whisper --model base --title T --show S --output-dir out/
 """
 
 import argparse
@@ -57,8 +62,21 @@ MODEL_SEARCH_PATHS += [
 # whisper-cli binary
 WHISPER_CLI = shutil.which("whisper-cli") or "whisper-cli"
 
+# Qwen3-ASR model path
+QWEN3_MODEL_NAME = "Qwen3-ASR-1.7B-4bit"
 
-def find_model(model_name: str) -> str | None:
+
+def find_qwen3_model() -> str | None:
+    """Find Qwen3-ASR model directory."""
+    models_dir = os.environ.get("MODELS_DIR")
+    if models_dir:
+        candidate = Path(models_dir).expanduser() / QWEN3_MODEL_NAME
+        if candidate.exists():
+            return str(candidate)
+    return None
+
+
+def find_whisper_model(model_name: str) -> str | None:
     """Find whisper model file in known locations."""
     filename = f"ggml-{model_name}.bin"
     for search_path in MODEL_SEARCH_PATHS:
@@ -66,6 +84,32 @@ def find_model(model_name: str) -> str | None:
         if model_path.exists():
             return str(model_path)
     return None
+
+
+def resolve_engine() -> str:
+    """Determine which engine to use: 'qwen3' if available, else 'whisper'."""
+    if find_qwen3_model():
+        return "qwen3"
+    return "whisper"
+
+
+def transcribe_audio_qwen3(audio_path: str, language: str | None = None) -> str | None:
+    """Transcribe audio using Qwen3-ASR via mlx_audio."""
+    model_path = find_qwen3_model()
+    if not model_path:
+        return None
+
+    try:
+        from mlx_audio.stt.utils import load_model
+    except ImportError:
+        print("  Warning: mlx_audio not installed, falling back to whisper")
+        return None
+
+    lang = language or "zh"
+    print(f"  Transcribing with Qwen3-ASR ({QWEN3_MODEL_NAME})...")
+    model = load_model(model_path)
+    result = model.generate(audio_path, language=lang)
+    return result.text.strip() if result.text else None
 
 
 def sanitize_filename(name: str, max_len: int = 50) -> str:
