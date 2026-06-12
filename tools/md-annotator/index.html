@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Markdown Annotator</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div>
+          <h1>MD Annotator</h1>
+          <p>选择 Markdown，选中文本后添加批注。</p>
+        </div>
+        <button id="refreshFiles" title="刷新文件列表">↻</button>
+      </div>
+      <input id="fileFilter" class="search" placeholder="搜索 .md 文件" />
+      <div id="fileList" class="file-list"></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <div class="label">当前文件</div>
+          <div id="currentFile" class="current-file">尚未选择</div>
+        </div>
+        <div class="topbar-actions">
+          <button id="showAnnotationPath" disabled>批注路径</button>
+          <button id="reloadFile" disabled>重新载入</button>
+        </div>
+      </header>
+
+      <section class="content-grid">
+        <article class="reader-wrap">
+          <div id="emptyState" class="empty-state">
+            <h2>选择一个 Markdown 文件开始</h2>
+            <p>页面会渲染正文。拖选一段文字后，在右侧写下你希望 Codex 修改的批注。</p>
+          </div>
+          <div id="reader" class="reader" hidden></div>
+        </article>
+
+        <aside class="annotation-panel">
+          <section class="composer">
+            <div class="label">选中文本</div>
+            <blockquote id="selectedQuote">还没有选中文本</blockquote>
+            <textarea id="commentInput" placeholder="例如：这里改得更口语一点，保留核心观点。"></textarea>
+            <button id="saveAnnotation" disabled>添加批注</button>
+          </section>
+
+          <section class="annotations">
+            <div class="panel-title">
+              <h2>批注</h2>
+              <span id="annotationCount">0</span>
+            </div>
+            <div id="annotationList" class="annotation-list"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

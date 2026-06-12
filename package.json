@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "annotate:md": "node tools/md-annotator/server.js"
+  },
   "dependencies": {
     "defuddle": "^0.13.0"
   }

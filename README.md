@@ -44,6 +44,18 @@ digital-brain-of-me/
 3. **Review past journals**: Browse `weekly-review/` for historical weekly reviews and reflections
 4. **Use with Claude Code**: Say things like "add a content idea about X" or "周记"
 
+## Tools
+
+### Markdown Annotator
+
+Use a local browser UI to annotate Markdown files visually:
+
+```bash
+npm run annotate:md
+```
+
+The tool renders `.md` files and saves comments next to the source file as `*.annotations.json`. See [tools/md-annotator/README.md](tools/md-annotator/README.md).
+
 详细的数据格式、脚本列表和使用指南见 [CLAUDE.md](CLAUDE.md)。
 各模块的详细说明见对应目录下的大写 `.md` 文件（如 `sources/SOURCES.md`、`knowledge/KNOWLEDGE.md`、`investment/INVESTMENT.md`、`weekly-review/WEEKLY-REVIEW.md`）。
 
