@@ -1,0 +1,957 @@
+<!DOCTYPE html><html prefix="dcterms: http://purl.org/dc/terms/" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR</title>
+<!--Generated on Fri Apr  3 14:51:16 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.03074v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.03074v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS1" title="In 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Model Architecture</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS2" title="In 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Iterative Temporal Interaction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS3" title="In 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Speaker-aware Context Cache</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS4" title="In 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Training Objective and Curriculum</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS1" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Implementation Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS2" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Datasets</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS3" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Evaluation Metrics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS4" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Performance Comparison with Baselines</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS5" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Ablation on Training Stages</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS6" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.6 </span>Performance on Long-form Audio</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS7" title="In 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.7 </span>Evaluation of Speaker Attributes</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S4" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: arXiv.org perpetual non-exclusive license
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.03074v1 [eess.AS] 03 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div id="p1" class="ltx_para">
+<p id="p1.1" class="ltx_p">Lin
+Wang
+Sun
+Xie
+Xie
+Liu
+Zhang
+Xie
+</p>
+</div>
+<h1 class="ltx_title ltx_title_document">Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Zhennan
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Shuai
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Zhaokai
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Pengyuan
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Chuan
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jie
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Qiang
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Lei
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_address"><sup id="id4.4.id1" class="ltx_sup">1</sup> Audio, Speech and Language Processing Group (ASLP@NPU), School of Computer Science, Northwestern Polytechnical University 
+<br class="ltx_break"><sup id="id5.5.id2" class="ltx_sup">2</sup> School of Intelligence Science and Technology, Nanjing University 
+<br class="ltx_break"><sup id="id6.6.id3" class="ltx_sup">3</sup> Shanghai Lingguang Zhaxian Technology
+
+</span>
+<span class="ltx_contact ltx_role_email"><a href="2604.03074v1/mailto:znlin@mail.nwpu.edu.cn,%20lxie@nwpu.edu.cn">znlin@mail.nwpu.edu.cn, lxie@nwpu.edu.cn</a>
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Transcribing and understanding multi-speaker conversations requires speech recognition, speaker attribution, and timestamp localization. While speech LLMs excel at single-speaker tasks, multi-speaker scenarios remain challenging due to overlapping speech, backchannels, rapid turn-taking, and context window constraints. We propose Speaker-Reasoner, an end-to-end Speech LLM with agentic multi-turn temporal reasoning. Instead of single-pass inference, the model iteratively analyzes global audio structure, autonomously predicts temporal boundaries, and performs fine-grained segment analysis, jointly modeling speaker identity, gender, timestamps, and transcription. A speaker-aware cache further extends processing to audio exceeding the training context window. Trained with a three-stage progressive strategy, Speaker-Reasoner achieves consistent improvements over strong baselines on AliMeeting and AISHELL-4 datasets, particularly in handling overlapping speech and complex turn-taking<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>https://github.com/ASLP-lab/Speaker-Reasoner</span></span></span>.</p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>speech large language model, full timestamped speaker-attributed ASR, multi-turn interaction
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<figure id="S1.F1" class="ltx_figure"><img src="2604.03074v1/x1.png" id="S1.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="722" height="308" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>The overview of Speaker-Reasoner. The model employs an agentic multi-turn reasoning mechanism on the temporal axis, utilizing an indexing and slicing tool and a speaker-aware context cache to iteratively generate speaker identity, gender, timestamps, and transcription from raw multi-speaker audio.</figcaption>
+</figure>
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p">In real-world multi-speaker conversational scenarios such as meetings and phone calls, comprehensive conversation understanding requires more than speech recognition alone. It demands the joint modeling of speaker attribution, fine-grained timestamp localization, and transcription <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/interspeech/GaoW0000CSS25</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2508-06372</span>]</cite>. This task is essential for applications such as meeting transcription and intelligent assistants, yet it poses significant challenges including overlapping speech, backchannels, and rapid turn-taking, all of which degrade both speaker attribution and transcription accuracy.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">Traditional approaches adopt cascaded frameworks that pipeline independent speaker diarization (SD) and ASR modules <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/slt/RajDCEHH0DYLKLW21</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/icassp/YuZGFDZHXTWQLYM22</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/icassp/CornellJ0S24</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/taslp/BoddekerSWHR24</span>]</cite>. While modular in design, these systems suffer from error propagation between stages, difficulty coordinating outputs in the presence of overlapping speech, and the absence of joint optimization <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2306-13734</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">app15042002</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2508-06372</span>]</cite>. End-to-end approaches have been proposed to address these limitations, with serialized output training (SOT) <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/interspeech/KandaGWMY20</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/interspeech/LiQ0KWYQ023</span>]</cite> emerging as the dominant paradigm. However, SOT-based models rely on single-pass sequence-to-sequence inference and lack specialized mechanisms for complex phenomena such as simultaneous speech and interruptions.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">Recent speech large language models (Speech LLMs) <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2407-10759</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2504-18425</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2507-08128</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2507-16632</span>]</cite> such as MiMo-Audio <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2512-23808</span>]</cite> and Qwen3-Omni <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2509-17765</span>]</cite> have demonstrated strong performance across a range of speech tasks, yet these models are primarily designed for single-speaker scenarios. Recent efforts <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2508-06372</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2601-18184</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2601-06896</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">shi2025trainshortinferlong</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/icassp/MengH0LWWWLM25</span>]</cite> have begun extending Speech LLMs to multi-speaker settings, but three key limitations persist. First, task coverage remains incomplete: full timestamped speaker-attributed ASR (SA-ASR), which jointly models speaker identity, timestamps, and transcription, remains underexplored, and attributes such as speaker gender are often overlooked. Second, inference strategies remain simplistic, relying on single-pass SOT-style decoding without mechanisms tailored to overlapping speech or rapid turn-taking. Third, fixed context windows restrict processing to short segments, preventing the handling of long-form recordings common in real-world applications.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p">Recent visual reasoning advances <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2509-07969</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2510-20579</span>]</cite> demonstrate that complex reasoning problems can be addressed by scaling interaction turns and enriching reasoning patterns. Inspired by this, we observe that SA-ASR inherently requires progressive reasoning along the temporal axis: the model must first understand the overall audio structure as global context, then progressively localize speaker boundaries, and finally perform fine-grained segment analysis. This global-to-local paradigm naturally aligns with multi-turn interaction mechanisms. Therefore, we propose Speaker-Reasoner, an end-to-end Speech LLM for SA-ASR featuring agentic multi-turn reasoning on the temporal axis. Unlike existing methods performing single-turn sequence-to-sequence inference, Speaker-Reasoner employs iterative tool-based interactions: analyzing complete audio for global speaker distribution, autonomously predicting temporal boundaries, extracting and analyzing local slices, and reasoning about whether to continue or terminate.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p id="S1.p5.1" class="ltx_p">The main contributions are as follows.
+(1) We propose <em id="S1.p5.1.1" class="ltx_emph ltx_font_italic">Speaker-Reasoner</em>, an end-to-end Speech LLM for timestamped speaker-attributed ASR that iteratively performs global-to-local temporal inference via boundary proposal and slice-level decoding.
+(2) We introduce a speaker-aware context cache to process long-form recordings beyond the model context window while preserving speaker consistency across segments.
+(3) We develop a three-stage progressive training strategy to equip the model with multi-task speech understanding, temporal interaction capability, and cache usage.
+(4) Experiments on AliMeeting and AISHELL-4 show consistent improvements over strong end-to-end baselines, with notable gains under overlap and rapid turn-taking.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Method</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.1" class="ltx_p">Speaker-Reasoner addresses speaker-attributed ASR for multi-speaker long-form recordings.
+The model takes raw multi-speaker audio as input and produces outputs containing speaker identity, gender, timestamps, and transcription through multi-turn interaction.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p id="S2.p2.1" class="ltx_p">The key challenge is that a single-pass decoder often struggles with overlapping speech and rapid turn-taking, while being constrained by fixed context windows.
+We therefore factor inference into an iterative global-to-local procedure:
+(1) obtain a global speaker inventory summary,
+(2) process the audio in a sequence of temporally indexed observations, and
+(3) maintain cross-chunk speaker consistency with a speaker-aware context cache.
+Figure <a href="#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> illustrates the overall architecture and inference flow.</p>
+</div>
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Model Architecture</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p id="S2.SS1.p1.1" class="ltx_p">Speaker-Reasoner follows an audio-to-text instruction-tuned Speech LLM paradigm,
+consisting of (i) an acoustic encoder, (ii) a modality projector, and (iii) an autoregressive LLM decoder.
+All components are initialized from Qwen3-Omni <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2509-17765</span>]</cite> unless otherwise stated.</p>
+</div>
+<div id="S2.SS1.p2" class="ltx_para ltx_noindent">
+<p id="S2.SS1.p2.1" class="ltx_p"><span id="S2.SS1.p2.1.1" class="ltx_text ltx_font_bold">Acoustic encoder</span>
+Audio Transformer (AuT) encoder from Qwen3-Omni is adopted. Built on the Transformer architecture, this encoder incorporates a Conv2D module that downsamples audio features by a factor of 8, producing a compressed feature sequence at a frame rate of 12.5 Hz.</p>
+</div>
+<div id="S2.SS1.p3" class="ltx_para ltx_noindent">
+<p id="S2.SS1.p3.1" class="ltx_p"><span id="S2.SS1.p3.1.1" class="ltx_text ltx_font_bold">Projector</span>
+A lightweight two-layer MLP projector maps acoustic embeddings into the LLM embedding space, enabling alignment between acoustic tokens and text tokens.</p>
+</div>
+<div id="S2.SS1.p4" class="ltx_para ltx_noindent">
+<p id="S2.SS1.p4.1" class="ltx_p"><span id="S2.SS1.p4.1.1" class="ltx_text ltx_font_bold">LLM decoder</span>
+We use the Thinker module from Qwen3-Omni, a Mixture-of-Experts (MoE) Transformer that
+activates a sparse subset of experts per token, maintaining high model capacity while ensuring computational efficiency.
+The decoder receives the projected audio embeddings <math id="S2.SS1.p4.1.m1" class="ltx_Math" alttext="\mathbf{z}" display="inline" intent=":literal"><semantics><mi>𝐳</mi><annotation encoding="application/x-tex">\mathbf{z}</annotation></semantics></math> concatenated with text instructions
+and previously generated tokens, producing responses autoregressively.</p>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Iterative Temporal Interaction</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p id="S2.SS2.p1.5" class="ltx_p">We perform multi-turn interaction by processing the audio incrementally along the temporal axis.
+At turn <math id="S2.SS2.p1.1.m1" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>, the model receives an observation <math id="S2.SS2.p1.2.m2" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math>, the interaction history <math id="S2.SS2.p1.3.m3" class="ltx_Math" alttext="\mathcal{H}_{i-1}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{H}_{i-1}</annotation></semantics></math>,
+and the speaker-aware cache <math id="S2.SS2.p1.4.m4" class="ltx_Math" alttext="\mathcal{C}_{i-1}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒞</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{C}_{i-1}</annotation></semantics></math> (Section <a href="#S2.SS3" title="2.3 Speaker-aware Context Cache ‣ 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2.3</span></a>),
+and produces (i) speaker identity, gender, timestamps, and transcription within <math id="S2.SS2.p1.5.m5" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math> and (ii) a boundary decision for the next observation window.</p>
+</div>
+<div id="S2.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S2.SS2.p2.3" class="ltx_p"><span id="S2.SS2.p2.3.1" class="ltx_text ltx_font_bold">Observation definition.</span>
+An observation is a contiguous time slice of the original audio,
+<math id="S2.SS2.p2.1.m1" class="ltx_math_unparsed" alttext="O_{i}=x[t_{i}^{\mathrm{st}}:t_{i}^{\mathrm{ed}}]" display="inline" intent=":literal"><semantics><mrow><msub><mi>O</mi><mi>i</mi></msub><mo>=</mo><mi>x</mi><mrow><mo stretchy="false">[</mo><msubsup><mi>t</mi><mi>i</mi><mi>st</mi></msubsup><mo lspace="0.278em" rspace="0.278em">:</mo><msubsup><mi>t</mi><mi>i</mi><mi>ed</mi></msubsup><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">O_{i}=x[t_{i}^{\mathrm{st}}:t_{i}^{\mathrm{ed}}]</annotation></semantics></math>, with <math id="S2.SS2.p2.2.m2" class="ltx_Math" alttext="0\leq t_{1}^{\mathrm{st}}&lt;t_{2}^{\mathrm{st}}&lt;\cdots&lt;t_{N+1}^{\mathrm{st}}\leq T" display="inline" intent=":literal"><semantics><mrow><mn>0</mn><mo>≤</mo><msubsup><mi>t</mi><mn>1</mn><mi>st</mi></msubsup><mo>&lt;</mo><msubsup><mi>t</mi><mn>2</mn><mi>st</mi></msubsup><mo>&lt;</mo><mi mathvariant="normal">⋯</mi><mo>&lt;</mo><msubsup><mi>t</mi><mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow><mi>st</mi></msubsup><mo>≤</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">0\leq t_{1}^{\mathrm{st}}&lt;t_{2}^{\mathrm{st}}&lt;\cdots&lt;t_{N+1}^{\mathrm{st}}\leq T</annotation></semantics></math>.
+The model is thus prompted with the triple <math id="S2.SS2.p2.3.m3" class="ltx_Math" alttext="(O_{i},\,\mathcal{H}_{i-1},\,\mathcal{C}_{i-1})" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>O</mi><mi>i</mi></msub><mo rspace="0.337em">,</mo><msub><mi class="ltx_font_mathcaligraphic">ℋ</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo rspace="0.337em">,</mo><msub><mi class="ltx_font_mathcaligraphic">𝒞</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(O_{i},\,\mathcal{H}_{i-1},\,\mathcal{C}_{i-1})</annotation></semantics></math>.</p>
+</div>
+<div id="S2.SS2.p3" class="ltx_para ltx_noindent">
+<p id="S2.SS2.p3.8" class="ltx_p"><span id="S2.SS2.p3.8.1" class="ltx_text ltx_font_bold">Boundary construction and supervision.</span>
+Training-time observation boundaries are derived from speaker-level segments to encourage the model to resolve turn-taking and partial overlaps.
+Given the current observation <math id="S2.SS2.p3.1.m1" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math>, the subsequent observation <math id="S2.SS2.p3.2.m2" class="ltx_Math" alttext="O_{i+1}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">O_{i+1}</annotation></semantics></math> is defined
+as the nearest speaker segment whose temporal overlap with <math id="S2.SS2.p3.3.m3" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math> falls below a threshold.
+Formally, for two segments <math id="S2.SS2.p3.4.m4" class="ltx_Math" alttext="A" display="inline" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math id="S2.SS2.p3.5.m5" class="ltx_Math" alttext="B" display="inline" intent=":literal"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> with durations <math id="S2.SS2.p3.6.m6" class="ltx_Math" alttext="d_{A}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mi>A</mi></msub><annotation encoding="application/x-tex">d_{A}</annotation></semantics></math>, <math id="S2.SS2.p3.7.m7" class="ltx_Math" alttext="d_{B}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mi>B</mi></msub><annotation encoding="application/x-tex">d_{B}</annotation></semantics></math> and intersection duration <math id="S2.SS2.p3.8.m8" class="ltx_Math" alttext="d_{AB}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mrow><mi>A</mi><mo lspace="0em" rspace="0em">​</mo><mi>B</mi></mrow></msub><annotation encoding="application/x-tex">d_{AB}</annotation></semantics></math>, we require:</p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E1.m1" class="ltx_Math" alttext="\frac{d_{AB}}{d_{A}}&lt;\tau\quad\text{and}\quad\frac{d_{AB}}{d_{B}}&lt;\tau," display="block" intent=":literal"><semantics><mrow><mrow><mrow><mfrac><msub><mi>d</mi><mrow><mi>A</mi><mo lspace="0em" rspace="0em">​</mo><mi>B</mi></mrow></msub><msub><mi>d</mi><mi>A</mi></msub></mfrac><mo>&lt;</mo><mrow><mi>τ</mi><mspace style="width:1em;" width="1em"></mspace><mtext>and</mtext></mrow></mrow><mspace style="width:1em;" width="1em"></mspace><mrow><mfrac><msub><mi>d</mi><mrow><mi>A</mi><mo lspace="0em" rspace="0em">​</mo><mi>B</mi></mrow></msub><msub><mi>d</mi><mi>B</mi></msub></mfrac><mo>&lt;</mo><mi>τ</mi></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\frac{d_{AB}}{d_{A}}&lt;\tau\quad\text{and}\quad\frac{d_{AB}}{d_{B}}&lt;\tau,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS2.p3.11" class="ltx_p">where <math id="S2.SS2.p3.9.m1" class="ltx_Math" alttext="\tau=0.8" display="inline" intent=":literal"><semantics><mrow><mi>τ</mi><mo>=</mo><mn>0.8</mn></mrow><annotation encoding="application/x-tex">\tau=0.8</annotation></semantics></math> in our experiments.
+Segments exceeding this threshold are merged into the same observation for joint processing,
+accommodating heavily overlapping events such as backchannels and simultaneous utterances.
+At inference time, the model outputs discrete boundary tokens representing <math id="S2.SS2.p3.10.m2" class="ltx_Math" alttext="t_{i+1}^{\mathrm{st}}" display="inline" intent=":literal"><semantics><msubsup><mi>t</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mi>st</mi></msubsup><annotation encoding="application/x-tex">t_{i+1}^{\mathrm{st}}</annotation></semantics></math> and <math id="S2.SS2.p3.11.m3" class="ltx_Math" alttext="t_{i+1}^{\mathrm{ed}}" display="inline" intent=":literal"><semantics><msubsup><mi>t</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mi>ed</mi></msubsup><annotation encoding="application/x-tex">t_{i+1}^{\mathrm{ed}}</annotation></semantics></math>, enabling fully autonomous temporal indexing.</p>
+</div>
+<div id="S2.SS2.p4" class="ltx_para ltx_noindent">
+<p id="S2.SS2.p4.1" class="ltx_p"><span id="S2.SS2.p4.1.1" class="ltx_text ltx_font_bold">Interaction protocol.</span>
+In the first turn, the model performs global analysis, outputting a summary of speaker count and gender distribution. In subsequent turns, the model processes each observation <math id="S2.SS2.p4.1.m1" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math> conditioned on the accumulated history. The interaction terminates when the model encloses the consolidated transcript within <span id="S2.SS2.p4.1.2" class="ltx_text ltx_font_typewriter">&lt;answer&gt;</span> and <span id="S2.SS2.p4.1.3" class="ltx_text ltx_font_typewriter">&lt;/answer&gt;</span> tags, yielding a chronologically sorted speaker-attributed transcript.</p>
+</div>
+</section>
+<section id="S2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Speaker-aware Context Cache</h3>
+
+<div id="S2.SS3.p1" class="ltx_para">
+<p id="S2.SS3.p1.1" class="ltx_p">Long-form audio often exceeds the training context window, causing speaker identity drift across chunks. We introduce a speaker-aware cache that supplies speaker-specific acoustic references from previously processed content.</p>
+</div>
+<div id="S2.SS3.p2" class="ltx_para ltx_noindent">
+<p id="S2.SS3.p2.4" class="ltx_p"><span id="S2.SS3.p2.4.1" class="ltx_text ltx_font_bold">Cache entry representation.</span>
+Each cache entry is a tuple:
+<math id="S2.SS3.p2.1.m1" class="ltx_math_unparsed" alttext="c=\bigl(s,\tilde{x}[t_{\mathrm{st}}:t_{\mathrm{ed}}],\tilde{y}\bigr)" display="inline" intent=":literal"><semantics><mrow><mi>c</mi><mo>=</mo><mrow><mo maxsize="1.200em" minsize="1.200em">(</mo><mi>s</mi><mo>,</mo><mover accent="true"><mi>x</mi><mo>~</mo></mover><mrow><mo stretchy="false">[</mo><msub><mi>t</mi><mi>st</mi></msub><mo lspace="0.278em" rspace="0.278em">:</mo><msub><mi>t</mi><mi>ed</mi></msub><mo stretchy="false">]</mo></mrow><mo>,</mo><mover accent="true"><mi>y</mi><mo>~</mo></mover><mo maxsize="1.200em" minsize="1.200em">)</mo></mrow></mrow><annotation encoding="application/x-tex">c=\bigl(s,\tilde{x}[t_{\mathrm{st}}:t_{\mathrm{ed}}],\tilde{y}\bigr)</annotation></semantics></math>
+, where <math id="S2.SS3.p2.2.m2" class="ltx_Math" alttext="s" display="inline" intent=":literal"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> is the speaker label, <math id="S2.SS3.p2.3.m3" class="ltx_Math" alttext="\tilde{x}" display="inline" intent=":literal"><semantics><mover accent="true"><mi>x</mi><mo>~</mo></mover><annotation encoding="application/x-tex">\tilde{x}</annotation></semantics></math> is an audio slice, and <math id="S2.SS3.p2.4.m4" class="ltx_Math" alttext="\tilde{y}" display="inline" intent=":literal"><semantics><mover accent="true"><mi>y</mi><mo>~</mo></mover><annotation encoding="application/x-tex">\tilde{y}</annotation></semantics></math> is the corresponding transcript.
+Cache entries are prepended to the prompt as structured context.</p>
+</div>
+<div id="S2.SS3.p3" class="ltx_para ltx_noindent">
+<p id="S2.SS3.p3.1" class="ltx_p"><span id="S2.SS3.p3.1.1" class="ltx_text ltx_font_bold">Cache training simulation.</span>
+To expose the model to cache usage during training, we employ a random sampling strategy.
+For each training instance, we randomly select a subset of speakers from the same session
+and retrieve 1–5 segments per speaker from non-overlapping earlier audio regions,
+which are prepended as cache context.
+Speaker labels are reassigned by order of first appearance in the augmented input sequence,
+encouraging permutation-invariant speaker assignment and ensuring label continuity
+between the cached history and the current observation.</p>
+</div>
+<div id="S2.SS3.p4" class="ltx_para ltx_noindent">
+<p id="S2.SS3.p4.7" class="ltx_p"><span id="S2.SS3.p4.7.1" class="ltx_text ltx_font_bold">Cache selection at inference.</span>
+During inference, we maintain an observation buffer <math id="S2.SS3.p4.1.m1" class="ltx_Math" alttext="B=\{O_{1},\ldots,O_{n}\}" display="inline" intent=":literal"><semantics><mrow><mi>B</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">B=\{O_{1},\ldots,O_{n}\}</annotation></semantics></math>
+of previously processed segments.
+For each speaker <math id="S2.SS3.p4.2.m2" class="ltx_Math" alttext="s\in S" display="inline" intent=":literal"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s\in S</annotation></semantics></math>, candidate segments are scored jointly by duration and recency: <math id="S2.SS3.p4.3.m3" class="ltx_Math" alttext="\phi=d\cdot\left(1+\alpha\cdot\frac{i}{n}\right)" display="inline" intent=":literal"><semantics><mrow><mi>ϕ</mi><mo>=</mo><mrow><mi>d</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo>(</mo><mrow><mn>1</mn><mo>+</mo><mrow><mi>α</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mfrac><mi>i</mi><mi>n</mi></mfrac></mrow></mrow><mo>)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\phi=d\cdot\left(1+\alpha\cdot\frac{i}{n}\right)</annotation></semantics></math>,
+where <math id="S2.SS3.p4.4.m4" class="ltx_Math" alttext="d" display="inline" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> is the segment duration, <math id="S2.SS3.p4.5.m5" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> is its position in the buffer,
+and <math id="S2.SS3.p4.6.m6" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> controls the recency weight.
+We retain the top-<math id="S2.SS3.p4.7.m7" class="ltx_Math" alttext="k" display="inline" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> segments per speaker as cache entries (Algorithm <a href="#alg1" title="Algorithm 1 ‣ 2.3 Speaker-aware Context Cache ‣ 2 Method ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>).
+These entries provide speaker-specific acoustic references that stabilize identity assignment
+for both recurring and newly emerging speakers.</p>
+</div>
+<figure id="alg1" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span id="alg1.2.1.1" class="ltx_text ltx_font_bold">Algorithm 1</span> </span> Speaker-aware Cache Selection</figcaption>
+<div id="alg1.3" class="ltx_listing ltx_listing">
+<div id="alg1.l1" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l1.5.1.1" class="ltx_text" style="font-size:80%;">1:</span></span>
+<span id="alg1.l1.4" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:402.9pt;"><span class="ltx_rule" style="width:0.0pt;height:6.9pt;--ltx-bg-color:black;display:inline-block;"></span>
+<span id="alg1.l1.4.4" class="ltx_p">Observation buffer <math id="alg1.l1.1.1.m1" class="ltx_Math" alttext="B=\{O_{1},\ldots,O_{n}\}" display="inline" intent=":literal"><semantics><mrow><mi>B</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>O</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>O</mi><mi>n</mi></msub><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">B=\{O_{1},\ldots,O_{n}\}</annotation></semantics></math>, speaker set <math id="alg1.l1.2.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+recency weight <math id="alg1.l1.3.3.m3" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>, cache size <math id="alg1.l1.4.4.m4" class="ltx_Math" alttext="k" display="inline" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></span>
+</span>
+</div>
+<div id="alg1.l2" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l2.2.1.1" class="ltx_text" style="font-size:80%;">2:</span></span>
+<span id="alg1.l2.1" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:407.5pt;"><span class="ltx_rule" style="width:0.0pt;height:6.9pt;--ltx-bg-color:black;display:inline-block;"></span>
+<span id="alg1.l2.1.1" class="ltx_p">Selected cache entries <math id="alg1.l2.1.1.m1" class="ltx_Math" alttext="C" display="inline" intent=":literal"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math></span>
+</span>
+</div>
+<div id="alg1.l3" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l3.3.1.1" class="ltx_text" style="font-size:80%;">3:</span></span>
+<span id="alg1.l3.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:433.6pt;">
+<span id="alg1.l3.2.2" class="ltx_p">Initialize empty candidate list <math id="alg1.l3.1.1.m1" class="ltx_Math" alttext="\mathcal{L}_{s}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{s}</annotation></semantics></math> for each <math id="alg1.l3.2.2.m2" class="ltx_Math" alttext="s\in S" display="inline" intent=":literal"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s\in S</annotation></semantics></math></span>
+</span>
+</div>
+<div id="alg1.l4" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l4.4.1.1" class="ltx_text" style="font-size:80%;">4:</span></span>
+<span id="alg1.l4.3" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:433.6pt;"><span class="ltx_inline-block"><svg id="alg1.l4.1.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l4.3.2" class="ltx_p"><span id="alg1.l4.3.2.1" class="ltx_text ltx_font_bold">for</span> <math id="alg1.l4.2.1.m1" class="ltx_Math" alttext="i=1" display="inline" intent=":literal"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i=1</annotation></semantics></math> <span id="alg1.l4.3.2.2" class="ltx_text ltx_font_bold">to</span> <math id="alg1.l4.3.2.m2" class="ltx_Math" alttext="n" display="inline" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> <span id="alg1.l4.3.2.3" class="ltx_text ltx_font_bold">do</span></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l4.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l4.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l5" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l5.3.1.1" class="ltx_text" style="font-size:80%;">5:</span></span>   <span class="ltx_inline-block"><svg id="alg1.l5.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l5.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:418.6pt;">
+<span id="alg1.l5.1.1" class="ltx_p"><math id="alg1.l5.1.1.m1" class="ltx_Math" alttext="\rho\leftarrow i/n" display="inline" intent=":literal"><semantics><mrow><mi>ρ</mi><mo stretchy="false">←</mo><mrow><mi>i</mi><mo>/</mo><mi>n</mi></mrow></mrow><annotation encoding="application/x-tex">\rho\leftarrow i/n</annotation></semantics></math> <span id="alg1.l5.1.1.1" class="ltx_text"></span></span>
+<span id="S2.Ex1" class="ltx_equation ltx_eqn_table">
+
+<span><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_eqn_cell ltx_align_center"></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+</span>
+<span id="alg1.l5.2.3" class="ltx_p"></span>
+<span id="S2.Ex2" class="ltx_equation ltx_eqn_table">
+
+<span><span class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<span class="ltx_eqn_cell ltx_eqn_center_padleft"></span>
+<span class="ltx_eqn_cell ltx_align_center"></span>
+<span class="ltx_eqn_cell ltx_eqn_center_padright"></span></span></span>
+</span>
+<span id="alg1.l5.2.2" class="ltx_p"><math id="alg1.l5.2.2.m1" class="ltx_Math" alttext="\triangleright" display="inline" intent=":literal"><semantics><mo style="--ltx-fg-color:#808080;" mathcolor="#808080">⊳</mo><annotation encoding="application/x-tex">\triangleright</annotation></semantics></math><span id="alg1.l5.2.2.1" class="ltx_text ltx_font_italic" style="--ltx-fg-color:#808080;"> recency ratio</span></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l5.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l5.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l6" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l6.4.1.1" class="ltx_text" style="font-size:80%;">6:</span></span>   <span class="ltx_inline-block"><svg id="alg1.l6.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l6.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l6.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l6.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l6.3" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:418.6pt;"><span class="ltx_inline-block"><svg id="alg1.l6.1.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l6.3.2" class="ltx_p"><span id="alg1.l6.3.2.1" class="ltx_text ltx_font_bold">for</span> each segment <math id="alg1.l6.2.1.m1" class="ltx_Math" alttext="(s,\,t_{\mathrm{st}},\,t_{\mathrm{ed}},\,\text{text})" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mi>s</mi><mo rspace="0.337em">,</mo><msub><mi>t</mi><mi>st</mi></msub><mo rspace="0.337em">,</mo><msub><mi>t</mi><mi>ed</mi></msub><mo rspace="0.337em">,</mo><mtext>text</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(s,\,t_{\mathrm{st}},\,t_{\mathrm{ed}},\,\text{text})</annotation></semantics></math> in <math id="alg1.l6.3.2.m2" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math> <span id="alg1.l6.3.2.2" class="ltx_text ltx_font_bold">do</span></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l6.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l6.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l7" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l7.3.1.1" class="ltx_text" style="font-size:80%;">7:</span></span>    <span class="ltx_inline-block"><svg id="alg1.l7.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l7.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l7.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l7.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l7.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:403.6pt;"><span class="ltx_inline-block"><svg id="alg1.l7.1.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l7.2.1" class="ltx_p"><span id="alg1.l7.2.1.1" class="ltx_text ltx_font_bold">if</span> <math id="alg1.l7.2.1.m1" class="ltx_Math" alttext="s\in S" display="inline" intent=":literal"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s\in S</annotation></semantics></math> <span id="alg1.l7.2.1.2" class="ltx_text ltx_font_bold">then</span></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l7.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l7.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l8" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l8.2.1.1" class="ltx_text" style="font-size:80%;">8:</span></span>      <span class="ltx_inline-block"><svg id="alg1.l8.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l8.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l8.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l8.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l8.1" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:388.6pt;">
+<span id="alg1.l8.1.1" class="ltx_p"><math id="alg1.l8.1.1.m1" class="ltx_Math" alttext="d\leftarrow t_{\mathrm{ed}}-t_{\mathrm{st}}" display="inline" intent=":literal"><semantics><mrow><mi>d</mi><mo stretchy="false">←</mo><mrow><msub><mi>t</mi><mi>ed</mi></msub><mo>−</mo><msub><mi>t</mi><mi>st</mi></msub></mrow></mrow><annotation encoding="application/x-tex">d\leftarrow t_{\mathrm{ed}}-t_{\mathrm{st}}</annotation></semantics></math></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l8.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l8.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l9" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l9.2.1.1" class="ltx_text" style="font-size:80%;">9:</span></span>      <span class="ltx_inline-block"><svg id="alg1.l9.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l9.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l9.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l9.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l9.1" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:388.6pt;">
+<span id="alg1.l9.1.1" class="ltx_p"><math id="alg1.l9.1.1.m1" class="ltx_Math" alttext="\phi\leftarrow d\cdot(1+\alpha\cdot\rho)" display="inline" intent=":literal"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">←</mo><mrow><mi>d</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>+</mo><mrow><mi>α</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>ρ</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\phi\leftarrow d\cdot(1+\alpha\cdot\rho)</annotation></semantics></math></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l9.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l9.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l10" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l10.3.1.1" class="ltx_text" style="font-size:80%;">10:</span></span>      <span class="ltx_inline-block"><svg id="alg1.l10.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l10.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l10.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l10.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l10.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:388.6pt;">
+<span id="alg1.l10.2.2" class="ltx_p">Append <math id="alg1.l10.1.1.m1" class="ltx_Math" alttext="(O_{i},\,\phi)" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>O</mi><mi>i</mi></msub><mo rspace="0.337em">,</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(O_{i},\,\phi)</annotation></semantics></math> to <math id="alg1.l10.2.2.m2" class="ltx_Math" alttext="\mathcal{L}_{s}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{s}</annotation></semantics></math></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l10.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l10.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l10.pic7" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>    <span class="ltx_inline-block"><svg id="alg1.l10.pic8" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>   <span class="ltx_inline-block"><svg id="alg1.l10.pic9" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l11" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l11.3.1.1" class="ltx_text" style="font-size:80%;">11:</span></span>
+<span id="alg1.l11.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:433.6pt;"><span class="ltx_inline-block"><svg id="alg1.l11.1.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l11.2.1" class="ltx_p"><span id="alg1.l11.2.1.1" class="ltx_text ltx_font_bold">for</span> each speaker <math id="alg1.l11.2.1.m1" class="ltx_Math" alttext="s\in S" display="inline" intent=":literal"><semantics><mrow><mi>s</mi><mo>∈</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">s\in S</annotation></semantics></math> <span id="alg1.l11.2.1.2" class="ltx_text ltx_font_bold">do</span></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l11.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l11.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l12" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l12.3.1.1" class="ltx_text" style="font-size:80%;">12:</span></span>   <span class="ltx_inline-block"><svg id="alg1.l12.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l12.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l12.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l12.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l12.2" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:418.6pt;">
+<span id="alg1.l12.2.2" class="ltx_p">Sort <math id="alg1.l12.1.1.m1" class="ltx_Math" alttext="\mathcal{L}_{s}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{s}</annotation></semantics></math> by <math id="alg1.l12.2.2.m2" class="ltx_Math" alttext="\phi" display="inline" intent=":literal"><semantics><mi>ϕ</mi><annotation encoding="application/x-tex">\phi</annotation></semantics></math> in descending order</span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l12.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l12.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l13" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l13.4.1.1" class="ltx_text" style="font-size:80%;">13:</span></span>   <span class="ltx_inline-block"><svg id="alg1.l13.pic1" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l13.pic2" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l13.pic3" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l13.pic4" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+<span id="alg1.l13.3" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:418.6pt;">
+<span id="alg1.l13.3.3" class="ltx_p"><math id="alg1.l13.1.1.m1" class="ltx_Math" alttext="C[s]\leftarrow" display="inline" intent=":literal"><semantics><mrow><mrow><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">[</mo><mi>s</mi><mo stretchy="false">]</mo></mrow></mrow><mo stretchy="false">←</mo><mi></mi></mrow><annotation encoding="application/x-tex">C[s]\leftarrow</annotation></semantics></math> top-<math id="alg1.l13.2.2.m2" class="ltx_Math" alttext="k" display="inline" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> entries of <math id="alg1.l13.3.3.m3" class="ltx_Math" alttext="\mathcal{L}_{s}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{s}</annotation></semantics></math></span>
+</span> <span class="ltx_inline-block"><svg id="alg1.l13.pic5" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l13.pic6" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span> <span class="ltx_inline-block"><svg id="alg1.l13.pic7" class="ltx_picture" height="1" overflow="visible" version="1.1" viewBox="0 0 1 1" width="1"><g transform="translate(0,1) matrix(1 0 0 -1 0 0)"></g></svg></span>
+</div>
+<div id="alg1.l14" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline"><span id="alg1.l14.2.1.1" class="ltx_text" style="font-size:80%;">14:</span></span>
+<span id="alg1.l14.1" class="ltx_inline-block ltx_minipage ltx_align_top" style="width:433.6pt;">
+<span id="alg1.l14.1.1" class="ltx_p"><span id="alg1.l14.1.1.1" class="ltx_text ltx_font_bold">return</span> <math id="alg1.l14.1.1.m1" class="ltx_Math" alttext="C" display="inline" intent=":literal"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math></span>
+</span>
+</div>
+</div>
+</figure>
+</section>
+<section id="S2.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Training Objective and Curriculum</h3>
+
+<div id="S2.SS4.p1" class="ltx_para">
+<p id="S2.SS4.p1.1" class="ltx_p">We adopt a three-stage curriculum that progressively equips the model with
+(i) multi-task perception, (ii) temporal interaction, and (iii) long-context robustness.</p>
+</div>
+<div id="S2.SS4.p2" class="ltx_para ltx_noindent">
+<p id="S2.SS4.p2.3" class="ltx_p"><span id="S2.SS4.p2.3.1" class="ltx_text ltx_font_bold">Stage 1: Multi-task foundation.</span>
+We train the model with teacher forcing to generate the full structured output sequence
+for each recording, encompassing speaker labels, gender, timestamps, and transcripts.
+The training objective is a standard next-token prediction loss:</p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E2.m1" class="ltx_Math" alttext="\mathcal{L}_{\mathrm{LM}}=-\sum_{t}\log p_{\theta}(w_{t}\mid w_{&lt;t},\,\mathbf{z})," display="block" intent=":literal"><semantics><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>LM</mi></msub><mo>=</mo><mrow><mo>−</mo><mrow><munder><mo movablelimits="false">∑</mo><mi>t</mi></munder><mrow><mrow><mi>log</mi><mo lspace="0.167em">⁡</mo><msub><mi>p</mi><mi>θ</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>w</mi><mi>t</mi></msub><mo>∣</mo><mrow><msub><mi>w</mi><mrow><mi></mi><mo>&lt;</mo><mi>t</mi></mrow></msub><mo rspace="0.337em">,</mo><mi>𝐳</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\mathcal{L}_{\mathrm{LM}}=-\sum_{t}\log p_{\theta}(w_{t}\mid w_{&lt;t},\,\mathbf{z}),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS4.p2.2" class="ltx_p">where <math id="S2.SS4.p2.1.m1" class="ltx_Math" alttext="w_{t}" display="inline" intent=":literal"><semantics><msub><mi>w</mi><mi>t</mi></msub><annotation encoding="application/x-tex">w_{t}</annotation></semantics></math> denotes the <math id="S2.SS4.p2.2.m2" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>-th output token.
+A global summary header listing speaker count and gender distribution is prepended
+to encourage global-to-local processing awareness.</p>
+</div>
+<div id="S2.SS4.p3" class="ltx_para ltx_noindent">
+<p id="S2.SS4.p3.1" class="ltx_p"><span id="S2.SS4.p3.1.1" class="ltx_text ltx_font_bold">Stage 2: Temporal interaction learning.</span>
+The model is trained to operate on observation <math id="S2.SS4.p3.1.m1" class="ltx_Math" alttext="O_{i}" display="inline" intent=":literal"><semantics><msub><mi>O</mi><mi>i</mi></msub><annotation encoding="application/x-tex">O_{i}</annotation></semantics></math> conditioned on interaction history.
+In addition to the language modeling loss, we supervise predicted boundary tokens:</p>
+<table id="S2.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E3.m1" class="ltx_Math" alttext="\mathcal{L}=\mathcal{L}_{\mathrm{LM}}+\lambda\,\mathcal{L}_{\mathrm{bd}}," display="block" intent=":literal"><semantics><mrow><mrow><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo>=</mo><mrow><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>LM</mi></msub><mo>+</mo><mrow><mi>λ</mi><mo lspace="0.170em" rspace="0em">​</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>bd</mi></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\mathcal{L}=\mathcal{L}_{\mathrm{LM}}+\lambda\,\mathcal{L}_{\mathrm{bd}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS4.p3.3" class="ltx_p">where <math id="S2.SS4.p3.2.m1" class="ltx_Math" alttext="\mathcal{L}_{\mathrm{bd}}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>bd</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{\mathrm{bd}}</annotation></semantics></math> is a cross-entropy loss over discretized boundary bins
+and <math id="S2.SS4.p3.3.m2" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> is a balancing weight.</p>
+</div>
+<div id="S2.SS4.p4" class="ltx_para ltx_noindent">
+<p id="S2.SS4.p4.1" class="ltx_p"><span id="S2.SS4.p4.1.1" class="ltx_text ltx_font_bold">Stage 3: Speaker-aware cache learning.</span>
+Cache-conditioned decoding is enabled by prepending sampled historical cache entries
+during training, matching inference-time prompting.
+This stage improves speaker consistency across long-form audio by exposing the model
+to cross-chunk speaker references and enforcing label continuity.</p>
+</div>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Experiments</h2>
+
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Implementation Details</h3>
+
+<div id="S3.SS1.p1" class="ltx_para">
+<p id="S3.SS1.p1.1" class="ltx_p">We initialize Speaker-Reasoner from Qwen3-Omni, a 30B-parameter multimodal LLM with a MoE architecture that activates 3B parameters per forward pass. Training is conducted using the MS-Swift framework <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/aaai/ZhaoHHWMZJWAWZC25</span>]</cite> with Megatron-LM backend on 8 NVIDIA A100 GPUs. We apply LoRA with rank 8 and scaling factor 32 to all linear layers across the audio encoder, projector, and language model. We use the AdamW <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/iclr/LoshchilovH19</span>]</cite> optimizer with a learning rate of 1e-5, cosine schedule, 0.05 warmup fraction, and minimum learning rate of 1e-6. The three training stages are executed sequentially, with each stage initialized from the checkpoint of the previous stage.</p>
+</div>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Datasets</h3>
+
+<div id="S3.SS2.p1" class="ltx_para">
+<p id="S3.SS2.p1.1" class="ltx_p">We conduct experiments on two Mandarin multi-speaker meeting corpora: AliMeeting <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/asru/LiangSYLZDCXQWCLYB23</span>]</cite> and AISHELL-4 <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:conf/interspeech/FuCLJKCHXWBXDC21</span>]</cite>. AliMeeting contains approximately 120 hours of recorded meetings with 2 to 4 speakers per session, captured using an 8-channel microphone array in 15 to 30 square meter meeting rooms. AISHELL-4 comprises 211 sessions totaling around 120 hours of meeting recordings involving 4 to 8 speakers, collected with an 8-channel circular microphone array. Both datasets provide word-level timestamps, speaker identity labels, gender annotations, and manual transcriptions. They also exhibit real-world acoustic challenges including overlapping speech, reverberation, and diverse speaking styles. Following the segmentation protocol in prior work <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">DBLP:journals/corr/abs-2508-06372</span>]</cite>, we use only the first microphone channel and split the original long-form recordings into segments of 40 to 50 seconds based on voice activity detection boundaries for both training and evaluation.</p>
+</div>
+</section>
+<section id="S3.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Evaluation Metrics</h3>
+
+<div id="S3.SS3.p1" class="ltx_para">
+<p id="S3.SS3.p1.1" class="ltx_p">We evaluate speaker diarization using Diarization Error Rate (DER), which measures the fraction of time incorrectly attributed to speakers, encompassing missed speech, false alarms, and speaker confusion errors. For transcription quality, we report Character Error Rate (CER). To jointly assess transcription accuracy and speaker attribution, we adopt concatenated minimum-permutation Character Error Rate (cpCER), which concatenates all utterances per speaker, finds the optimal speaker permutation, and then computes CER. We additionally report <math id="S3.SS3.p1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp, defined as cpCER minus CER, which isolates the error contribution from speaker assignment by factoring out intrinsic transcription errors.
+  </p>
+</div>
+<figure id="S3.T1" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Comparison of speaker diarization and recognition performance on AISHELL4-Eval
+and Alimeeting-Far test sets.
+The proposed models also serve as a stage-wise ablation across training stages.
+<span id="S3.T1.14.1" class="ltx_text ltx_font_bold">Bold</span> denotes the best result in each column.</figcaption>
+<div id="S3.T1.12" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:345.0pt;height:130.1pt;vertical-align:-63.7pt;"><span class="ltx_transformed_inner" style="transform:translate(-149.4pt,56.4pt) scale(0.535900710543809,0.535900710543809) ;">
+<table id="S3.T1.12.12" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S3.T1.12.12.13.1" class="ltx_tr">
+<th id="S3.T1.12.12.13.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt" style="padding-left:5.0pt;padding-right:5.0pt;" rowspan="2"><span id="S3.T1.12.12.13.1.1.1" class="ltx_text ltx_font_bold">Model</span></th>
+<td id="S3.T1.12.12.13.1.2" class="ltx_td ltx_align_center ltx_border_tt" style="padding-left:5.0pt;padding-right:5.0pt;" colspan="4"><span id="S3.T1.12.12.13.1.2.1" class="ltx_text ltx_font_bold">AISHELL4-Eval</span></td>
+<td id="S3.T1.12.12.13.1.3" class="ltx_td ltx_align_center ltx_border_tt" style="padding-left:5.0pt;padding-right:5.0pt;" colspan="4"><span id="S3.T1.12.12.13.1.3.1" class="ltx_text ltx_font_bold">Alimeeting-Far</span></td>
+</tr>
+<tr id="S3.T1.10.10.10" class="ltx_tr">
+<td id="S3.T1.1.1.1.1" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">DER<math id="S3.T1.1.1.1.1.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.2.2.2.2" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">CER<math id="S3.T1.2.2.2.2.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.3.3.3.3" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">cpCER<math id="S3.T1.3.3.3.3.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.5.5.5.5" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">
+<math id="S3.T1.4.4.4.4.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp<math id="S3.T1.5.5.5.5.m2" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.6.6.6.6" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">DER<math id="S3.T1.6.6.6.6.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.7.7.7.7" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">CER<math id="S3.T1.7.7.7.7.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.8.8.8.8" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">cpCER<math id="S3.T1.8.8.8.8.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+<td id="S3.T1.10.10.10.10" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;">
+<math id="S3.T1.9.9.9.9.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp<math id="S3.T1.10.10.10.10.m2" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S3.T1.12.12.14.2" class="ltx_tr">
+<th id="S3.T1.12.12.14.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" style="padding-bottom:1.0pt;padding-left:5.0pt;padding-right:5.0pt;" colspan="9"><span id="S3.T1.12.12.14.2.1.1" class="ltx_text ltx_font_italic">Cascade Baselines</span></th>
+</tr>
+<tr id="S3.T1.12.12.15.3" class="ltx_tr">
+<th id="S3.T1.12.12.15.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  Pyannote3.1 + Paraformer</th>
+<td id="S3.T1.12.12.15.3.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">8.10</td>
+<td id="S3.T1.12.12.15.3.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">19.18</td>
+<td id="S3.T1.12.12.15.3.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">26.24</td>
+<td id="S3.T1.12.12.15.3.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">7.06</td>
+<td id="S3.T1.12.12.15.3.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">19.13</td>
+<td id="S3.T1.12.12.15.3.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">30.15</td>
+<td id="S3.T1.12.12.15.3.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">45.39</td>
+<td id="S3.T1.12.12.15.3.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">15.24</td>
+</tr>
+<tr id="S3.T1.12.12.16.4" class="ltx_tr">
+<th id="S3.T1.12.12.16.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" style="padding-bottom:1.0pt;padding-left:5.0pt;padding-right:5.0pt;" colspan="9"><span id="S3.T1.12.12.16.4.1.1" class="ltx_text ltx_font_italic">End-to-End Baselines</span></th>
+</tr>
+<tr id="S3.T1.11.11.11" class="ltx_tr">
+<th id="S3.T1.11.11.11.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  Gemini-2.5-Pro<sup id="S3.T1.11.11.11.1.1" class="ltx_sup"><span id="S3.T1.11.11.11.1.1.1" class="ltx_text ltx_font_italic">†</span></sup>
+</th>
+<td id="S3.T1.11.11.11.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">36.07</td>
+<td id="S3.T1.11.11.11.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">19.81</td>
+<td id="S3.T1.11.11.11.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">25.11</td>
+<td id="S3.T1.11.11.11.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">5.30</td>
+<td id="S3.T1.11.11.11.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">56.39</td>
+<td id="S3.T1.11.11.11.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">30.16</td>
+<td id="S3.T1.11.11.11.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">39.29</td>
+<td id="S3.T1.11.11.11.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">9.13</td>
+</tr>
+<tr id="S3.T1.12.12.17.5" class="ltx_tr">
+<th id="S3.T1.12.12.17.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  Qwen3-Omni-30B-A3B-Instruct</th>
+<td id="S3.T1.12.12.17.5.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">32.42</td>
+<td id="S3.T1.12.12.17.5.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">14.46</td>
+<td id="S3.T1.12.12.17.5.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">22.22</td>
+<td id="S3.T1.12.12.17.5.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">7.76</td>
+<td id="S3.T1.12.12.17.5.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">37.15</td>
+<td id="S3.T1.12.12.17.5.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">25.40</td>
+<td id="S3.T1.12.12.17.5.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">36.28</td>
+<td id="S3.T1.12.12.17.5.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">10.88</td>
+</tr>
+<tr id="S3.T1.12.12.18.6" class="ltx_tr">
+<th id="S3.T1.12.12.18.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  Qwen2.5-Omni-7B</th>
+<td id="S3.T1.12.12.18.6.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">85.68</td>
+<td id="S3.T1.12.12.18.6.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">33.37</td>
+<td id="S3.T1.12.12.18.6.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">60.45</td>
+<td id="S3.T1.12.12.18.6.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">27.08</td>
+<td id="S3.T1.12.12.18.6.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">91.77</td>
+<td id="S3.T1.12.12.18.6.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">38.13</td>
+<td id="S3.T1.12.12.18.6.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">73.38</td>
+<td id="S3.T1.12.12.18.6.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">35.25</td>
+</tr>
+<tr id="S3.T1.12.12.19.7" class="ltx_tr">
+<th id="S3.T1.12.12.19.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  SpeakerLM (212.25h)</th>
+<td id="S3.T1.12.12.19.7.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">–</td>
+<td id="S3.T1.12.12.19.7.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">17.75</td>
+<td id="S3.T1.12.12.19.7.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">26.14</td>
+<td id="S3.T1.12.12.19.7.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">8.39</td>
+<td id="S3.T1.12.12.19.7.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">–</td>
+<td id="S3.T1.12.12.19.7.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">18.63</td>
+<td id="S3.T1.12.12.19.7.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">32.22</td>
+<td id="S3.T1.12.12.19.7.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">13.59</td>
+</tr>
+<tr id="S3.T1.12.12.20.8" class="ltx_tr">
+<th id="S3.T1.12.12.20.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  SpeakerLM (7638.95h)</th>
+<td id="S3.T1.12.12.20.8.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">–</td>
+<td id="S3.T1.12.12.20.8.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">17.17</td>
+<td id="S3.T1.12.12.20.8.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">18.37</td>
+<td id="S3.T1.12.12.20.8.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">1.20</td>
+<td id="S3.T1.12.12.20.8.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">–</td>
+<td id="S3.T1.12.12.20.8.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.20.8.7.1" class="ltx_text ltx_font_bold">13.97</span></td>
+<td id="S3.T1.12.12.20.8.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.20.8.8.1" class="ltx_text ltx_font_bold">16.05</span></td>
+<td id="S3.T1.12.12.20.8.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">2.08</td>
+</tr>
+<tr id="S3.T1.12.12.21.9" class="ltx_tr">
+<th id="S3.T1.12.12.21.9.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  VibeVoice-ASR</th>
+<td id="S3.T1.12.12.21.9.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">10.88</td>
+<td id="S3.T1.12.12.21.9.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">22.30</td>
+<td id="S3.T1.12.12.21.9.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">26.30</td>
+<td id="S3.T1.12.12.21.9.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">4.00</td>
+<td id="S3.T1.12.12.21.9.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">20.70</td>
+<td id="S3.T1.12.12.21.9.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">34.67</td>
+<td id="S3.T1.12.12.21.9.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">40.54</td>
+<td id="S3.T1.12.12.21.9.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">5.87</td>
+</tr>
+<tr id="S3.T1.12.12.22.10" class="ltx_tr">
+<th id="S3.T1.12.12.22.10.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;">  TagSpeech-Alimeeting</th>
+<td id="S3.T1.12.12.22.10.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">37.51</td>
+<td id="S3.T1.12.12.22.10.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">35.70</td>
+<td id="S3.T1.12.12.22.10.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">53.44</td>
+<td id="S3.T1.12.12.22.10.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">17.74</td>
+<td id="S3.T1.12.12.22.10.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">52.46</td>
+<td id="S3.T1.12.12.22.10.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">47.11</td>
+<td id="S3.T1.12.12.22.10.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">68.74</td>
+<td id="S3.T1.12.12.22.10.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;">21.63</td>
+</tr>
+<tr id="S3.T1.12.12.23.11" class="ltx_tr">
+<th id="S3.T1.12.12.23.11.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" style="padding-bottom:1.0pt;padding-left:5.0pt;padding-right:5.0pt;" colspan="9"><span id="S3.T1.12.12.23.11.1.1" class="ltx_text ltx_font_italic">Ours (Stage-wise Ablation)</span></th>
+</tr>
+<tr id="S3.T1.12.12.24.12" class="ltx_tr" style="--ltx-bg-color:#ECF4FF;">
+<th id="S3.T1.12.12.24.12.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.1.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">  Qwen3-Omni + SOT sft</span></th>
+<td id="S3.T1.12.12.24.12.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.2.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">–</span></td>
+<td id="S3.T1.12.12.24.12.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.3.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">17.65</span></td>
+<td id="S3.T1.12.12.24.12.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.4.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">19.59</span></td>
+<td id="S3.T1.12.12.24.12.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.5.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">1.94</span></td>
+<td id="S3.T1.12.12.24.12.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.6.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">–</span></td>
+<td id="S3.T1.12.12.24.12.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.7.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">24.24</span></td>
+<td id="S3.T1.12.12.24.12.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.8.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">26.03</span></td>
+<td id="S3.T1.12.12.24.12.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.24.12.9.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">1.79</span></td>
+</tr>
+<tr id="S3.T1.12.12.25.13" class="ltx_tr" style="--ltx-bg-color:#ECF4FF;">
+<th id="S3.T1.12.12.25.13.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.1.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">  Speaker-Reasoner Base (Stage 1)</span></th>
+<td id="S3.T1.12.12.25.13.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.2.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">6.24</span></td>
+<td id="S3.T1.12.12.25.13.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.3.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">14.04</span></td>
+<td id="S3.T1.12.12.25.13.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.4.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">16.54</span></td>
+<td id="S3.T1.12.12.25.13.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.5.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">2.50</span></td>
+<td id="S3.T1.12.12.25.13.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.6.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">8.96</span></td>
+<td id="S3.T1.12.12.25.13.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.7.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">21.16</span></td>
+<td id="S3.T1.12.12.25.13.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.8.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">22.64</span></td>
+<td id="S3.T1.12.12.25.13.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.25.13.9.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">1.48</span></td>
+</tr>
+<tr id="S3.T1.12.12.26.14" class="ltx_tr" style="--ltx-bg-color:#ECF4FF;">
+<th id="S3.T1.12.12.26.14.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.1.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">  Speaker-Reasoner Multi-turn (Stage 2)</span></th>
+<td id="S3.T1.12.12.26.14.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.2.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#ECF4FF;">5.19</span></td>
+<td id="S3.T1.12.12.26.14.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.3.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#ECF4FF;">13.83</span></td>
+<td id="S3.T1.12.12.26.14.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.4.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">14.93</span></td>
+<td id="S3.T1.12.12.26.14.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.5.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">1.10</span></td>
+<td id="S3.T1.12.12.26.14.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.6.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">7.47</span></td>
+<td id="S3.T1.12.12.26.14.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.7.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">20.34</span></td>
+<td id="S3.T1.12.12.26.14.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.8.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">20.29</span></td>
+<td id="S3.T1.12.12.26.14.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.26.14.9.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">-0.05</span></td>
+</tr>
+<tr id="S3.T1.12.12.27.15" class="ltx_tr" style="--ltx-bg-color:#C5DAFB;">
+<th id="S3.T1.12.12.27.15.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.1.1" class="ltx_text" style="--ltx-bg-color:#C5DAFB;">  <span id="S3.T1.12.12.27.15.1.1.1" class="ltx_text ltx_font_bold">Speaker-Reasoner Multi-turn w/ SAC (Stage 3)</span></span></th>
+<td id="S3.T1.12.12.27.15.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.2.1" class="ltx_text" style="--ltx-bg-color:#C5DAFB;">5.26</span></td>
+<td id="S3.T1.12.12.27.15.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.3.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#C5DAFB;">13.83</span></td>
+<td id="S3.T1.12.12.27.15.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.4.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#C5DAFB;">14.73</span></td>
+<td id="S3.T1.12.12.27.15.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.5.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#C5DAFB;">0.90</span></td>
+<td id="S3.T1.12.12.27.15.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.6.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#C5DAFB;">7.34</span></td>
+<td id="S3.T1.12.12.27.15.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.7.1" class="ltx_text" style="--ltx-bg-color:#C5DAFB;">20.57</span></td>
+<td id="S3.T1.12.12.27.15.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.8.1" class="ltx_text" style="--ltx-bg-color:#C5DAFB;">20.43</span></td>
+<td id="S3.T1.12.12.27.15.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.27.15.9.1" class="ltx_text" style="--ltx-bg-color:#C5DAFB;">-0.14</span></td>
+</tr>
+<tr id="S3.T1.12.12.28.16" class="ltx_tr" style="--ltx-bg-color:#ECF4FF;">
+<th id="S3.T1.12.12.28.16.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.1.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">  <span id="S3.T1.12.12.28.16.1.1.1" class="ltx_text" style="font-size:90%;">Speaker-Reasoner Base 7B</span></span></th>
+<td id="S3.T1.12.12.28.16.2" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.2.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">12.00</span></td>
+<td id="S3.T1.12.12.28.16.3" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.3.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">15.65</span></td>
+<td id="S3.T1.12.12.28.16.4" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.4.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">25.60</span></td>
+<td id="S3.T1.12.12.28.16.5" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.5.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">9.95</span></td>
+<td id="S3.T1.12.12.28.16.6" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.6.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">18.43</span></td>
+<td id="S3.T1.12.12.28.16.7" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.7.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">24.97</span></td>
+<td id="S3.T1.12.12.28.16.8" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.8.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">38.12</span></td>
+<td id="S3.T1.12.12.28.16.9" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.28.16.9.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">13.15</span></td>
+</tr>
+<tr id="S3.T1.12.12.29.17" class="ltx_tr" style="--ltx-bg-color:#ECF4FF;">
+<th id="S3.T1.12.12.29.17.1" class="ltx_td ltx_align_left ltx_th ltx_th_row" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.1.1" class="ltx_text" style="--ltx-bg-color:#ECF4FF;">  <span id="S3.T1.12.12.29.17.1.1.1" class="ltx_text" style="font-size:90%;">Speaker-Reasoner Multi-turn 7B</span></span></th>
+<td id="S3.T1.12.12.29.17.2" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.2.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">9.38</span></td>
+<td id="S3.T1.12.12.29.17.3" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.3.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">15.31</span></td>
+<td id="S3.T1.12.12.29.17.4" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.4.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">22.91</span></td>
+<td id="S3.T1.12.12.29.17.5" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.5.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">7.60</span></td>
+<td id="S3.T1.12.12.29.17.6" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.6.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">15.56</span></td>
+<td id="S3.T1.12.12.29.17.7" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.7.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">24.33</span></td>
+<td id="S3.T1.12.12.29.17.8" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.8.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">34.81</span></td>
+<td id="S3.T1.12.12.29.17.9" class="ltx_td ltx_align_center" style="padding-left:5.0pt;padding-right:5.0pt;"><span id="S3.T1.12.12.29.17.9.1" class="ltx_text" style="font-size:90%;--ltx-bg-color:#ECF4FF;">10.48</span></td>
+</tr>
+</tbody>
+<tfoot class="ltx_tfoot">
+<tr id="S3.T1.12.12.12" class="ltx_tr">
+<th id="S3.T1.12.12.12.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt" style="padding-left:5.0pt;padding-right:5.0pt;" colspan="9">
+<sup id="S3.T1.12.12.12.1.1" class="ltx_sup"><span id="S3.T1.12.12.12.1.1.1" class="ltx_text ltx_font_italic" style="font-size:80%;">†</span></sup><span id="S3.T1.12.12.12.1.2" class="ltx_text" style="font-size:80%;"> Closed-source model.  DER unavailable for SpeakerLM and SOT-based models due to incompatible output formats.</span>
+</th>
+</tr>
+</tfoot>
+</table>
+</span></div>
+</figure>
+</section>
+<section id="S3.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Performance Comparison with Baselines</h3>
+
+<div id="S3.SS4.p1" class="ltx_para">
+<p id="S3.SS4.p1.1" class="ltx_p">Table <a href="#S3.T1" title="Table 1 ‣ 3.3 Evaluation Metrics ‣ 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> compares Speaker-Reasoner against competitive baselines on AISHELL4-Eval and Alimeeting-Far test sets. Our models achieve state-of-the-art performance across all metrics. Specifically, Speaker-Reasoner Multi-turn w/ SAC achieves a DER of 5.26% and cpCER of 14.73% on AISHELL4, significantly outperforming the closed-source Gemini-2.5-Pro. On the more challenging Alimeeting-Far, our model maintains superiority with a DER of 7.34% and cpCER of 20.43%, effectively handling complex speaker overlaps.</p>
+</div>
+<div id="S3.SS4.p2" class="ltx_para">
+<p id="S3.SS4.p2.2" class="ltx_p">A notable observation is the <math id="S3.SS4.p2.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp of -0.14% achieved by our best model on Alimeeting-Far. While <math id="S3.SS4.p2.2.m2" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp is typically positive due to speaker attribution errors, a negative value indicates that cpCER is slightly lower than standard CER. This occurs because the concatenated minimum-permutation alignment in cpCER calculation can compensate for minor transcription inaccuracies when the model achieves high speaker tracking precision.</p>
+</div>
+<div id="S3.SS4.p3" class="ltx_para">
+<p id="S3.SS4.p3.1" class="ltx_p">We further validate the architecture by evaluating 7B-parameter variants. Speaker-Reasoner Multi-turn 7B outperforms specialized baselines such as VibeVoice-ASR and SpeakerLM (7638.95h) that utilize significantly more data. Our 7B model achieves cpCER of 22.91% and 34.81% on the two sets respectively, substantially improving over zero-shot Qwen2.5-Omni-7B. These results demonstrate that our three-stage training and multi-turn reasoning enable superior timestamped speaker-attributed ASR performance even under constrained data and parameter scales.</p>
+</div>
+</section>
+<section id="S3.SS5" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Ablation on Training Stages</h3>
+
+<figure id="S3.T2" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 2: </span>Performance on long-form AISHELL4-Eval without segmentation.</figcaption>
+<table id="S3.T2.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S3.T2.1.1.1" class="ltx_tr">
+<th id="S3.T2.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" style="padding-top:-0.5pt;padding-bottom:-0.5pt;" rowspan="2"><span id="S3.T2.1.1.1.1.1" class="ltx_text ltx_font_bold">Model</span></th>
+<th id="S3.T2.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" style="padding-top:-0.5pt;padding-bottom:-0.5pt;" colspan="2"><span id="S3.T2.1.1.1.2.1" class="ltx_text ltx_font_bold">AISHELL4-Eval</span></th>
+</tr>
+<tr id="S3.T2.1.2.2" class="ltx_tr">
+<th id="S3.T2.1.2.2.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">DER</th>
+<th id="S3.T2.1.2.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">cpCER</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S3.T2.1.3.1" class="ltx_tr">
+<th id="S3.T2.1.3.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">Gemini-2.5-Pro</th>
+<td id="S3.T2.1.3.1.2" class="ltx_td ltx_align_center ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T2.1.3.1.2.1" class="ltx_text ltx_font_bold">15.32</span></td>
+<td id="S3.T2.1.3.1.3" class="ltx_td ltx_align_center ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T2.1.3.1.3.1" class="ltx_text ltx_font_bold">31.59</span></td>
+</tr>
+<tr id="S3.T2.1.4.2" class="ltx_tr">
+<th id="S3.T2.1.4.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">Speaker-Reasoner Multi-turn w/ SAC</th>
+<td id="S3.T2.1.4.2.2" class="ltx_td ltx_align_center ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">21.60</td>
+<td id="S3.T2.1.4.2.3" class="ltx_td ltx_align_center ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">36.20</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div id="S3.SS5.p1" class="ltx_para">
+<p id="S3.SS5.p1.1" class="ltx_p">Table <a href="#S3.T1" title="Table 1 ‣ 3.3 Evaluation Metrics ‣ 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> illustrates performance evolution across the three training stages. The transition from base to multi-turn interaction yields substantial improvements, with reductions in DER, cpCER, and <math id="S3.SS5.p1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>cp across both evaluation sets. This confirms that agentic reasoning effectively captures complex temporal dependencies and speaker transitions. Furthermore, the stability of DER and cpCER upon integrating SAC demonstrates that the cache extends model capabilities without compromising diarization or recognition accuracy.</p>
+</div>
+</section>
+<section id="S3.SS6" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.6 </span>Performance on Long-form Audio</h3>
+
+<div id="S3.SS6.p1" class="ltx_para">
+<p id="S3.SS6.p1.1" class="ltx_p">Table <a href="#S3.T2" title="Table 2 ‣ 3.5 Ablation on Training Stages ‣ 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> evaluates Speaker-Reasoner on long-form AISHELL4-Eval recordings without manual segmentation. Speaker-Reasoner Multi-turn w/ SAC achieves DER of 21.60% and cpCER of 36.20%. Although Gemini-2.5-Pro maintains a lead in these metrics, the results indicate that the speaker-aware cache effectively enables the model to maintain context across extended durations.</p>
+</div>
+</section>
+<section id="S3.SS7" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.7 </span>Evaluation of Speaker Attributes</h3>
+
+<figure id="S3.T3" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 3: </span>Gender prediction accuracy (ACC) and speaker count accuracy (SCA) on AISHELL4-Eval. SCA measures whether the predicted number of speakers matches the ground truth.</figcaption>
+<table id="S3.T3.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S3.T3.1.1.1" class="ltx_tr">
+<th id="S3.T3.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T3.1.1.1.1.1" class="ltx_text ltx_font_bold">Model</span></th>
+<th id="S3.T3.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T3.1.1.1.2.1" class="ltx_text ltx_font_bold">ACC</span></th>
+<th id="S3.T3.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T3.1.1.1.3.1" class="ltx_text ltx_font_bold">SCA</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S3.T3.1.2.1" class="ltx_tr">
+<td id="S3.T3.1.2.1.1" class="ltx_td ltx_align_left ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">Gemini-2.5-Pro</td>
+<td id="S3.T3.1.2.1.2" class="ltx_td ltx_align_center ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">94.80</td>
+<td id="S3.T3.1.2.1.3" class="ltx_td ltx_align_center ltx_border_t" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">67.03</td>
+</tr>
+<tr id="S3.T3.1.3.2" class="ltx_tr">
+<td id="S3.T3.1.3.2.1" class="ltx_td ltx_align_left" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">Qwen3-Omni-30B-A3B-Instruct</td>
+<td id="S3.T3.1.3.2.2" class="ltx_td ltx_align_center" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">97.12</td>
+<td id="S3.T3.1.3.2.3" class="ltx_td ltx_align_center" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">60.49</td>
+</tr>
+<tr id="S3.T3.1.4.3" class="ltx_tr">
+<td id="S3.T3.1.4.3.1" class="ltx_td ltx_align_left ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;">Speaker-Reasoner Multi-turn</td>
+<td id="S3.T3.1.4.3.2" class="ltx_td ltx_align_center ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T3.1.4.3.2.1" class="ltx_text ltx_font_bold">96.80</span></td>
+<td id="S3.T3.1.4.3.3" class="ltx_td ltx_align_center ltx_border_bb" style="padding-top:-0.5pt;padding-bottom:-0.5pt;"><span id="S3.T3.1.4.3.3.1" class="ltx_text ltx_font_bold">69.03</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div id="S3.SS7.p1" class="ltx_para">
+<p id="S3.SS7.p1.1" class="ltx_p">Table <a href="#S3.T3" title="Table 3 ‣ 3.7 Evaluation of Speaker Attributes ‣ 3 Experiments ‣ Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> evaluates gender prediction accuracy (ACC) and speaker count accuracy (SCA) on AISHELL4-Eval. Speaker-Reasoner Multi-turn achieves gender accuracy of 96.80% and SCA of 69.03%, outperforming Gemini-2.5-Pro and zero-shot Qwen3-Omni. These results indicate that iterative global-to-local reasoning enables more reliable speaker distinction in complex multi-speaker audio, thereby improving global speaker composition estimation.</p>
+</div>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Conclusion</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.1" class="ltx_p">In this work, we present Speaker-Reasoner, an end-to-end Speech LLM for timestamped speaker-attributed ASR. We introduce an agentic multi-turn reasoning mechanism that shifts inference from single-pass decoding to iterative global-to-local reasoning. This enables the model to autonomously resolve complex multi-speaker scenarios, while a speaker-aware cache ensures speaker consistency across long-form recordings.
+Experiments on AliMeeting and AISHELL-4 demonstrate superior performance, suggesting the potential of scaling interaction turns and reasoning patterns for conversation understanding in speech LLMs.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+</ul>
+</section><div class="ltx_rdf" about="" property="dcterms:title" content="{Under review}"></div>
+
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.03074v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>
