@@ -17,7 +17,7 @@ knowledge/ai/
 - 长文、论文、thread 使用 `paper-reading` skill 处理
 - 元数据登记在 `sources/sources.jsonl`
 - `output` 指向本目录下的主题笔记，例如 `knowledge/ai/20260327a-autoharness/notes.md`
-- 目录命名格式 `YYYYMMDD-slug`（发布日期前缀 + 英文短标题），同日多篇追加字母
+- 目录命名格式 `YYYYMMDD-slug`（阅读日期前缀 + 英文短标题），同日多篇追加字母
 - 文章重点若是组织管理而非 AI 机制，放到 `knowledge/organizations/`
 
 ## Scope
