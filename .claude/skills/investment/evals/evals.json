@@ -49,6 +49,25 @@
           {"name": "sources_updated", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "R099O5G2T"}
         ]
       }
+    },
+    {
+      "id": 4,
+      "prompt": "洪灏发布了新的采访文章：https://www.scmp.com/business/banking-finance/article/3357948/how-are-chinese-firms-faring-ai-and-tech-reshape-global-market-cap-rankings\n\n（eval 环境无法访问浏览器，文章全文已在 .claude/skills/investment/evals/fixtures/eval_4_scmp_article.md）",
+      "expected_output": "1. 保存英文原文 article.md 到 investment/洪灏/ 下\n2. 生成中文翻译 article-zh.md（因为原文是英文）\n3. 生成精读笔记 notes.md\n4. 更新 investment/洪灏/洪灏.md 索引（含翻译和笔记链接）\n5. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "106db13",
+        "checks": [
+          {"name": "article_saved", "type": "glob_exists", "pattern": "investment/洪灏/**/article.md"},
+          {"name": "chinese_translation_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/article-zh.md"},
+          {"name": "translation_has_chinese", "type": "glob_file_contains", "pattern": "investment/洪灏/**/article-zh.md", "contains": "科技"},
+          {"name": "notes_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes.md"},
+          {"name": "notes_has_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes.md", "contains": "市值"},
+          {"name": "index_has_translation_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "article-zh.md"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes.md"},
+          {"name": "sources_registered", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "3357948"}
+        ]
+      }
     }
   ]
 }
