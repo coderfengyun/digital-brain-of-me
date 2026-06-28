@@ -1,7 +1,7 @@
 # 川普2.0与我们的策略选择
 
 **Show:** 卢麒元
-**Date:** 2026-06-28
+**Date:** 2024-11-30
 **Language:** zh
 **Model:** Qwen3-ASR-1.7B-4bit
 
