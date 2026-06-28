@@ -21,6 +21,8 @@ grep '招商证券' investment/投资日志整理/交易日志汇总表.csv | ta
 
 ### Step 1：币安（API）
 
+**现货：**
+
 ```bash
 # 不要用 --all（400+ 交易对会触发限速），指定近期活跃品种
 python3 .claude/skills/investment/scripts/fetch_binance_trades.py \
@@ -32,6 +34,17 @@ python3 .claude/skills/investment/scripts/write_trade_journal.py import-binance 
 ```
 
 > 如果 import 因金额偏差 >1% 跳过记录（手续费导致），用 `add` 手动添加。
+
+**合约（USDT-M）：**
+
+```bash
+python3 .claude/skills/investment/scripts/fetch_binance_futures.py \
+  --start START_DATE --end END_DATE \
+  -o /tmp/binance_futures.csv
+```
+
+> 合约 API 限制单次最多7天，脚本自动分段查询。
+> 合约交易需用 `write_trade_journal.py add` 手动录入（品种填"BTC合约"，备注标注开仓/平仓及PnL）。
 
 ### Step 2：富途（需 FutuOpenD 运行，端口 11111）
 
