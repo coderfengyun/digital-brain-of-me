@@ -18,7 +18,8 @@ digital-brain-of-me/
 ├── work-standard/     工作标准与示例
 ├── env/               环境与依赖管理
 ├── docs/              设计文档与方法论
-├── .claude/skills/    复杂工作流的指令和脚本
+├── .codex/skills/     Codex 复杂工作流的指令和脚本
+├── .claude/skills/    Claude 复杂工作流的指令和脚本（保留）
 └── CLAUDE.md          本文件（项目结构与约束）
 ```
 
@@ -29,7 +30,7 @@ digital-brain-of-me/
 | `identity/` | 用户身份定义与表达风格 | `identity/voice/style.md`（内容创作前必读） |
 | `content/` | 创意 → 草稿 → 发布的完整内容流程 | `content/CONTENT.md` |
 | `knowledge/` | 书签、学习笔记、AI/组织研究等知识沉淀 | `knowledge/KNOWLEDGE.md` |
-| `investment/` | 投资研究、交易日志、盈亏计算 | `investment/INVESTMENT.md`（复杂工作流由 `.claude/skills/investment/` 驱动） |
+| `investment/` | 投资研究、交易日志、盈亏计算 | `investment/INVESTMENT.md`（Codex 复杂工作流由 `.codex/skills/investment/` 驱动） |
 | `sources/` | 外部来源（论文、播客、文章）注册表 | `sources/SOURCES.md`（注册后路由到对应 skill） |
 | `operations/` | 任务管理、目标跟踪、会议记录、指标 | `operations/OPERATIONS.md` |
 | `weekly-review/` | 周记 | `weekly-review/WEEKLY-REVIEW.md`（文件命名：`YYYY-MM-DD~MM-DD.md`） |
@@ -69,4 +70,3 @@ digital-brain-of-me/
 - 执行 Python 脚本前先读 `env/ENV.md`，按其要求选择运行方式
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令
-
