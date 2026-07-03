@@ -1,0 +1,73 @@
+{
+  "$schema": "./evals.schema.json",
+  "skill_name": "investment",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "增加一下卢麒元 04-26 在微博 vip 群的发言：\n## 2026-04-26\n下文，可能在下周的东京。日元连续冲击160，下周要给一个说法。贝嫂不介意日元冲击180。然而，日本通胀已经接近临界点了。植田和男敢不敢加息或抛售美债呢？如果敢，月底的戏就精彩了。\n事实上，一切大宗商品皆密切相关能源价格。以往，东大会先吞下通胀，给西方一个缓冲时间。这一次，东大不会再输出通缩了。因为，东大已经懂得使用汇率工具了。人民币稳定升值，进出口自动完成平衡。相反，适度输出通胀，有利于内部产业结构调整和升级转型。\n\n意思是，由中东的廉价能源和中国廉价商品构成的强美元的基座开始崩塌了。全世界（除中国），将于下半年陷入恶性通胀周期。恶性通胀将螺旋式发散，导致中小经济体陷入危机。最终，会反噬美国的资本市场。\n\n我大体上完成了十八个月资本流转的沙盘推演。我惊叹巴菲特和李嘉诚的先知先觉。我约略看到贝森特和沃什的未来操作。当沃什准备缩表的时候，我预感到了向心坍缩的时间节点。\n最近，鸭梨山大，原因在于一些人不想让我说话。或者，不希望一些信息传到决策层耳中。因为，未来十八个月，最大的变量就是中国的经济政策。\n好吧，不理会外部干扰。我们先做好我们自己的事。从短股长金到金转油，逻辑是明晰而精准的。请按既定方针办。\n至于，向心坍缩的相关准备，不用向巴菲特那样前置和极端。能源和粮食这一波次应该拿下，其余的安排还有时间和空间。\n感谢有你们同行，感谢与你们共同观赏这百年难遇的世纪风光。",
+      "expected_output": "1. 将发言追加到 investment/卢麒元/微博VIP群发言.md 顶部（倒序）\n2. 更新 investment/卢麒元/卢麒元.md 关键观点速查表（新观点：强美元基座崩塌、中国输出通胀、沃什缩表→向心坍缩时点）",
+      "files": [],
+      "fixture": {
+        "base_commit": "8e71757",
+        "checks": [
+          {"name": "content_appended", "type": "file_contains", "file": "investment/卢麒元/微博VIP群发言.md", "contains": "## 2026-04-26"},
+          {"name": "correct_order", "type": "line_order", "file": "investment/卢麒元/微博VIP群发言.md", "first": "2026-04-26", "second": "2026-04-18"},
+          {"name": "index_updated", "type": "file_contains", "file": "investment/卢麒元/卢麒元.md", "contains": "04-26"},
+          {"name": "has_strong_dollar_insight", "type": "file_contains", "file": "investment/卢麒元/卢麒元.md", "contains": "强美元"},
+          {"name": "no_duplicate_collapse", "type": "count_max", "file": "investment/卢麒元/卢麒元.md", "pattern": "向心坍缩", "max_count": 3}
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "prompt": "weibo 页面里是洪灏最新的采访视频，转录一下，翻译成中文，并读一下。https://weibo.com/7799274131/QF15AxiAv\n\n（eval 环境无法访问浏览器和视频，转录结果在 .codex/skills/investment/evals/fixtures/eval_2_transcript.md）",
+      "expected_output": "1. 文件保存到 investment/洪灏/ 下（而非 sources/ 或其他位置）\n2. sources/ 目录下不应出现该文件\n3. 更新 investment/洪灏/洪灏.md 索引，添加该采访链接",
+      "files": [],
+      "fixture": {
+        "base_commit": "69ad016",
+        "checks": [
+          {"name": "transcript_under_author_dir", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "20-25%"},
+          {"name": "not_in_sources", "type": "glob_file_not_contains", "pattern": "sources/**/*.md", "contains": "20-25%"},
+          {"name": "index_has_date", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "2026-05-12"},
+          {"name": "has_chinese_translation", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "泡沫"}
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "prompt": "洪灏发了个微博视频，标题《半导体超级周期？？》，链接 https://weibo.com/7799274131/R099O5G2T，发布于2026-05-19。\n\n（eval 环境无法访问浏览器和视频，转录结果已在 .codex/skills/investment/evals/fixtures/eval_3_video_transcript.md）\n\n请基于转录内容完成完整流程：生成精读笔记，更新洪灏索引。",
+      "expected_output": "1. 在 investment/洪灏/ 下某子目录生成精读笔记（notes*.md）\n2. 笔记包含核心观点（债息、半导体、15%调整、沃什缩表、60/40失效）\n3. 更新 investment/洪灏/洪灏.md 索引，包含视频链接和笔记链接\n4. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "d383279",
+        "checks": [
+          {"name": "notes_file_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes*.md"},
+          {"name": "notes_has_debt_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "债息"},
+          {"name": "notes_has_semiconductor", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "半导体"},
+          {"name": "notes_has_adjustment", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "15%"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes"},
+          {"name": "sources_updated", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "R099O5G2T"}
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "洪灏发布了新的采访文章：https://www.scmp.com/business/banking-finance/article/3357948/how-are-chinese-firms-faring-ai-and-tech-reshape-global-market-cap-rankings\n\n（eval 环境无法访问浏览器，文章全文已在 .codex/skills/investment/evals/fixtures/eval_4_scmp_article.md）",
+      "expected_output": "1. 保存英文原文 article.md 到 investment/洪灏/ 下\n2. 生成中文翻译 article-zh.md（因为原文是英文）\n3. 生成精读笔记 notes.md\n4. 更新 investment/洪灏/洪灏.md 索引（含翻译和笔记链接）\n5. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "106db13",
+        "checks": [
+          {"name": "article_saved", "type": "glob_exists", "pattern": "investment/洪灏/**/article.md"},
+          {"name": "chinese_translation_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/article-zh.md"},
+          {"name": "translation_has_chinese", "type": "glob_file_contains", "pattern": "investment/洪灏/**/article-zh.md", "contains": "科技"},
+          {"name": "notes_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes.md"},
+          {"name": "notes_has_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes.md", "contains": "市值"},
+          {"name": "index_has_translation_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "article-zh.md"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes.md"},
+          {"name": "sources_registered", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "3357948"}
+        ]
+      }
+    }
+  ]
+}
