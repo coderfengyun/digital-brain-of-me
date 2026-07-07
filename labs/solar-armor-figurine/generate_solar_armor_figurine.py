@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Generate a stylized solar-armor hero figurine as an ASCII STL.
+"""Generate a printable full-body solar-armor hero figurine as an ASCII STL.
 
-The model is an original, printable approximation inspired by a silver/red
-tokusatsu-style armored hero with a sun chest crest. Units are millimeters.
+The model is a fan-made, printable approximation of an Arc-style solar armor
+hero silhouette: silver/red suit, raised fists, large sun chest armor, shoulder
+guards, and wing-like forearm armor. Units are millimeters.
 """
 
 from __future__ import annotations
@@ -14,7 +15,7 @@ import numpy as np
 
 
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT / "generated" / "solar_armor_hero_figurine.stl"
+OUT = ROOT / "generated" / "arc_solar_armor_full_figurine.stl"
 
 
 class Mesh:
@@ -157,7 +158,7 @@ def triangular_prism(points2d, z0, z1) -> Mesh:
     return mesh
 
 
-def sun_crest(center=(0, -19.5, 92), radius=9.0) -> Mesh:
+def sun_crest(center=(0, -20.5, 92), radius=10.0) -> Mesh:
     mesh = Mesh()
     mesh.extend(cylinder_between([center[0], center[1] - 2, center[2]], [center[0], center[1] + 2, center[2]], radius, seg=32))
     for i in range(12):
@@ -179,6 +180,30 @@ def sun_crest(center=(0, -19.5, 92), radius=9.0) -> Mesh:
     return mesh
 
 
+def armor_petal(center, angle, inner, outer, width, y0, y1) -> Mesh:
+    cx, _, cz = center
+    pts = [
+        (cx + inner * math.cos(angle - width), cz + inner * math.sin(angle - width)),
+        (cx + outer * math.cos(angle), cz + outer * math.sin(angle)),
+        (cx + inner * math.cos(angle + width), cz + inner * math.sin(angle + width)),
+    ]
+    return xz_prism(pts, y0, y1)
+
+
+def solar_breastplate() -> Mesh:
+    mesh = Mesh()
+    center = (0, -22, 91)
+    for i in range(10):
+        angle = math.radians(-155 + i * 34)
+        mesh.extend(armor_petal(center, angle, 12.0, 24.0, 0.18, -22.8, -14.8))
+    mesh.extend(xz_prism([(-22, 82), (-10, 112), (0, 103)], -21.5, -15.0))
+    mesh.extend(xz_prism([(22, 82), (10, 112), (0, 103)], -21.5, -15.0))
+    mesh.extend(xz_prism([(-15, 75), (0, 61), (15, 75)], -18.0, -12.8))
+    mesh.extend(sun_crest(center=(0, -24.5, 93), radius=9.6))
+    mesh.extend(cylinder_between([-18, -18, 101], [18, -18, 101], 2.4, seg=12))
+    return mesh
+
+
 def xz_prism(points_xz, y0, y1) -> Mesh:
     """Create a triangular prism from x/z points with thickness on the y axis."""
     raw = triangular_prism(points_xz, y0, y1)
@@ -189,12 +214,48 @@ def xz_prism(points_xz, y0, y1) -> Mesh:
 
 
 def helmet_crest() -> Mesh:
+    mesh = xz_prism([(-4.8, 121), (0, 145), (4.8, 121)], -7.5, -1.5)
+    mesh.extend(xz_prism([(-10, 125), (-4, 139), (-2, 124)], -6.8, -2.4))
+    mesh.extend(xz_prism([(10, 125), (4, 139), (2, 124)], -6.8, -2.4))
+    return mesh
+
+
+def suit_relief_stripes() -> Mesh:
     mesh = Mesh()
-    mesh.extend(triangular_prism([(-4, 120), (0, 140), (4, 120)], -3.0, 3.0).transformed(np.eye(3), np.array([0, 0, 0])))
-    remapped = Mesh()
-    for tri in mesh.tris:
-        remapped.add([[v[0], v[2] - 6, v[1]] for v in tri])
-    return remapped
+    # Raised red suit bands: chest V, abdomen, and lower-leg slashes.
+    mesh.extend(xz_prism([(-14, 99), (-5, 82), (-10, 80)], -17.5, -13.5))
+    mesh.extend(xz_prism([(14, 99), (5, 82), (10, 80)], -17.5, -13.5))
+    mesh.extend(xz_prism([(-9, 70), (0, 58), (9, 70)], -16.0, -12.5))
+    mesh.extend(xz_prism([(-16, 38), (-8, 17), (-5, 42)], -8.0, -4.0))
+    mesh.extend(xz_prism([(16, 38), (8, 17), (5, 42)], -8.0, -4.0))
+    return mesh
+
+
+def side_wing_armor(side: int) -> Mesh:
+    sx = side
+    mesh = Mesh()
+    plates = [
+        [(0, 0), (sx * 20, 5), (sx * 7, 22)],
+        [(sx * 5, 5), (sx * 27, 9), (sx * 11, 28)],
+        [(sx * 9, 12), (sx * 24, 19), (sx * 12, 34)],
+    ]
+    for pts in plates:
+        wing = triangular_prism(pts, -2.8, 2.8)
+        remapped = Mesh()
+        for tri in wing.tris:
+            remapped.add([[v[0] + sx * 30, v[2] - 6, v[1] + 102] for v in tri])
+        mesh.extend(remapped)
+    return mesh
+
+
+def shoulder_sun_armor(side: int) -> Mesh:
+    sx = side
+    mesh = Mesh()
+    mesh.extend(ellipsoid([sx * 26, -4, 106], [14, 9, 8], seg=24, rings=10))
+    mesh.extend(xz_prism([(sx * 17, 104), (sx * 43, 114), (sx * 24, 124)], -7.2, 1.0))
+    mesh.extend(xz_prism([(sx * 27, 111), (sx * 50, 124), (sx * 35, 132)], -6.4, -1.2))
+    mesh.extend(xz_prism([(sx * 18, 99), (sx * 42, 96), (sx * 28, 107)], -7.0, -1.6))
+    return mesh
 
 
 def write_stl(mesh: Mesh, path: Path) -> None:
@@ -239,27 +300,15 @@ def build_model() -> Mesh:
     # Shoulders, arms, fists.
     for side in [-1, 1]:
         sx = side
-        m.extend(ellipsoid([sx * 24, -1, 104], [11, 9, 8], seg=24, rings=10))
+        m.extend(shoulder_sun_armor(sx))
         m.extend(cylinder_between([sx * 25, -2, 101], [sx * 38, -3, 115], 5.6, seg=18, r2=5.0))
         m.extend(cylinder_between([sx * 38, -3, 115], [sx * 29, -6, 130], 5.1, seg=18, r2=4.5))
         m.extend(ellipsoid([sx * 28, -8, 133], [6.5, 5.2, 5.2], seg=18, rings=10))
-        # Wing-like forearm armor.
-        wing = triangular_prism([(0, 0), (sx * 22, 4), (sx * 5, 22)], -2.8, 2.8)
-        remapped = Mesh()
-        for tri in wing.tris:
-            remapped.add([[v[0] + sx * 30, v[2] - 5, v[1] + 106] for v in tri])
-        m.extend(remapped)
-        # Shoulder spikes.
-        spike = triangular_prism([(sx * 22, 106), (sx * 39, 112), (sx * 25, 119)], -4, 4)
-        remapped = Mesh()
-        for tri in spike.tris:
-            remapped.add([[v[0], v[2] - 1, v[1]] for v in tri])
-        m.extend(remapped)
+        m.extend(side_wing_armor(sx))
 
     # Solar chest armor and lower red suit ridge.
-    m.extend(sun_crest())
-    m.extend(xz_prism([(-12, 73), (0, 91), (12, 73)], -17, -12))
-    m.extend(cylinder_between([-10, -17, 83], [10, -17, 83], 2.2, seg=12))
+    m.extend(solar_breastplate())
+    m.extend(suit_relief_stripes())
 
     return m
 

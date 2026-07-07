@@ -1,21 +1,24 @@
-# Solar Armor Hero Figurine
+# Arc Solis Armor Full Figurine
 
-Stylized 3D-printable figurine inspired by a silver/red tokusatsu armored hero
-with a sun chest crest. This is an original approximation for personal
-printing/prototyping, not an exact replica of a licensed character.
+Fan-made 3D-printable full-body figurine based on the visual language of
+Ultraman Arc Solis Armor / 亚刻奥特曼灼日装甲: red/silver suit, raised fists,
+large orange-gold flame armor, sunburst chest plate, oversized shoulder guards,
+and segmented forearm wing armor.
 
 ## Files
 
-- `generated/solar_armor_hero_figurine.stl` - printable STL, units in millimeters
+- `generated/arc_solar_armor_full_figurine.stl` - current printable STL, units in millimeters
+- `generated/solar_armor_hero_figurine.stl` - older generic solar-armor draft
 - `generate_solar_armor_figurine.py` - procedural mesh generator
 
 ## Current Model
 
-- Size: about `104 x 78 x 146.5 mm`
-- Triangles: `5676`
+- Size: about `114 x 78 x 149 mm`
+- Triangles: `5892`
 - Structure: overlapping closed solids for slicer-friendly printing
-- Features: round base, silver/red hero silhouette, helmet crest, eye plates,
-  chest sun armor, shoulder armor, raised fists, wing-like forearm guards
+- Features: round base, Arc-style helmet crest, eye plates, sunburst chest
+  armor, flame-like chest petals, oversized curved shoulder armor, raised
+  fists, segmented forearm wing guards, red suit relief stripes
 
 ## Regenerate
 
