@@ -4,3 +4,6 @@ args = [
     "--autoConnect",
 ]
 command = "npx"
+
+[mcp_servers.playwright]
+command = "/Users/yangdoudou/.nvm/versions/node/v22.22.0/bin/playwright-mcp"
