@@ -5,7 +5,7 @@
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
 | #0042 | 2026-06-17 | Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR | [notes](20260617-speaker-reasoner/notes.md) |
-| #0041 | 2026-06-03 | A harness for every task: dynamic workflows in Claude Code | [notes](dynamic-workflows-claude-code/notes.md) |
+| #0041 | 2026-06-03 | A harness for every task: dynamic workflows in Claude Code | [notes](20260603a-dynamic-workflows-claude-code/notes.md) |
 | #0040 | 2026-06-03 | ResearchRubrics: A Benchmark of Prompts and Rubrics For Evaluating Deep Research Agents | [notes](research-rubrics-benchmark/notes.md) |
 | #0039 | 2026-05-26 | /canvas：不止是更漂亮的输出，而是下一代人机协作 | [notes](canvas-agentic-ui/notes.md) |
 | #0038 | 2026-05-15 | Testing Agent Skills Systematically with Evals | [notes](eval-agent-skills/notes.md) |

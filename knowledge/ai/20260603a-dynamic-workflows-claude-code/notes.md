@@ -47,7 +47,7 @@
 
 Claude Code 默认在单一上下文窗口中既计划又执行。当任务变得长时间、大规模并行、或需要对抗性验证时，会触发三种失效模式：
 
-1. **Agentic laziness** — 在复杂多步任务中提前宣布完成（如安全审查只做了 20/50 条）
+1. **Agentic laziness** — 在复杂多步任务中提前宣布完成（如安全审查只做了 35/50 条）
 2. **Self-preferential bias** — 倾向于偏好自己的输出，无法客观验证
 3. **Goal drift** — 经过多轮 compaction 后原始目标细节丢失
 
@@ -106,7 +106,7 @@ Token 成本显著更高。常规编码任务无需 5 个 reviewer 的 panel。�
 
 | 论点 | 创新点 | 支撑数据 | 数据来源 | 说服力评估 |
 |------|--------|----------|----------|------------|
-| 单上下文窗口有三种失效模式 | 将 agent 质量问题结构化为 laziness/bias/drift | **例子**: 安全审查只完成 20/50 条（laziness）；compaction 丢失 "don't do X" 约束（drift） | 文章 "Why dynamic workflows" 章节 | ⭐⭐⭐ 强——与实践经验高度吻合 |
+| 单上下文窗口有三种失效模式 | 将 agent 质量问题结构化为 laziness/bias/drift | **例子**: 安全审查只完成 35/50 条（laziness）；compaction 丢失 "don't do X" 约束（drift） | 文章 "Why dynamic workflows" 章节 | ⭐⭐⭐ 强——与实践经验高度吻合 |
 | 动态工作流优于静态工作流 | "AI 写 harness"取代"人写 harness" | **例子**: 静态需覆盖所有 edge case → 通用；动态由 Opus 4.8 实时定制 | "Dynamic vs static" 章节 | ⭐⭐ 中——缺乏定量对比 |
 | 六种编排模式可组合 | 将 multi-agent 编排归纳为六种原语 | **例子**: Bun 重写用 fan-out + adversarial；排序用 tournament（pairwise > absolute scoring） | "Helpful patterns" + "Use cases" | ⭐⭐⭐ 强——模式命名清晰、场景覆盖广 |
 | 工作流不限于编码任务 | 将 Claude Code 从 IDE agent 扩展为通用任务引擎 | **例子**: 简历排序、商业计划多角度撕裂、Slack 事故根因挖掘 | "Example prompts" 章节 | ⭐⭐ 中——示例丰富但无量化效果 |

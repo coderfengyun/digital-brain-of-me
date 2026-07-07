@@ -1,9 +1,9 @@
 # A harness for every task: dynamic workflows in Claude Code
 
 **作者**: Thariq Shihipar (@trq212), Sid Bidasaria (@sidbid) — Anthropic, Claude Code team
-**来源**: https://x.com/trq212/status/2061907337154367865
-**同步发布**: https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code
-**日期**: 2026-06-03
+**来源**: https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code
+**同步发布**: https://x.com/trq212/status/2061907337154367865
+**日期**: 2026-06-02
 
 ---
 
@@ -11,24 +11,22 @@ Last week, we released dynamic workflows in Claude Code. Claude can now write it
 
 While the default Claude Code harness is built for coding, it is also useful for many other types of tasks because, as it turns out, many tasks resemble coding tasks. But there are certain classes of tasks where we have had to build custom harnesses on top of Claude Code to achieve peak performance such as Research, security analysis, agent teams, or Code Review.
 
-Workflows allow you to dynamically create harnesses that enable Claude to solve all of those problems and more natively inside of Claude Code. You can also share and re-use these workflows with others.
+Workflows allow you to dynamically create harnesses built on top of Claude Code that enable Claude to solve all of those problems more natively. You can also share and reuse these workflows with others.
 
-In this article, I'll cover my initial workflows experiences and learnings so you can take full advantage. That said, best practices are still developing! Dynamic workflows often use more tokens, so think carefully about when and how to use them.
-
-Note: this post is also available on the Claude Blog.
+In this article, I'll cover my initial workflows experiences and learnings so you can best take full advantage. Keep in mind, best practices are still developing: dynamic workflows often use more tokens and are best suited for complex, high value tasks.
 
 ## Example prompts
 
 Before diving into the technical details, I'd like to start with some example prompts to get you thinking about the possibilities with workflows:
 
-- "This test fails maybe 1 in 50 runs. Set up a workflow to reproduce it, form theories and adversarially test them in worktrees /goal don't stop until one theory works."
+- "This test fails maybe 1 in 50 runs. Set up a workflow to reproduce it. Form competing theories about the race, and don't stop until one theory survives the evidence."
 - "Using a workflow, go through my last 50 sessions and mine them for corrections I keep making and turn the recurring ones into CLAUDE.md rules"
 - "Use a workflow to dig through #incidents in Slack for the past six months and find recurring root causes where nobody has filed a ticket."
 - "Take my business plan and run a workflow where different agents tear it apart from an investor's, a customer's, and a competitor's perspective."
 - "Here's a folder of 80 resumes, use a workflow to rank them for the backend role and double-check the top ten. Interview me using the AskUserQuestion tool for a rubric."
 - "I need a name for this CLI tool. Use a workflow to brainstorm a bunch of options and run a tournament to pick the top 3."
 - "Use a workflow to rename our User model to Account everywhere."
-- "Go through my blog post draft and using a workflow verify every technical claim against the codebase, I don't want to ship anything wrong."
+- "Go through my blog post draft and verify every technical claim against the codebase using a workflow, I don't want to ship anything wrong."
 
 ## How dynamic workflows work
 
@@ -42,15 +40,15 @@ If a workflow is interrupted, for example by user action or quitting the termina
 
 ## Why dynamic workflows
 
-When you ask the default Claude Code harness to do a task, it needs to both plan and execute in the same context window. For many coding tasks, this is highly effective, but it can sometimes break down over long-running, massively parallel and/or highly structured adversarial tasks.
+When you ask the default Claude Code harness to do a task, it needs to both plan and execute in the same context window. For many coding tasks, this is highly effective, but it can break down over long-running, massively parallel, highly structured and/or adversarial tasks.
 
 This is because the longer Claude works on a complex task in a single context window, the more it becomes susceptible to a few specific failure modes:
 
-- **Agentic laziness** refers to when Claude stops before finishing a particularly complex, multi-part task and declares the job done after partial progress, for example addressing 20 of the 50 items in a security review.
+- **Agentic laziness** refers to when Claude stops before finishing a particularly complex, multi-part task and declares the job done after partial progress, for example addressing 35 of the 50 items in a security review.
 - **Self-preferential bias** refers to Claude's tendency to prefer its own results or findings, especially when asked to verify or judge them against a rubric.
 - **Goal drift** refers to the gradual loss of fidelity to the original objective across many turns, especially after compaction. Each summarization step is lossy, and details like edge-case requirements or "don't do X" constraints can get lost.
 
-Creating a workflow helps combat these by orchestrating separate Claudes with their own context windows and focused, isolated goals.
+Creating a workflow helps combat these by orchestrating separate Claude subagents with their own context windows and focused, isolated goals.
 
 ## Dynamic vs static workflows
 
@@ -182,8 +180,10 @@ You can save workflows by pressing "s" in the workflow menu. You can check these
 
 To share them via a skill, put your JavaScript workflow files in the skill and folder and reference them in the SKILL.MD. To allow for more flexibility, you may want to prompt Claude to think of the workflows in the skill as a template instead of a script that needs to be run verbatim.
 
-## A whole new world
+## A new starting point for discovery
 
-Workflows are a helpful new way to extend Claude Code. I encourage you to think of this as a starting point, there's still much to discover in how to use them best. Let us know what you find.
+Workflows are a helpful new way to extend Claude Code. I encourage you to think of them as a starting point to explore new ways to use Claude to help accomplish your tasks. There is still much to discover in how to use them best. Let me know what you find.
 
-Thariq Shihipar and Sid Bidasaria (@sidbid) are members of technical staff at Anthropic, working on Claude Code.
+For principles on what belongs in a harness in the first place, see our three harness design patterns for building with Claude.
+
+This article was written by Thariq Shihipar and Sid Bidasaria, members of technical staff at Anthropic working on Claude Code.
