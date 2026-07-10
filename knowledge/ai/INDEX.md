@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0043 | 2026-07-10 | Why Supervised Fine-Tuning Fails to Learn: A Systematic Study of Incomplete Learning in Large Language Models | [notes](20260710-sft-incomplete-learning/notes.md) |
 | #0042 | 2026-06-17 | Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR | [notes](20260617-speaker-reasoner/notes.md) |
 | #0041 | 2026-06-03 | A harness for every task: dynamic workflows in Claude Code | [notes](20260603a-dynamic-workflows-claude-code/notes.md) |
 | #0040 | 2026-06-03 | ResearchRubrics: A Benchmark of Prompts and Rubrics For Evaluating Deep Research Agents | [notes](research-rubrics-benchmark/notes.md) |
