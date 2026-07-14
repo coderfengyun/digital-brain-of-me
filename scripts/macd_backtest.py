@@ -41,6 +41,7 @@ class BacktestResult:
     completed_trades: int
     win_rate: float | None
     position_open: bool
+    zero_filter: bool
     trades: pd.DataFrame
     equity: pd.Series
 
@@ -119,6 +120,7 @@ def run_backtest(
     fast: int = 12,
     slow: int = 26,
     signal: int = 9,
+    zero_filter: bool = False,
 ) -> BacktestResult:
     """以 1 单位初始资金进行全仓、只做多回测，允许小数份额。"""
     if cost_bps < 0:
@@ -142,7 +144,13 @@ def run_backtest(
         previous_day = data.index[location - 1] if location > 0 else None
 
         if previous is not None and previous_day >= start_ts:
-            if bool(previous["GoldenCross"]) and units == 0:
+            golden_allowed = bool(previous["GoldenCross"]) and (
+                not zero_filter or float(previous["MACD"]) < 0
+            )
+            death_allowed = bool(previous["DeathCross"]) and (
+                not zero_filter or float(previous["MACD"]) > 0
+            )
+            if golden_allowed and units == 0:
                 raw_price = float(row["Open"])
                 execution_price = raw_price * (1 + cost_rate)
                 units = cash / execution_price
@@ -152,8 +160,9 @@ def run_backtest(
                     "买入日": trading_day.date().isoformat(),
                     "买入价": raw_price,
                     "含成本买入价": execution_price,
+                    "买入信号MACD": float(previous["MACD"]),
                 }
-            elif bool(previous["DeathCross"]) and units > 0 and entry is not None:
+            elif death_allowed and units > 0 and entry is not None:
                 raw_price = float(row["Open"])
                 execution_price = raw_price * (1 - cost_rate)
                 cash = units * execution_price
@@ -165,6 +174,7 @@ def run_backtest(
                         "卖出日": trading_day.date().isoformat(),
                         "卖出价": raw_price,
                         "含成本卖出价": execution_price,
+                        "卖出信号MACD": float(previous["MACD"]),
                         "收益率": trade_return,
                         "状态": "已平仓",
                     }
@@ -184,6 +194,7 @@ def run_backtest(
                 "卖出日": period.index[-1].date().isoformat(),
                 "卖出价": final_price,
                 "含成本卖出价": final_price,
+                "卖出信号MACD": None,
                 "收益率": final_price / float(entry["含成本买入价"]) - 1,
                 "状态": "期末持有",
             }
@@ -211,6 +222,7 @@ def run_backtest(
         completed_trades=len(completed),
         win_rate=win_rate,
         position_open=position_open,
+        zero_filter=zero_filter,
         trades=pd.DataFrame(trades),
         equity=equity,
     )
@@ -222,6 +234,8 @@ def percent(value: float | None) -> str:
 
 def print_result(result: BacktestResult) -> None:
     print(f"\n{result.symbol}  {result.data_start.date()} ~ {result.data_end.date()}")
+    if result.zero_filter:
+        print("  过滤条件:     零轴下金叉买入，零轴上死叉卖出")
     print(f"  MACD 策略收益: {percent(result.strategy_return)}")
     print(f"  买入持有收益: {percent(result.buy_hold_return)}")
     print(f"  最大回撤:     {percent(result.max_drawdown)}")
@@ -307,7 +321,8 @@ def plot_trade_chart(
             )
 
     axis.set_title(
-        f"{result.symbol} — Daily MACD(12, 26, 9) trade points\n"
+        f"{result.symbol} — Daily MACD(12, 26, 9)"
+        f"{' zero-line filtered' if result.zero_filter else ''} trade points\n"
         f"{result.data_start.date()} to {result.data_end.date()} | "
         f"Return {result.strategy_return:.2%} | Max drawdown {result.max_drawdown:.2%}"
     )
@@ -342,6 +357,11 @@ def parse_args() -> argparse.Namespace:
         help="使用未复权价格；默认使用自动复权价格",
     )
     parser.add_argument(
+        "--zero-filter",
+        action="store_true",
+        help="仅零轴下金叉买入、零轴上死叉卖出",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         help="可选：保存逐笔交易、净值 CSV 和买卖点位 PNG",
@@ -369,6 +389,7 @@ def main() -> None:
             fast=args.fast,
             slow=args.slow,
             signal=args.signal,
+            zero_filter=args.zero_filter,
         )
         print_result(result)
         if args.output_dir:
