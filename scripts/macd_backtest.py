@@ -15,6 +15,10 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from pathlib import Path
 
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 import pandas as pd
 import yfinance as yf
 
@@ -232,6 +236,92 @@ def print_result(result: BacktestResult) -> None:
         print(display.to_string(index=False))
 
 
+def plot_trade_chart(
+    prices: pd.DataFrame,
+    result: BacktestResult,
+    output_path: Path,
+) -> None:
+    """绘制价格曲线，并在实际成交日/成交价标记买卖点。"""
+    period = prices.loc[result.data_start : result.data_end]
+    fig, axis = plt.subplots(figsize=(14, 7))
+    axis.plot(
+        period.index,
+        period["Close"],
+        color="#2563eb",
+        linewidth=1.6,
+        label="Close",
+        zorder=1,
+    )
+
+    if not result.trades.empty:
+        buys = result.trades.copy()
+        buy_dates = pd.to_datetime(buys["买入日"])
+        buy_prices = buys["买入价"].astype(float)
+        axis.scatter(
+            buy_dates,
+            buy_prices,
+            marker="^",
+            s=95,
+            color="#16a34a",
+            edgecolors="white",
+            linewidths=0.8,
+            label="Buy",
+            zorder=3,
+        )
+        for index, (day, price) in enumerate(zip(buy_dates, buy_prices)):
+            axis.annotate(
+                f"B {price:.2f}",
+                (day, price),
+                xytext=(0, -18 - (index % 2) * 12),
+                textcoords="offset points",
+                ha="center",
+                va="top",
+                fontsize=8,
+                color="#15803d",
+            )
+
+        sells = result.trades[result.trades["状态"] == "已平仓"]
+        sell_dates = pd.to_datetime(sells["卖出日"])
+        sell_prices = sells["卖出价"].astype(float)
+        axis.scatter(
+            sell_dates,
+            sell_prices,
+            marker="v",
+            s=95,
+            color="#dc2626",
+            edgecolors="white",
+            linewidths=0.8,
+            label="Sell",
+            zorder=3,
+        )
+        for index, (day, price) in enumerate(zip(sell_dates, sell_prices)):
+            axis.annotate(
+                f"S {price:.2f}",
+                (day, price),
+                xytext=(0, 18 + (index % 2) * 12),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                color="#b91c1c",
+            )
+
+    axis.set_title(
+        f"{result.symbol} — Daily MACD(12, 26, 9) trade points\n"
+        f"{result.data_start.date()} to {result.data_end.date()} | "
+        f"Return {result.strategy_return:.2%} | Max drawdown {result.max_drawdown:.2%}"
+    )
+    axis.set_xlabel("Execution date (signal confirmed at previous close)")
+    axis.set_ylabel("Price")
+    axis.grid(axis="y", alpha=0.2)
+    axis.legend(loc="best")
+    fig.autofmt_xdate()
+    fig.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("symbols", nargs="*", default=["CL1!", "HKEX:883"])
@@ -251,7 +341,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="使用未复权价格；默认使用自动复权价格",
     )
-    parser.add_argument("--output-dir", type=Path, help="可选：保存逐笔交易和净值 CSV")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        help="可选：保存逐笔交易、净值 CSV 和买卖点位 PNG",
+    )
     return parser.parse_args()
 
 
@@ -284,6 +378,11 @@ def main() -> None:
                 args.output_dir / f"{safe_symbol}_trades.csv", index=False
             )
             result.equity.to_csv(args.output_dir / f"{safe_symbol}_equity.csv")
+            plot_trade_chart(
+                prices,
+                result,
+                args.output_dir / f"{safe_symbol}_trade_points.png",
+            )
 
 
 if __name__ == "__main__":

@@ -18,4 +18,5 @@ dependencies = [
     "httpx[socks]>=0.28.1",
     "mlx-audio>=0.4.3",
     "pyannote-audio>=4.0.4",
+    "matplotlib>=3.10",
 ]
