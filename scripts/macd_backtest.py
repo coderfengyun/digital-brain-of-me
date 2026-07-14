@@ -263,11 +263,23 @@ def plot_trade_chart(
     prices: pd.DataFrame,
     result: BacktestResult,
     output_path: Path,
+    *,
+    fast: int = 12,
+    slow: int = 26,
+    signal: int = 9,
 ) -> None:
-    """绘制价格曲线，并在实际成交日/成交价标记买卖点。"""
-    period = prices.loc[result.data_start : result.data_end]
-    fig, axis = plt.subplots(figsize=(14, 7))
-    axis.plot(
+    """绘制价格与 MACD，并标记成交点及其交点高度。"""
+    period = add_macd(prices, fast=fast, slow=slow, signal=signal).loc[
+        result.data_start : result.data_end
+    ]
+    fig, (price_axis, macd_axis) = plt.subplots(
+        2,
+        1,
+        figsize=(14, 9),
+        sharex=True,
+        gridspec_kw={"height_ratios": [2, 1]},
+    )
+    price_axis.plot(
         period.index,
         period["Close"],
         color="#2563eb",
@@ -280,7 +292,7 @@ def plot_trade_chart(
         buys = result.trades.copy()
         buy_dates = pd.to_datetime(buys["买入日"])
         buy_prices = buys["买入价"].astype(float)
-        axis.scatter(
+        price_axis.scatter(
             buy_dates,
             buy_prices,
             marker="^",
@@ -292,7 +304,7 @@ def plot_trade_chart(
             zorder=3,
         )
         for index, (day, price) in enumerate(zip(buy_dates, buy_prices)):
-            axis.annotate(
+            price_axis.annotate(
                 f"B {price:.2f}",
                 (day, price),
                 xytext=(0, -18 - (index % 2) * 12),
@@ -306,7 +318,7 @@ def plot_trade_chart(
         sells = result.trades[result.trades["状态"] == "已平仓"]
         sell_dates = pd.to_datetime(sells["卖出日"])
         sell_prices = sells["卖出价"].astype(float)
-        axis.scatter(
+        price_axis.scatter(
             sell_dates,
             sell_prices,
             marker="v",
@@ -318,7 +330,7 @@ def plot_trade_chart(
             zorder=3,
         )
         for index, (day, price) in enumerate(zip(sell_dates, sell_prices)):
-            axis.annotate(
+            price_axis.annotate(
                 f"S {price:.2f}",
                 (day, price),
                 xytext=(0, 18 + (index % 2) * 12),
@@ -329,16 +341,87 @@ def plot_trade_chart(
                 color="#b91c1c",
             )
 
-    axis.set_title(
-        f"{result.symbol} — Daily MACD(12, 26, 9)"
+    macd_axis.plot(
+        period.index,
+        period["MACD"],
+        color="#2563eb",
+        linewidth=1.4,
+        label="DIF",
+    )
+    macd_axis.plot(
+        period.index,
+        period["Signal"],
+        color="#f59e0b",
+        linewidth=1.3,
+        label="DEA",
+    )
+    macd_axis.axhline(0, color="#6b7280", linewidth=1, label="Zero line")
+
+    if not result.trades.empty:
+        buy_signal_dates = pd.to_datetime(result.trades["买入信号日"])
+        buy_levels = result.trades["买入交点高度"].astype(float)
+        macd_axis.scatter(
+            buy_signal_dates,
+            buy_levels,
+            marker="^",
+            s=80,
+            color="#16a34a",
+            edgecolors="white",
+            linewidths=0.8,
+            label="Golden cross used",
+            zorder=3,
+        )
+        for day, level in zip(buy_signal_dates, buy_levels):
+            macd_axis.annotate(
+                f"G {level:.2f}",
+                (day, level),
+                xytext=(0, -15),
+                textcoords="offset points",
+                ha="center",
+                va="top",
+                fontsize=8,
+                color="#15803d",
+            )
+
+        closed = result.trades[result.trades["状态"] == "已平仓"]
+        sell_signal_dates = pd.to_datetime(closed["卖出信号日"])
+        sell_levels = closed["卖出交点高度"].astype(float)
+        macd_axis.scatter(
+            sell_signal_dates,
+            sell_levels,
+            marker="v",
+            s=80,
+            color="#dc2626",
+            edgecolors="white",
+            linewidths=0.8,
+            label="Death cross used",
+            zorder=3,
+        )
+        for day, level in zip(sell_signal_dates, sell_levels):
+            macd_axis.annotate(
+                f"D {level:.2f}",
+                (day, level),
+                xytext=(0, 15),
+                textcoords="offset points",
+                ha="center",
+                va="bottom",
+                fontsize=8,
+                color="#b91c1c",
+            )
+
+    price_axis.set_title(
+        f"{result.symbol} — Daily MACD({fast}, {slow}, {signal})"
         f"{' zero-line filtered' if result.zero_filter else ''} trade points\n"
         f"{result.data_start.date()} to {result.data_end.date()} | "
         f"Return {result.strategy_return:.2%} | Max drawdown {result.max_drawdown:.2%}"
     )
-    axis.set_xlabel("Execution date (signal confirmed at previous close)")
-    axis.set_ylabel("Price")
-    axis.grid(axis="y", alpha=0.2)
-    axis.legend(loc="best")
+    price_axis.set_ylabel("Price")
+    price_axis.grid(axis="y", alpha=0.2)
+    price_axis.legend(loc="best")
+    macd_axis.set_xlabel("Signal date (trade executes at next open)")
+    macd_axis.set_ylabel("MACD")
+    macd_axis.grid(axis="y", alpha=0.2)
+    macd_axis.legend(loc="best", ncol=5, fontsize=8)
     fig.autofmt_xdate()
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -412,6 +495,9 @@ def main() -> None:
                 prices,
                 result,
                 args.output_dir / f"{safe_symbol}_trade_points.png",
+                fast=args.fast,
+                slow=args.slow,
+                signal=args.signal,
             )
 
 
