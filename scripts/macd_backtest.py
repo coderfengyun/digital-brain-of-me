@@ -409,6 +409,78 @@ def plot_trade_chart(
                 color="#b91c1c",
             )
 
+    if result.zero_filter:
+        actual_buy_days = (
+            set(pd.to_datetime(result.trades["买入信号日"]))
+            if not result.trades.empty
+            else set()
+        )
+        actual_sell_days = (
+            set(
+                pd.to_datetime(
+                    result.trades.loc[
+                        result.trades["状态"] == "已平仓", "卖出信号日"
+                    ]
+                )
+            )
+            if not result.trades.empty
+            else set()
+        )
+        qualifying_golden = period[
+            period["GoldenCross"] & (period["CrossLevel"] < 0)
+        ]
+        qualifying_death = period[
+            period["DeathCross"] & (period["CrossLevel"] > 0)
+        ]
+        skipped_golden = qualifying_golden[
+            ~qualifying_golden.index.isin(actual_buy_days)
+        ]
+        skipped_death = qualifying_death[
+            ~qualifying_death.index.isin(actual_sell_days)
+        ]
+        for skipped, marker, color, label, prefix, offset in (
+            (
+                skipped_golden,
+                "^",
+                "#16a34a",
+                "Qualifying golden cross (no trade)",
+                "G held",
+                -15,
+            ),
+            (
+                skipped_death,
+                "v",
+                "#dc2626",
+                "Qualifying death cross (no trade)",
+                "D flat",
+                15,
+            ),
+        ):
+            if skipped.empty:
+                continue
+            macd_axis.scatter(
+                skipped.index,
+                skipped["CrossLevel"],
+                marker=marker,
+                s=80,
+                facecolors="none",
+                edgecolors=color,
+                linewidths=1.4,
+                label=label,
+                zorder=3,
+            )
+            for day, level in skipped["CrossLevel"].items():
+                macd_axis.annotate(
+                    f"{prefix} {level:.2f}",
+                    (day, level),
+                    xytext=(0, offset),
+                    textcoords="offset points",
+                    ha="center",
+                    va="top" if offset < 0 else "bottom",
+                    fontsize=8,
+                    color=color,
+                )
+
     price_axis.set_title(
         f"{result.symbol} — Daily MACD({fast}, {slow}, {signal})"
         f"{' zero-line filtered' if result.zero_filter else ''} trade points\n"
