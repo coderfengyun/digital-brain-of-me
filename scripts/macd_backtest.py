@@ -107,6 +107,15 @@ def add_macd(
     result["DeathCross"] = (result["MACD"] < result["Signal"]) & (
         result["MACD"].shift(1) >= result["Signal"].shift(1)
     )
+    # 日线只能观察到交叉前后的两个离散点。在线段之间做线性插值，
+    # 求 DIF(MACD) 与 DEA(Signal) 真正相交时的纵坐标。
+    previous_gap = (result["MACD"] - result["Signal"]).shift(1)
+    current_gap = result["MACD"] - result["Signal"]
+    cross_fraction = -previous_gap / (current_gap - previous_gap)
+    result["CrossLevel"] = result["MACD"].shift(1) + cross_fraction * (
+        result["MACD"] - result["MACD"].shift(1)
+    )
+    result.loc[~(result["GoldenCross"] | result["DeathCross"]), "CrossLevel"] = pd.NA
     return result
 
 
@@ -145,10 +154,10 @@ def run_backtest(
 
         if previous is not None and previous_day >= start_ts:
             golden_allowed = bool(previous["GoldenCross"]) and (
-                not zero_filter or float(previous["MACD"]) < 0
+                not zero_filter or float(previous["CrossLevel"]) < 0
             )
             death_allowed = bool(previous["DeathCross"]) and (
-                not zero_filter or float(previous["MACD"]) > 0
+                not zero_filter or float(previous["CrossLevel"]) > 0
             )
             if golden_allowed and units == 0:
                 raw_price = float(row["Open"])
@@ -160,7 +169,7 @@ def run_backtest(
                     "买入日": trading_day.date().isoformat(),
                     "买入价": raw_price,
                     "含成本买入价": execution_price,
-                    "买入信号MACD": float(previous["MACD"]),
+                    "买入交点高度": float(previous["CrossLevel"]),
                 }
             elif death_allowed and units > 0 and entry is not None:
                 raw_price = float(row["Open"])
@@ -174,7 +183,7 @@ def run_backtest(
                         "卖出日": trading_day.date().isoformat(),
                         "卖出价": raw_price,
                         "含成本卖出价": execution_price,
-                        "卖出信号MACD": float(previous["MACD"]),
+                        "卖出交点高度": float(previous["CrossLevel"]),
                         "收益率": trade_return,
                         "状态": "已平仓",
                     }
@@ -194,7 +203,7 @@ def run_backtest(
                 "卖出日": period.index[-1].date().isoformat(),
                 "卖出价": final_price,
                 "含成本卖出价": final_price,
-                "卖出信号MACD": None,
+                "卖出交点高度": None,
                 "收益率": final_price / float(entry["含成本买入价"]) - 1,
                 "状态": "期末持有",
             }
