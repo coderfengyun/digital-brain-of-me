@@ -1,0 +1,9 @@
+//@version=6
+indicator("China BIS REER", overlay = false, precision = 2)
+
+// TradingView currently provides BIS China broad REER through FRED,
+// but does not provide the corresponding NBCNBIS nominal series.
+reer = request.security("FRED:RBCNBIS", "M", close, gaps = barmerge.gaps_off)
+
+plot(reer, "BIS China REER (2020 = 100)", color = color.orange, linewidth = 2)
+hline(100, "2020 benchmark", color = color.gray, linestyle = hline.style_dashed)
