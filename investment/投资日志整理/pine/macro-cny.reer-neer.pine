@@ -1,0 +1,16 @@
+//@version=6
+indicator("China REER / NEER", overlay = false, precision = 2)
+
+// BIS 广义有效汇率，由 FRED 在 TradingView 提供。
+// 两个序列均为月度数据、未经季调，以 2020 年 = 100。
+reer = request.security("FRED:RBCNBIS", "M", close, gaps = barmerge.gaps_off)
+neer = request.security("FRED:NBCNBIS", "M", close, gaps = barmerge.gaps_off)
+
+// REER 相对 NEER 的变化主要反映中国与贸易伙伴之间的相对价格变化。
+ratio = reer / neer * 100
+
+plot(ratio, "REER / NEER × 100", color = color.orange, linewidth = 2)
+hline(100, "2020 基准", color = color.gray, linestyle = hline.style_dashed)
+
+// 注意：指数或比率低于 100 不等于人民币被低估，
+// 这里只表示相对于 2020 年基准的变化。
