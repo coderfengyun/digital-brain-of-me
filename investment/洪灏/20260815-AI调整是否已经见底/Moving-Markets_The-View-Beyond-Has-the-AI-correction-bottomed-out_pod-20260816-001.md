@@ -1,7 +1,7 @@
 # The View Beyond: Has the AI correction bottomed out?
 
 **Show:** Moving Markets
-**Date:** 2026-08-16
+**Date:** 2026-08-15
 **Source:** [https://share.transistor.fm/s/1f9f200e](https://share.transistor.fm/s/1f9f200e)
 **Language:** en
 **Model:** whisper-base
