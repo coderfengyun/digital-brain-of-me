@@ -32,7 +32,6 @@ investment/
 │       ├── source.md
 │       └── notes.md
 ├── M_Medi/M_Medi.md                 # 作者索引：市场结构(Swing/Structure)、流动性计算、加密交易
-├── satoshi-cafe-analysis/           # BTC 技术分析
 ├── 资产全景.md                       # 全量资产底图（币安+富途，按资产类型分布）
 ├── 资产载体转换计划.md               # 币安$71k → 香港汇丰 → 富途CNH 执行计划
 ├── 石油投资调研/                     # 石油/能源专题投研
