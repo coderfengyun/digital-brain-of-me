@@ -62,6 +62,7 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 **现有作者索引**：
 - [`洪灏/洪灏.md`](../../../investment/洪灏/洪灏.md) — 宏观分析、地缘-能源-通胀传导、黄金/美元结构性分析
 - [`卢麒元/卢麒元.md`](../../../investment/卢麒元/卢麒元.md) — 马克思资本论框架、货币体系、资产配置三三四原则
+- [`M_Medi/M_Medi.md`](../../../investment/M_Medi/M_Medi.md) — 加密资产市场结构、流动性计算、多时间框架与仓位管理
 
 **新建作者索引时**：
 1. 在 `investment/{作者名}/` 下创建 `{作者名}.md`
