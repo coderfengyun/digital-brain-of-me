@@ -78,3 +78,19 @@
 - **21:51** it is our baseline target
 - **21:51** so taking profit here is correct
 - **21:56** so basically in this sideways structure we are only interested in super accurate relations and lvs
+
+## 2026-08-18 补充问答
+
+**风云 22:18**（引用 M_Medi 关于目标不清晰时拉远视角、观察中等时间框架的发言）
+
+> May I ask what timeframe you'd like to zoom out to?
+
+**M_Medi 22:21 前后**
+
+> the structure is more important
+>
+> so 3Rd of June 2026 to now
+>
+> would be the structure
+>
+> @风云 and you would look within this structure and look for obvious stoplosses
