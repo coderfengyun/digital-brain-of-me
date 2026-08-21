@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0047 | 2026-08-21 | 复刻专家判断：桥水如何把投资“品位”训练进模型 | [notes](20260821-expert-judgment-financial-tasks/notes.md) |
 | #0046 | 2026-07-24 | 凯文·凯利：没有专家能看透 AI 未来 | [notes](20260724-kevin-kelly-ai-frontiers/notes.md) |
 | #0045 | 2026-07-21 | RubricEval: A Rubric-Level Meta-Evaluation Benchmark for LLM Judges in Instruction Following | [notes](20260721-rubriceval/notes.md) |
 | #0044 | 2026-07-10 | RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards | [notes](20260710b-rubricem/notes.md) |
