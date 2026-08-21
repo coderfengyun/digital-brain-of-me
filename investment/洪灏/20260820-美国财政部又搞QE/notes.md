@@ -2,7 +2,7 @@
 
 **类型**: 叙事  
 **发布日期**: 2026-08-20  
-**来源**: [微信视频号](https://weixin.qq.com/sph/AFRKomo0lT) / [微博正文](https://weibo.com/7799274131/ReiyvcSO0) / [微博视频](https://weibo.com/tv/show/1034:5334078199889969)
+**来源**: [微信视频号](https://weixin.qq.com/sph/AFRKomo0lT) / [微博视频](https://weibo.com/tv/show/1034:5334078199889969)  
 **转录**: [人工校订稿](./洪灝的宏观策略_洪灝美国财政部又搞QE中国继续买黄金_pod-20260821-001.md)
 
 ---
