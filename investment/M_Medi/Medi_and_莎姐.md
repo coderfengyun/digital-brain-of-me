@@ -1,4 +1,4 @@
-# M_Medi (Mercator Moderatus) — 内容索引
+# Medi_and_莎姐 — 内容索引
 
 > 加密货币交易员，Discord 社区导师。专注市场结构（Market Structure）分析体系：以 Swing 定义结构、流动性计算与压缩识别、多时间框架支撑/阻力判定。核心主张：结构由 Swing 定义而非时间或形态；流动性是任何资产的关键。
 

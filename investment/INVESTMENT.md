@@ -31,7 +31,7 @@ investment/
 │   └── 文章主题/
 │       ├── source.md
 │       └── notes.md
-├── M_Medi/M_Medi.md                 # 作者索引：市场结构(Swing/Structure)、流动性计算、加密交易
+├── M_Medi/Medi_and_莎姐.md          # 作者索引：市场结构(Swing/Structure)、流动性计算、加密交易
 │
 │  ── 个人研究（结合 AI）──
 ├── 个人研究/
@@ -68,7 +68,7 @@ investment/
 
 - [`洪灏/洪灏.md`](洪灏/洪灏.md) — 宏观分析、地缘-能源-通胀传导、黄金/美元结构性分析
 - [`卢麒元/卢麒元.md`](卢麒元/卢麒元.md) — 马克思资本论框架、货币体系、资产配置三三四原则
-- [`M_Medi/M_Medi.md`](M_Medi/M_Medi.md) — 市场结构（Swing/Structure）分析体系、流动性计算、加密货币交易
+- [`M_Medi/Medi_and_莎姐.md`](M_Medi/Medi_and_莎姐.md) — 市场结构（Swing/Structure）分析体系、流动性计算、加密货币交易
 
 ## 投研文章归档规则
 
