@@ -13,6 +13,7 @@ digital-brain-of-me/
 ├── sources/           外部来源注册表（论文、播客、文章）
 ├── operations/        任务、目标、会议、指标
 ├── weekly-review/     周记
+├── cultivation/       个人修行（实践、体悟、阶段复盘）
 ├── labs/              进行中的探索性项目
 ├── scripts/           通用脚本工具
 ├── work-standard/     工作标准与示例
@@ -34,6 +35,7 @@ digital-brain-of-me/
 | `sources/` | 外部来源（论文、播客、文章）注册表 | `sources/SOURCES.md`（注册后路由到对应 skill） |
 | `operations/` | 任务管理、目标跟踪、会议记录、指标 | `operations/OPERATIONS.md` |
 | `weekly-review/` | 周记 | `weekly-review/WEEKLY-REVIEW.md`（文件命名：`YYYY-MM-DD~MM-DD.md`） |
+| `cultivation/` | 个人修行实践、体悟与阶段复盘；外部原文仍留在来源所属模块 | `cultivation/CULTIVATION.md` |
 | `labs/` | 进行中的探索性技术实验 | 每个子目录含 README |
 | `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
 | `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
@@ -67,6 +69,7 @@ digital-brain-of-me/
 
 ### 操作纪律
 - 写之前先读（不覆盖已有数据）
+- 处理个人修行内容前先读 `cultivation/CULTIVATION.md`；区分外部观点、个人理解与实际体验
 - 执行 Python 脚本前先读 `env/ENV.md`，按其要求选择运行方式
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令

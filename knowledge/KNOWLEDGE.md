@@ -47,6 +47,7 @@ Saved web pages converted to Markdown for offline reading.
 
 - **weekly-review/** - 周记&月结归档. See [../weekly-review/WEEKLY-REVIEW.md](../weekly-review/WEEKLY-REVIEW.md)
 - **investment/** - Investment trade journal. See [../investment/INVESTMENT.md](../investment/INVESTMENT.md)
+- **cultivation/** - 个人修行实践、体悟与阶段复盘。知识笔记回答“学到了什么”，cultivation 回答“如何实践并发生改变”。See [../cultivation/CULTIVATION.md](../cultivation/CULTIVATION.md)
 
 ## Usage Tips
 
@@ -54,6 +55,7 @@ Saved web pages converted to Markdown for offline reading.
 - Link research notes to related bookmarks using bookmark IDs
 - Regularly review and consolidate learning materials
 - Weekly review 中的学习记录与 learning/ 模块互相补充
+- 可实践的修行方法先保留原始知识来源，再以引用方式登记到 cultivation；不要把外部观点直接当作个人体验
 
 ## Extending
 
