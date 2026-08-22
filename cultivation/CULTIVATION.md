@@ -7,7 +7,10 @@
 ```text
 cultivation/
 ├── CULTIVATION.md      # 模块入口、使用方法与边界
-└── cultivation.jsonl  # 修行主题与练习索引
+├── cultivation.jsonl  # 修行主题与练习索引
+└── traditions/         # 按传统归档的课程、精读与个人理解
+    └── 儒家/
+        └── 20250426-中庸第26讲经纶章/
 ```
 
 出现稳定内容后，可按需增加：
@@ -16,7 +19,7 @@ cultivation/
 cultivation/
 ├── practices/          # 已采用的具体练习及操作说明
 ├── reflections/        # 专题体悟与阶段性复盘
-└── traditions/         # 儒、释、道等体系的个人理解与比较
+└── traditions/         # 儒、释、道等体系的课程、精读与个人理解
 ```
 
 不要为了预设分类而创建空目录；有第一份真实内容时再建立。
@@ -33,8 +36,8 @@ cultivation/
 
 ### 不放入 cultivation/
 
-- 书籍、讲座、论文原文及客观精读笔记：进入 `sources/` 后路由到相应领域
-- 某位投研作者的原始内容：保留在 `investment/{作者}/`
+- 与修行无关的书籍、讲座、论文原文及精读笔记：进入 `sources/` 后路由到相应领域
+- 作者虽在投研作者库中，但内容主题明确属于修行：正文归入 `cultivation/`，作者索引保留跨模块链接
 - 日常生活流水账：放入 `weekly-review/`
 - 长期身份、价值观和表达风格：放入 `identity/`
 - 有明确截止时间的行动项：放入 `operations/tasks/`
@@ -102,7 +105,7 @@ cultivation/
 ## 与其他模块的关系
 
 - **sources → cultivation**：外部材料提供候选方法，但必须经过个人判断与实践。
-- **investment → cultivation**：卢麒元等作者的原文与精读笔记保留在作者库，修行模块只建立引用和实践记录。
+- **investment ↔ cultivation**：卢麒元等作者的修行内容归入本模块，作者库通过跨模块链接维持作者视角入口。
 - **cultivation → weekly-review**：周记记录本周是否实践、出现了什么体验。
 - **cultivation → identity**：经过长期验证并稳定内化的原则，才可能更新个人价值观。
 - **cultivation → operations**：需要定时执行的练习，可拆成任务或目标；这里保留方法与反思，不承担提醒功能。
@@ -117,4 +120,5 @@ cultivation/
 
 ## 当前入口
 
-- `cult-001`：中庸修习“止定静安虑得”，来源于卢麒元《中庸》第26讲，当前为候选练习。
+- [卢麒元《中庸》第26讲：经纶章](./traditions/儒家/20250426-中庸第26讲经纶章/article.md) / [精读笔记](./traditions/儒家/20250426-中庸第26讲经纶章/notes.md)
+- `cult-001`：中庸修习“止定静安虑得”，当前为候选练习。
