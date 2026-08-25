@@ -141,3 +141,13 @@
 - **03:19** 看看成不成功？
 - **06:10** 现在没有目标，只要还在79400以下待着，就对多头不好了@PF 
 - **06:10** 目前还是横盘，还得观察一下
+
+## 2026-08-25｜M_Medi（续）
+
+- **15:38** currently the lv we are looking for locally is 80800-80600 as a lv to create a retrace to sweep yesterday's nights longs
+- **15:40** locally speaking the goal would be to get below 78460. so your tp would be around 78300-77800
+- **17:13** @山松 we can look for our bigger targets at 73800 or 75k but it needs one additional setup after our sweep is reached
+- **17:14** you won't just get the straight drop to below 61300 in one session
+- **17:18** @山松 we need to see confirmation that 78400-80000 longs are trapped which require certain retest if MMS want a to do that they will do it after market open and we would still have time to enter
+- **17:19** trapping 78400-80000 is the liquidity we need to get to 75000-73800
+- **17:20** so we look for our setups step by step and relate it to existing structure and liquidity
