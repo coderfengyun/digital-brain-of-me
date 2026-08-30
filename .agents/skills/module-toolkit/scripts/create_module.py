@@ -3,11 +3,11 @@
 Automated module creation script for Digital Brain system.
 
 Usage:
-    python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> [--top-level]
+    python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> [--top-level]
 
 Example:
-    python .claude/skills/module-toolkit/scripts/create_module.py tasks task                # Creates knowledge/tasks/
-    python .claude/skills/module-toolkit/scripts/create_module.py projects project --top-level  # Creates projects/
+    python .codex/skills/module-toolkit/scripts/create_module.py tasks task                # Creates knowledge/tasks/
+    python .codex/skills/module-toolkit/scripts/create_module.py projects project --top-level  # Creates projects/
 
 Creates:
     - <module>/<MODULE>.md (top-level or under knowledge/)
@@ -208,10 +208,10 @@ def create_module(module_name, keyword, top_level=False):
     print(f"   2. Create {module_name}.jsonl if needed:")
     print(f"      touch {module_path}/{module_name}.jsonl")
     print(f"   3. Verify integration:")
-    print(f"      python .claude/skills/module-toolkit/scripts/check_module_integration.py {module_name} {keyword}")
+    print(f"      python .codex/skills/module-toolkit/scripts/check_module_integration.py {module_name} {keyword}")
     print()
     print("📚 For more details, see:")
-    print("   - .claude/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md")
+    print("   - .codex/skills/module-toolkit/references/MODULE_CREATION_GUIDE.md")
     print()
 
     return True
@@ -219,13 +219,13 @@ def create_module(module_name, keyword, top_level=False):
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> [--top-level]")
+        print("Usage: python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> [--top-level]")
         print()
         print("Examples:")
-        print("  python .claude/skills/module-toolkit/scripts/create_module.py tasks task")
+        print("  python .codex/skills/module-toolkit/scripts/create_module.py tasks task")
         print("  # Creates: knowledge/tasks/TASKS.md")
         print()
-        print("  python .claude/skills/module-toolkit/scripts/create_module.py projects project --top-level")
+        print("  python .codex/skills/module-toolkit/scripts/create_module.py projects project --top-level")
         print("  # Creates: projects/PROJECTS.md")
         print()
         print("Options:")

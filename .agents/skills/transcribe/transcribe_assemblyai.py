@@ -3,7 +3,7 @@
 AssemblyAI transcription with speaker diarization.
 
 Usage:
-    uv run .claude/skills/transcribe/transcribe_gcp.py \
+    uv run .codex/skills/transcribe/transcribe_gcp.py \
         --audio ~/Downloads/podcast.mp3 \
         --title "对话标题" \
         --show "节目名" \

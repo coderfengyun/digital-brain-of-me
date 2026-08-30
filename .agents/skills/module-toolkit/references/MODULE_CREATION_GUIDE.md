@@ -8,17 +8,17 @@
 
 ```bash
 # 默认: 在 knowledge/ 子目录下创建
-python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
+python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
 
 # 例如:
-python .claude/skills/module-toolkit/scripts/create_module.py tasks task
+python .codex/skills/module-toolkit/scripts/create_module.py tasks task
 # 创建: knowledge/tasks/TASKS.md
 
 # 顶级目录: 使用 --top-level 标志
-python .claude/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
+python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
 
 # 例如:
-python .claude/skills/module-toolkit/scripts/create_module.py projects project --top-level
+python .codex/skills/module-toolkit/scripts/create_module.py projects project --top-level
 # 创建: projects/PROJECTS.md
 ```
 
@@ -30,7 +30,7 @@ python .claude/skills/module-toolkit/scripts/create_module.py projects project -
 **后续步骤**:
 1. 编辑 `<MODULE>.md` 定义数据模型
 2. 如需要,创建 `<module>.jsonl`: `touch <module_path>/<module>.jsonl`
-3. 验证集成: `python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>`
+3. 验证集成: `python .codex/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>`
 
 **选择目录的建议**:
 - 📁 **knowledge/** - 适合知识管理类模块 (bookmarks, research, learning)
@@ -55,7 +55,7 @@ python .claude/skills/module-toolkit/scripts/create_module.py projects project -
 
 **检查方法**:
 ```bash
-python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
+python .codex/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
 ---
@@ -150,7 +150,7 @@ for file in CLAUDE.md README.md; do
 done
 
 # 运行自动检查
-python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
+python .codex/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 ---
@@ -179,7 +179,7 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 
 **集成检查**:
 ```bash
-python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
+python .codex/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 **期望结果**: ✅ 100% (all files pass)
@@ -218,7 +218,7 @@ python .claude/skills/module-toolkit/scripts/check_module_integration.py <module
 - ⚪ `scripts/update_<module>_status.py` - 可选
 
 ### 系统文档更新 (4个)
-- ✅ 3个核心文档 (skill.md, CLAUDE.md, README.md)
+- ✅ 3个核心文档 (SKILL.md, CLAUDE.md, README.md)
 - ✅ 1个模块文档
 
 ---
@@ -247,7 +247,7 @@ diff <(grep "^##" knowledge/ai/AI.md) \
 
 ### 集成检查: ✅ 100%
 ```bash
-python .claude/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
+python .codex/skills/module-toolkit/scripts/check_module_integration.py <module> <keyword>
 ```
 
 

@@ -6,14 +6,14 @@ Plan A: Use AssemblyAI for speaker time segments, then cut audio by those segmen
 and transcribe each segment with Qwen3-ASR for higher quality text.
 
 Usage:
-    uv run .claude/skills/transcribe/transcribe_combined.py \
+    uv run .codex/skills/transcribe/transcribe_combined.py \
         --audio ~/Downloads/podcast.mp3 \
         --title "对话标题" \
         --show "节目名" \
         --output-dir investment/洪灏/
 
     # Reuse saved speaker segments (skip AssemblyAI):
-    uv run .claude/skills/transcribe/transcribe_combined.py \
+    uv run .codex/skills/transcribe/transcribe_combined.py \
         --audio ~/Downloads/podcast.mp3 \
         --speaker-json /tmp/speakers.json \
         --title "对话标题" \

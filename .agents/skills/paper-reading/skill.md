@@ -12,7 +12,7 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 - 元数据注册：`sources/sources.jsonl`（type: `"paper"`）
 - 阅读笔记：输出到真实领域目录（如 `knowledge/ai/20260327a-autoharness/notes.md`、`investment/洪灏/20260427-半导体超级周期/notes.md`）
 - 源文件：优先与笔记同目录保存为 `source.md`、`article.md`、`paper.html` 或 `source.*`
-- 模板文件：`.Codex/skills/paper-reading/TEMPLATE-*.md`
+- 模板文件：`.codex/skills/paper-reading/TEMPLATE-*.md`
 
 ## Paper Note Templates
 
@@ -40,7 +40,7 @@ description: "Systematic paper/article reading with narrative-driven approach. U
 
 **Adding a new paper**:
 1. Generate ID: `paper-YYYYMMDD-XXX`（检查当日已有序号，递增）
-2. Decide output domain and create folder using **`YYYYMMDD-slug`** 命名（发布日期 + 英文短标题，同日多篇追加字母 a/b/c）:
+2. Decide output domain and create folder using **`YYYYMMDD-slug`** 命名（阅读日期 + 英文短标题，同日多篇追加字母 a/b/c）:
    - 投资、宏观、地缘、能源、货币、资产配置、研报 → `investment/{作者或机构}/YYYYMMDD-文章主题/notes.md`
    - AI、agent、context engineering、AI 产品、developer tools、persona → `knowledge/ai/YYYYMMDD-文章主题/notes.md`
    - 组织管理、决策机制、协作方式 → `knowledge/organizations/YYYYMMDD-主题/notes.md`

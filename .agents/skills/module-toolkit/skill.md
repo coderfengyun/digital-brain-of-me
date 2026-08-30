@@ -16,8 +16,8 @@ Digital Brain 系统的模块创建与集成工具包。负责新建模块、验
 ## Skill Structure
 
 ```
-.Codex/skills/module-toolkit/
-├── skill.md                              # This file
+.codex/skills/module-toolkit/
+├── SKILL.md                              # This file
 ├── scripts/
 │   ├── create_module.py                  # Automated module creator
 │   └── check_module_integration.py       # Integration checker
@@ -31,20 +31,20 @@ Digital Brain 系统的模块创建与集成工具包。负责新建模块、验
 
 ```bash
 # knowledge/ 子目录下创建（默认）
-python .Codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
+python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword>
 
 # 顶级目录创建
-python .Codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
+python .codex/skills/module-toolkit/scripts/create_module.py <module_name> <keyword> --top-level
 ```
 
 自动完成:
 - 创建 `<MODULE>.md` 模板文档
-- 更新 3 个系统集成文件（AGENTS.md, README.md, KNOWLEDGE.md）
+- 更新 3 个系统集成文件（CLAUDE.md, README.md, KNOWLEDGE.md）
 
 ### 2. 检查集成完整性
 
 ```bash
-python .Codex/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
+python .codex/skills/module-toolkit/scripts/check_module_integration.py <module_name> <keyword>
 ```
 
 检查项:
@@ -86,7 +86,7 @@ python .Codex/skills/module-toolkit/scripts/check_module_integration.py <module_
 
 ### 集成要求
 每个模块必须在以下文件中有引用:
-1. `AGENTS.md` (≥3 次, 包含 Module Navigation 表)
+1. `CLAUDE.md` (≥3 次, 包含 Module Navigation 表)
 2. `README.md` (≥3 次)
 3. `knowledge/KNOWLEDGE.md` (≥2 次)
 
@@ -98,9 +98,9 @@ python .Codex/skills/module-toolkit/scripts/check_module_integration.py <module_
 
 | Task | Command |
 |------|---------|
-| Create module (auto) | `python .Codex/skills/module-toolkit/scripts/create_module.py <name> <keyword>` |
+| Create module (auto) | `python .codex/skills/module-toolkit/scripts/create_module.py <name> <keyword>` |
 | Create module (manual) | Read `references/MODULE_CREATION_GUIDE.md` |
-| Check integration | `python .Codex/skills/module-toolkit/scripts/check_module_integration.py <name> <keyword>` |
+| Check integration | `python .codex/skills/module-toolkit/scripts/check_module_integration.py <name> <keyword>` |
 
 ## 参考
 

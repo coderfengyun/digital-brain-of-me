@@ -3,11 +3,11 @@
 检查新模块是否完全集成到Digital Brain系统中
 
 Usage:
-    python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]
+    python .codex/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]
 
 Example:
-    python .claude/skills/module-toolkit/scripts/check_module_integration.py papers paper
-    python .claude/skills/module-toolkit/scripts/check_module_integration.py contacts contact
+    python .codex/skills/module-toolkit/scripts/check_module_integration.py papers paper
+    python .codex/skills/module-toolkit/scripts/check_module_integration.py contacts contact
 """
 
 import sys
@@ -38,9 +38,9 @@ def check_file_exists(filepath):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python .claude/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]")
+        print("Usage: python .codex/skills/module-toolkit/scripts/check_module_integration.py <module_name> [keyword]")
         print("\nExample:")
-        print("  python .claude/skills/module-toolkit/scripts/check_module_integration.py papers paper")
+        print("  python .codex/skills/module-toolkit/scripts/check_module_integration.py papers paper")
         sys.exit(1)
 
     module_name = sys.argv[1]

@@ -10,13 +10,13 @@ Supports two modes:
 
 Usage:
     # From RSS feed (--output-dir is required)
-    python .claude/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
+    python .codex/skills/transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
 
     # From local audio file
-    python .claude/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
+    python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
 
     # Force whisper engine
-    python .claude/skills/transcribe/transcribe_podcast.py --audio file.mp3 --engine whisper --model base --title T --show S --output-dir out/
+    python .codex/skills/transcribe/transcribe_podcast.py --audio file.mp3 --engine whisper --model base --title T --show S --output-dir out/
 """
 
 import argparse
