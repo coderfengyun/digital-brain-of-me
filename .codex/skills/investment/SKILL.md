@@ -153,3 +153,7 @@ print('\n\n'.join([r[1] for r in results]))
 3. 基于转录内容直接生成精读笔记 `notes-YYYYMMDD.md`（不询问用户）
 4. 更新作者索引，按规则判断是否更新"关键观点速查"表
 5. 清理 `video.mp4`
+
+### 微博 VIP 群文字发言
+
+当用户要求更新卢麒元在微博 VIP 群中的发言，或从上次记录继续收集群主文字消息时，必须先完整阅读并执行 [`references/weibo-vip-chat.md`](references/weibo-vip-chat.md)。该流程包含固定群聊与发言人、断点回溯、文字消息筛选、原文写入和作者索引更新规则。
