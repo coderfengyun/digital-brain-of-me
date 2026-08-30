@@ -20,7 +20,7 @@
     },
     {
       "id": 2,
-      "prompt": "weibo 页面里是洪灏最新的采访视频，转录一下，翻译成中文，并读一下。https://weibo.com/7799274131/QF15AxiAv\n\n（eval 环境无法访问浏览器和视频，转录结果在 .claude/skills/investment/evals/fixtures/eval_2_transcript.md）",
+      "prompt": "weibo 页面里是洪灏最新的采访视频，转录一下，翻译成中文，并读一下。https://weibo.com/7799274131/QF15AxiAv\n\n（eval 环境无法访问浏览器和视频，转录结果在 .codex/skills/investment/evals/fixtures/eval_2_transcript.md）",
       "expected_output": "1. 文件保存到 investment/洪灏/ 下（而非 sources/ 或其他位置）\n2. sources/ 目录下不应出现该文件\n3. 更新 investment/洪灏/洪灏.md 索引，添加该采访链接",
       "files": [],
       "fixture": {
@@ -30,6 +30,42 @@
           {"name": "not_in_sources", "type": "glob_file_not_contains", "pattern": "sources/**/*.md", "contains": "20-25%"},
           {"name": "index_has_date", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "2026-05-12"},
           {"name": "has_chinese_translation", "type": "glob_file_contains", "pattern": "investment/洪灏/**/*.md", "contains": "泡沫"}
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "prompt": "洪灏发了个微博视频，标题《半导体超级周期？？》，链接 https://weibo.com/7799274131/R099O5G2T，发布于2026-05-19。\n\n（eval 环境无法访问浏览器和视频，转录结果已在 .codex/skills/investment/evals/fixtures/eval_3_video_transcript.md）\n\n请基于转录内容完成完整流程：生成精读笔记，更新洪灏索引。",
+      "expected_output": "1. 在 investment/洪灏/ 下某子目录生成精读笔记（notes*.md）\n2. 笔记包含核心观点（债息、半导体、15%调整、沃什缩表、60/40失效）\n3. 更新 investment/洪灏/洪灏.md 索引，包含视频链接和笔记链接\n4. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "d383279",
+        "checks": [
+          {"name": "notes_file_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes*.md"},
+          {"name": "notes_has_debt_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "债息"},
+          {"name": "notes_has_semiconductor", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "半导体"},
+          {"name": "notes_has_adjustment", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes*.md", "contains": "15%"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes"},
+          {"name": "sources_updated", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "R099O5G2T"}
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "prompt": "洪灏发布了新的采访文章：https://www.scmp.com/business/banking-finance/article/3357948/how-are-chinese-firms-faring-ai-and-tech-reshape-global-market-cap-rankings\n\n（eval 环境无法访问浏览器，文章全文已在 .codex/skills/investment/evals/fixtures/eval_4_scmp_article.md）",
+      "expected_output": "1. 保存英文原文 article.md 到 investment/洪灏/ 下\n2. 生成中文翻译 article-zh.md（因为原文是英文）\n3. 生成精读笔记 notes.md\n4. 更新 investment/洪灏/洪灏.md 索引（含翻译和笔记链接）\n5. sources.jsonl 追加一条记录",
+      "files": [],
+      "fixture": {
+        "base_commit": "106db13",
+        "checks": [
+          {"name": "article_saved", "type": "glob_exists", "pattern": "investment/洪灏/**/article.md"},
+          {"name": "chinese_translation_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/article-zh.md"},
+          {"name": "translation_has_chinese", "type": "glob_file_contains", "pattern": "investment/洪灏/**/article-zh.md", "contains": "科技"},
+          {"name": "notes_exists", "type": "glob_exists", "pattern": "investment/洪灏/**/notes.md"},
+          {"name": "notes_has_content", "type": "glob_file_contains", "pattern": "investment/洪灏/**/notes.md", "contains": "市值"},
+          {"name": "index_has_translation_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "article-zh.md"},
+          {"name": "index_has_notes_link", "type": "file_contains", "file": "investment/洪灏/洪灏.md", "contains": "notes.md"},
+          {"name": "sources_registered", "type": "file_contains", "file": "sources/sources.jsonl", "contains": "3357948"}
         ]
       }
     }

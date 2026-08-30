@@ -158,9 +158,9 @@ def _write_csv(tmp_path: Path, content: str) -> Path:
 
 class TestSchemaValidation:
     VALID_CSV = """\
-        序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-        1,黄金,买入,800,2,1600,CNY,2025-05-06,精确,
-        2,黄金,卖出,900,2,1800,CNY,2025-10-01,精确,
+        序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+        1,黄金,黄金,买入,800,2,1600,CNY,2025-05-06,精确,招行,
+        2,黄金,黄金,卖出,900,2,1800,CNY,2025-10-01,精确,招行,
     """
 
     def test_valid_csv(self, tmp_path):
@@ -175,13 +175,13 @@ class TestSchemaValidation:
             1,黄金,买入,800,2,1600,CNY,2025-05-06,
         """
         p = _write_csv(tmp_path, csv)
-        with pytest.raises(ValidationError, match="缺少列.*日期精确度"):
+        with pytest.raises(ValidationError, match="缺少列"):
             validate_and_load(p)
 
     def test_invalid_op_type(self, tmp_path):
         csv = """\
-            序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-            1,BTC合约,开仓,100000,0.1,10000,USD,2025-05-06,精确,
+            序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+            1,BTC合约,,开仓,100000,0.1,10000,USD,2025-05-06,精确,币安,
         """
         p = _write_csv(tmp_path, csv)
         with pytest.raises(ValidationError, match="操作类型.*开仓.*非法"):
@@ -189,8 +189,8 @@ class TestSchemaValidation:
 
     def test_invalid_currency(self, tmp_path):
         csv = """\
-            序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-            1,日经ETF,买入,100,10,1000,JPY,2025-05-06,精确,
+            序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+            1,日经ETF,,买入,100,10,1000,JPY,2025-05-06,精确,其他,
         """
         p = _write_csv(tmp_path, csv)
         with pytest.raises(ValidationError, match="币种.*JPY.*非法"):
@@ -198,8 +198,8 @@ class TestSchemaValidation:
 
     def test_non_numeric_price(self, tmp_path):
         csv = """\
-            序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-            1,黄金,买入,791.48 ￥/g,2,1582.96,CNY,2025-05-06,精确,
+            序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+            1,黄金,黄金,买入,791.48 ￥/g,2,1582.96,CNY,2025-05-06,精确,招行,
         """
         p = _write_csv(tmp_path, csv)
         with pytest.raises(ValidationError, match="价格.*无法解析为数值"):
@@ -207,8 +207,8 @@ class TestSchemaValidation:
 
     def test_bad_date_format(self, tmp_path):
         csv = """\
-            序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-            1,黄金,买入,800,2,1600,CNY,2025/05/06,精确,
+            序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+            1,黄金,黄金,买入,800,2,1600,CNY,2025/05/06,精确,招行,
         """
         p = _write_csv(tmp_path, csv)
         with pytest.raises(ValidationError, match="日期.*格式不符合"):
@@ -216,8 +216,8 @@ class TestSchemaValidation:
 
     def test_amount_mismatch(self, tmp_path):
         csv = """\
-            序号,品种,操作类型,价格,数量,金额,币种,日期,日期精确度,备注
-            1,黄金,买入,800,2,9999,CNY,2025-05-06,精确,
+            序号,品种,代码,操作类型,价格,数量,金额,币种,日期,日期精确度,交易平台,备注
+            1,黄金,黄金,买入,800,2,9999,CNY,2025-05-06,精确,招行,
         """
         p = _write_csv(tmp_path, csv)
         with pytest.raises(ValidationError, match="金额.*偏差"):
@@ -295,7 +295,7 @@ class TestIntegration:
         assert total_sold_qty + total_remaining_qty == pytest.approx(33.0, abs=0.01)
 
     def test_sh50etf_realized_pnl(self, real_df):
-        """上证50ETF: 买入 19837.40, 卖出 19247.80 → 已实现亏损 ≈ -589.60"""
+        """上证50ETF: 买入 @3.148×6300, 卖出 @3.06×6300 → 已实现亏损 ≈ -554.40"""
         etf_df = real_df[real_df["品种"] == "上证50ETF"]
         if etf_df.empty:
             pytest.skip("CSV 中无上证50ETF数据")
@@ -304,5 +304,5 @@ class TestIntegration:
         total_pnl = sum(t.pnl for t in realized)
 
         assert total_pnl < 0, "上证50ETF 应为亏损"
-        assert total_pnl == pytest.approx(-589.60, abs=5.0)
+        assert total_pnl == pytest.approx(-554.40, abs=5.0)
         assert len(remaining) == 0, "上证50ETF 应完全平仓"

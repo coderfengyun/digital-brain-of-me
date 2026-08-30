@@ -31,7 +31,7 @@ digital-brain-of-me/
 | `identity/` | 用户身份定义与表达风格 | `identity/voice/style.md`（内容创作前必读） |
 | `content/` | 创意 → 草稿 → 发布的完整内容流程 | `content/CONTENT.md` |
 | `knowledge/` | 书签、学习笔记、AI/组织研究等知识沉淀 | `knowledge/KNOWLEDGE.md` |
-| `investment/` | 投资研究、交易日志、盈亏计算 | `investment/INVESTMENT.md`（Codex 复杂工作流由 `.codex/skills/investment/` 驱动） |
+| `investment/` | 投资研究、交易日志、盈亏计算 | `investment/INVESTMENT.md`（复杂工作流源码位于 `.agents/skills/investment/`） |
 | `sources/` | 外部来源（论文、播客、文章）注册表 | `sources/SOURCES.md`（注册后路由到对应 skill） |
 | `operations/` | 任务管理、目标跟踪、会议记录、指标 | `operations/OPERATIONS.md` |
 | `weekly-review/` | 周记 | `weekly-review/WEEKLY-REVIEW.md`（文件命名：`YYYY-MM-DD~MM-DD.md`） |
@@ -73,3 +73,10 @@ digital-brain-of-me/
 - 执行 Python 脚本前先读 `env/ENV.md`，按其要求选择运行方式
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令
+
+### Skill 单一来源
+
+- 项目自维护 Skill 统一以 `.agents/skills/{skill}/` 为源码目录。
+- `.codex/skills/{skill}` 与 `.claude/skills/{skill}` 通过相对软链接指向同一 `.agents` 目录，不复制 Skill、Reference、脚本或测试文件。
+- 新增或修改 Skill 内容时只编辑 `.agents` 下的真实文件；框架目录仅作为兼容入口。
+- `.agents` 中的主入口保留为 `skill.md`。本项目运行于大小写不敏感的 macOS 文件系统，Codex 通过目录软链接访问 `SKILL.md` 时会解析到同一文件。

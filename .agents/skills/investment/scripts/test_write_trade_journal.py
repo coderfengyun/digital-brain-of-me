@@ -43,6 +43,7 @@ def _make_row(**overrides) -> dict:
     defaults = {
         "序号": "1",
         "品种": "BTC",
+        "代码": "BTCUSDT",
         "操作类型": "买入",
         "价格": "100000.0",
         "数量": "0.01",
@@ -50,6 +51,7 @@ def _make_row(**overrides) -> dict:
         "币种": "USD",
         "日期": "2025-06-01",
         "日期精确度": "精确",
+        "交易平台": "币安",
         "备注": "",
     }
     defaults.update(overrides)

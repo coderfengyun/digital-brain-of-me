@@ -3,7 +3,7 @@
 Investment skill 评测脚本。
 
 用法:
-    python .claude/skills/investment/evals/run_eval.py [--runs N] [--eval-id ID]
+    python .codex/skills/investment/evals/run_eval.py [--runs N] [--eval-id ID]
 
 默认跑 3 次，输出每条 assertion 的通过率。
 需要 `claude` CLI 可用。
@@ -21,9 +21,9 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[4]  # .claude/skills/investment/evals -> repo root
-SKILL_PATH = REPO_ROOT / ".claude" / "skills" / "investment" / "SKILL.md"
-EVALS_PATH = REPO_ROOT / ".claude" / "skills" / "investment" / "evals" / "evals.json"
+REPO_ROOT = Path(__file__).resolve().parents[4]  # .codex/skills/investment/evals -> repo root
+SKILL_PATH = REPO_ROOT / ".codex" / "skills" / "investment" / "SKILL.md"
+EVALS_PATH = REPO_ROOT / ".codex" / "skills" / "investment" / "evals" / "evals.json"
 
 
 def create_worktree(base_commit: str) -> str:
@@ -37,8 +37,8 @@ def create_worktree(base_commit: str) -> str:
         check=True,
     )
     # 复制最新 skill 目录到 worktree（包含 SKILL.md、evals/fixtures 等）
-    skill_src = REPO_ROOT / ".claude" / "skills" / "investment"
-    skill_dst = Path(worktree_path) / ".claude" / "skills" / "investment"
+    skill_src = REPO_ROOT / ".codex" / "skills" / "investment"
+    skill_dst = Path(worktree_path) / ".codex" / "skills" / "investment"
     if skill_dst.exists():
         shutil.rmtree(skill_dst)
     shutil.copytree(skill_src, skill_dst)
