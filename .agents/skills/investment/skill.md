@@ -82,7 +82,7 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 3. 更新该作者的索引文件，添加链接（含翻译和笔记链接）
 4. 判断是否更新"关键观点速查"表：只有**新的分析框架、新指标、或与已有观点矛盾/显著升级的判断**才追加；已有观点的重复验证或应用实例不追加
 
-### 获取微博研报（端到端 pipeline）
+### 获取洪灏的微博研报（端到端 pipeline）
 
 当用户要求获取洪灏最新或指定的微博研报时，必须先完整阅读并执行 [`references/weibo-report.md`](references/weibo-report.md)。该流程涵盖选帖、正文与原图保存、OCR 校对、结构化笔记、来源注册和作者索引更新；用户明确只下载时按 Reference 中的范围规则停止。
 
