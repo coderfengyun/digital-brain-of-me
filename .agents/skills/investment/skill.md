@@ -14,21 +14,6 @@ description: "投资交易日志、盈亏计算、券商导入、投研作者管
 - 投研作者索引：`investment/{作者名}/{作者名}.md`
 - 设计文档：`investment/投资日志整理/DESIGN_盈亏统计系统设计.md`
 
-## Scripts
-
-All scripts live in `.codex/skills/investment/scripts/`:
-
-- `write_trade_journal.py` — 交易日志写入工具（添加/导入/迁移/校验）
-- `fetch_binance_trades.py` — 币安现货交易记录获取
-- `fetch_binance_futures.py` — 币安合约（USDT-M）交易记录获取（自动分段查询，绕过7天限制）
-- `fetch_binance_balances.py` — 币安账户全部资产余额及 USD 估值
-- `fetch_futu_trades.py` — 富途交易记录获取
-- `fetch_futu_positions.py` — 富途账户持仓及资金概览
-- `fetch_cms_trades.py` — 招商证券交易记录获取（Chrome MCP）
-- `calc_pnl.py` — 盈亏计算（FIFO 匹配）
-
----
-
 ## 交易日志操作
 
 ### 添加单条记录
