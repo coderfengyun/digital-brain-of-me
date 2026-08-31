@@ -182,6 +182,38 @@
 
 ---
 
+## 2026年3月5日（群聊）— 莎姐判断洗多与持续性
+
+> 转发记录中显示的昵称为「金莎」；由用户确认为莎姐的历史发言。
+
+**金莎 04:11**
+> 现在可以去洗点多头，但是继续看多
+
+**金莎 04:11**
+> 今天的行情很简单
+
+**金莎 04:11**
+> 除非位置不好的
+
+**金莎 04:12**
+> 位置好一点的不用担心
+
+**金莎 04:12**
+> 这是一个月以来的流动性
+
+**金莎 04:13**
+> 其实，不用说的
+
+**群友 04:13**
+> 估计洗到哪里
+>
+> *（引用金莎：现在可以去洗点多头，但是继续看多）*
+
+**金莎 04:14**
+> 在这中间估计不了，不用担心
+
+---
+
 ## 2026年3月16日（群聊）
 
 **PF 21:51**
@@ -208,6 +240,30 @@
 ---
 
 ## 2026年3月11-12日（群聊）— XRP 买入逻辑
+
+**Mercator Moderatus 2026-3-11 21:34**
+> xrp is the only alt coin I can say that has structural strength
+
+**Mercator Moderatus 21:34**
+> compared to other altcoins
+
+**Mercator Moderatus 21:35**
+> @蟹子 I think when btc pumps xrp can do a lot of work
+
+**Mercator Moderatus 21:35**
+> in my opinion xrp is still in structural bull market
+
+**Mercator Moderatus 21:36**
+> so I added some spot the last few days
+
+**Mercator Moderatus 21:36**
+> 4.8, 5.5, 7.6
+
+**Mercator Moderatus 21:37**
+> it is long hold position for me playing the same set up as btc at 16k
+
+**Mercator Moderatus 21:37**
+> so might take years
 
 **金诗钰叶 2026-3-11 23:09**
 > M老师，支撑位在哪里呢
