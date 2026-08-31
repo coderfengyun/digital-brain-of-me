@@ -7,6 +7,7 @@
 ```
 weekly-review/
 ├── WEEKLY-REVIEW.md          # 本文件（模块入口）
+├── TEMPLATE.md               # 周记内容模板
 ├── YYYY-MM-DD~MM-DD.md       # 各期周记/月结
 └── assets/                   # 图片等附件
 ```
@@ -17,30 +18,9 @@ weekly-review/
 - 跨年：`2025-12-29~2026-01-23.md`（结束日期带年份）
 - 子页面：`YYYY-MM-DD~MM-DD_标题.md`
 
-## 内容结构
+## 内容模板
 
-每篇周记通常包含以下章节（可灵活调整）：
-
-### 本周完成
-- 列出本周 done 的 task，用 task-id 引用（如 `- [x] task-20260314-001 整理《预测》读书笔记`）
-- 来源：`operations/tasks/tasks.jsonl` 中本周状态变为 done 的条目
-
-### 投资
-- 本周交易记录（标的、方向、价格、数量）
-- 各资产类别的下一步计划（黄金/白银、BTC/ETH、A股、港股、外汇）
-
-### 修行&内观
-- 工作：沟通方式、协作反思
-- 交易：交易心理、策略复盘
-- 生活：日常观察与感悟
-
-### 学习
-- 在读书籍/课程及进度（用 checkbox 标记完成状态）
-
-### 接下来的调整
-- 方向性意图和反思（不需要追踪完成状态的）
-- 具体可追踪的 TODO **必须**同步创建 task，周记里用 task-id 引用：
-  `- [ ] task-20260606-001 阅读知识星球文章`
+新建周记时直接复制 [`TEMPLATE.md`](./TEMPLATE.md)。周记的章节与初始格式以该模板为唯一来源；需要调整默认内容结构时，直接修改模板，不在本文件重复维护。
 
 ## 与其他模块的关联
 
@@ -50,14 +30,14 @@ weekly-review/
 
 ## 写作流程
 
-1. 回顾 `operations/tasks/tasks.jsonl` 中本周完成的 task，填入「本周完成」
-2. 撰写投资/修行/学习等回顾章节
-3. 写「接下来的调整」时，如果某条足够具体、可追踪 → 创建 task → 周记里引用 task-id
+1. 复制 [`TEMPLATE.md`](./TEMPLATE.md)，按文件命名规则创建本期周记。
+2. 回顾 `operations/tasks/tasks.jsonl` 中本周完成的 task，并在周记中用 task-id 引用。
+3. 如果回顾中出现具体、可追踪的 TODO，先创建 task，再在周记中引用 task-id。
 
 ## Usage
 
 | 操作 | 方法 |
 |------|------|
 | 查看某期周记 | 按日期找到对应 .md 文件 |
-| 新建周记 | 创建 `YYYY-MM-DD~MM-DD.md`，参考上述内容结构 |
+| 新建周记 | 复制 `TEMPLATE.md` 为 `YYYY-MM-DD~MM-DD.md` |
 | 搜索历史 | `grep -r "关键词" weekly-review/` |
