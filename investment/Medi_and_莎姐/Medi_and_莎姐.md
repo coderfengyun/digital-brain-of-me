@@ -7,7 +7,7 @@
 ## 方法论笔记
 
 - [Market Structure 分析要点](./market-structure-medi.md) — Swing 定义、结构边界、新结构判定规则
-- [微信群聊搜索方法](./微信群聊搜索方法.md) — 按群成员筛选、日期换算、断点续更、原文保存及异常处理
+- [微信群聊搜索方法](../../.agents/skills/investment/references/wechat-group-search.md) — 按群成员筛选、日期换算、断点续更、原文保存及异常处理
 
 ## 对话记录
 

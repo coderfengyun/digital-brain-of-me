@@ -99,3 +99,7 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 ### 获取卢麒元的微博 VIP 群发言
 
 当用户要求更新卢麒元在微博 VIP 群中的发言，或从上次记录继续收集群主文字消息时，必须先完整阅读并执行 [`references/weibo-vip-chat.md`](references/weibo-vip-chat.md)。该流程包含固定群聊与发言人、断点回溯、文字消息筛选、原文写入和作者索引更新规则。
+
+### 获取 Medi 或莎姐的微信群发言
+
+当用户要求从微信群「Satoshi Coffeehouse」提取、搜索或续更 Medi（群昵称 `Mercator Moderatus`）或莎姐（群昵称 `中本莎`）的历史发言时，必须先完整阅读并执行 [`references/wechat-group-search.md`](references/wechat-group-search.md)。该流程包含按群成员筛选、日期换算、断点续更、投资内容筛选、原文与翻译保存、笔记生成、来源注册和作者索引更新规则。

@@ -76,6 +76,6 @@
 1. 保存英文原文为新内容目录下的 `source.md`。
 2. 非中文内容生成完整翻译 `source-zh.md`。
 3. 生成结构化精读笔记 `notes.md`。
-4. 更新 [`Medi_and_莎姐.md`](./Medi_and_莎姐.md) 的对话记录入口。
+4. 更新 [`Medi_and_莎姐.md`](../../../../investment/Medi_and_莎姐/Medi_and_莎姐.md) 的对话记录入口。
 5. 仅在出现新分析框架、指标或显著观点变化时更新“关键观点速查”。
 6. 在 `sources/sources.jsonl` 追加来源记录；JSONL 只追加，不删除或重写旧记录。
