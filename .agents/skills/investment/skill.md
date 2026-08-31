@@ -86,11 +86,11 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 
 当用户要求获取洪灏最新或指定的微博研报时，必须先完整阅读并执行 [`references/weibo-report.md`](references/weibo-report.md)。该流程涵盖选帖、正文与原图保存、OCR 校对、结构化笔记、来源注册和作者索引更新；用户明确只下载时按 Reference 中的范围规则停止。
 
-### 微博视频投研内容
+### 获取洪灏的微博视频投研内容
 
-当用户分享微博视频链接，或 `take_snapshot` 发现帖子是视频（有"播放视频"按钮）而非图文时：
+当用户分享洪灏的微博视频链接，或 `take_snapshot` 发现洪灏的微博帖子是视频（有"播放视频"按钮）而非图文时：
 
-1. 点击"播放视频" → `list_network_requests(resourceTypes=["media"])` 获取 `.mp4` URL → `curl -L -H "Referer: https://weibo.com/"` 下载到 `investment/{作者名}/{主题}/video.mp4`
+1. 点击"播放视频" → `list_network_requests(resourceTypes=["media"])` 获取 `.mp4` URL → `curl -L -H "Referer: https://weibo.com/"` 下载到 `investment/洪灏/{主题}/video.mp4`
 2. 触发 `transcribe` skill 对 `video.mp4` 进行转录（输出到同一目录）
 3. 基于转录内容直接生成精读笔记 `notes-YYYYMMDD.md`（不询问用户）
 4. 更新作者索引，按规则判断是否更新"关键观点速查"表
