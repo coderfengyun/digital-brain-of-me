@@ -1,0 +1,208 @@
+# 莎姐与 Medi：BTC 77k 失守与 79,700 目标
+
+> 来源：微信群「Satoshi Coffeehouse」  
+> 作者：中本莎、M_Medi（群昵称 `Mercator Moderatus`）  
+> 日期：2026-09-01—2026-09-02  
+> 说明：接续莎姐 2026-09-01 20:42、Medi 2026-08-31 23:09 的上次记录；按群成员筛选，以时间正序保留投资相关原始措辞和英文拼写。贴图、红包、群务及一般闲聊未收录。
+
+## 2026-09-01｜M_Medi
+
+- **22:16** Pretty exciting day [呲牙]
+- **22:16** pretty accurate retest on 77700 and 77500
+- **22:17** market has now given everyone ample enough opportunity to enter
+- **22:17** this should be the last chance
+- **22:18** but to say anything definitely we need to make new local highs above 79400
+- **22:20** after we get above 79400 I will be talking about moving stop losses and targets
+- **22:29** @菜菜子 you are looking for a long in the range of 4000-4300 to get above 4700 and then back down to 4000
+- **22:30** and more side way between 4000-4300 and then eventually breaking 4000 and going down hard
+
+## 2026-09-01｜中本莎
+
+- **22:32** 但是不管怎么拉
+- **22:32** 不要想这是牛市来了
+- **22:33** 这波走完，不管牛市还是熊市，都要下来一次大的
+- **22:33** 没有下来，不可能有牛市
+- **22:34** 我们开这张多单不是因为牛市来了
+- **22:35** 83000不是位置
+- **22:35** 过了79400，medi会写给你们目标位置
+- **22:36** 会给你们说怎样操作这个trade
+- **22:36** 上去的过程中，还有回撤，该怎么处理，都会说的
+- **22:37** 目标位置肯定比你这个位置高的
+- **22:37** 位置我们已经计算好了，只是等确认
+- **22:38** 另外重要的，在拉升的过程中，很多人会说牛市来了
+- **22:38** 随便谁说，谁喊，当他们是傻逼
+- **22:39** 不出所料，Michael Saylor他又接盘了几千个BTC
+- **22:40** 他每次买，我们就和主力一起砸下去，他卖了，主力又拉上来，他又买[捂脸][捂脸][捂脸]
+
+## 2026-09-02｜中本莎
+
+- **01:42** 除了bybit有一点空头，其它基本上都没啥空头了，现在估计就是狗庄在搞事
+- **01:44** 做不到局部新低，只能用时间去做回撤,专业一点叫（retracement in time）
+- **01:46** 之前输了78100实在不好
+- **01:51** 如果30分钟完了，市场还不能决定上行还是下行，那我们还要等下一个30分钟
+- **01:54** 现在可以出局，
+- **01:54** 出来以后，等跌下来到77k附近
+- **01:55** 等77k上行，超过77500，再回踩测试，测试成功，再进场
+- **02:23** 主力将我们踢出局了
+- **02:26** 就是洗干净
+- **02:27** 下来扫了
+- **02:35** 多单已经完了
+- **02:35** 不能开多，要等的
+- **02:35** 开空的机会还要等一下
+- **02:36** 除非上去77500，站稳，那就继续多
+- **02:38** 如果上行，不用担心，会给我们几个小时进场
+- **02:38** 如果继续下行，那么下一个位置应该是去73800
+- **02:48** 现在到76374,现在应该上行去测试某个位置
+- **02:51** 现在观察多头用这个底干什么？@saku🌸 能不能站回77500？
+- **02:52** 假如站上去77500能不能顶住
+- **02:53** 如果顶不住，那就多头投降了
+- **02:54** 现在观察多头会不会利用目前这个底，开启上行的趋势
+- **03:00** 30分钟线🧵是根绿针
+- **03:01** 现在确定是一个sweep
+- **03:02** 现在上行要超过77500，77700，然后下来，再次回到77500附近，这个地方hold住了，就可以进场多单
+- **03:05** 如果这回拉上去了，就是将我们洗出来了，那也没办法
+- **03:08** 我也进场了，风险是有的
+- **03:09** 止损很小
+- **03:10** 看来76374就是今晚暂时的底了
+- **03:12** technically, 在77k以下,是很有可能到73800的@Mark 
+- **03:16** 这波行情，严格来说77500主力应该hold ，不应该输的，但是比如狗庄专门下来洗我们，那就是主力有意为之。
+- **03:16** 现在去77900，再下来到77500，能不能顶住？那么你的止损应该是77200
+- **03:17** 主力应该会将77200变成一个局部重要的位置
+- **03:21** 问题是不应该走这么低的，向下⬇️突破了77k，那么提出来一个问题:会不会去73800？
+- **03:22** 这个问题的解决办法就是拉升到79400之上，那么我们要重新计算一次。
+- **03:23** 简单一点:现在拉上去，不再下来接触77k，就OK了[捂脸]@不羁 
+- **03:24** 只是要重新计算一次，因为流动性变了，
+- **03:29** 没进场的也不用担心
+- **03:29** 会给机会进场的
+- **03:29** 主力不会自己和自己玩
+- **13:16** 77500是要试多的
+- **13:18** 77500站稳了，和之前一样的一张单
+- **13:18** 只是重新计算一下目标
+- **13:21** 止损你试一下77150
+- **13:21** 这么复杂的单，你做过一次，未来会轻松一点
+- **13:23** 这种走线，掉单就不说了，如果没掉单 ，这回上去了 ，你复盘的时候，就觉得有意思
+- **13:27** 主力要做market making，就是这样，
+- **13:47** 你的止损在77200了
+- **13:48** @所有人 那这一次不是79400这个位置要过，而是79700到了，会再下来一次的
+- **13:49** 79700要过了才行的
+- **13:49** 但是路线大家比较清楚了，试一下吧，止损不远
+- **13:50** 整理一下order
+- **13:53** 9月2号；进场位置: 77500附近；止损位置: 77200；第一目标: 79700；止盈位置: 未知
+- **13:57** 目前会在77500附近有点波动
+- **13:58** 在77500—77700这里是压力区间
+- **13:59** 但是77500市场站上来了，[强]这是一个achievement
+- **13:59** 如果走空的话，77500是不应该站上来的
+- **14:03** 我们还在中段行情里面，中段是比较波动的，也是主力要做他们的目标的地方，你只要玩好了中段，如此波动复杂的行情，你很牛逼。
+- **14:05** 因为79400没过，太多高倍杠杆了，下来洗掉他们
+- **14:07** 我们进场的位置是好位置，但是主力也不可能让这么多高倍杠杆的玩家带着一起上去。
+- **14:08** 77300，标准的跌了1.25%，将100×的高倍玩家全部洗了
+- **14:10** 今年我们还没有办法说杠杆问题
+- **14:10** 杠杆多少是你自己的决定
+- **14:10** 但是我们能够在一年里面，首先学会精准进场出场
+- **14:11** 没有这些基本功，很难
+- **14:18** 目前最不好的看头，就是不想看价格再下来77k，
+- **14:18** 只要价格还在77k之上，都好说
+- **14:19** 那么止损是可以放在77k的。这是最后的底线，止损可以放在76900。这个是就是对77500的最后博弈。
+- **14:22** 现在有时间进场，没进场的可以等机会进场，76900止损有点大，找一个位置进场，止损小一点的。这是针对没有进场的友。
+- **14:24** 77570，77340，这是二个进场的位置
+- **14:25** technically, 多头是有一个上行趋势的
+- **14:27** 另外多头还在77570上面hold住的，这是最牛的一点，只要不输这个位置就上行了。输了这个位置就下去77340
+- **14:28** 越长时间待在77570上面就越好，对于多头来说。
+- **14:32** 现在看77340这里是不是横盘
+- **14:37** 要做单，中段，就是这样了，
+- **14:38** 非常牛逼的技术才能和主力缠斗
+- **14:40** 慢慢就会明白，而且止损必须要近
+- **14:52** 你能看12个小时的分钟线🧵吗？@Evey 
+- **14:53** 这个看分钟线🧵对于华尔街的专业交易者他们是用机器看的
+- **14:57** 我们都是至少二个monitor 这是最低配置，大部分3个以上，一个看反面，还要看orderflow，……@Evey 
+- **15:04** 就一个看盘的持久专注力
+- **15:06** 能有定力，坐下来，专注不多的项目才行
+- **15:07** 你才能找到和主力之间的交易agreement.[咖啡][咖啡][咖啡]⚠️⚠️⚠️这一点非常重要
+- **15:09** 那么什么是你和一个项目的做市商之间达成的交易一致性？
+- **15:10** 那么引出另外一个问题:这个项目，不管是ETH，sol，xrp，黄金，铜，……不管哪一个项目，
+- **15:11** 这个项目有没有做市商？
+- **15:11** 第一个工作，你要在线上找到他，不管是不是同一个做市商
+- **15:13** 第二个工作，你有多么接近他/她？懂他怎么画线吗，她/他习惯什么，欺骗什么，怎样做market making?等等……
+- **15:17** 今天重提这个话题，只是为了再次强调，杠杆的高下对决
+- **15:19** 威科夫（Richard D. Wyckoff）的股票技术分析理论中，他也将市场具象化，他将所有的数据具象化为一个市场里面的“综合人”（Composite Man，有时也被译为“主力”或“合成人”）是一个假想的拟人化模型。
+- **15:22** 我们问我们自己，进场一个项目，你和谁在博弈？
+- **15:23** 看见拉了很大的百分比，但是拉升前有准备，有计划没有？
+- **15:25** 那至少大饼的主力我们还是比较了解的
+- **15:28** 总结，高倍杠杆只针对非常熟悉的项目
+- **15:29** 杠杆的倍数不是问题的关键
+- **15:31** 止损位置是一个重要的问题
+- **16:51** 这个trade就算结束了
+- **18:04** 白天有点忙了，有急事amedi
+- **18:05** 没急事就等开盘了
+- **18:05** 止损以后，不要急于进场
+- **18:05** 慢慢来，中段有点难度的
+
+## 2026-09-02｜M_Medi
+
+- **01:03** for right now it is just the sweep of 77500
+- **01:03** on 30 min
+- **02:18** We have now lost 77500
+- **02:18** so not good
+- **02:18** let us get out
+- **02:19** and reevaluate it tomorrow
+- **02:19** we will have our next chance at a position
+- **02:20** we have to wait for the re achievement of 77500 before taking the next long
+- **02:20** after losing 77000 we will go to 73800
+- **02:21** so 77k is still a lv to watch
+- **03:38** so what happened now is the sweep of 77000, exactly 1.2% from 77300, so 100x lev has been liquidated
+- **03:41** however we still broke the 77k lv,  which is not good from a liquidity perspective, which means the market needs to show that it can hold 77500-77700 as a bullish lv again. if we for example now go above 77700 like 77900/77800 but fail to hold 77500 or 77000 we still can consider the 73800 lv
+- **03:51** right now this pump should exceed 78000
+- **05:53** if we do achieve and hold 77500/77700 it is worth a try to get to 79700
+- **16:51** yes you have to wait for market open for a position today
+- **16:52** wait for market open for any bigger trades
+- **21:07** There is a possibility we test 78200-78300 but not sure if the retest after on 77500 will work
+- **21:07** certainly suspicious since we spend time below 77k,
+- **21:19** will look for 73800 if we go down further, but it is higher unlikely currently that the high at 81400 is the high this time
+- **21:20** so we will make a new high first before we really drop
+- **21:20** so our big short needs to wait till we make new high first
+- **21:20** and in the mean time we look for any accurate long positions or short term short positions
+- **21:22** for example if we test 78200 and lose 77500 again I would say that is a short opportunity
+- **21:22** otherwise I will wait for a better setup
+- **21:22** certainly will not chase short here
+- **21:25** we can reverse locally of we hold 76700-76600 for the 78200 retest
+- **21:27** to sweep the 77500-77700 short today who have entered
+- **21:28** @山松 that is the problem we will have achieved liq lv
+- **21:28** so the market will be volatile
+- **21:28** my suggestion is to take profit
+- **21:29** on long
+- **21:29** and wait for the market to fight it out
+- **21:29** I went long too today at the lows
+- **21:29** for a low probability sweep
+- **21:31** yeah we had a 30 min sweep and then achievement locally
+- **21:31** but still under 77k so no confident in the trade currently
+- **21:34** my basic trade idea is just to sweep today's shorts
+- **21:41** @ykf I do not think it will be like that,  there is not enough long that have chased at the top since it was midnight when they did it
+- **21:41** no longs trapped up there
+- **21:42** yes for the pre market sweep if we defend 76600
+- **21:42** but we will come down again I think
+- **21:43** my long is working out for now
+- **21:43** but just a short term position for me currently
+- **21:44** if we do hold 77500 confidently then I will reenter, but for now I will full tp at 78000
+- **21:45** @蟹子 yes we held local 76600
+- **21:46** but anyone who have entered I would suggest at least a partial tp at 78100-78200
+- **21:47** and wait for the market to hold 77500 or lose it
+- **21:48** I personally will full tp, since if we succeed in making 77500 into support I will have another chance to enter
+- **21:54** market will make it difficult
+- **21:54** it will be up down, all around
+- **21:54** at the 78000-75500 lv
+- **21:56** middle market is too difficult
+- **21:57** but fun
+- **21:57** I like to do it to practice my execution of trades, so when I need to lock in I have the skill to do my trades when it really counts
+- **22:00** being disciplined with lv and stop losses is what everyone need to practice, if you do not you will have emotions on trades and that kills
+- **22:00** so I trade a lot to numb myself
+- **22:01** once you do it everyday you know you can always reenter
+- **22:02** if we do lose and breakdown slowly from the 77500 lv the drop will be pretty big and violent
+- **22:02** if it breaks down it will likely slowly
+- **22:02** so do chase the fast moves
+- **22:03** let the market slow down when the breakdown happens
+- **22:03** and then you enter for big candles
+- **22:03** same with break out
+- **22:03** it will likely side way above a lv before a real breakout
+- **22:05** do not chase the fast moves
+- **22:06** entering on exact position or on slower movements is the way to go
+- **22:06** way less emotions and you can get accurate positioning
