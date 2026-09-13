@@ -64,6 +64,7 @@ WHISPER_CLI = shutil.which("whisper-cli") or "whisper-cli"
 
 # Qwen3-ASR model path
 QWEN3_MODEL_NAME = "Qwen3-ASR-1.7B-4bit"
+QWEN3_MLX_MODEL_ID = "mlx-community/Qwen3-ASR-1.7B-bf16"
 
 
 def find_qwen3_model() -> str | None:
@@ -73,6 +74,12 @@ def find_qwen3_model() -> str | None:
         candidate = Path(models_dir).expanduser() / QWEN3_MODEL_NAME
         if candidate.exists():
             return str(candidate)
+    # qwen3-asr-mlx downloads the MLX weights from Hugging Face on first use.
+    try:
+        import qwen3_asr_mlx  # noqa: F401
+        return QWEN3_MLX_MODEL_ID
+    except ImportError:
+        pass
     return None
 
 
@@ -98,6 +105,17 @@ def transcribe_audio_qwen3(audio_path: str, language: str | None = None) -> str 
     model_path = find_qwen3_model()
     if not model_path:
         return None
+
+    if model_path == QWEN3_MLX_MODEL_ID:
+        try:
+            from qwen3_asr_mlx import Qwen3ASR
+            print(f"  Transcribing with Qwen3-ASR ({QWEN3_MLX_MODEL_ID})...")
+            model = Qwen3ASR.from_pretrained(model_path)
+            result = model.transcribe(audio_path, language=language)
+            return result.text.strip() if result.text else None
+        except Exception as exc:
+            print(f"  Warning: qwen3-asr-mlx failed: {exc}")
+            return None
 
     try:
         from mlx_audio.stt.utils import load_model
