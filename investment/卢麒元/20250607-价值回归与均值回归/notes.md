@@ -141,4 +141,4 @@
 
 ## 来源
 
-- [讲座转录](./transcript.txt)
+- [讲座转录（分段版）](./transcript.md)；[原始校订稿](./transcript.txt)
