@@ -59,36 +59,28 @@ python3 .codex/skills/investment/scripts/write_trade_journal.py import-futu /tmp
 - `import-futu` 自带去重、品种名映射（`FUTU_NAME_MAP`）和代码字段填充
 - 新品种首次导入时，如映射表中没有对应中文名，会使用富途原始英文名；后续可在映射表中补充
 
-### Step 3：招商证券（Chrome MCP）
+### Step 3：招商证券（掌上证券 MAC 金融终端）
 
 **前置条件**：
-- Chrome 以 `--remote-debugging-port=9222` 启动，Chrome MCP 已连接
-- 浏览器已登录招商证券
-
-**历史成交页面 URL**（必须含 `/npctrade` 路径前缀）：
-```
-https://xtrade.newone.com.cn/npctrade#/trade/ptjy/cx?page=lscj
-```
+- macOS 上已启动并登录“掌上证券 MAC 金融终端”
+- 已进入“普通交易”模块
 
 **步骤**：
 
+1. 在左侧菜单选择 **普通交易 → 查询 → 历史委托**。
+2. 将起始日期设为 `START_DATE`，终止日期设为 `END_DATE`，执行查询。
+3. 读取查询结果中的成交日期、证券代码、证券名称、买卖方向、成交价格、成交数量、成交金额、成交编号等字段。
+4. 若终端支持导出，将结果导出为 CSV；按 `write_trade_journal.py import-cms` 所需的招商证券字段格式整理后导入：
+
 ```bash
-# 1. chrome-devtools navigate_page 导航到上述 URL（timeout: 60000）
-
-# 2. 生成提取数据的 JS
-python3 .codex/skills/investment/scripts/fetch_cms_trades.py js \
-  --start START_DATE --end END_DATE
-
-# 3. chrome-devtools evaluate_script 执行该 JS，获取 JSON 结果
-
-# 4. JSON → CSV → 导入
-python3 .codex/skills/investment/scripts/fetch_cms_trades.py convert \
-  --json-file /tmp/cms_raw.json -o /tmp/cms.csv
-python3 .codex/skills/investment/scripts/write_trade_journal.py import-cms /tmp/cms.csv
+uv run .codex/skills/investment/scripts/write_trade_journal.py import-cms /tmp/cms.csv
 ```
 
-> - 如果数据量只有几条且已存在于日志中，可跳过 convert + import，确认无新记录即可
-> - 页面"服务异常"或有错误弹窗 = 会话过期，提示用户重新登录（用 `take_snapshot` 确认）
+5. 若终端不支持导出，逐笔使用 `add` 命令写入交易日志；备注中保留成交编号、委托编号及终端显示的结算金额，便于去重和复核。
+
+> - “历史委托”是本流程的查询入口；只将已成交的委托写入交易日志，未成交或已撤单的委托不记录为交易。
+> - 如果查询结果为空，确认日期范围、账户和交易市场后即可记为本期无新成交。
+> - `fetch_cms_trades.py` 原有的网页提取脚本不再作为招商证券的默认数据来源。
 
 ### Step 4：校验
 
