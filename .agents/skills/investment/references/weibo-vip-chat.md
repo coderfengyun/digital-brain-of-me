@@ -12,7 +12,7 @@
 
 ## 强制使用 computer use
 
-本流程必须通过 computer use 操作微博网页版：使用 `node_repl` 调用 `@oai/sky`，控制用户已有登录态的 Chrome，读取页面可见状态并执行点击、滚动等交互。不得用 WebFetch、普通 HTTP/API 抓取、网页文本搜索或已有快照替代；在未通过 computer use 实际确认群聊页面前，不得写入同步结果。
+本流程必须通过 computer use 操作微博网页版：使用 `node_repl` 调用 `@oai/sky`，控制用户已有登录态的 Chrome，读取页面可见状态并执行点击、滚动等交互。
 
 ## 获取流程
 
