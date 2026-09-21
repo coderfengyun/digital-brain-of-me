@@ -10,6 +10,10 @@
 - 原文文件：`investment/卢麒元/微博VIP群发言.md`
 - 作者索引：`investment/卢麒元/卢麒元.md`
 
+## 强制使用 computer use
+
+本流程必须通过 computer use 操作微博网页版：使用 `node_repl` 调用 `@oai/sky`，控制用户已有登录态的 Chrome，读取页面可见状态并执行点击、滚动等交互。不得用 WebFetch、普通 HTTP/API 抓取、网页文本搜索或已有快照替代；在未通过 computer use 实际确认群聊页面前，不得写入同步结果。
+
 ## 获取流程
 
 1. 写入前先读原文文件顶部，以上一条已记录日期和内容作为续更断点。
