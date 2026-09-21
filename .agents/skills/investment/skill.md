@@ -89,7 +89,7 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 
 当用户要求更新卢麒元在微博 VIP 群中的发言，或从上次记录继续收集群主文字消息时，必须先完整阅读并执行 [`references/weibo-vip-chat.md`](references/weibo-vip-chat.md)。该流程包含固定群聊与发言人、断点回溯、文字消息筛选、原文写入和作者索引更新规则。
 
-**强制交互方式**：此任务必须使用 computer use 完成微博页面操作，即通过 `node_repl` + `@oai/sky` 控制用户已有登录态的 Chrome；不得使用 WebFetch、普通 HTTP/API 抓取、网页文本搜索或仅凭已有快照代替 computer use。只有通过 computer use 实际查看并确认群聊页面后，才能写入同步结果。
+**强制交互方式**：此任务必须使用 computer use 完成微博页面操作，即通过 `node_repl` + `@oai/sky` 控制用户已有登录态的 Chrome。
 
 ### 获取 Medi 或莎姐的微信群发言
 
