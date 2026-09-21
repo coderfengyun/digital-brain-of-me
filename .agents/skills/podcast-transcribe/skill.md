@@ -40,7 +40,7 @@ https://itunes.apple.com/search?term=<Show+Name>&entity=podcast&limit=5
 **Step 3: 运行转录脚本**
 
 ```bash
-python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "<RSS_URL>" --count 1 --model base --output-dir investment/洪灏/
+python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "<RSS_URL>" --count 1 --model Qwen3-ASR-0.6B --output-dir investment/洪灏/
 ```
 
 ### 方式二：通过 RSS Feed 转录
@@ -49,8 +49,8 @@ python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "<RSS_URL>" 
 # 转录最新 1 集，输出到指定目录
 python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 1 --output-dir investment/洪灏/
 
-# 转录最新 3 集，使用 small 模型（更高质量）
-python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 3 --model small --output-dir investment/洪灏/
+# 转录最新 3 集，使用 Qwen3-ASR-0.6B（默认）
+python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --count 3 --model Qwen3-ASR-0.6B --output-dir investment/洪灏/
 
 # 指定语言
 python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "https://example.com/feed.xml" --language zh --output-dir knowledge/research/
@@ -62,8 +62,8 @@ python .Codex/skills/podcast-transcribe/transcribe_podcast.py --rss "https://exa
 # 转录本地音频文件
 python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Episode Title" --show "Show Name" --output-dir investment/卢麒元/
 
-# 指定模型和语言
-python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
+# 指定模型和语言（模型默认为 Qwen3-ASR-0.6B）
+python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model Qwen3-ASR-0.6B --language en --output-dir knowledge/research/
 ```
 
 ## 输出
@@ -79,7 +79,7 @@ python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Download
 **Date:** 2026-04-15
 **Source:** [url](url)
 **Language:** zh
-**Model:** whisper-base
+**Model:** Qwen3-ASR-0.6B
 
 ## Transcript
 
@@ -88,14 +88,15 @@ python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Download
 
 同时会在 `sources/sources.jsonl` 中注册一条记录，用于追踪处理过的外部输入。
 
-## Whisper 模型选择
+## 转录模型选择
 
 | 模型 | 大小 | 速度 | 质量 | 建议场景 |
 |------|------|------|------|----------|
+| `Qwen3-ASR-0.6B` | — | — | 高 | 日常使用（默认） |
 | `tiny` | 74MB | 最快 | 一般 | 快速预览 |
-| `base` | 141MB | 快 | 良好 | 日常使用（默认） |
-| `small` | 244MB | 中等 | 很好 | 正式转录 |
-| `large` | 1550MB | 慢 | 最佳 | 高质量需求 |
+| `base` | 141MB | 快 | 良好 | 兼容 Whisper 的旧任务 |
+| `small` | 244MB | 中等 | 很好 | 兼容 Whisper 的正式转录 |
+| `large` | 1550MB | 慢 | 最佳 | 兼容 Whisper 的高质量需求 |
 
 ## 已验证的 RSS Feed
 
@@ -109,10 +110,8 @@ python .Codex/skills/podcast-transcribe/transcribe_podcast.py --audio ~/Download
 # macOS
 brew install whisper-cpp ffmpeg
 
-# 下载 Whisper 模型（目前已安装 base 模型）
-mkdir -p ~/.cache/whisper-cpp
-curl -L -o ~/.cache/whisper-cpp/ggml-base.bin \
-  "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin"
+# 下载 Qwen3-ASR-0.6B 模型（默认模型）
+# 模型地址和安装方式以 env/models.toml 及对应 Qwen3-ASR 工具为准
 
 # Python 依赖
 python3 -m pip install feedparser requests
