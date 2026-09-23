@@ -58,9 +58,6 @@ digital-brain-of-me/
 ### 语言
 - 用户用中文交流，用中文回复
 
-### 权限
-- 当用户提供 web URL 或需要将网页内容转成 Markdown，统一使用 Chrome MCP（navigate_page + take_snapshot），不使用 WebFetch 或 agent-browser
-
 ### 格式
 - 流程图只保存 Mermaid 源代码（.mmd 文件），不保存图片
 - JSONL 文件：一行一个 JSON 对象，只追加不删除
