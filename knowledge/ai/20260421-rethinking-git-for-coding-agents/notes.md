@@ -2,6 +2,9 @@
 
 **类型**: 叙事
 **来源**: a16z Podcast, 2026-04-20
+**Spotify**: https://open.spotify.com/episode/3tKtHFe4GhYoYxxr1LZlHS
+**本地材料**: [英文转录](transcript.txt)
+**转录说明**: 2026-09-28 使用 whisper-small（英文）从官方 RSS 音频重新转录；自动转录可能含少量专有名词和口语识别误差。
 **嘉宾**: Scott Chacon (GitHub 联合创始人, GitButler CEO)
 **主持**: Matt Bornstein (a16z General Partner)
 

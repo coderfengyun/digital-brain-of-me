@@ -20,7 +20,7 @@
 | #0034 | 2026-05-12 | Interaction Models: A Scalable Approach to Human-AI Collaboration | [notes](interaction-models/notes.md) |
 | #0033 | 2026-05-06 | OpenAI 实时语音架构首次公开 | [notes](openai-realtime-voice-architecture/notes.md) |
 | #0032 | 2026-05-06 | Stephanie Zhan × Karpathy @ Sequoia AI Ascent 2026: Vibe Coding vs Agentic Engineering | [notes](vibe-coding-vs-agentic-engineering/notes.md) |
-| #0031 | 2026-04-21 | Rethinking Git for the Age of Coding Agents - Scott Chacon (a16z Podcast) | [notes](rethinking-git-for-coding-agents/notes.md) |
+| #0031 | 2026-04-21 | Rethinking Git for the Age of Coding Agents - Scott Chacon (a16z Podcast) | [notes](20260421-rethinking-git-for-coding-agents/notes.md) |
 | #0030 | 2026-04-16 | Scaling Managed Agents: Decoupling the brain from the hands | [notes](scaling-managed-agents/notes.md) |
 | #0029 | 2026-04-07 | From Hierarchy to Intelligence | [notes](from-hierarchy-to-intelligence/notes.md) |
 | #0028 | 2026-04-07 | LLM Knowledge Bases | [notes](llm-knowledge-bases/notes.md) |
