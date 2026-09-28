@@ -4,7 +4,11 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+<<<<<<< HEAD
 | #0045 | 2026-07-24 | 凯文·凯利：没有专家能看透 AI 未来 | [notes](20260724-kevin-kelly-ai-frontiers/notes.md) |
+=======
+| #0045 | 2026-07-21 | RubricEval: A Rubric-Level Meta-Evaluation Benchmark for LLM Judges in Instruction Following | [notes](20260721-rubriceval/notes.md) |
+>>>>>>> bf38a29 (Auto-commit on session end)
 | #0044 | 2026-07-10 | RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards | [notes](20260710b-rubricem/notes.md) |
 | #0043 | 2026-07-10 | Why Supervised Fine-Tuning Fails to Learn: A Systematic Study of Incomplete Learning in Large Language Models | [notes](20260710-sft-incomplete-learning/notes.md) |
 | #0042 | 2026-06-17 | Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR | [notes](20260617-speaker-reasoner/notes.md) |
