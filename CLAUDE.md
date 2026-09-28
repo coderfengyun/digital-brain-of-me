@@ -17,7 +17,7 @@ digital-brain-of-me/
 ├── labs/              进行中的探索性项目
 ├── scripts/           通用脚本工具
 ├── work-standard/     工作标准与示例
-├── env/               环境与依赖管理
+├── env/               环境、依赖及本地模型的下载与管理
 ├── docs/              设计文档与方法论
 ├── .codex/skills/     Codex 复杂工作流的指令和脚本
 ├── .claude/skills/    Claude 复杂工作流的指令和脚本（保留）
@@ -39,7 +39,7 @@ digital-brain-of-me/
 | `labs/` | 进行中的探索性技术实验 | 每个子目录含 README |
 | `scripts/` | 通用脚本工具 | 用 `uv run` 执行 |
 | `work-standard/` | 工作标准、对话示例、参考文章 | 直接读取目录内文件 |
-| `env/` | 环境与依赖管理（setup.sh、依赖分层、日常操作） | `env/ENV.md`（执行脚本/安装依赖前必读） |
+| `env/` | 环境与依赖管理（setup.sh、依赖分层、本地模型下载与管理、日常操作） | `env/ENV.md`（执行脚本、安装依赖或下载本地模型前必读） |
 | `docs/` | 设计文档与方法论（见下表） | — |
 
 ### `docs/` 文件说明
