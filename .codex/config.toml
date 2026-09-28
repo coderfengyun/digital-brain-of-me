@@ -5,5 +5,11 @@ args = [
 ]
 command = "npx"
 
+[mcp_servers.chrome-devtools.tools.take_snapshot]
+approval_mode = "approve"
+
+[mcp_servers.chrome-devtools.tools.evaluate_script]
+approval_mode = "approve"
+
 [mcp_servers.playwright]
 command = "/Users/yangdoudou/.nvm/versions/node/v22.22.0/bin/playwright-mcp"

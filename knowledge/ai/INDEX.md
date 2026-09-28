@@ -4,7 +4,9 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
-| #0045 | 2026-07-24 | 凯文·凯利：没有专家能看透 AI 未来 | [notes](20260724-kevin-kelly-ai-frontiers/notes.md) |
+| #0047 | 2026-08-21 | 复刻专家判断：桥水如何把投资“品位”训练进模型 | [notes](20260821-expert-judgment-financial-tasks/notes.md) |
+| #0046 | 2026-07-24 | 凯文·凯利：没有专家能看透 AI 未来 | [notes](20260724-kevin-kelly-ai-frontiers/notes.md) |
+| #0045 | 2026-07-21 | RubricEval: A Rubric-Level Meta-Evaluation Benchmark for LLM Judges in Instruction Following | [notes](20260721-rubriceval/notes.md) |
 | #0044 | 2026-07-10 | RubricEM: Meta-RL with Rubric-guided Policy Decomposition beyond Verifiable Rewards | [notes](20260710b-rubricem/notes.md) |
 | #0043 | 2026-07-10 | Why Supervised Fine-Tuning Fails to Learn: A Systematic Study of Incomplete Learning in Large Language Models | [notes](20260710-sft-incomplete-learning/notes.md) |
 | #0042 | 2026-06-17 | Speaker-Reasoner: Scaling Interaction Turns and Reasoning Patterns for Timestamped Speaker-Attributed ASR | [notes](20260617-speaker-reasoner/notes.md) |
@@ -18,7 +20,7 @@
 | #0034 | 2026-05-12 | Interaction Models: A Scalable Approach to Human-AI Collaboration | [notes](interaction-models/notes.md) |
 | #0033 | 2026-05-06 | OpenAI 实时语音架构首次公开 | [notes](openai-realtime-voice-architecture/notes.md) |
 | #0032 | 2026-05-06 | Stephanie Zhan × Karpathy @ Sequoia AI Ascent 2026: Vibe Coding vs Agentic Engineering | [notes](vibe-coding-vs-agentic-engineering/notes.md) |
-| #0031 | 2026-04-21 | Rethinking Git for the Age of Coding Agents - Scott Chacon (a16z Podcast) | [notes](rethinking-git-for-coding-agents/notes.md) |
+| #0031 | 2026-04-21 | Rethinking Git for the Age of Coding Agents - Scott Chacon (a16z Podcast) | [notes](20260421-rethinking-git-for-coding-agents/notes.md) |
 | #0030 | 2026-04-16 | Scaling Managed Agents: Decoupling the brain from the hands | [notes](scaling-managed-agents/notes.md) |
 | #0029 | 2026-04-07 | From Hierarchy to Intelligence | [notes](from-hierarchy-to-intelligence/notes.md) |
 | #0028 | 2026-04-07 | LLM Knowledge Bases | [notes](llm-knowledge-bases/notes.md) |
