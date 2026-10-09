@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""使用 Qwen3-ASR 1.7B MLX 模型转写音频。"""
+"""使用 Qwen3-ASR 0.6B MLX 模型转写音频。"""
 
 from __future__ import annotations
 
@@ -10,11 +10,11 @@ from qwen3_asr_mlx import Qwen3ASR
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Transcribe audio with Qwen3-ASR 1.7B")
+    parser = argparse.ArgumentParser(description="Transcribe audio with Qwen3-ASR 0.6B")
     parser.add_argument("audio", type=Path, help="音频文件路径（WAV/MP3/FLAC 等）")
     parser.add_argument(
         "--model",
-        default="mlx-community/Qwen3-ASR-1.7B-bf16",
+        default="mlx-community/Qwen3-ASR-0.6B-bf16",
         help="Hugging Face 模型名或本地模型目录",
     )
     parser.add_argument("--language", default=None, help="可选语言提示，例如 Chinese 或 English")

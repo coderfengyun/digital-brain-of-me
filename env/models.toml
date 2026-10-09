@@ -26,16 +26,9 @@ description = "whisper.cpp 最高质量转录"
 [asr.qwen3-0_6b]
 path = "Qwen3-ASR-0.6B"
 size = "1.8GB"
-url = "https://huggingface.co/Qwen/Qwen3-ASR-0.6B"
-required = false
-description = "通义千问 ASR，52语言，速度优先"
-
-[asr.qwen3-1_7b-4bit]
-path = "Qwen3-ASR-1.7B-4bit"
-size = "1.5GB"
-url = "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-4bit"
+url = "https://huggingface.co/mlx-community/Qwen3-ASR-0.6B-bf16"
 required = true
-description = "通义千问 ASR 4bit 量化版，转录默认模型（优先于 whisper）"
+description = "通义千问 ASR MLX 版，转录默认模型；本地不存在时回退 whisper"
 
 [asr.mimo-v2_5-mlx]
 path = "MiMo-V2.5-ASR-MLX"

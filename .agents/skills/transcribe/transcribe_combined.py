@@ -225,7 +225,7 @@ def main():
     parser.add_argument('--output-dir', required=True, help='Output directory')
     parser.add_argument('--language', default='zh', help='Language code (default: zh)')
     parser.add_argument('--speakers', type=int, default=None, help='Expected speakers (auto if omitted)')
-    parser.add_argument('--asr-model', default='~/Models/Qwen3-ASR-1.7B-4bit',
+    parser.add_argument('--asr-model', default='~/Models/Qwen3-ASR-0.6B',
                         help='Qwen3-ASR model path')
     parser.add_argument('--speaker-json', default=None,
                         help='Path to saved speaker segments JSON (skip AssemblyAI)')

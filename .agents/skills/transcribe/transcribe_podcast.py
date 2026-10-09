@@ -63,8 +63,8 @@ MODEL_SEARCH_PATHS += [
 WHISPER_CLI = shutil.which("whisper-cli") or "whisper-cli"
 
 # Qwen3-ASR model path
-QWEN3_MODEL_NAME = "Qwen3-ASR-1.7B-4bit"
-QWEN3_MLX_MODEL_ID = "mlx-community/Qwen3-ASR-1.7B-bf16"
+QWEN3_MODEL_NAME = "Qwen3-ASR-0.6B"
+QWEN3_MLX_MODEL_ID = "mlx-community/Qwen3-ASR-0.6B-bf16"
 
 
 def find_qwen3_model() -> str | None:
@@ -74,12 +74,19 @@ def find_qwen3_model() -> str | None:
         candidate = Path(models_dir).expanduser() / QWEN3_MODEL_NAME
         if candidate.exists():
             return str(candidate)
-    # qwen3-asr-mlx downloads the MLX weights from Hugging Face on first use.
+    # Only select the Hugging Face model when it is already cached. Auto mode
+    # must not trigger a multi-GB model download after the user removed it.
     try:
-        import qwen3_asr_mlx  # noqa: F401
-        return QWEN3_MLX_MODEL_ID
+        from huggingface_hub import scan_cache_dir
+
+        cached_repos = {repo.repo_id for repo in scan_cache_dir().repos}
+        if QWEN3_MLX_MODEL_ID in cached_repos:
+            import qwen3_asr_mlx  # noqa: F401
+            return QWEN3_MLX_MODEL_ID
     except ImportError:
         pass
+    except Exception as exc:
+        print(f"  Warning: unable to inspect Hugging Face cache: {exc}")
     return None
 
 

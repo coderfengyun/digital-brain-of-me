@@ -11,7 +11,7 @@ description: "Audio/video transcription tool (Qwen3-ASR default, whisper.cpp fal
 
 ## 引擎优先级
 
-**Qwen3-ASR > whisper.cpp**。脚本自动检测 Qwen3-ASR 模型是否存在（路径见 `env/models.toml`），存在则默认使用，否则 fallback 到 whisper.cpp。可通过 `--engine whisper` 强制使用 whisper。
+**Qwen3-ASR 0.6B > whisper.cpp**。脚本只在本地已有 Qwen3-ASR 0.6B 模型时使用它，否则 fallback 到 whisper.cpp，不会为了自动选择引擎而下载模型。可通过 `--engine whisper` 强制使用 whisper。
 
 ## 核心流程
 
@@ -115,7 +115,7 @@ python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episod
 
 ## 模型选择
 
-默认引擎 Qwen3-ASR 无需选择模型（自动从 `env/models.toml` 中定义的路径加载）。
+默认引擎 Qwen3-ASR 0.6B 无需选择模型（优先从 `MODELS_DIR` 加载，其次使用已有的 Hugging Face 缓存）。模型不存在时自动使用 whisper.cpp。
 
 当使用 `--engine whisper` 时，通过 `--model` 指定 whisper 模型：
 
@@ -146,7 +146,7 @@ uv add feedparser requests mlx-audio
 
 ## 技术备忘
 
-- 引擎优先级：Qwen3-ASR（`mlx_audio.stt.utils.load_model`）> whisper-cli
+- 引擎优先级：本地 Qwen3-ASR 0.6B > whisper-cli
 - whisper-cpp 安装后的命令是 `whisper-cli`（不是 `whisper-cpp`）
 - 模型位置：统一查 `env/models.toml`
 - ffmpeg 会将音频预处理为 16kHz 单声道 WAV（whisper/qwen3 的输入要求）
