@@ -1,7 +1,7 @@
 # The View Beyond: China's post-Golden Week reality check
 
 **Show:** Moving Markets
-**Date:** 2026-10-18
+**Date:** 2026-10-17
 **Source:** [https://share.transistor.fm/s/fd7ff85b](https://share.transistor.fm/s/fd7ff85b)
 **Language:** en
 **Model:** whisper-base
