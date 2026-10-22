@@ -2,7 +2,7 @@
 
 Parametric reconstruction from four reference photos.
 
-- outer diameter: 8 mm
+- outer diameter: 7 mm
 - circular end recess diameter: 5 mm
 - transverse hole diameter: 3.5 mm
 - length: 12.5 mm

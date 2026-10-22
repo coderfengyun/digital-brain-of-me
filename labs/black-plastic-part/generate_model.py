@@ -9,7 +9,7 @@ from skimage import measure
 
 # All dimensions are millimetres.
 LENGTH = 12.5
-OUTER_DIAMETER = 8.0
+OUTER_DIAMETER = 7.0
 INNER_DIAMETER = 5.0
 SIDE_HOLE_DIAMETER = 3.5
 INTERNAL_SLOT_WIDTH = 2.0
