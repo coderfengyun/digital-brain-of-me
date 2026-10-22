@@ -87,6 +87,11 @@ def main() -> None:
     faces = faces[np.sort(unique_faces)]
 
     write_binary_stl(output_dir / "black_plastic_part.stl", vertices, faces)
+    # A second copy rotated 90 degrees about X, so its long axis lies on the bed.
+    laid_flat = vertices[:, [0, 2, 1]].copy()
+    laid_flat[:, 2] *= -1
+    laid_flat[:, 2] -= laid_flat[:, 2].min()
+    write_binary_stl(output_dir / "black_plastic_part_laid_flat.stl", laid_flat, faces)
     print(f"Wrote {len(vertices):,} vertices and {len(faces):,} triangles")
 
 

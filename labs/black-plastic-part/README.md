@@ -18,3 +18,6 @@ uv run generate_model.py
 The output is `black_plastic_part.stl` in this directory. Print one test piece
 before producing multiples; holes in FDM prints often need 0.1–0.3 mm clearance
 depending on the printer and filament.
+
+`black_plastic_part_laid_flat.stl` contains the identical mesh rotated 90° for
+printing with its long axis parallel to the build plate.
