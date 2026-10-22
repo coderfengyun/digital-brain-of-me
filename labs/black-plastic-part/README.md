@@ -3,10 +3,11 @@
 Parametric reconstruction from four reference photos.
 
 - outer diameter: 8 mm
-- axial inner diameter: 6 mm
+- circular end recess diameter: 6 mm
 - transverse hole diameter: 3 mm
 - length: 12.5 mm
-- internal rectangular relief width supplied: 2 mm (position/height pending)
+- axial rectangular through-hole: 4 × 2 mm (4 mm estimated from photo)
+- circular end recess depth: 4 mm (estimated from photo)
 
 Generate the printable mesh with:
 

@@ -13,6 +13,8 @@ OUTER_DIAMETER = 8.0
 INNER_DIAMETER = 6.0
 SIDE_HOLE_DIAMETER = 3.0
 INTERNAL_SLOT_WIDTH = 2.0
+INTERNAL_SLOT_HEIGHT = 4.0  # estimated from the end-view photograph
+COUNTERBORE_DEPTH = 4.0     # circular 6 mm recess from each end
 
 # The photo shows a subtle waist. 0.25 mm preserves a printable wall.
 WAIST_DEPTH = 0.25
@@ -31,14 +33,19 @@ def field(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
     local_radius = outer_radius - WAIST_DEPTH * (1.0 - axial**2)
     outer = np.maximum(np.sqrt(x * x + y * y) - local_radius, np.abs(z) - half_length)
 
-    # Main axial bore and the 3 mm transverse through-hole.
-    axial_bore = inner_radius - np.sqrt(x * x + y * y)
+    # The 6 mm feature is a circular recess at each end, not a full bore.
+    radial_inside = inner_radius - np.sqrt(x * x + y * y)
+    within_end_recess = np.abs(z) - (half_length - COUNTERBORE_DEPTH)
+    end_counterbores = np.minimum(radial_inside, within_end_recess)
+
+    # The rectangular opening seen inside the circular recess runs axially.
+    axial_slot = np.minimum(
+        INTERNAL_SLOT_HEIGHT / 2 - np.abs(x),
+        INTERNAL_SLOT_WIDTH / 2 - np.abs(y),
+    )
     side_hole = SIDE_HOLE_DIAMETER / 2 - np.sqrt(y * y + z * z)
 
-    # INTERNAL_SLOT_WIDTH is retained as a supplied parameter. The photographs
-    # do not establish the slot's second dimension or its radial position, so a
-    # speculative overlapping cut is intentionally omitted from this test fit.
-    voids = np.maximum(axial_bore, side_hole)
+    voids = np.maximum.reduce([end_counterbores, axial_slot, side_hole])
     return np.maximum(outer, voids)
 
 
