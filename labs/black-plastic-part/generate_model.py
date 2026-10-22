@@ -10,11 +10,11 @@ from skimage import measure
 # All dimensions are millimetres.
 LENGTH = 12.5
 OUTER_DIAMETER = 8.0
-INNER_DIAMETER = 6.0
+INNER_DIAMETER = 5.0
 SIDE_HOLE_DIAMETER = 3.5
 INTERNAL_SLOT_WIDTH = 2.0
 INTERNAL_SLOT_HEIGHT = 5.0
-COUNTERBORE_DEPTH = 4.0     # circular 6 mm recess from each end
+COUNTERBORE_DEPTH = 4.0     # circular 5 mm recess from each end
 
 # The photo shows a subtle waist. 0.25 mm preserves a printable wall.
 WAIST_DEPTH = 0.25
@@ -33,7 +33,7 @@ def solid_mask(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
     local_radius = outer_radius - WAIST_DEPTH * (1.0 - axial**2)
     outer = (np.sqrt(x * x + y * y) <= local_radius) & (np.abs(z) <= half_length)
 
-    # The 6 mm feature is a circular recess at each end, not a full bore.
+    # The 5 mm feature is a circular recess at each end, not a full bore.
     radial_inside = np.sqrt(x * x + y * y) <= inner_radius
     within_end_recess = np.abs(z) >= (half_length - COUNTERBORE_DEPTH)
     end_counterbores = radial_inside & within_end_recess
