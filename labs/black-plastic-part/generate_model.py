@@ -86,23 +86,10 @@ def main() -> None:
     _, unique_faces = np.unique(canonical, axis=0, return_index=True)
     faces = faces[np.sort(unique_faces)]
 
-    write_binary_stl(output_dir / "black_plastic_part.stl", vertices, faces)
-    # A second copy rotated 90 degrees about X, so its long axis lies on the bed.
-    laid_flat = vertices[:, [0, 2, 1]].copy()
-    laid_flat[:, 2] *= -1
-    laid_flat[:, 2] -= laid_flat[:, 2].min()
-    write_binary_stl(output_dir / "black_plastic_part_laid_flat.stl", laid_flat, faces)
-
-    # Ready-to-print comparison plate: one original orientation and one laid flat.
+    # Place the model upright with its long axis perpendicular to the bed.
     upright = vertices.copy()
     upright[:, 2] -= upright[:, 2].min()
-    upright[:, 0] -= 7.0
-    laid_on_plate = laid_flat.copy()
-    laid_on_plate[:, 0] += 7.0
-    plate_vertices = np.vstack([upright, laid_on_plate])
-    plate_faces = np.vstack([faces, faces + len(upright)])
-    write_binary_stl(output_dir / "black_plastic_part_two_orientations.stl",
-                     plate_vertices, plate_faces)
+    write_binary_stl(output_dir / "black_plastic_part.stl", upright, faces)
     print(f"Wrote {len(vertices):,} vertices and {len(faces):,} triangles")
 
 
