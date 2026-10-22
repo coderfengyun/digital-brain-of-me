@@ -22,8 +22,8 @@ VOXEL = 0.06
 MARGIN = 1.0
 
 
-def field(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
-    """Negative values are material; positive values are empty space."""
+def solid_mask(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
+    """Return a Boolean occupancy grid after all subtractive features."""
     half_length = LENGTH / 2
     outer_radius = OUTER_DIAMETER / 2
     inner_radius = INNER_DIAMETER / 2
@@ -31,22 +31,20 @@ def field(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
     # Rounded end rims with a gentle central waist, matching the reference.
     axial = np.clip(np.abs(z) / half_length, 0.0, 1.0)
     local_radius = outer_radius - WAIST_DEPTH * (1.0 - axial**2)
-    outer = np.maximum(np.sqrt(x * x + y * y) - local_radius, np.abs(z) - half_length)
+    outer = (np.sqrt(x * x + y * y) <= local_radius) & (np.abs(z) <= half_length)
 
     # The 6 mm feature is a circular recess at each end, not a full bore.
-    radial_inside = inner_radius - np.sqrt(x * x + y * y)
-    within_end_recess = np.abs(z) - (half_length - COUNTERBORE_DEPTH)
-    end_counterbores = np.minimum(radial_inside, within_end_recess)
+    radial_inside = np.sqrt(x * x + y * y) <= inner_radius
+    within_end_recess = np.abs(z) >= (half_length - COUNTERBORE_DEPTH)
+    end_counterbores = radial_inside & within_end_recess
 
     # The rectangular opening seen inside the circular recess runs axially.
-    axial_slot = np.minimum(
-        INTERNAL_SLOT_HEIGHT / 2 - np.abs(x),
-        INTERNAL_SLOT_WIDTH / 2 - np.abs(y),
-    )
-    side_hole = SIDE_HOLE_DIAMETER / 2 - np.sqrt(y * y + z * z)
+    axial_slot = ((np.abs(x) <= INTERNAL_SLOT_HEIGHT / 2)
+                  & (np.abs(y) <= INTERNAL_SLOT_WIDTH / 2))
+    side_hole = np.sqrt(y * y + z * z) <= SIDE_HOLE_DIAMETER / 2
 
-    voids = np.maximum.reduce([end_counterbores, axial_slot, side_hole])
-    return np.maximum(outer, voids)
+    voids = end_counterbores | axial_slot | side_hole
+    return outer & ~voids
 
 
 def write_binary_stl(path: Path, vertices: np.ndarray, faces: np.ndarray) -> None:
@@ -71,8 +69,8 @@ def main() -> None:
     zs = np.arange(-z_limit, z_limit + VOXEL, VOXEL, dtype=np.float32)
     x, y, z = np.meshgrid(xs, ys, zs, indexing="ij")
 
-    volume = field(x, y, z)
-    vertices, faces, _, _ = measure.marching_cubes(volume, level=0.0, spacing=(VOXEL,) * 3)
+    volume = solid_mask(x, y, z).astype(np.uint8)
+    vertices, faces, _, _ = measure.marching_cubes(volume, level=0.5, spacing=(VOXEL,) * 3)
     vertices += np.array([xs[0], ys[0], zs[0]], dtype=np.float32)
 
     # Merge numerically coincident marching-cubes vertices and remove any
