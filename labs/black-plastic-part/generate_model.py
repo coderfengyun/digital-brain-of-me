@@ -11,9 +11,9 @@ from skimage import measure
 LENGTH = 12.5
 OUTER_DIAMETER = 8.0
 INNER_DIAMETER = 6.0
-SIDE_HOLE_DIAMETER = 3.0
+SIDE_HOLE_DIAMETER = 3.5
 INTERNAL_SLOT_WIDTH = 2.0
-INTERNAL_SLOT_HEIGHT = 4.0  # estimated from the end-view photograph
+INTERNAL_SLOT_HEIGHT = 5.0
 COUNTERBORE_DEPTH = 4.0     # circular 6 mm recess from each end
 
 # The photo shows a subtle waist. 0.25 mm preserves a printable wall.
