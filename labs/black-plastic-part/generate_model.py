@@ -92,6 +92,17 @@ def main() -> None:
     laid_flat[:, 2] *= -1
     laid_flat[:, 2] -= laid_flat[:, 2].min()
     write_binary_stl(output_dir / "black_plastic_part_laid_flat.stl", laid_flat, faces)
+
+    # Ready-to-print comparison plate: one original orientation and one laid flat.
+    upright = vertices.copy()
+    upright[:, 2] -= upright[:, 2].min()
+    upright[:, 0] -= 7.0
+    laid_on_plate = laid_flat.copy()
+    laid_on_plate[:, 0] += 7.0
+    plate_vertices = np.vstack([upright, laid_on_plate])
+    plate_faces = np.vstack([faces, faces + len(upright)])
+    write_binary_stl(output_dir / "black_plastic_part_two_orientations.stl",
+                     plate_vertices, plate_faces)
     print(f"Wrote {len(vertices):,} vertices and {len(faces):,} triangles")
 
 

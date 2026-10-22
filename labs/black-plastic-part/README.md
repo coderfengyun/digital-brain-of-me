@@ -21,3 +21,6 @@ depending on the printer and filament.
 
 `black_plastic_part_laid_flat.stl` contains the identical mesh rotated 90° for
 printing with its long axis parallel to the build plate.
+
+`black_plastic_part_two_orientations.stl` contains two separate shells on one
+plate: the original upright orientation and a second copy laid flat.
