@@ -6,7 +6,7 @@ Parametric reconstruction from four reference photos.
 - axial inner diameter: 6 mm
 - transverse hole diameter: 3 mm
 - length: 12.5 mm
-- internal rectangular relief width: 2 mm
+- internal rectangular relief width supplied: 2 mm (position/height pending)
 
 Generate the printable mesh with:
 

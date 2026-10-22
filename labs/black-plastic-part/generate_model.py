@@ -35,11 +35,10 @@ def field(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> np.ndarray:
     axial_bore = inner_radius - np.sqrt(x * x + y * y)
     side_hole = SIDE_HOLE_DIAMETER / 2 - np.sqrt(y * y + z * z)
 
-    # A 2 mm-wide internal rectangular relief aligned with the main bore.
-    # It lies within the 6 mm bore, so it records the supplied dimension while
-    # keeping the functional opening circular and easy to tune later.
-    slot = np.minimum(INTERNAL_SLOT_WIDTH / 2 - np.abs(x), inner_radius - np.abs(y))
-    voids = np.maximum.reduce([axial_bore, side_hole, slot])
+    # INTERNAL_SLOT_WIDTH is retained as a supplied parameter. The photographs
+    # do not establish the slot's second dimension or its radial position, so a
+    # speculative overlapping cut is intentionally omitted from this test fit.
+    voids = np.maximum(axial_bore, side_hole)
     return np.maximum(outer, voids)
 
 
