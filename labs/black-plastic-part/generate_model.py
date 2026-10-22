@@ -68,6 +68,19 @@ def main() -> None:
     vertices, faces, _, _ = measure.marching_cubes(volume, level=0.0, spacing=(VOXEL,) * 3)
     vertices += np.array([xs[0], ys[0], zs[0]], dtype=np.float32)
 
+    # Merge numerically coincident marching-cubes vertices and remove any
+    # collapsed/duplicate triangles at Boolean intersections.
+    quantized = np.rint(vertices / 1e-5).astype(np.int64)
+    _, first, inverse = np.unique(quantized, axis=0, return_index=True, return_inverse=True)
+    vertices = vertices[first]
+    faces = inverse[faces]
+    valid = ((faces[:, 0] != faces[:, 1]) & (faces[:, 1] != faces[:, 2])
+             & (faces[:, 2] != faces[:, 0]))
+    faces = faces[valid]
+    canonical = np.sort(faces, axis=1)
+    _, unique_faces = np.unique(canonical, axis=0, return_index=True)
+    faces = faces[np.sort(unique_faces)]
+
     write_binary_stl(output_dir / "black_plastic_part.stl", vertices, faces)
     print(f"Wrote {len(vertices):,} vertices and {len(faces):,} triangles")
 
