@@ -59,6 +59,18 @@ python3 .codex/skills/investment/scripts/write_trade_journal.py import-futu /tmp
 - `import-futu` 自带去重、品种名映射（`FUTU_NAME_MAP`）和代码字段填充
 - 新品种首次导入时，如映射表中没有对应中文名，会使用富途原始英文名；后续可在映射表中补充
 
+**现金流水（股息及相关费用）：**
+
+```bash
+uv run .codex/skills/investment/scripts/fetch_futu_cashflows.py \
+  --start START_DATE --end END_DATE \
+  -o /tmp/futu_cashflows.csv
+```
+
+- 部分账户只支持按清算日查询；脚本会逐日请求并自动遵守每 30 秒最多 20 次的限频。
+- 默认只保留股息和公司行动服务费；需要核对全部资金变动时加 `--all`。
+- 导出结果保留股息与费用两条原始流水。写入极简 `现金流水.csv` 时，可合并为一笔净到账，并在备注中保留税前股息、税费与原始流水编号。
+
 ### Step 3：招商证券（掌上证券 MAC 金融终端）
 
 **前置条件**：

@@ -10,6 +10,7 @@ description: "投资交易日志、盈亏计算、券商导入、投研作者管
 ## Data Location
 
 - 交易日志：`investment/投资日志整理/交易日志汇总表.csv`
+- 现金流水：`investment/投资日志整理/现金流水.csv`
 - CSV Schema：`investment/投资日志整理/交易日志汇总表.schema.json`
 - 投研作者索引：`investment/{作者名}/{作者名}.md`
 - 设计文档：`investment/投资日志整理/DESIGN_盈亏统计系统设计.md`
@@ -36,6 +37,7 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 |------|------|
 | 校验数据 | `python3 .codex/skills/investment/scripts/write_trade_journal.py validate` |
 | 盈亏计算 | `python3 .codex/skills/investment/scripts/calc_pnl.py` |
+| 富途股息流水 | `uv run .codex/skills/investment/scripts/fetch_futu_cashflows.py --start YYYY-MM-DD --end YYYY-MM-DD` |
 | 运行测试 | `cd .codex/skills/investment/scripts && python3 -m pytest -v` |
 
 ---
