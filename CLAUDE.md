@@ -76,4 +76,4 @@ digital-brain-of-me/
 - 项目自维护 Skill 统一以 `.agents/skills/{skill}/` 为源码目录。
 - `.codex/skills/{skill}` 与 `.claude/skills/{skill}` 通过相对软链接指向同一 `.agents` 目录，不复制 Skill、Reference、脚本或测试文件。
 - 新增或修改 Skill 内容时只编辑 `.agents` 下的真实文件；框架目录仅作为兼容入口。
-- `.agents` 中的主入口保留为 `skill.md`。本项目运行于大小写不敏感的 macOS 文件系统，Codex 通过目录软链接访问 `SKILL.md` 时会解析到同一文件。
+- `.agents/skills/{skill}/SKILL.md` 是 Skill 的标准主入口，文件名必须保持该大小写，以便 Codex 的 Skill 发现器正确识别。
