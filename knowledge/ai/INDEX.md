@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0049 | 2026-10-27 | Post-Training 变革（中）：RL 到底学会了新能力，还是只把已有能力“压”进 pass@1？ | [notes](20261027-post-training-rl-capability/notes.md) |
 | #0048 | 2026-10-27 | Post-Training 变革（上）：从“数据”到“可学习经验” | [notes](20261027-post-training-experience/notes.md) |
 | #0047 | 2026-08-21 | 复刻专家判断：桥水如何把投资“品位”训练进模型 | [notes](20260821-expert-judgment-financial-tasks/notes.md) |
 | #0046 | 2026-07-24 | 凯文·凯利：没有专家能看透 AI 未来 | [notes](20260724-kevin-kelly-ai-frontiers/notes.md) |

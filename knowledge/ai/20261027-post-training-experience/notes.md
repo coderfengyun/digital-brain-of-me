@@ -80,6 +80,50 @@ SFT 数据稀缺，增加问答样本就能提升能力
 
 这样一来，训练样本不再只是一条最终答案。模型打开了哪个文件、调用了什么工具、遇到什么报错、是否恢复、验证器为何给分，都会成为可学习和可审计的信息。
 
+### 状态空间与动作空间
+
+**状态空间（state space）** 是环境在任一步可能处于的全部有效状态集合。对一个代码修复环境，它不仅包括模型当前看到的提示，还包括仓库快照、已修改文件、终端历史、测试结果、剩余时间、工具返回值和权限状态。状态决定“此刻真实发生了什么”。
+
+状态空间还要和**观察空间（observation space）**区分：环境可能知道完整状态，但 policy 只能看到其中一部分。例如隐藏测试结果属于环境状态，却不应直接成为模型的观察；模型只能看到公开测试或 verifier 最终返回的信号。这种部分可观测性必须写入环境定义，否则训练时泄漏的信息会造成虚假的高成功率。
+
+**动作空间（action space）** 是 policy 在每个状态下可以提交的合法动作集合。代码环境中的动作可能是读取文件、提交 patch、运行限定命令和结束任务；浏览器环境则可能是点击、输入、滚动和导航。每种动作都要定义参数 schema、前置条件、成本、超时、失败语义和对状态的影响。
+
+工具权限不是动作空间之外的附属配置，而是动作空间的动态边界。例如环境虽然支持 `run_command`，当前任务却可以禁止网络、限制可写目录或屏蔽危险命令。这样才能区分：模型没有选择某个动作、模型选择了但参数非法、动作被权限系统拒绝，以及工具实际执行后失败。这四种情况对应完全不同的训练信号。
+
+二者共同定义了 agent 的决策问题：
+
+```text
+环境状态 s_t
+  ↓ 通过观察函数，只暴露 o_t
+policy 根据 o_t 选择合法动作 a_t
+  ↓ 环境执行动作并应用权限、成本和失败规则
+转移到新状态 s_{t+1}，返回观察 o_{t+1}
+  ↓
+直到成功、失败、超时或触发安全终止条件
+```
+
+一个环境 manifest 因此至少应把以下内容写清楚：
+
+| 部分 | 必须回答的问题 |
+|------|----------------|
+| 状态空间 | 环境保存哪些事实？哪些状态可以重放？ |
+| 观察空间 | policy 能看到状态的哪一部分？是否可能泄漏答案？ |
+| 动作空间 | 有哪些动作？参数和前置条件是什么？非法动作如何处理？ |
+| 工具权限 | 哪些动作在当前任务、角色和状态下真正可用？ |
+| 状态转移 | 动作怎样改变文件、数据库、页面或其他外部世界？ |
+| 终止条件 | 什么算成功、失败、超时、安全中止或人工接管？ |
+
+评估时也不能只检查最终结果。完整 verifier stack 应同时覆盖：
+
+| 检查面 | 目的 |
+|--------|------|
+| 最终结果 | 判断任务目标是否完成 |
+| 中间状态 | 发现结果正确但过程已污染环境、留下副作用的情况 |
+| 工具权限 | 检查是否越权、绕过批准或使用禁用能力 |
+| 行为轨迹 | 检查循环、投机策略、错误恢复和高风险步骤 |
+| verifier 完整性 | 检查测试、评分脚本或观测信号是否被篡改、屏蔽或利用 |
+| 独立安全约束 | 以硬性 veto 判断隐私、数据损坏等条件，不与任务得分简单平均 |
+
 ### 五条共识的准确含义
 
 **1. Post-training 是能力路由与行为塑形。** 强 base model 提供潜在能力；post-training 决定模型遇到问题时是否分解、验证、调用工具、花费更多推理计算，以及遵守何种行为边界。它不能凭空补上 base model 从未学过的世界知识，因此“决定能力如何调用”比“创造全部能力”更准确。
@@ -187,10 +231,20 @@ environment:
     - terminal_history
     - changed_files
     - test_results
+    - remaining_budget
+    - permission_state
+  observation_space:
+    visible: ["task_prompt", "public_test_results", "tool_outputs"]
+    hidden: ["hidden_tests", "verifier_secrets"]
   action_space:
-    - read_file
-    - edit_patch
-    - run_command
+    read_file:
+      params: ["path", "line_range"]
+    edit_patch:
+      params: ["patch"]
+      precondition: "target_path_is_writable"
+    run_command:
+      params: ["argv", "timeout"]
+      precondition: "command_is_allowlisted"
   tool_permissions:
     network: false
     writable_paths: ["/workspace"]
@@ -200,7 +254,9 @@ environment:
   verifier:
     id: repo-tests
     version: 2.1.0
-    signals: ["public_tests", "hidden_tests", "lint", "policy_checks"]
+    signals: ["public_tests", "hidden_tests", "lint", "trajectory_checks"]
+    integrity_checks: ["tests_unchanged", "verifier_not_modified"]
+    safety_veto: ["writes_outside_workspace", "secret_access"]
   difficulty:
     changed_modules: 2
     hidden_failures: 3
@@ -210,4 +266,3 @@ environment:
 ```
 
 这个 manifest 只定义环境。一次可复现实验还应另存任务实例、`trace.jsonl`、工具输出、终态快照、reward 分解，以及 policy、教师和 verifier 的版本。这样才能回答“模型为什么成功或失败”，而不只是留下一个总分。
-
