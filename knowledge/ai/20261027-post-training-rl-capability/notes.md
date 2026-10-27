@@ -103,7 +103,7 @@ pass@1、pass@k、CoT-Pass@k、分布外迁移分别测量不同对象
 | RLVR 主要重排已有推理轨迹 | 用大 k pass@k 近似潜在能力边界 | 小 k 时 RL 模型领先；大 k 时 base 可接近或超过 RL；RL 生成路径可在 base 分布中采到 | [Yue et al., 2025](https://arxiv.org/abs/2504.13837) | **中高**：跨模型/任务现象稳定，但结论取决于 pass@k 是否足以代表“能力” |
 | RLVR 能提升正确推理而非只提高答案命中率 | CoT-Pass@k 要求答案和中间推理同时正确 | 在该指标下，RLVR 模型在所有测试 k 上表现出正确推理泛化提升 | [Wen et al., 2026](https://arxiv.org/abs/2506.14245) | **中**：修正了指标盲点，但 CoT 正确性验证自身需要可靠评审器，也未直接证明产生了 base 支持集之外的轨迹 |
 | RLVR 在受控任务中可能扩大可达边界 | 用可控视觉迷宫和 OOD 导航测试“base 高预算仍为 0”区域 | RLVR 成功解决 base 在增加 pass@k 后仍为 0% 的迷宫，并零样本提升 MapBench、ReasonMap | [Shen et al., ACL 2026](https://aclanthology.org/2026.acl-long.2102/) | **中高（窄域）**：有受控难度和真实任务迁移，但只证明特定视觉空间推理场景 |
-| RLVR 泛化需要足够 base competence | 把模型规模和因果查询层级作为能力门槛变量 | 在 3B–32B Qwen2.5 模型上，RLVR 只在特定规模/训练层级组合中优于 SFT；足够初始能力时才改善边缘化策略与中间概率计算 | *Generalization of RLVR Using Causal Reasoning as a Testbed*, ICLR 2026 | **中高（窄域）**：支持“有种子能力才能放大”，但对开放式 agent/工具任务的适用性未知 |
+| RLVR 泛化需要足够 base competence | 把模型规模和因果查询层级作为能力门槛变量 | 在 3B–32B Qwen2.5 模型上，RLVR 只在特定规模/训练层级组合中优于 SFT；足够初始能力时才改善边缘化策略与中间概率计算 | [*Generalization of RLVR Using Causal Reasoning as a Testbed*](https://arxiv.org/abs/2512.20760), ICLR 2026 | **中高（窄域）**：支持“有种子能力才能放大”，但对开放式 agent/工具任务的适用性未知 |
 | 小模型通常蒸馏优于直接 RL | 用教师直接提供学生难以探索的状态 | **例子**：DeepSeek-R1 发布了基于 Qwen/Llama 的 1.5B–70B 蒸馏模型；能力边界研究也观察到蒸馏可注入新知识 | [DeepSeek-R1](https://arxiv.org/abs/2501.12948)、[Yue et al., 2025](https://arxiv.org/abs/2504.13837) | **中低（一般化表述）**：方向合理，但文章没有提供“同预算、同学生、蒸馏 vs RL”的系统对照，不能推出普遍优越性 |
 
 ### 证据核验后的结论
@@ -157,4 +157,3 @@ pass@1、pass@k、CoT-Pass@k、分布外迁移分别测量不同对象
 5. 真实能力增长：过程正确性、held-out/OOD transfer、可解决难度上限。
 
 若只出现 pass@1 上升，应称为“可用性提升”；只有过程正确性、覆盖边界或迁移难度也提升时，才有更强理由称为“能力扩展”。
-
