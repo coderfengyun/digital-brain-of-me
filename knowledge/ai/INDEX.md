@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0050 | 2026-10-28 | On-Policy Distillation：让教师批改学生自己的每一步 | [notes](20261028-on-policy-distillation/notes.md) |
 | #0049 | 2026-10-27 | Post-Training 变革（中）：RL 到底学会了新能力，还是只把已有能力“压”进 pass@1？ | [notes](20261027-post-training-rl-capability/notes.md) |
 | #0048 | 2026-10-27 | Post-Training 变革（上）：从“数据”到“可学习经验” | [notes](20261027-post-training-experience/notes.md) |
 | #0047 | 2026-08-21 | 复刻专家判断：桥水如何把投资“品位”训练进模型 | [notes](20260821-expert-judgment-financial-tasks/notes.md) |
