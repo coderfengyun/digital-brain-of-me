@@ -65,8 +65,24 @@ AI 的存在是为了服务我们所做的工作。工作依赖于关于“事�
 
 ## 值得建设的未来
 
-科技行业在教机器思考方面取得了惊人进展；但机器应该思考什么，必须仍由我们决定：什么值得渴望，什么值得创造，我们拥有的时间应当如何使用。（Hannah Arendt 在《人的境况》中主张，只有把人视为目的本身，功用才可能获得意义与尊严。）我们无意给出一个自上而下的统一答案，而是希望让每个人都有能力把自己的答案融入前沿 AI 的发展。
+科技行业在教机器思考方面取得了惊人进展；但机器应该思考什么，必须仍由我们决定：什么值得渴望，什么值得创造，我们拥有的时间应当如何使用。（Hannah Arendt 写道：“要摆脱一切严格功利主义哲学中的无意义困境，唯一的出路，是转离有用之物的客观世界，退回到使用本身的主体性。只有在一个严格以人为中心的世界里——使用者，即人本身，成为终极目的，从而终止那条无休无止的目的与手段之链——功用本身才能获得意义的尊严……制造者之人的人类中心主义功利观，在康德的公式中得到了最充分的表达：任何人都绝不能沦为达到某个目的的手段，每个人本身都是目的。”[《人的境况》](https://press.uchicago.edu/ucp/books/book/chicago/H/bo29137972.html)，1958）我们无意给出一个自上而下的统一答案，而是希望让每个人都有能力把自己的答案融入前沿 AI 的发展。
 
 当前 AI 的发展路径正走向集中化与自主化，并把人类参与描述成一种取舍：参与还是能力，所有权还是安全对齐。我们把这些看作需要解决的技术挑战：AI 可以因为鼓励人的参与而更强；组织可以通过按自身优势定制 AI 获得长期收益；对齐可以源于由所有者塑造的、多样化 AI。解决这些挑战，正是我们使命的要求。
 
 未来并不是一道非此即彼的选择题：要么人类统治，要么面对 AI 迅速过时。不同道路会通向许多不同的未来，而我们可以选择走哪一条。我们正在构建一种技术，让生而为人与被制造出的智能并肩前行。
+
+## 原文链接与注释
+
+- [Inkling 模型](https://thinkingmachines.ai/news/introducing-inkling/)
+- [Tinker](https://thinkingmachines.ai/tinker/)
+- [Interaction Models](https://thinkingmachines.ai/blog/interaction-models/)
+- [Thinking Machines 研究博客](https://thinkingmachines.ai/blog/)
+- [Tinker 实践配方](https://tinker-docs.thinkingmachines.ai/cookbook/)
+- Michael Polanyi：[The Tacit Dimension](https://press.uchicago.edu/ucp/books/book/chicago/T/bo6035368.html)（1966）
+- Friedrich Hayek：[The Use of Knowledge in Society](https://www.econlib.org/library/Essays/hykKnw.html)（1945）
+- Craig Trudell、Yuki Hagiwara、Ma Jie：[Humans Replacing Robots Herald Toyota’s Vision of Future](https://www.bloomberg.com/news/articles/2014-04-06/humans-replacing-robots-herald-toyota-s-vision-of-future)（2014）
+- Thomas Kwa、Ben West 等：[Task-Completion Time Horizons of Frontier AI Models](https://metr.org/time-horizons/)（2025）
+- Luke Drago、Rudolf Laine：[The Intelligence Curse](https://intelligence-curse.ai/)（2025）
+- Leo XIV：[Magnifica Humanitas](https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html)（2026）
+- Gwern Branwen：[Guardian Angels: LLM Personalization for Productivity and Security](https://gwern.net/guardian-angel)（2026）
+- John von Neumann：[Can We Survive Technology?](https://sseh.uchicago.edu/doc/von_Neumann_1955.pdf)（1955）
