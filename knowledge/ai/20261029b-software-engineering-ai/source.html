@@ -1,0 +1,1109 @@
+<!DOCTYPE html><!-- Last Published: Fri Oct 23 2026 15:45:58 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.rise8.us" data-wf-page="67fd7fef22b9fe9528682d14" data-wf-site="67fd7fef22b9fe9528682d30" lang="en" data-wf-collection="67fd7fef22b9fe9528682e24" data-wf-item-slug="kent-beck-software-engineering-in-the-age-of-ai"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>Kent Beck: Software Engineering in the Age of AI | Rise8</title><meta content="Kent Beck on programming with AI: why generated code demands adversarial trust, how features burn futures, and how to keep iterating toward value." name="description"/><meta content="Kent Beck: Software Engineering in the Age of AI | Rise8" property="og:title"/><meta content="Kent Beck on programming with AI: why generated code demands adversarial trust, how features burn futures, and how to keep iterating toward value." property="og:description"/><meta content="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d3f/6a985723fd42a8d200c81884_Day1_Session7_KentBeck.png" property="og:image"/><meta content="Kent Beck: Software Engineering in the Age of AI | Rise8" name="twitter:title"/><meta content="Kent Beck on programming with AI: why generated code demands adversarial trust, how features burn futures, and how to keep iterating toward value." name="twitter:description"/><meta content="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d3f/6a985723fd42a8d200c81884_Day1_Session7_KentBeck.png" name="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="TZbHc1kjkQLs8lUam2vJg6FIbBrJVHjt6ZWCqdWNAX0" name="google-site-verification"/><link href="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/css/rise8-us-2025.shared.4720067b3.min.css" rel="stylesheet" type="text/css" integrity="sha384-RyAGez+SgcBGE4xbnHN7U0cDDoYKqca72CDMekigYXdt+dtCdtA/dzVpFdYRSaGA" crossorigin="anonymous"/><style>html.w-mod-js:not(.w-mod-ix3) :is(.wso-hero_person, .wso-hero_h1, .wso-hero_content, .wso-hero_point, .clp-guarantee-hero_subject, .clp-guarantee-hero_content) {visibility: hidden !important;}</style><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/67fd7fef22b9fe952868302f_Rise8_Mark_Favicon32x32.png" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/67fd7fef22b9fe9528683047_Rise8_Mark_Webclip256x256.png" rel="apple-touch-icon"/><link href="https://www.rise8.us/videos/kent-beck-software-engineering-in-the-age-of-ai" rel="canonical"/><!-- Keep this css code to improve the font quality-->
+<style>
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -o-font-smoothing: antialiased;
+  }
+
+  .logos_component {
+    pointer-events: none !important;
+  }
+
+  .padding-global {
+    opacity: 0;
+  }
+
+  .w-editor .padding-global {
+    opacity: 1;
+  }
+
+  .brand-loader {
+    display: flex;
+    opacity: 1;
+  }
+
+  .w-editor .brand-loader {
+    display: none;
+  }
+
+  .loader_right {
+    transform: translate(65vw);
+  }
+
+  .loader_left {
+    transform: translate(-65vw);
+  }
+</style>
+
+<!-- GDPR Cookie Banner
+<script async type="text/javascript" charset="UTF-8" src="//geo.cookie-script.com/s/924149bfaf7d814873d904422a2d76be.js?country=br-gb&state=ca&region=eu"></script>
+
+<script async type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/4bbcf4eb2a722c185129a765cebc7e5b.js"></script>
+-->
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                                      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                            })(window,document,'script','dataLayer','GTM-T57BHB6');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<!-- Cookiescript ADA Compliance -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "Rise8",
+  "url": "https://www.rise8.us/",
+  "logo": "https://assets-global.website-files.com/64cd1523806781d956492279/65c14a2b7d4bfe3ed8ac8c16_Rise8%20logo%20Dark.svg",
+  "description": "Rise8 is revolutionizing the way federal agencies and companies develop complex, critical software to continuously deliver a future where fewer bad things happen because of bad software.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "601 S Harbour Island Blvd Suite 109",
+    "addressLocality": "Tampa",
+    "addressRegion": "FL",
+    "postalCode": "33602",
+    "addressCountry": "US"
+  },
+  "telephone": "+1 (813) 575-4080",
+  "email": "info@rise8.us",
+  "sameAs": [
+    "https://www.facebook.com/rise8/",
+    "https://twitter.com/Rise8_Inc",
+    "https://www.instagram.com/rise8_inc/",
+    "https://www.linkedin.com/company/rise8"
+  ]
+}
+</script><script>
+  (function () {
+    function stripWebflowFAQSchema() {
+      // Remove data-schema attributes
+      document.querySelectorAll('[data-schema="faq-pt1"], [data-schema="faq-pt2"]').forEach((el) => {
+        el.removeAttribute('data-schema');
+      });
+
+      // Remove auto-generated FAQPage JSON-LD
+      document.querySelectorAll('script[type="application/ld+json"]').forEach((script) => {
+        try {
+          const json = JSON.parse(script.textContent);
+          if (json['@type'] === 'FAQPage' && script.id !== 'custom-faq-schema') {
+            script.remove();
+          }
+        } catch (e) {}
+      });
+    }
+
+    // Run ASAP
+    stripWebflowFAQSchema();
+
+    // Run again after load (Webflow may inject late)
+    window.addEventListener('load', stripWebflowFAQSchema);
+
+    // Optional: observe DOM changes (for safety)
+    const observer = new MutationObserver(stripWebflowFAQSchema);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script></head><body><div class="page-wrapper"><div class="global-styles w-embed"><style>
+  html {
+    font-size: 1.125rem;
+  }
+  @media screen and (max-width: 1920px) {
+    html {
+      font-size: calc(0.625rem + 0.41666666666666674vw);
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    html {
+      font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+    }
+  }
+  @media screen and (max-width: 479px) {
+    html {
+      font-size: 0.875rem;
+    }
+  }
+
+  [class='w-layout-grid wf-grid'],
+  [class='w-layout-grid wf-empty wf-grid'] {
+    grid-template-rows: auto;
+    min-height: 48px;
+  }
+
+  [class*='section_'] {
+    position: relative;
+  }
+
+  .w-tabs::before,
+  .w-tabs::after {
+    display: none;
+  }
+
+  .button-group:empty {
+    min-width: 100px;
+    min-height: 48px;
+    padding: 0;
+    background-color: rgba(125, 125, 125, 0.1);
+    border: 1px dashed rgba(125, 125, 125, 0.15);
+  }
+
+  .button-group.is-stack .button-component_group {
+    justify-content: center;
+  }
+
+  /* Set color style to inherit */
+  .inherit-color * {
+    color: inherit;
+  }
+
+  /* Focus state style for keyboard navigation for the focusable elements */
+  *[tabindex]:focus-visible,
+  input[type='file']:focus-visible {
+    outline: 0.125rem solid #4d65ff;
+    outline-offset: 0.125rem;
+  }
+
+  /* Get rid of top margin on first element in any rich text element */
+  .w-richtext > :not(div):first-child,
+  .w-richtext > div:first-child > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Get rid of bottom margin on last element in any rich text element */
+  .w-richtext > :last-child,
+  .w-richtext ol li:last-child,
+  .w-richtext ul li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Prevent all click and hover interaction with an element */
+  .pointer-events-off {
+    pointer-events: none;
+  }
+
+  /* Enables all click and hover interaction with an element */
+  .pointer-events-on {
+    pointer-events: auto;
+  }
+
+  /* Create a class of .div-square which maintains a 1:1 dimension of a div */
+  .div-square::after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+
+  /* Make sure containers never lose their center alignment */
+  .container-medium,
+  .container-small,
+  .container-large {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  /* 
+Make the following elements inherit typography styles from the parent and not have hardcoded values. 
+Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
+Uncomment this CSS to use it in the project. Leave this message for future hand-off.
+*/
+  /*
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+.w-nav-link,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+color: inherit;
+text-decoration: inherit;
+font-size: inherit;
+}
+*/
+
+  /* Apply "..." after 4 lines of text */
+  .text-style-4lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 3 lines of text */
+  .text-style-3lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 2 lines of text */
+  .text-style-2lines {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Apply "..." after 1 lines of text */
+  .text-style-1line {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Adds inline flex display */
+  .display-inlineflex {
+    display: inline-flex;
+  }
+
+  /* These classes are never overwritten */
+  .hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .hide,
+    .hide-tablet {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape {
+      display: none !important;
+    }
+  }
+  @media screen and (max-width: 479px) {
+    .hide-mobile {
+      display: none !important;
+    }
+  }
+
+  .margin-0 {
+    margin: 0rem !important;
+  }
+
+  .padding-0 {
+    padding: 0rem !important;
+  }
+
+  .spacing-clean {
+    padding: 0rem !important;
+    margin: 0rem !important;
+  }
+
+  .margin-top {
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-top {
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-right {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-right {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-bottom {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-bottom {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  .margin-left {
+    margin-top: 0rem !important;
+    margin-right: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-left {
+    padding-top: 0rem !important;
+    padding-right: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-horizontal {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+  }
+
+  .padding-horizontal {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+  }
+
+  .margin-vertical {
+    margin-right: 0rem !important;
+    margin-left: 0rem !important;
+  }
+
+  .padding-vertical {
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
+  }
+
+  /* Apply "..." at 100% width */
+  .truncate-width {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Removes native scrollbar */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .w-dyn-empty {
+    padding: 0;
+    background-color: transparent;
+  }
+
+  /* SWEVEN Rich Text Utilities */
+
+  .text-rich-text li em {
+    font-style: normal !important;
+    font-family: 'Supply';
+  }
+
+  .w-richtext ul li {
+    list-style: none;
+    background-image: url(https://cdn.prod.website-files.com/6696d9c3d02211b753870ec1/6699ee309f4f8b344c6faa65_Bullet%20-%20red.svg);
+    background-repeat: no-repeat;
+    background-position: top 0.45em left 0.2em;
+    background-size: 0.5em;
+    margin-left: -1.25rem;
+    padding-left: 1.75rem;
+  }
+
+  /* Keep list block centered but text left-aligned near bullet */
+  div[data-wf--2026-utility-content-group--alignment='center-aligned'] .text-rich-text ul,
+  div[data-wf--2026-utility-content-group--alignment='center-aligned'] .text-rich-text ol {
+    display: table; /* shrink-wrap list to content */
+    margin: 0 auto; /* center the whole list block */
+    padding: 0; /* remove default padding */
+    list-style: none; /* remove default bullets */
+    text-align: left; /* text inside items stays left */
+  }
+
+  /* Custom bullets close to text */
+  div[data-wf--2026-utility-content-group--alignment='center-aligned'] .text-rich-text ul li,
+  div[data-wf--2026-utility-content-group--alignment='center-aligned'] .text-rich-text ol li {
+    position: relative; /* bullet positioning */
+    padding-left: 1.75rem; /* space for custom bullet */
+    margin: 0.25em 0; /* spacing between items */
+    background-image: url(https://cdn.prod.website-files.com/6696d9c3d02211b753870ec1/6699ee309f4f8b344c6faa65_Bullet%20-%20red.svg);
+    background-repeat: no-repeat;
+    background-position: left 0.35em top 0.2em; /* bullet close to text */
+    background-size: 0.5em;
+  }
+
+  .w-richtext ul li:has(strong em) {
+    list-style: none;
+    background-image: url(https://cdn.prod.website-files.com/6696d9c3d02211b753870ec1/6699a3bd1e719ac8e8fd2dd8_check-black.svg);
+    background-repeat: no-repeat;
+    background-position: top 0.25em left 0.15em;
+    background-size: 0.9em;
+    margin-left: -1.5rem;
+    padding-left: 1.75rem;
+  }
+
+  [class*='-black'] .w-richtext ul li:has(strong em),
+  [class*='-alternate'] .w-richtext ul li:has(strong em) {
+    background-image: url(https://cdn.prod.website-files.com/6696d9c3d02211b753870ec1/6699a3bdc5f1e4041794af3f_check-white.svg);
+  }
+
+  .w-richtext ul li strong em {
+    font-weight: 500 !important;
+    font-style: normal !important;
+  }
+
+  .w-richtext blockquote strong em {
+    font-family: 'Supply', san-serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-style: normal;
+    margin-top: 1rem;
+    display: inline-block;
+  }
+
+  .w-richtext p strong em {
+    font-family: 'Supply', san-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-style: normal;
+    display: block;
+    color: inherit;
+  }
+
+  .w-richtext p:has(strong em) {
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+  }
+
+  .w-richtext a:has(strong) {
+    display: inline-flex;
+    padding-top: 0.675rem;
+    padding-right: 1rem;
+    padding-bottom: 0.675rem;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 0.5rem;
+    grid-row-gap: 0.5rem;
+    border-top-style: none;
+    border-top-width: 1px;
+    border-top-color: var(--base-color-neutral--black);
+    border-right-style: none;
+    border-right-width: 1px;
+    border-right-color: var(--base-color-neutral--black);
+    border-bottom-style: none;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--base-color-neutral--black);
+    border-left-style: none;
+    border-left-width: 1px;
+    border-left-color: var(--base-color-neutral--black);
+    border-top-left-radius: var(--border-radius--small);
+    border-top-right-radius: var(--border-radius--small);
+    border-bottom-left-radius: var(--border-radius--small);
+    border-bottom-right-radius: var(--border-radius--small);
+    background-color: var(--base-color-brand--red);
+    background-image: linear-gradient(180deg, var(--base-color-brand--burgundy), var(--base-color-brand--red));
+    font-family: Supply;
+    color: var(--base-color-neutral--white);
+    text-align: center;
+    letter-spacing: 0em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .w-richtext a strong {
+    font-weight: 400 !important;
+  }
+
+  .w-richtext a:has(strong):hover {
+    background-color: var(--base-color-brand--black);
+    background-image: none /* linear-gradient(180deg, var(--base-color-brand--burgundy), var(--base-color-brand--red)) */;
+    opacity: 1 !important;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6, [class*='heading-style']) :is(strong:has(em), strong em) {
+    font-style: inherit;
+    font-weight: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--base-color-brand--red);
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 0.125rem;
+  }
+
+  .text-rich-text.is-strikethrough-hook :is(h1, h2, h3, h4, h5, h6) :is(strong:has(em), strong em) {
+    font: inherit;
+    text-decoration: line-through;
+    opacity: 0.65;
+  }
+
+  .navbar_link::after {
+    content: '';
+    transition: transform 300ms;
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    height: 0.3rem;
+    transform: scale(0, 1);
+    transform-origin: left center;
+    background: linear-gradient(90deg, #800031 0%, #ff0000 100%);
+  }
+  .navbar_link:hover::after {
+    transform: scale(1, 1);
+  }
+  .prodacity-navbar_link::after {
+    content: '';
+    transition: transform 300ms;
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 100%;
+    height: 0.3rem;
+    transform: scale(0, 1);
+    transform-origin: left center;
+    background: linear-gradient(90deg, #800031 0%, #ff0000 100%);
+  }
+  .prodacity-navbar_link:hover::after {
+    transform: scale(1, 1);
+  }
+  .navbar_link.w--current::after {
+    transform: scale(1, 1);
+  }
+  .navbar_link.is-dropdown-link::after {
+    bottom: 0%;
+  }
+
+  @media (max-width: 991px) {
+    .navbar_link::after {
+      display: none;
+      height: 0.25rem;
+      bottom: 20%;
+    }
+
+    .navbar_link.is-subnav::after {
+      display: block;
+    }
+  }
+
+  .button:hover .button-arrow.is-trailing {
+    transform: translate(50%);
+  }
+
+  .button:hover .button-arrow.is-leading {
+    transform: translate(-50%);
+  }
+
+  [data-logo='Category']::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform: skewX(-10deg);
+    position: absolute;
+    top: 0;
+    right: 3rem;
+    bottom: 0;
+    z-index: 0;
+  }
+
+  [data-logo='Category'] {
+    padding-right: 6rem;
+    padding-left: 3rem;
+    position: sticky;
+    left: 0;
+    transition:
+      left 0.5s ease,
+      transform 0.5s ease; /* Smooth transition effect */
+    z-index: 2;
+    margin-right: 0rem;
+  }
+
+  [data-logo='Category'] .logos_slash {
+    display: block;
+  }
+
+  .logos_collection:last-child .logos_wrapper:last-child {
+    padding-right: 0 !important;
+  }
+
+  .feature-tabs_link.w--current .feature-tabs_link-bar {
+    transform: scale(1, 1);
+  }
+
+  .blog_item-link:hover .arrow-button {
+    background-color: var(--base-color-brand--red);
+    box-shadow: inset 0 0 0 var(--border-width--tiny) var(--base-color-brand--red);
+  }
+
+  .blog_item-link:hover .blog_item-arrow {
+    transform: translate(100%, 0);
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translate(0%, 0%);
+    }
+    to {
+      transform: translate(-100%, 0%);
+    }
+  }
+
+  .logos-auto_marquee-group,
+  .logos-auto_list-wrapper {
+    animation: marquee 40s infinite linear;
+  }
+
+  a:not([class]) {
+    color: var(--base-color-brand--red);
+  }
+
+  a:not([class]):hover {
+    opacity: 0.7;
+  }
+
+  .element_video-link:hover .video-link_overlay,
+  .element_video-link:has(~ .element_video-link-modal-trigger:hover) .video-link_overlay,
+  .element_video-link-modal-trigger:hover ~ .element_video-link .video-link_overlay {
+    opacity: 1;
+  }
+
+  .content-card_content.horizontal .flex-image {
+    width: auto !important;
+    max-width: 50%;
+  }
+
+  .content-card:has(.flex-icon.offset:not(.w-condition-invisible)) {
+    overflow: visible;
+  }
+
+  .content-grid.is-two-column.is-flex > * {
+    flex: 0 1 calc((100% / 2) - 1rem);
+  }
+
+  .content-grid.is-three-column.is-flex > * {
+    flex: 0 1 calc((100% / 3) - 1.35rem);
+  }
+
+  .content-grid.is-four-column.is-flex > * {
+    flex: 0 1 calc((100% / 4) - 1.5rem);
+  }
+
+  @media screen and (max-width: 991px) {
+    .content-grid.is-two-column.is-flex > * {
+      flex: 0 1 100%;
+    }
+
+    .content-grid.is-three-column.is-flex > * {
+      flex: 0 1 calc((100% / 2) - 1.35rem);
+    }
+
+    .content-grid.is-four-column.is-flex > * {
+      flex: 0 1 calc((100% / 2) - 1.5rem);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .content-grid.is-three-column.is-flex > * {
+      flex: 0 1 100%;
+    }
+
+    .content-grid.is-four-column.is-flex > * {
+      flex: 0 1 100%;
+    }
+
+    .content-grid.is-three-column.is-flex > .icon-card {
+      flex: 0 1 calc((100% / 2) - 1.5rem);
+    }
+
+    .content-grid.is-four-column.is-flex > .icon-card {
+      flex: 0 1 calc((100% / 2) - 1.5rem);
+    }
+
+    [data-logo='Category'] {
+      padding-right: 5rem;
+      padding-left: 5vw;
+      position: sticky;
+      left: 0;
+      transition:
+        left 0.5s ease,
+        transform 0.5s ease; /* Smooth transition effect */
+      z-index: 2;
+      margin-right: 0rem;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .content-grid.is-three-column.is-flex > * {
+      flex: 0 1 100%;
+    }
+
+    .content-grid.is-four-column.is-flex > * {
+      flex: 0 1 100%;
+    }
+  }
+
+  :is(.w-richtext.heading-style-h1, .w-richtext.heading-style-h2, .w-richtext.heading-style-h3, .w-richtext.heading-style-h4, .w-richtext.heading-style-h5, .w-richtext.heading-style-h6) :is(h1, h2, h3, h4, h5, h6) {
+    all: inherit;
+  }
+  /*
+.typewriter-text::after {
+content: "";
+position: absolute;
+top: 0;
+right: -.25em;
+height: 100%;
+width: .25rem;
+background-color: currentColor;
+}
+
+@keyframes blink {
+0%, 49.9% {
+opacity: 1;
+}
+50%, 100% {
+opacity: 0;
+}
+}
+
+.typewriter-text::after {
+content: "";
+animation: blink 1s steps(1, start) infinite;
+}
+
+*/
+
+  .content-group.is-sidebar:before {
+    content: '';
+    width: 30px;
+    height: 2px;
+    background-color: var(--base-color-brand--red);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .wf-design-mode .absolute-link {
+    pointer-events: none;
+  }
+
+  [sw-slot]:empty {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    min-width: 100%;
+    background-color: rgba(150, 150, 150, 0.05);
+    border: 2px dashed rgba(150, 150, 150, 0.5);
+    padding: 1rem;
+  }
+
+  .w-richtext-align-fullwidth {
+    max-width: 100% !important;
+  }
+
+  .wf-design-mode .wso-hero_lightbox {
+    pointer-events: none;
+  }
+
+  .blog-bar_link ~ a.absolute-link {
+    transition: background-color 0.35s ease;
+  }
+  .blog-bar_link ~ a.absolute-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .table_cell em {
+    opacity: 0.5;
+    font-style: unset;
+  }
+
+  .table_cell sup {
+    font-size: 0.5em;
+    margin-right: 0.2em;
+  }
+
+  .text-rich-text.is-black-links a {
+    color: black;
+  }
+
+  .text-rich-text.is-black-links a:hover {
+    color: red;
+  }
+
+  .is-large-left {
+    grid-template-columns: 1.25fr 1fr;
+  }
+  .is-large-right {
+    grid-template-columns: 1fr 1.25fr;
+  }
+  .is-swap .image-wrapper {
+    order: -1;
+  }
+  .is-transparent {
+    background-color: transparent !important;
+  }
+  /* Grid Column Styles */
+  .is-desktop-four-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .is-desktop-three-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .is-desktop-two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .is-desktop-one-column {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  @media (max-width: 991px) {
+    .is-tablet-four-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .is-tablet-three-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .is-tablet-two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .is-tablet-one-column {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+  }
+  @media (max-width: 767px) {
+    .is-mobile-four-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .is-mobile-three-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .is-mobile-two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .is-mobile-one-column {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+  }
+  [sw-section-border='True'] {
+    border-top: 1px solid hsla(0, 0%, 100%, 25%);
+  }
+
+  .text-style-eyebrow:empty {
+    display: none;
+  }
+
+  .is-logo-white {
+    filter: brightness(0) invert(1);
+  }
+  .is-logo-black {
+    filter: brightness(0);
+  }
+
+  @media (max-width: 991px) {
+    [data-tablet-orientation='False'] {
+      flex-direction: column-reverse;
+    }
+  }
+
+  /* Column Span */
+  [sw-column-span='2'] {
+    grid-column: span 2;
+  }
+  [sw-column-span='3'] {
+    grid-column: span 3;
+  }
+  [sw-column-span='4'] {
+    grid-column: span 4;
+  }
+  [sw-column-span='5'] {
+    grid-column: span 5;
+  }
+  [sw-column-span='6'] {
+    grid-column: span 6;
+  }
+
+  *:has(> [data-wf--nest-alignment--alignment='center']) {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .visual-slot:has(~ [data-wf--nest-alignment--alignment='center']),
+  .visual-slot:has(+ [data-wf--nest-alignment--alignment='center']) {
+    display: flex;
+    justify-content: center;
+  }
+</style></div><div data-animation="default" class="navbar_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="e499ad27-4c45-b649-34c5-9c94d9d73aca" role="banner" data-duration="400" data-wf--global-navbar--variant="global"><div class="navbar_container container-large"><a href="/" aria-label="Rise8 Home" class="navbar_logo-link w-nav-brand"><img loading="lazy" src="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/67fd7fef22b9fe9528682d6d_Rise8%20logo%20Dark.svg" alt="Rise8" class="navbar_logo"/></a><nav role="navigation" class="navbar_menu is-page-height-tablet w-nav-menu"><a href="/about" class="navbar_link w-nav-link">About Rise8</a><div data-hover="true" data-delay="200" data-w-id="e499ad27-4c45-b649-34c5-9c94d9d73acf" class="navbar_menu-dropdown w-dropdown"><div class="navbar_dropdown-toggle w-dropdown-toggle"><div>Capabilities</div><div class="dropdown-chevron w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z" fill="currentColor"/>
+</svg></div></div><nav class="navbar_dropdown-list w-dropdown-list"><div class="spacer-xsmall show-tablet"></div><a href="/capabilities/software-delivery" class="navbar_link is-dropdown-link w-dropdown-link">Software Delivery</a><a href="/vehicles" class="navbar_link is-dropdown-link w-dropdown-link">Contract Vehicles</a><a href="/experience" class="navbar_link is-dropdown-link w-dropdown-link">Case Studies</a><a href="/capabilities/workshops" class="navbar_link is-dropdown-link w-dropdown-link">Workshops</a><div class="spacer-xsmall show-tablet"></div></nav></div><a href="/our-approach" class="navbar_link w-nav-link">Our Approach</a><div data-hover="true" data-delay="200" data-w-id="c2d7a553-3140-e3cc-5bb2-2b27088c58e2" class="navbar_menu-dropdown w-dropdown"><div class="navbar_dropdown-toggle w-dropdown-toggle"><div>Resources</div><div class="dropdown-chevron w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z" fill="currentColor"/>
+</svg></div></div><nav class="navbar_dropdown-list w-dropdown-list"><div class="spacer-xsmall show-tablet"></div><a href="/resource/hub" class="navbar_link is-dropdown-link w-dropdown-link">Resource Hub</a><a href="/resource/hub/#episodes" class="navbar_link is-dropdown-link w-dropdown-link">Mission O/S</a><a href="/livestreams" class="navbar_link is-dropdown-link w-dropdown-link">Talks &amp; Livestream</a><a href="/resource/articles" class="navbar_link is-dropdown-link w-dropdown-link">Blog</a><a href="/resource/hub/#training" class="navbar_link is-dropdown-link w-dropdown-link">In-Person Training</a><div class="spacer-xsmall show-tablet"></div></nav></div><div data-hover="true" data-delay="200" data-w-id="602eb921-e2fc-821c-491f-338f21dddf56" class="navbar_menu-dropdown w-dropdown"><div class="navbar_dropdown-toggle w-dropdown-toggle"><div>Events</div><div class="dropdown-chevron w-embed"><svg width=" 100%" height=" 100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.55806 6.29544C2.46043 6.19781 2.46043 6.03952 2.55806 5.94189L3.44195 5.058C3.53958 4.96037 3.69787 4.96037 3.7955 5.058L8.00001 9.26251L12.2045 5.058C12.3021 4.96037 12.4604 4.96037 12.5581 5.058L13.4419 5.94189C13.5396 6.03952 13.5396 6.19781 13.4419 6.29544L8.17678 11.5606C8.07915 11.6582 7.92086 11.6582 7.82323 11.5606L2.55806 6.29544Z" fill="currentColor"/>
+</svg></div></div><nav class="navbar_dropdown-list w-dropdown-list"><div class="spacer-xsmall show-tablet"></div><a href="/shipsummit" class="navbar_link is-dropdown-link w-dropdown-link">ShipSummit</a><a href="/prodacity" class="navbar_link is-dropdown-link w-dropdown-link">Prodacity</a><a href="/impact-lab" class="navbar_link is-dropdown-link w-dropdown-link">Impact LAb</a><div class="spacer-xsmall show-tablet"></div></nav></div><a href="/careers" class="navbar_link w-nav-link">Careers</a><div class="show-tablet"><div class="text-size-medium"><div class="nav_contact"><div class="text-style-jagerlay text-align-left"><a href="tel:18135754080">+1 (813) 575-4080<br/></a>‍<br/>601 S Harbour Island Blvd<br/>Suite 109<br/>Tampa, FL 33602<br/><br/><a href="mailto:info@rise8.us">info@rise8.us</a></div><div class="spacer-medium"></div><div class="social-icons_component"><div class="w-layout-grid social-icons_list"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/rise8" target="_blank" class="social-icons_link w-inline-block red"><div class="icon-embed-small w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Twitter" href="https://twitter.com/Rise8_Inc" target="_blank" class="social-icons_link w-inline-block red"><div class="icon-embed-small w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Facebook" href="https://www.facebook.com/rise8/" target="_blank" class="social-icons_link w-inline-block red"><div class="icon-embed-small w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 12.0611C22 6.50451 17.5229 2 12 2C6.47715 2 2 6.50451 2 12.0611C2 17.0828 5.65684 21.2452 10.4375 22V14.9694H7.89844V12.0611H10.4375V9.84452C10.4375 7.32296 11.9305 5.93012 14.2146 5.93012C15.3088 5.93012 16.4531 6.12663 16.4531 6.12663V8.60261H15.1922C13.95 8.60261 13.5625 9.37822 13.5625 10.1739V12.0611H16.3359L15.8926 14.9694H13.5625V22C18.3432 21.2452 22 17.083 22 12.0611Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Instagram" href="https://www.instagram.com/rise8_inc/" target="_blank" class="social-icons_link w-inline-block red"><div class="icon-embed-small w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 3H8C5.23858 3 3 5.23858 3 8V16C3 18.7614 5.23858 21 8 21H16C18.7614 21 21 18.7614 21 16V8C21 5.23858 18.7614 3 16 3ZM19.25 16C19.2445 17.7926 17.7926 19.2445 16 19.25H8C6.20735 19.2445 4.75549 17.7926 4.75 16V8C4.75549 6.20735 6.20735 4.75549 8 4.75H16C17.7926 4.75549 19.2445 6.20735 19.25 8V16ZM16.75 8.25C17.3023 8.25 17.75 7.80228 17.75 7.25C17.75 6.69772 17.3023 6.25 16.75 6.25C16.1977 6.25 15.75 6.69772 15.75 7.25C15.75 7.80228 16.1977 8.25 16.75 8.25ZM12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5027 10.8057 16.0294 9.65957 15.1849 8.81508C14.3404 7.97059 13.1943 7.49734 12 7.5ZM9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25C10.4812 9.25 9.25 10.4812 9.25 12Z" fill="CurrentColor"/>
+</svg></div></a></div></div></div></div></div><img src="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/67fd7fef22b9fe9528682dbe_64d181e92e1fa206476d635f_logo-8-mark-white-540.avif" loading="lazy" alt="Rise8 logo" class="navbar_watermark"/></nav><div class="navbar_menu-buttons"><a href="/contact" class="button is-navbar-button w-button">Get in touch</a></div><div class="navbar_menu-button w-nav-button"><div class="menu-icon1"><div class="menu-icon_line-top"></div><div class="menu-icon_line-middle"><div class="menu-icon_line-middle-inner"></div></div><div class="menu-icon_line-bottom"></div></div></div></div></div><main class="main-wrapper"><div class="section_header background-color-white"><div class="padding-global"><div class="container-small"><div class="padding-section-small"><div class="video-header_content section-content"><div data-wf--global-button-component--variant="base" class="button-component"><div class="button-component_group"><a href="/prodacity/videos" class="button is-link w-inline-block"><div class="button-arrow is-leading w-embed"><svg width="100%" height="100%" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.1364 0.263604C7.48787 0.615076 7.48787 1.18492 7.1364 1.5364L2.67279 6L7.1364 10.4636C7.48787 10.8151 7.48787 11.3849 7.1364 11.7364C6.78492 12.0879 6.21508 12.0879 5.8636 11.7364L0.763604 6.6364C0.412132 6.28492 0.412132 5.71508 0.763604 5.3636L5.8636 0.263604C6.21508 -0.087868 6.78492 -0.087868 7.1364 0.263604Z" fill="currentColor"/>
+</svg></div><div class="button-text">View all recordings</div></a></div></div><div style="padding-top:56.17021276595745%" class="video-header_video w-video w-embed"><iframe class="embedly-embed" src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FF8fBgDCf2Y4%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DF8fBgDCf2Y4&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FF8fBgDCf2Y4%2Fhqdefault.jpg&type=text%2Fhtml&schema=youtube" width="940" height="528" scrolling="no" title="YouTube embed" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen="true"></iframe></div><div class="spacer"></div><h2>Kent Beck: Software Engineering in the Age of AI</h2><div class="content-group"><h3 class="heading-style-h4"><strong><em>Summary:</em></strong></h3><div class="spacer-small"></div><div class="text-rich-text w-richtext"><p>Kent Beck, creator of Extreme Programming and a signatory of the Agile Manifesto, talks about craft in an augmented development world. He calls the model the genie, because it grants your wishes and gives you something other than what you wanted, and pushes back hard on the claim that it codes better than humans: plausible is not the same as working. His central idea is the trade between features and futures. Every feature you ship burns some of your options for change, and the work of pacing yourself between features is what keeps a project from reaching the state where nothing can be changed without breaking something else. He closes on a revised effort-output-outcome diagram, adding mission at the end, and on Goodhart&#x27;s law as it applies to measuring lines of code.</p></div></div><div class="content-group"><h3 class="heading-style-h4"><strong><em>Transcript:</em></strong></h3><div class="spacer-small"></div><div class="text-rich-text w-richtext"><p>Thank you very much. It&#x27;s a pleasure to be here. It&#x27;s a little strange because this is not my usual venue and I don&#x27;t mean Nashville. I&#x27;ve spent my career in commercial software development. I&#x27;ve had occasional encounters with the military or government world. I remember working on a project at Lockheed way back in the day. Does Lockheed still exist? Yes? Okay, good. I&#x27;m glad I didn&#x27;t sink them. So some of the things that I was hearing this morning were outside of my usual sphere of concerns, but much of what I heard was spot on and the constraints are very similar. And I also solved a long-term puzzle. The way my brain works is I&#x27;ll take a problem and I&#x27;ll stick it in the back and I&#x27;ll churn on that. And sometimes the answer comes within minutes, sometimes it&#x27;s months, sometimes it&#x27;s years or even decades. And so at the end, I&#x27;m going to reveal a refinement of an idea that I&#x27;ve been working on for 10 or 15 years that I think I cracked this morning as a result of listening to General Whiting.</p><p>But I&#x27;m just going to leave that out there to make sure that you pay attention to the whole thing. Is that okay? And by the way, if anybody has questions as we go along, I&#x27;d rather have you raise your hand and ask right away than sit there and wonder about it. Asking questions is a form of leadership. I remember being a freshman in college and we had an experimental discrete math class and Professor Ken Ross, I still remember him at the whiteboard, was not being terribly clear. And one day he was a little late coming in, this is probably three weeks in, and the whole class was there and we&#x27;re sitting there and just kind of the glazed eyes, everybody looking forward, trying not to make contact, eye contact with anybody else. And finally somebody said, &quot;Does anybody know what&#x27;s going on?&quot; And everybody said, &quot;No, no.</p><p>We&#x27;re completely closed about what&#x27;s going on.&quot; And it was such a moment of (SIGH...)</p><p>And then Ken Ross came in and we just blasted him. Like, &quot;Nobody knows what&#x27;s going on. Stop whatever you were going to lecture about, please don&#x27;t explain what was going...&quot; And it was great for everybody, and he ended up writing a very popular discreet math textbook, and I would like to say that our class really had a lot of responsibility for that happening. So if you have a question, comment, please raise your hand. We have mic runners ready to go around. So my name is Kent Beck. I&#x27;ve been coached by Gene Kim, who many of you will know, that I ought to introduce myself in the following kind of way. I don&#x27;t like it, but Gene says so. So I was instrumental in bringing patterns in that pattern style of thinking to software development. Programmer testing, programmer testing frameworks like J-Unit was my original invention.</p><p>I refined it with Eric Gamma and it was then copied a million different ways. Test Driven Development, which is an age old idea. I recently found a book from 1957 called Something Like Digital Programming where the distinction between binary computers and decimal computers had not been worked out yet, which I thought was like, &quot;Oh, I guess that must have been a question at some point.&quot; But late in that book, it talks about how do you write programs and it talks about you go to the users and you ask them for some check items that is give me some input output pairs from your domain and we&#x27;ll make sure that the computer program matches those input output items. I thought that&#x27;s Test Driven Development right there. So I can&#x27;t claim to have invented TDD, but I maybe rediscovered it or something like that and then refined it.</p><p>Extreme Programming is my baby.</p><p>I was one of the signatories of the Agile Manifesto. I wasn&#x27;t just one of, I was the first signatory of the Agile Manifesto alphabetically. And then since then I&#x27;ve spent a lot of time coaching high potential engineers. I&#x27;m deep in the augmented development world. I&#x27;m working with one of the frontier labs, which is its own set of interesting constraints. I mean, it&#x27;s one of the first. I work at the intersection of technology and sociology, and this is one of the first times when it&#x27;s not a press play kind of problem on how a team that&#x27;s building a frontier model or building a sequence of frontier models, how they should actually work. I&#x27;m having to really think. I&#x27;m having to learn a lot, which I appreciate.</p><p>So that&#x27;s my background. I&#x27;m coming here to talk to you about craft and the role of craft in an augmented development world. I always say augmented development because to me, this is still a human process. At least so far, I still have a lot to add to the decisions that the genie&#x27;s making. I call it the genie because it grants your wishes, but it ends up not being what you really wanted. Just as a reminder that that&#x27;s the essential relationship here. I&#x27;m going to make some requests. I&#x27;m going to get something back. It&#x27;s going to seem really cool and then at the end of it, I&#x27;m going to be a little bit disappointed. So that&#x27;s how we work together.</p><p>I wanted to say, I&#x27;m not going to bury the lead. The one thing I would like you to take away from is there&#x27;s a tendency now when people talk about augmented development where they make a statement like now that the genie...they don&#x27;t usually call it the genie because they&#x27;re not going to be that cynical...now that the genie is better at coding than humans. And I&#x27;m calling a balder dash on that statement, that attitude that just because a genie can create syntactically correct programs doesn&#x27;t mean that they&#x27;re better than a programmer or even that they actually work. And one of the things I always loved as an autistic person that I loved about programming is this binary red green. Oh, that&#x27;s so relaxing to be able to say, &quot;This program doesn&#x27;t work. I fix a bug and now it&#x27;s fixed.&quot; And that&#x27;s the programs that we get out of augmented development oftentimes just don&#x27;t work.</p><p>They&#x27;re plausible. Genie&#x27;s really good at plausible, but actually working, no.</p><p>And we&#x27;ve all read these breathless accounts of, &quot;Well, we spent $10,000 in tokens and we got a working C compiler out of it. How amazing is that?&quot; And then you start digging and you realize that working C compiler, hello world doesn&#x27;t actually work or there were a few remaining bugs and every time one of those bugs got fixed, three more bugs were introduced. If you dig a little bit deeper, it&#x27;s close to a C compiler. It&#x27;s C compiler-ish, but it doesn&#x27;t actually efficiently compile C programs that then run, which seems to my old-fashioned way of thinking to be the criteria we ought to be using. So that idea that somehow we&#x27;ve just replaced programmers because computers can do what programmers used to do is simply wrong. Now, maybe someday it will be less wrong, but today it&#x27;s simply not true. And that means your relationship as a programmer or as a manager of programmers or as a purchaser of software, if there&#x27;s a heavy presence of the genie in the production of some software, you have to take a cynical view.</p><p>You have to take an adversarial view and say, &quot;Okay, you say this works. You made yourself happy, but did you make me happy? How real is that? How hard do I have to push?&quot; So the kinds of things that you do as a programmer to make sure that a program works by construction or that a certain class of bugs is simply not possible, genie doesn&#x27;t have those tricks. So things that you used to be able to infer, trustworthiness that you used to be able to infer, you simply can&#x27;t assume that that&#x27;s true anymore.</p><p>Now I&#x27;ve been through a number of cycles. One of the advantages of losing all this hair was I&#x27;ve been through enough cycles where people said, &quot;Oh goody, we don&#x27;t need programmers anymore.&quot; And as programmers, it behooves us to think about why they keep trying to get rid of us kind of at a strategic level. But also it&#x27;s never been true because computer programmers are highly technical artifacts and we&#x27;d love for say business people to just be able to speak in a plain language to the computer so that we don&#x27;t need programmers anymore. The business people can just state their requirements in plain language and the computer will just compute it. And that of course is the high level description of COBOL, but that cycle has been going over and over again. And here we are at the next round of that cycle, which is why I&#x27;m not worried about having a job that and because much of my job is coaching, it turns out that young engineers make exactly the same young engineer mistakes that young engineers have been making since the time of the Romans.</p><p>And they can use someone who comes along and says, &quot;Yes, you&#x27;re kind of weird, but you&#x27;re definitely not alone. And you know what? I&#x27;ve seen worse.&quot; And that&#x27;s a very soothing thing for a young, nearly overwhelmed programmer to hear.</p><p>So that word craft that&#x27;s in the title of my talk is an interesting word and I have a mixed relationship with that word craft. I&#x27;ve written at least three books which can all be described as craft oriented. Okay, you&#x27;re a programmer. How can you put your whole self into the act of programming? And all three of those books are completely obsolete and should be thrown away at this point, which is an odd thing to feel towards the end of a career, but there you have it. The kinds of activities that we used to use to express craft, careful naming, careful decomposition of logic into little pieces that all compose together to create some larger effect, indentation, use of white space, optimizing program structure for human understanding, those aren&#x27;t decisions. Those used to be decisions that had a lot of leverage. Now they tend to have a lot of leverage over time.</p><p>So five years later, someone would come across some code and say, &quot;Oh, thank goodness I can read and understand this,&quot; and they would feel good about it.</p><p>Those decisions don&#x27;t have the same leverage that they used to have, and that&#x27;s just true. It doesn&#x27;t mean that humans don&#x27;t need to understand code. I think there&#x27;s still a lot of leverage. If I have to choose a system where the humans can read it and a system where the humans can&#x27;t, I&#x27;d much rather have a system where the humans can read and understand about it. But I also have to recognize that that reading and understanding is going to happen in the context of I&#x27;ve got this genie, it can explain stuff to me if it&#x27;s not lying to me, which is always an option, but if it&#x27;s not lying to me, I&#x27;m going to be able to understand this more quickly. But that detail oriented, which feels so good, I&#x27;m like, how does this go together? And then I realize, oh, if I inline these things and I extract those things and I rename these, ah, then it all becomes clear.</p><p>That moment felt really good to me and there&#x27;s just not payoff for that particular moment. Now craft was, let me say, from my perspective, that word craft was hijacked by a group of people who wanted, again, this from my perspective, wanted to go in their little cave and they wanted to be programmers and it was just them and the computer and they would craft themselves until they were ready to be finished. And so this is the flip side of my relationship with that word craft was I really hated that. Oh no, it&#x27;s not done yet because I haven&#x27;t finished with my craft. Well, sometimes if the cost of delay is high, an ugly program that gives you feedback is exactly the right thing to do.</p><p>Some other times, if the cost of delay is low, the software is going to live for the next 20 years, then absolutely that Swiss watchmaker get everything exactly right is going to pay off over time. But the idea that as a programmer, time doesn&#x27;t matter compared to your experience of programming, I disagree with that strongly and I didn&#x27;t like what that side of programming did with that word craft. But we have to recognize now that craft is going to mean something different. It&#x27;s still a valid concern. It&#x27;s still a valid discipline, but it&#x27;s going to show up very differently. And I&#x27;ll talk as I go along more about how I see that change happening.</p><p>So let me draw a little bit for y&#x27;all. I&#x27;ve noticed that if you look at my GitHub, so I&#x27;ve been programming augmented development, like back into programming hardcore every day for maybe the last 18 months. I saw Gene Kim and Steve Yegge give a demo and they were so excited I thought I have to get back into this. And I got to say, I absolutely love programming with the genie. I&#x27;ve always had bigger ambitions than my technical skill could achieve and now I can try ridiculously ambitious projects and make a lot of progress. I didn&#x27;t say accomplish them because on my GitHub you&#x27;ll see that there&#x27;s a name of a project and then project two, project three, project four, because I kept hitting the wall. I kept getting to that place where I couldn&#x27;t fix one bug without breaking something else. And then new project, new project two, new project three.</p><p>Now it somehow never occurs to me to put a one by that new project. I just assume this time it&#x27;ll be different. This time I&#x27;ll be able to actually get this thing completed, but no, I have to release over and over and over again.</p><p>So here&#x27;s how I&#x27;ve come to think about this. If we look at progress, it took me a while to get to this visualization by the way. This is one of those ideas that went in the back of my head and I had to work on for a while. If we look at progress on features, what we see is it goes fast at first and then it goes slower and slower and slower and slower. And what goes into that dynamic? What goes on the other axis? And sometimes I call it optionality. Sometimes I call it futures so it&#x27;s easy to see futures versus features. And then I knocked out one of my front teeth and then I had to call it futures versus features and it was a really terrible choice, but then I got the tooth replaced. So now I&#x27;m good. The vicissitudes of age.</p><p>So here&#x27;s what happens. We always start with a wide variety of things that we could do, but we have no features. And then we implement something and we burn some of our futures in order to realize that feature. At the very least, we&#x27;re going to have to maintain backwards compatibility if we add the next feature, which will constrain what we can do a little bit or we&#x27;ll decide we don&#x27;t like that first feature and we&#x27;ll have to take it out and that again constrains a little bit what we do next. But what happens next is we burn some more futures in order to get our next feature and then we burn some more. And then eventually we get down to the point where we have no options for change at all because everything is such a big mess. And then that&#x27;s when I start project two or project three or project four.</p><p>So now we&#x27;ve made a lot of progress in software development. It used to take us a hundred people 10 years to get to this absolute zero state where we can&#x27;t make any changes without breaking something else. And now with AI, I can do this in the privacy of my own office, one person, one week and I can make a complete mess. So that&#x27;s a big productivity enhancer to get to a project that can&#x27;t be changed with far less in the way of investment. But what&#x27;s the alternative? What else can we do? So that&#x27;s what I want to create. That first feature, it&#x27;s always going to burn some futures. There&#x27;s nothing you can do about that. But now we have a moment. When I was in music school, there was a story about Pablo Casals who was one of the greatest cellists of the 20th century.</p><p>And the cello is a very physical instrument. It&#x27;s big, it moves a lot of air, takes a lot of physical strength to play the cello. And Casals had a piece that was a long run of 16th notes</p><p>On and on and on and on. And someone asked Casals, &quot;Don&#x27;t you get tired playing all those 16th notes?&quot; And he said, &quot;No, I rest between the notes.&quot; And for me as a young classical guitar major trying desperately to play fast enough, the idea that there was a between the notes was just mind boggling. Now it turns out Casals never said this, the story&#x27;s made up, but it&#x27;s such a good story that I have to tell it. But here we have a moment. We&#x27;ve completed a feature. The genie said, &quot;Okay, boss.&quot; You know the finger guns? &quot;Okay boss, I finished that feature. Do you want me to implement the next thing?&quot; And we all have the opportunity to take a breath and say, &quot;Huh, maybe I&#x27;m not ready.&quot; And that gives us a chance to add back some of the features and maybe even a little bit more before we implement the next feature.</p><p>And then again with the finger guns and then again we can say, &quot;No, I&#x27;m going to refactor what&#x27;s there. I&#x27;m going to eliminate some duplication. I&#x27;m going to optimize some of this for readability. I&#x27;m going to throw away what I just did and implement it again in a different way, see if that turns out differently.&quot; There&#x27;s a lot of things that you can do in that moment between features that are going to add value to the project because the economic value of a project is the sum of the features that it currently has and the futures, all the options for what it could do next. I can add value by adding to the futures. And so this is the trajectory that I want to create to go back and forth between adding features and improving the futures of the project. Now the challenge with this is adding features is a visible, legible in that seeing like a state sense.</p><p>Everybody can see the progress. They want the features. The users want the features. Now they have it. Woo, thank you very much. Futures, futures is harder to account for. You may have added to the theoretical value of the software, but the fact that you could make a change that you may or may not want to make seems like guilding the lily. Why didn&#x27;t you just implement the next feature? Well, because if I just implement the next feature, I&#x27;m going to go down to zero and everybody hates that. So this is how I think about the challenge of augmented, not just augmented development, this is the challenge of software development is balancing the investment between the next set of features and the futures which determine what it is that you can implement next. With the genie involved, the whole thing ramps up. The timelines are shorter. The opportunity cost....</p><p>if you just say, &quot;Yeah, implement the next feature,&quot; you&#x27;re going to get it really fast. Something like it, maybe, that works mostly. And if instead you go and future proof your software, you remove the sources of error, it&#x27;s harder to account for that. It&#x27;s not written in any spec that says, &quot;And this will be easier to change in the future.&quot; Nobody seems to ask for that. They&#x27;re all looking for that project that gets finished. Whereas for me, finished, like I don&#x27;t want to change this software is a failure. I want to write software that inspires any number of new ideas. To me, that&#x27;s more valuable, but it&#x27;s harder to write a spec for that. I&#x27;ll get cynical about spec driven development before this is over, I promise. So this is the trajectory I&#x27;m trying to create. If you step back from this as a trajectory far enough, you don&#x27;t notice the back and forth.</p><p>It just looks like the software is getting more features and more options at the same time. If you try to, as an implementer, try and actually implement more features and more options at the same time, it turns out that&#x27;s a bigger problem than fits even into the combined brain of the genie and the human. The more effective strategy is to go back and forth between the two. We&#x27;re going to make some progress, then we&#x27;re going to consolidate. We&#x27;re going to make some progress and we&#x27;re going to consolidate. You can&#x27;t wipe the knife while you&#x27;re cutting. You have to cut and wipe the knife and cut and wipe the knife, but you have to wipe the knife. If you went into a professional kitchen and you said, &quot;You&#x27;re wiping the knife and it&#x27;s pretty much clean already, why don&#x27;t you just stop wiping the knife? Then the chef is going to offer to use the knife on you and then wipe it.&quot; So the commercial kitchen has developed these strategies that work out well.</p><p>And in software development, I mean, one of the things about Extreme Programming that I thought was the biggest compliment I could have gotten was this is what really good teams look like in the wild. This isn&#x27;t theoretical. This is an observation of what teams really look like. And that was my goal in Extreme Programming. If I said anything creative or I said anything innovative, it was definitely a mistake and I wanted to take it out. I wanted proven techniques.</p><p>But now we have this much more powerful tool that can go much faster, that can create opportunities for feedback faster than we&#x27;re prepared to gather that feedback or analyze that feedback. And the temptation is there to just let it go full speed ahead. And for me, this is dangerous. Anytime I&#x27;ve tried fully agentic, the dark factory, the dark software factory, and the dark doesn&#x27;t, it&#x27;s not meant like dark like evil. I was kind of hopeful. The dark software factory, like, oh, I get to finally write evil software. And no, it turns out that&#x27;s not what they mean at all. It&#x27;s just, there&#x27;s no human involved. There&#x27;s no feedback. And that always goes off the rails, always. And here&#x27;s the problem. It&#x27;s amazing while it&#x27;s going off the rails. The crash is so entertaining, right? You&#x27;re like, &quot;Wow, how did you get this much? How did you do this much?&quot; And it&#x27;s still complete crap, but there it is.</p><p>So the challenge for me and my personal practice, for the people that I coach, for the teams that I coach is how do you create this space between features to go back and enhance the futures of the work that you&#x27;re doing?</p><p>And to do that in this environment where it&#x27;s so tempting to just implement the next feature, the next feature, the next feature.</p><p>By pacing yourself, you&#x27;re also taking the time to form understanding.</p><p>So the comment is by pacing yourself, you&#x27;re giving yourself the chance to form an understanding. And that&#x27;s exactly right. The best software that I&#x27;ve worked on is software where I tried to maximize learning, which threw off software as a side effect, as opposed to I&#x27;m trying to produce software and sometimes accidentally I learn something because I messed up. Your habits, if you&#x27;re trying to maximize learning, your habits look completely different. The pace looks completely different. You&#x27;re not afraid to throw stuff away when it gets kind of messy. This is one of my early experiences working with Ward Cunningham, who was my mentor when I came straight out of school, the biggest piece of luck I ever had in my life. Ward invented the Wiki and we had developed some code.</p><p>It did what we wanted to, but it was late in the day. We felt a little bit like, I don&#x27;t know. And he just reached over and turned off the computer and I jumped out of my skin like, &quot;Oh, we implemented this stuff and it was kind of working and we only felt a little bit bad about it. How could you destroy that?&quot; So I kind of huffed my way home and came in the next morning and we re-implemented everything that we had done the entire previous afternoon in about 15 minutes and it was absolutely clear and we understood it. And that was the light bulb moment for me. This is a learning process that throws off software as a side effect. Whereas the temptation in the dark factory, you don&#x27;t learn anything except at the end you learn how unreliable the genie really is.</p><p>But we already knew that. So why is it that I need to keep learning that? I don&#x27;t know.</p><p>So that&#x27;s what I&#x27;m trying to create, this trajectory where futures and features go together in a little bit back and forth. Something I&#x27;ve heard echoes of earlier in the day is a distinction that I want to make that it&#x27;s coming back. This is again, one of these advantages/disadvantages of experiences. You see stuff and you go like, &quot;This again, okay.&quot; And this is the distinction between one shot development and iterative develop. Sorry about that. Iterative development. Sometimes my mouth gets a little ahead of my brain or maybe it&#x27;s the other way around, but here we are. There is such a temptation in spec driven development to go down the path of I&#x27;m going to write a spec and the genie&#x27;s going to produce the software and if the spec is good enough, the software is going to be good enough. And there&#x27;s a word for that, that&#x27;s exactly waterfall development where it didn&#x27;t work, it never worked.</p><p>If you go back to the original Winston Royce paper about the waterfall, there&#x27;s a diagram with the waterfall and it says right there on that page, &quot;Of course this doesn&#x27;t work because decisions you make later are going to inform decisions that you made earlier.&quot; So the next page has waterfall going down and feedback coming up. But the power of an image is everybody looked at that waterfall and though, &quot;Wouldn&#x27;t that be awesome if I could just write a spec that was good enough and then the software would be finished?&quot; And that&#x27;s what stuck. That&#x27;s how careful you have to be when you&#x27;re explaining things. What about formal methods? What about formal methods? Great question. I have enjoyed. So when I was in graduate school, I was in music school and computer science school every other year and I just ended on the wrong year. So I&#x27;m on stage here during the day instead of in the evening.</p><p>It feels good to be in a music venue though. I was a TA for the proof of program correctness class. So I have those patterns baked into my head and I use them informally all the time to do some data flow analysis or control flow analysis and define some invariance and so on. But I hadn&#x27;t done formal proofs until maybe a year ago and a friend introduced me to Lean and Lean with the genie and I tried it out. The challenge I have with formal methods is twofold. One, it still feels like a one shot process. I have some formal specification and I want to prove some properties of it and I do a whole bunch of work and I prove the properties. What happens if I change one element? Oh, I got to wind back. And even if it&#x27;s faster because I have the genie helping, it&#x27;s still a drag on my ability to change and I want to build systems that encourage change instead of discourage change.</p><p>So that&#x27;s my first one. And the second one is, even with formal methods, there&#x27;s still a gap between this mathematical model and implementation. Okay, I can have some formal specification. I can derive some properties. I can prove those properties hold for this formal specification, and now I want to turn that into a running program. There&#x27;s still a gap in that derivation of the program from the formal specification, and I don&#x27;t know how to bridge that. Okay, I want to turn that into C code. I want to turn that into C++ or ARM 64.</p><p>You can program an assembly language now. It&#x27;s so cool. I mean, that&#x27;s where I started. My dad and I soldering together a 6800 machine. You can do that now. You can just say, &quot;Well, okay, implement this data structure and do it in x86 assembly.&quot; Ding. Out will come some... It&#x27;s amazing. Figuring out all the different ways I can torture the genie is just so entertaining.</p><p>OK, let me make this even harder and more awkward. So the second part to finish that thought about formal methods, the second part is that bridge, that gap between here&#x27;s a specification and here&#x27;s an implementation that matches that specification. As far as I can tell is something that hasn&#x27;t been fully bridged. Now, the good news is you can get to low defect densities with a combination of examples, automated tests, carefully chosen, and foolproofing of the design. If you work at those two things pretty hard, you can get software that is trustworthy. Unfortunately, the genie wants to make shortcuts. It doesn&#x27;t want to foolproof the design and it will do things that subvert the intentions of test cases.</p><p>You have to watch for returning constants. You have to watch for just all of the nasty things that you can imagine that a 14-year-old programmer would do just to say, &quot;Yeah, it works, boss.&quot; So it is possible to write though trustworthy program with the genie. So I got into that one shot versus iterative. So are you making some software that has value deployed in the world that you then change and now it has more value in the world that you then change and then now it has more value in the world? That&#x27;s one paradigm versus the, &quot;I&#x27;m going to write a spec and the spec&#x27;s going to be so good that the software is going to be good. Ooh, it&#x27;s not. I&#x27;m going to write more of a spec and a bigger spec until the spec is big enough and complicated enough that the software is correct.&quot; And there&#x27;s times to do both.</p><p>If I&#x27;m writing a little app, one shot is fine. If I&#x27;m writing as I am a virtual machine for a graph database with an embedded programming language, that&#x27;s not good enough. It&#x27;s going to have to be something where I have some software, it has some value, I see a way to improve it and so on. The people who are getting really excited about spectrum development just reminds me it doesn&#x27;t sound like they&#x27;ve ever had a billion users because the kinds of things that you have to do if you have a really large install base and a lot of traffic to change software like one shot and then oh no, nevermind, let me one shot it again, that&#x27;s just never going to work because you have continuity problems, you have data migration problems, you&#x27;re better off assuming that you&#x27;re going to be iterative all along the way.</p><p>Now I said that I was going to show you an update of a diagram and I&#x27;m excited because anytime I get one of these, I have a puzzle and I can finally solve it, then I&#x27;m a very happy person. So us programmers, I&#x27;m a programmer mostly and so that&#x27;s the way that I speak. If we want to look at what we do, there&#x27;s this sequence where as a programmer you put in a certain amount of effort and then you have say a new feature that you can deliver to your customers and that&#x27;s output. And then the customers use that feature and their behavior changes. After all, if we produce software and nobody&#x27;s behavior changes in any kind of way, we didn&#x27;t need to produce the software.</p><p>And that&#x27;s outcome. And one of the big changes in my life was moving to the web and being able to observe what customers actually do with the software. Before then you had software on a CD, you&#x27;d send it out. Are people using my new features? I don&#x27;t know. There was no way of knowing. So just being able to observe outcomes was a big step forward. How much of what we did was wasted effort because nobody used the feature at all. But here&#x27;s what I learned today is outcome for the customers, the people using the software leads to, and I used to use the word impact, but I love this word mission, leads to changes in our accomplishment of the mission and the mission is shared between the people making the program and the people using the program.</p><p>And here&#x27;s where we get to the tyranny of metrics. People will be amazed that Genie produced 200,000 lines of code. That&#x27;s a measure of effort. It has nothing to do with the mission and whether the mission is making enough money for my next yacht or I don&#x27;t have a yacht, just using that as an illustrative example or making the country safer. The fact that we&#x27;ve generated 200,000 lines of code is irrelevant and 200,000 lines is not 10 times as much as 20,000 lines. From the mission perspective, it&#x27;s just irrelevant. And yet it&#x27;s the easiest thing to measure. And so we look for our keys under the lamppost. And the genie is able to produce so much output with so little effort, it&#x27;s easy to see that as productivity because after all productivity, the very definition of productivity is the ratio of output to input.</p><p>And whether it&#x27;s lines of code, which we&#x27;ve known was balderdash for a very, very long time and somehow it&#x27;s back, PR count, anything which is a measure of effort or a measure of output is per definition not a measure of mission. The problem with measuring mission is it&#x27;s hard to do. Oftentimes value from the mission is bursty. You don&#x27;t see it until a crisis happens and then you realize that you&#x27;re ready for the crisis. So it&#x27;s hard to measure from the level of the mission, but that&#x27;s what actually matters. So the fact that the genie can give you a lot of effort and now I can just spin up 10 genies and now I have 10 times as much effort. Yeah, but it doesn&#x27;t matter. Doesn&#x27;t mean that we&#x27;re making progress on what really matters to people. And the earlier in this cycle you measure, the more likely you are to see Goodhart&#x27;s law.</p><p>When a measure becomes a goal, it ceases to be a measure. I think Goodhart was an optimist. It&#x27;s not just that the measure ceases to be a measure, it&#x27;s that people will twist the entire system out of shape. They&#x27;ll make it worse in order to get better measures. So it&#x27;s not that you lose visibility by turning measures into goals. It&#x27;s you lose progress on the mission by doing that. The later in this cycle you go, the harder it is to attribute, &quot;Hey, the mission is now 7% better and I own 0.075% of that.&quot; It&#x27;s hard to say what you did versus what he did versus what she did. Which of us deserves the credit? And this is the challenge we had from earlier today. How do you incentivize progress on the mission? And I&#x27;ll close with just a few words about this. I&#x27;ve had the great good fortune of having a few of my ideas spread out in the world of software development.</p><p>And what I know about that process is you have to find an expression of what you&#x27;re trying to accomplish of the mission. You have to find an expression of the mission that speaks to people&#x27;s heads and their hearts. And then you have to repeat it and repeat it and repeat it. And that repetition, that not getting bored with telling the story of how software development can be over and over again is part of the skill of leadership to tell that same story for the thousandth time as if it&#x27;s brand new. And then someday somebody will come to you and say to you, &quot;I have this great idea.&quot; And they&#x27;ll tell you your idea without realizing it was you, without giving you any credit whatsoever. And that&#x27;s the moment that you&#x27;ve succeeded as a leader. And I think we have these tools that have the capability of transforming the value we create in the world.</p><p>And that&#x27;s the challenge is finding those missions into which the tools fit for human purposes. And I&#x27;m looking forward to finding out what comes out next, to doing my little bit to shape what that is and to seeing what it is that you do that also shapes the future. Thank you so much for your time and attention.</p><p>‍</p></div></div><div class="line-divider is-light-grey"></div><p class="text-size-medium text-weight-semibold">Enjoyed this talk? Subscribe for more insights from the brightest minds in GovTech.</p><div class="form-embed w-embed w-script"><script src="https://js.hsforms.net/forms/embed/20292219.js" defer></script>
+<div class="hs-form-frame" data-region="na1" data-form-id="69b4e5ec-878f-4944-a6ac-7504a7fc4de0" data-portal-id="20292219"></div></div></div><div class="padding-section-large padding-bottom"></div></div></div></div></div></main><footer sw-section-border="False" class="footer_component"><div class="padding-global is-0-z-index"><div class="container-large"><div class="footer_top-wrapper-padding"><div class="w-layout-grid footer_top-wrapper is-shipsummit"><div id="w-node-faf218da-20a9-3d18-ca25-75706f650293-d4efc4b0" class="footer_left-wrapper is-shipsummit"><div id="w-node-faf218da-20a9-3d18-ca25-75706f650294-d4efc4b0" class="margin-bottom margin-small"><div class="text-wrap-balance"><div class="heading-style-h4">Together, we create continuous impact.</div></div></div><div class="button-group"><div data-wf--global-button-component--variant="base" class="button-component"><div class="button-component_group"><a href="/contact" class="button w-inline-block"><div class="button-text">Contact us</div></a></div></div><div data-wf--global-button-component--variant="base" class="button-component"><div class="button-component_group"><a href="/resource/articles" class="button is-secondary w-inline-block"><div class="button-text">See Resources</div></a></div></div></div></div><div id="w-node-faf218da-20a9-3d18-ca25-75706f65029c-d4efc4b0" class="footer_link-list is-shipsummit"><div class="footer_link-list-heading-wrapper"><div class="text-style-eyebrow is-shipsummit">Navigate</div></div><a href="/capabilities/software-delivery" class="footer_link is-shipsummit">Capabilities</a><a href="/about" class="footer_link is-shipsummit">About Rise8</a><a href="/careers" class="footer_link is-shipsummit">Careers</a><a href="/prodacity" class="footer_link is-shipsummit">Prodacity</a><a href="/resource/articles" class="footer_link is-shipsummit">Resources</a><a href="/contact" class="footer_link is-shipsummit">Contact</a></div><div id="w-node-faf218da-20a9-3d18-ca25-75706f6502ac-d4efc4b0" class="footer_content"><div class="text-size-small"><div class="nav_contact is-shipsummit"><div class="text-style-eyebrow is-shipsummit">Contact Us</div><div class="spacer-small"></div><div class="text-style-jagerlay"><a href="tel:18135754080" class="text-color-alternate">+1 (813) 575-4080<br/></a>‍<br/>601 S Harbour Island Blvd<br/>Suite 109, Tampa, FL 33602<br/><br/><a href="mailto:info@rise8.us" class="text-color-alternate">info@rise8.us</a></div><div class="spacer-small"></div><div class="social-icons_component"><div class="w-layout-grid social-icons_list is-shipsummit"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/rise8" target="_blank" class="social-icons_link is-shipsummit w-inline-block red"><div class="icon-embed-xsmall is-theme w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.5 3C3.67157 3 3 3.67157 3 4.5V19.5C3 20.3284 3.67157 21 4.5 21H19.5C20.3284 21 21 20.3284 21 19.5V4.5C21 3.67157 20.3284 3 19.5 3H4.5ZM8.52076 7.00272C8.52639 7.95897 7.81061 8.54819 6.96123 8.54397C6.16107 8.53975 5.46357 7.90272 5.46779 7.00413C5.47201 6.15897 6.13998 5.47975 7.00764 5.49944C7.88795 5.51913 8.52639 6.1646 8.52076 7.00272ZM12.2797 9.76176H9.75971H9.7583V18.3216H12.4217V18.1219C12.4217 17.742 12.4214 17.362 12.4211 16.9819V16.9818V16.9816V16.9815V16.9812C12.4203 15.9674 12.4194 14.9532 12.4246 13.9397C12.426 13.6936 12.4372 13.4377 12.5005 13.2028C12.7381 12.3253 13.5271 11.7586 14.4074 11.8979C14.9727 11.9864 15.3467 12.3141 15.5042 12.8471C15.6013 13.1803 15.6449 13.5389 15.6491 13.8863C15.6605 14.9339 15.6589 15.9815 15.6573 17.0292V17.0294C15.6567 17.3992 15.6561 17.769 15.6561 18.1388V18.3202H18.328V18.1149C18.328 17.6629 18.3278 17.211 18.3275 16.7591V16.759V16.7588C18.327 15.6293 18.3264 14.5001 18.3294 13.3702C18.3308 12.8597 18.276 12.3563 18.1508 11.8627C17.9638 11.1286 17.5771 10.5211 16.9485 10.0824C16.5027 9.77019 16.0133 9.5691 15.4663 9.5466C15.404 9.54401 15.3412 9.54062 15.2781 9.53721L15.2781 9.53721L15.2781 9.53721C14.9984 9.52209 14.7141 9.50673 14.4467 9.56066C13.6817 9.71394 13.0096 10.0641 12.5019 10.6814C12.4429 10.7522 12.3852 10.8241 12.2991 10.9314L12.2991 10.9315L12.2797 10.9557V9.76176ZM5.68164 18.3244H8.33242V9.76733H5.68164V18.3244Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Twitter" href="https://twitter.com/Rise8_Inc" target="_blank" class="social-icons_link is-shipsummit w-inline-block red"><div class="icon-embed-xsmall is-theme w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.1761 4H19.9362L13.9061 10.7774L21 20H15.4456L11.0951 14.4066L6.11723 20H3.35544L9.80517 12.7508L3 4H8.69545L12.6279 9.11262L17.1761 4ZM16.2073 18.3754H17.7368L7.86441 5.53928H6.2232L16.2073 18.3754Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Facebook" href="https://www.facebook.com/rise8/" target="_blank" class="social-icons_link is-shipsummit w-inline-block red"><div class="icon-embed-xsmall is-theme w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 12.0611C22 6.50451 17.5229 2 12 2C6.47715 2 2 6.50451 2 12.0611C2 17.0828 5.65684 21.2452 10.4375 22V14.9694H7.89844V12.0611H10.4375V9.84452C10.4375 7.32296 11.9305 5.93012 14.2146 5.93012C15.3088 5.93012 16.4531 6.12663 16.4531 6.12663V8.60261H15.1922C13.95 8.60261 13.5625 9.37822 13.5625 10.1739V12.0611H16.3359L15.8926 14.9694H13.5625V22C18.3432 21.2452 22 17.083 22 12.0611Z" fill="CurrentColor"/>
+</svg></div></a><a aria-label="Instagram" href="https://www.instagram.com/rise8_inc/" target="_blank" class="social-icons_link is-shipsummit w-inline-block red"><div class="icon-embed-xsmall is-theme w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 3H8C5.23858 3 3 5.23858 3 8V16C3 18.7614 5.23858 21 8 21H16C18.7614 21 21 18.7614 21 16V8C21 5.23858 18.7614 3 16 3ZM19.25 16C19.2445 17.7926 17.7926 19.2445 16 19.25H8C6.20735 19.2445 4.75549 17.7926 4.75 16V8C4.75549 6.20735 6.20735 4.75549 8 4.75H16C17.7926 4.75549 19.2445 6.20735 19.25 8V16ZM16.75 8.25C17.3023 8.25 17.75 7.80228 17.75 7.25C17.75 6.69772 17.3023 6.25 16.75 6.25C16.1977 6.25 15.75 6.69772 15.75 7.25C15.75 7.80228 16.1977 8.25 16.75 8.25ZM12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5027 10.8057 16.0294 9.65957 15.1849 8.81508C14.3404 7.97059 13.1943 7.49734 12 7.5ZM9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25C10.4812 9.25 9.25 10.4812 9.25 12Z" fill="CurrentColor"/>
+</svg></div></a></div></div></div></div></div><div id="w-node-faf218da-20a9-3d18-ca25-75706f6502b4-d4efc4b0" class="footer_bottom-wrapper"><div class="text-style-jagerlay text-size-small">©<span class="dyn-copyright">2026</span> All rights reserved.</div><div class="footer_link-list is-shipsummit-legals"><a href="/legal/privacy-policy" class="text-style-supply text-size-tiny text-color-alternate">Privacy</a><a href="https://hubspot.rise8.us/hubfs/Rise8%20Capabilities.pdf" class="text-style-supply text-size-tiny text-color-alternate">Capabilities statement</a></div></div></div></div><img src="https://cdn.prod.website-files.com/67fd7fef22b9fe9528682d30/6941c734c95273c937f36c90_Rise8%20Logo.svg" loading="eager" alt="" class="footer_logo is-shipsummit"/></div></div><div class="utm-tags_embed w-embed w-script"><!-- UTM TAGS START -->
+<script>
+  (() => {
+    var R = ({ customFormFields: t = {} }) => {
+        let r = { rl_utm_source: t?.source || 'rl_utm_source', rl_utm_medium: t?.medium || 'rl_utm_medium', rl_utm_campaign: t?.campaign || 'rl_utm_campaign', rl_utm_content: t?.content || 'rl_utm_content', rl_utm_term: t?.term || 'rl_utm_term' },
+          m = Object.values(r),
+          n = { [r.rl_utm_source]: e.utm_source, [r.rl_utm_medium]: e.utm_medium, [r.rl_utm_campaign]: e.utm_campaign, [r.rl_utm_content]: e.utm_content, [r.rl_utm_term]: e.utm_term };
+        return { FORM_FIELD_IDS_MAP: r, FORM_FIELD_IDS_LIST: m, FORM_FIELD_IDS_TO_UTM_MAP: n };
+      },
+      e = { utm_source: 'utm_source', utm_medium: 'utm_medium', utm_campaign: 'utm_campaign', utm_term: 'utm_term', utm_content: 'utm_content' },
+      f = Object.values(e),
+      g = ['www.google.com', 'google.com', 'www.bing.com', 'bing.com', 'www.yahoo.com', 'yahoo.com'],
+      d = ['www.facebook.com', 'facebook.com', 'www.twitter.com', 'twitter.com', 'www.linkedin.com', 'linkedin.com'],
+      A = [...g, ...d],
+      _ = 'session',
+      l = { [e.utm_source]: 'Direct', [e.utm_medium]: 'Direct', [e.utm_campaign]: 'Not Provided', [e.utm_term]: '', [e.utm_content]: '' },
+      S = { [e.utm_source]: 'Web Referral', [e.utm_medium]: '', [e.utm_campaign]: 'Not Provided', [e.utm_term]: '', [e.utm_content]: '' };
+    function E(t) {
+      return { [e.utm_source]: t.get(e.utm_source), [e.utm_medium]: t.get(e.utm_medium), [e.utm_campaign]: t.get(e.utm_campaign), [e.utm_term]: t.get(e.utm_term), [e.utm_content]: t.get(e.utm_content) };
+    }
+    function D(t) {
+      let r = E(t);
+      return f.some((m) => r[m]);
+    }
+    function I() {
+      let t = document.referrer ? new URL(document.referrer).hostname : null,
+        r = location.href ? new URL(location.href).hostname : null;
+      return !(!document.referrer || r == t);
+    }
+    function x(t) {
+      return { [e.utm_source]: t.get(e.utm_source) || l[e.utm_source], [e.utm_medium]: t.get(e.utm_medium) || l[e.utm_medium], [e.utm_campaign]: t.get(e.utm_campaign) || l[e.utm_campaign], [e.utm_term]: t.get(e.utm_term) || l[e.utm_term], [e.utm_content]: t.get(e.utm_content) || l[e.utm_content] };
+    }
+    function O() {
+      let t = JSON.parse(localStorage.getItem(_));
+      if (!t) return !0;
+      let r = new Date(t.expirationDate);
+      return new Date() > r;
+    }
+    function p() {
+      let t = JSON.parse(localStorage.getItem(_));
+      return t ? t.utm : {};
+    }
+    function P({ sessionExpirationTime: t }) {
+      let r = new URLSearchParams(window.location.search);
+      D(r) ? L({ params: r, sessionExpirationTime: t }) : I() ? N({ sessionExpirationTime: t }) : O() ? w({ utmParams: x(r), sessionExpirationTime: t }) : F(t);
+    }
+    function M(t) {
+      let r = new Date();
+      return (r.setMinutes(r.getMinutes() + t), r);
+    }
+    function F(t) {
+      let m = { ...JSON.parse(localStorage.getItem(_)), expirationDate: M(t) };
+      localStorage.setItem(_, JSON.stringify(m));
+    }
+    function w({ utmParams: t, sessionExpirationTime: r }) {
+      let m = { utm: t, expirationDate: M(r) };
+      localStorage.setItem(_, JSON.stringify(m));
+    }
+    function L({ params: t, sessionExpirationTime: r }) {
+      let m = E(t);
+      w({ utmParams: m, sessionExpirationTime: r });
+    }
+    function N({ referrer: t = '', sessionExpirationTime: r }) {
+      let m = window.location.host,
+        n = t || new URL(document.referrer).host,
+        o = m === n ? 'Direct' : n,
+        c,
+        s,
+        i,
+        a;
+      A.includes(o) ? (d.includes(o) ? (c = 'Organic Social') : g.includes(o) && (c = 'Organic Search'), (o = o.replace('.com', '').replace('www.', ''))) : (c = 'Web Referral');
+      let u = { [e.utm_source]: o || S[e.utm_source], [e.utm_medium]: c || S[e.utm_medium], [e.utm_campaign]: s || S[e.utm_campaign], [e.utm_term]: i || S[e.utm_term], [e.utm_content]: a || S[e.utm_content] };
+      w({ utmParams: u, sessionExpirationTime: r });
+    }
+    function T({ container: t, inputSelectType: r = 'name', customFormFields: m = {} }) {
+      let { FORM_FIELD_IDS_LIST: n, FORM_FIELD_IDS_TO_UTM_MAP: o } = R({ customFormFields: m }),
+        c = p();
+      n.forEach((s) => {
+        let i = t || '';
+        r === 'className' ? (i += ` input.${s}`) : r === 'name' ? (i += ` input[name='${s}']`) : r === 'id' && (i += ` input#${s}`);
+        let a = document.querySelectorAll(i.trim());
+        for (let u = 0; u < frames.length; u++)
+          try {
+            let h = frames[u].document.querySelectorAll(i.trim());
+            a = [...a, ...h];
+          } catch {}
+        for (let u of a) u.value = c[o[s]] || '';
+      });
+    }
+    function U(t) {
+      let r = H();
+      y(r, t);
+    }
+    function H() {
+      return document.getElementsByTagName('a');
+    }
+    function y(t, r) {
+      let m = p();
+      Array.from(t).forEach((n) => {
+        if (n.hostname && r.includes(n.hostname)) {
+          let o = new URLSearchParams(n.search);
+          (f.forEach((c) => {
+            m[c] && o.set(c, m[c]);
+          }),
+            (n.search = o));
+        }
+      });
+    }
+    var G = (() => {
+      let t = { sessionExpirationTime: 30, inputSelectType: 'name', container: '', customFormFields: {}, appendHostnames: [] },
+        r = !1;
+      async function m(n) {
+        t = { ...t, ...n };
+        let { sessionExpirationTime: o, inputSelectType: c, customFormFields: s, container: i, appendHostnames: a } = t;
+        P({ sessionExpirationTime: o });
+        let u = { inputSelectType: c, customFormFields: s, container: i };
+        r
+          ? (T(u), U(a))
+          : ((r = !0),
+            window.addEventListener('load', () => {
+              (T(u), U(a));
+            }));
+      }
+      return {
+        init: m,
+        customInit: (n) => {
+          if (!n?.container) throw new Error('container param is required');
+          m(n || t);
+        },
+      };
+    })();
+    window.UtmTags || (window.UtmTags = G);
+  })();
+  //# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiLi4vc3JjL2dldC1jb25zdGFudHMuanMiLCAiLi4vc3JjL2hlbHBlcnMuanMiLCAiLi4vc3JjL3Nlc3Npb24uanMiLCAiLi4vc3JjL2NoZWNrLWZpZWxkcy5qcyIsICIuLi9zcmMvYXBwZW5kLXVybC5qcyIsICIuLi9zcmMvaW5kZXguanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImV4cG9ydCBjb25zdCBnZXRGb3JtRmllbGRzID0gKHsgY3VzdG9tRm9ybUZpZWxkcyA9IHt9IH0pID0+IHtcbiAgY29uc3QgRk9STV9GSUVMRF9JRFNfTUFQID0ge1xuICAgIHJsX3V0bV9zb3VyY2U6IGN1c3RvbUZvcm1GaWVsZHM/LnNvdXJjZSB8fCAncmxfdXRtX3NvdXJjZScsXG4gICAgcmxfdXRtX21lZGl1bTogY3VzdG9tRm9ybUZpZWxkcz8ubWVkaXVtIHx8ICdybF91dG1fbWVkaXVtJyxcbiAgICBybF91dG1fY2FtcGFpZ246IGN1c3RvbUZvcm1GaWVsZHM/LmNhbXBhaWduIHx8ICdybF91dG1fY2FtcGFpZ24nLFxuICAgIHJsX3V0bV9jb250ZW50OiBjdXN0b21Gb3JtRmllbGRzPy5jb250ZW50IHx8ICdybF91dG1fY29udGVudCcsXG4gICAgcmxfdXRtX3Rlcm06IGN1c3RvbUZvcm1GaWVsZHM/LnRlcm0gfHwgJ3JsX3V0bV90ZXJtJyxcbiAgfTtcbiAgY29uc3QgRk9STV9GSUVMRF9JRFNfTElTVCA9IE9iamVjdC52YWx1ZXMoRk9STV9GSUVMRF9JRFNfTUFQKTtcbiAgY29uc3QgRk9STV9GSUVMRF9JRFNfVE9fVVRNX01BUCA9IHtcbiAgICBbRk9STV9GSUVMRF9JRFNfTUFQLnJsX3V0bV9zb3VyY2VdOiBVVE1fVEFHU19NQVAudXRtX3NvdXJjZSxcbiAgICBbRk9STV9GSUVMRF9JRFNfTUFQLnJsX3V0bV9tZWRpdW1dOiBVVE1fVEFHU19NQVAudXRtX21lZGl1bSxcbiAgICBbRk9STV9GSUVMRF9JRFNfTUFQLnJsX3V0bV9jYW1wYWlnbl06IFVUTV9UQUdTX01BUC51dG1fY2FtcGFpZ24sXG4gICAgW0ZPUk1fRklFTERfSURTX01BUC5ybF91dG1fY29udGVudF06IFVUTV9UQUdTX01BUC51dG1fY29udGVudCxcbiAgICBbRk9STV9GSUVMRF9JRFNfTUFQLnJsX3V0bV90ZXJtXTogVVRNX1RBR1NfTUFQLnV0bV90ZXJtLFxuICB9O1xuXG4gIHJldHVybiB7XG4gICAgRk9STV9GSUVMRF9JRFNfTUFQLFxuICAgIEZPUk1fRklFTERfSURTX0xJU1QsXG4gICAgRk9STV9GSUVMRF9JRFNfVE9fVVRNX01BUCxcbiAgfTtcbn07XG5cbmV4cG9ydCBjb25zdCBVVE1fVEFHU19NQVAgPSB7XG4gIHV0bV9zb3VyY2U6ICd1dG1fc291cmNlJyxcbiAgdXRtX21lZGl1bTogJ3V0bV9tZWRpdW0nLFxuICB1dG1fY2FtcGFpZ246ICd1dG1fY2FtcGFpZ24nLFxuICB1dG1fdGVybTogJ3V0bV90ZXJtJyxcbiAgdXRtX2NvbnRlbnQ6ICd1dG1fY29udGVudCcsXG59O1xuXG5leHBvcnQgY29uc3QgVVRNX1RBR1NfTElTVCA9IE9iamVjdC52YWx1ZXMoVVRNX1RBR1NfTUFQKTtcblxuZXhwb3J0IGNvbnN0IFNFQVJDSF9FTkdJTkVfSE9TVFMgPSBbXG4gICd3d3cuZ29vZ2xlLmNvbScsXG4gICdnb29nbGUuY29tJyxcbiAgJ3d3dy5iaW5nLmNvbScsXG4gICdiaW5nLmNvbScsXG4gICd3d3cueWFob28uY29tJyxcbiAgJ3lhaG9vLmNvbScsXG5dO1xuZXhwb3J0IGNvbnN0IFNPQ0lBTF9NRURJQV9IT1NUUyA9IFtcbiAgJ3d3dy5mYWNlYm9vay5jb20nLFxuICAnZmFjZWJvb2suY29tJyxcbiAgJ3d3dy50d2l0dGVyLmNvbScsXG4gICd0d2l0dGVyLmNvbScsXG4gICd3d3cubGlua2VkaW4uY29tJyxcbiAgJ2xpbmtlZGluLmNvbScsXG5dO1xuXG5leHBvcnQgY29uc3QgUkVGRVJSRVJfSE9TVFMgPSBbLi4uU0VBUkNIX0VOR0lORV9IT1NUUywgLi4uU09DSUFMX01FRElBX0hPU1RTXTtcblxuZXhwb3J0IGNvbnN0IFNFU1NJT05fS0VZID0gJ3Nlc3Npb24nO1xuXG5leHBvcnQgY29uc3QgVVRNX1RBR1NfREVGQVVMVF9WQUxVRVMgPSB7XG4gIFtVVE1fVEFHU19NQVAudXRtX3NvdXJjZV06ICdEaXJlY3QnLFxuICBbVVRNX1RBR1NfTUFQLnV0bV9tZWRpdW1dOiAnRGlyZWN0JyxcbiAgW1VUTV9UQUdTX01BUC51dG1fY2FtcGFpZ25dOiAnTm90IFByb3ZpZGVkJyxcbiAgW1VUTV9UQUdTX01BUC51dG1fdGVybV06ICcnLFxuICBbVVRNX1RBR1NfTUFQLnV0bV9jb250ZW50XTogJycsXG59O1xuXG5leHBvcnQgY29uc3QgVVRNX1RBR1NfUkVGRVJSRVJfREVGQVVMVF9WQUxVRVMgPSB7XG4gIFtVVE1fVEFHU19NQVAudXRtX3NvdXJjZV06ICdXZWIgUmVmZXJyYWwnLFxuICBbVVRNX1RBR1NfTUFQLnV0bV9tZWRpdW1dOiAnJyxcbiAgW1VUTV9UQUdTX01BUC51dG1fY2FtcGFpZ25dOiAnTm90IFByb3ZpZGVkJyxcbiAgW1VUTV9UQUdTX01BUC51dG1fdGVybV06ICcnLFxuICBbVVRNX1RBR1NfTUFQLnV0bV9jb250ZW50XTogJycsXG59O1xuIiwgImltcG9ydCB7XG4gIFJFRkVSUkVSX0hPU1RTLFxuICBTRVNTSU9OX0tFWSxcbiAgVVRNX1RBR1NfREVGQVVMVF9WQUxVRVMsXG4gIFVUTV9UQUdTX0xJU1QsXG4gIFVUTV9UQUdTX01BUCxcbn0gZnJvbSAnLi9nZXQtY29uc3RhbnRzLmpzJztcblxuZXhwb3J0IGZ1bmN0aW9uIGdldFV0bVBhcmFtcyhwYXJhbXMpIHtcbiAgcmV0dXJuIHtcbiAgICBbVVRNX1RBR1NfTUFQLnV0bV9zb3VyY2VdOiBwYXJhbXMuZ2V0KFVUTV9UQUdTX01BUC51dG1fc291cmNlKSxcbiAgICBbVVRNX1RBR1NfTUFQLnV0bV9tZWRpdW1dOiBwYXJhbXMuZ2V0KFVUTV9UQUdTX01BUC51dG1fbWVkaXVtKSxcbiAgICBbVVRNX1RBR1NfTUFQLnV0bV9jYW1wYWlnbl06IHBhcmFtcy5nZXQoVVRNX1RBR1NfTUFQLnV0bV9jYW1wYWlnbiksXG4gICAgW1VUTV9UQUdTX01BUC51dG1fdGVybV06IHBhcmFtcy5nZXQoVVRNX1RBR1NfTUFQLnV0bV90ZXJtKSxcbiAgICBbVVRNX1RBR1NfTUFQLnV0bV9jb250ZW50XTogcGFyYW1zLmdldChVVE1fVEFHU19NQVAudXRtX2NvbnRlbnQpLFxuICB9O1xufVxuXG5leHBvcnQgZnVuY3Rpb24gaGFzQW55VXRtUGFyYW1zKHBhcmFtcykge1xuICBjb25zdCB1dG1QcmFtcyA9IGdldFV0bVBhcmFtcyhwYXJhbXMpO1xuXG4gIHJldHVybiBVVE1fVEFHU19MSVNULnNvbWUodGFnID0+IHV0bVByYW1zW3RhZ10pO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gaGFzUmVmZXJyZXIoKSB7XG4gIGNvbnN0IHJlZmVycmVySG9zdG5hbWUgPSBkb2N1bWVudC5yZWZlcnJlclxuICAgID8gbmV3IFVSTChkb2N1bWVudC5yZWZlcnJlcikuaG9zdG5hbWVcbiAgICA6IG51bGw7XG5cbiAgY29uc3QgbG9jYXRpb25Ib3N0bmFtZSA9IGxvY2F0aW9uLmhyZWZcbiAgICA/IG5ldyBVUkwobG9jYXRpb24uaHJlZikuaG9zdG5hbWVcbiAgICA6IG51bGw7XG5cbiAgaWYgKCFkb2N1bWVudC5yZWZlcnJlciB8fCBsb2NhdGlvbkhvc3RuYW1lID09IHJlZmVycmVySG9zdG5hbWUpIHtcbiAgICByZXR1cm4gZmFsc2U7XG4gIH1cblxuICByZXR1cm4gdHJ1ZTtcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGdldFV0bVBhcmFtc1dpdGhEZWZhdWx0KHBhcmFtcykge1xuICByZXR1cm4ge1xuICAgIFtVVE1fVEFHU19NQVAudXRtX3NvdXJjZV06XG4gICAgICBwYXJhbXMuZ2V0KFVUTV9UQUdTX01BUC51dG1fc291cmNlKSB8fFxuICAgICAgVVRNX1RBR1NfREVGQVVMVF9WQUxVRVNbVVRNX1RBR1NfTUFQLnV0bV9zb3VyY2VdLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX21lZGl1bV06XG4gICAgICBwYXJhbXMuZ2V0KFVUTV9UQUdTX01BUC51dG1fbWVkaXVtKSB8fFxuICAgICAgVVRNX1RBR1NfREVGQVVMVF9WQUxVRVNbVVRNX1RBR1NfTUFQLnV0bV9tZWRpdW1dLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX2NhbXBhaWduXTpcbiAgICAgIHBhcmFtcy5nZXQoVVRNX1RBR1NfTUFQLnV0bV9jYW1wYWlnbikgfHxcbiAgICAgIFVUTV9UQUdTX0RFRkFVTFRfVkFMVUVTW1VUTV9UQUdTX01BUC51dG1fY2FtcGFpZ25dLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX3Rlcm1dOlxuICAgICAgcGFyYW1zLmdldChVVE1fVEFHU19NQVAudXRtX3Rlcm0pIHx8XG4gICAgICBVVE1fVEFHU19ERUZBVUxUX1ZBTFVFU1tVVE1fVEFHU19NQVAudXRtX3Rlcm1dLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX2NvbnRlbnRdOlxuICAgICAgcGFyYW1zLmdldChVVE1fVEFHU19NQVAudXRtX2NvbnRlbnQpIHx8XG4gICAgICBVVE1fVEFHU19ERUZBVUxUX1ZBTFVFU1tVVE1fVEFHU19NQVAudXRtX2NvbnRlbnRdLFxuICB9O1xufVxuXG5leHBvcnQgZnVuY3Rpb24gc2Vzc2lvbkV4cGlyZWRDaGVja2VyKCkge1xuICBjb25zdCBzZXNzaW9uID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShTRVNTSU9OX0tFWSkpO1xuXG4gIGlmICghc2Vzc2lvbikge1xuICAgIHJldHVybiB0cnVlO1xuICB9XG5cbiAgY29uc3QgZXhwaXJhdGlvbkRhdGUgPSBuZXcgRGF0ZShzZXNzaW9uLmV4cGlyYXRpb25EYXRlKTtcbiAgY29uc3QgY3VycmVudERhdGUgPSBuZXcgRGF0ZSgpO1xuXG4gIHJldHVybiBjdXJyZW50RGF0ZSA+IGV4cGlyYXRpb25EYXRlO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gZ2V0VXRtUGFyYW1zRnJvbVNlc3Npb24oKSB7XG4gIGNvbnN0IHNlc3Npb24gPSBKU09OLnBhcnNlKGxvY2FsU3RvcmFnZS5nZXRJdGVtKFNFU1NJT05fS0VZKSk7XG5cbiAgaWYgKCFzZXNzaW9uKSB7XG4gICAgcmV0dXJuIHt9O1xuICB9XG5cbiAgcmV0dXJuIHNlc3Npb24udXRtO1xufVxuIiwgImltcG9ydCB7XG4gIFJFRkVSUkVSX0hPU1RTLFxuICBTRUFSQ0hfRU5HSU5FX0hPU1RTLFxuICBTRVNTSU9OX0tFWSxcbiAgU09DSUFMX01FRElBX0hPU1RTLFxuICBVVE1fVEFHU19NQVAsXG4gIFVUTV9UQUdTX1JFRkVSUkVSX0RFRkFVTFRfVkFMVUVTLFxufSBmcm9tICcuL2dldC1jb25zdGFudHMuanMnO1xuXG5pbXBvcnQge1xuICBnZXRVdG1QYXJhbXMsXG4gIGdldFV0bVBhcmFtc1dpdGhEZWZhdWx0LFxuICBoYXNBbnlVdG1QYXJhbXMsXG4gIGhhc1JlZmVycmVyLFxuICBzZXNzaW9uRXhwaXJlZENoZWNrZXIsXG59IGZyb20gJy4vaGVscGVycy5qcyc7XG5cbmV4cG9ydCBmdW5jdGlvbiBpbml0aWFsaXplU2Vzc2lvbih7IHNlc3Npb25FeHBpcmF0aW9uVGltZSB9KSB7XG4gIGNvbnN0IHBhcmFtcyA9IG5ldyBVUkxTZWFyY2hQYXJhbXMod2luZG93LmxvY2F0aW9uLnNlYXJjaCk7XG5cbiAgaWYgKGhhc0FueVV0bVBhcmFtcyhwYXJhbXMpKSB7XG4gICAgY3JlYXRlU2Vzc2lvbldpdGhVdG1QYXJhbXMoeyBwYXJhbXMsIHNlc3Npb25FeHBpcmF0aW9uVGltZSB9KTtcbiAgfSBlbHNlIGlmIChoYXNSZWZlcnJlcigpKSB7XG4gICAgY3JlYXRlU2Vzc2lvbldpdGhSZWZlcnJhbCh7IHNlc3Npb25FeHBpcmF0aW9uVGltZSB9KTtcbiAgfSBlbHNlIGlmIChzZXNzaW9uRXhwaXJlZENoZWNrZXIoKSkge1xuICAgIGNyZWF0ZVNlc3Npb24oe1xuICAgICAgdXRtUGFyYW1zOiBnZXRVdG1QYXJhbXNXaXRoRGVmYXVsdChwYXJhbXMpLFxuICAgICAgc2Vzc2lvbkV4cGlyYXRpb25UaW1lLFxuICAgIH0pO1xuICB9IGVsc2Uge1xuICAgIHVwZGF0ZUV4cGlyYXRpb25EYXRlKHNlc3Npb25FeHBpcmF0aW9uVGltZSk7XG4gIH1cbn1cblxuZnVuY3Rpb24gY2FsY0V4cGlyYXRpb25EYXRlKHNlc3Npb25FeHBpcmF0aW9uVGltZSkge1xuICBjb25zdCBleHBpcmF0aW9uRGF0ZSA9IG5ldyBEYXRlKCk7XG4gIGV4cGlyYXRpb25EYXRlLnNldE1pbnV0ZXMoXG4gICAgZXhwaXJhdGlvbkRhdGUuZ2V0TWludXRlcygpICsgc2Vzc2lvbkV4cGlyYXRpb25UaW1lLFxuICApO1xuXG4gIHJldHVybiBleHBpcmF0aW9uRGF0ZTtcbn1cblxuZnVuY3Rpb24gdXBkYXRlRXhwaXJhdGlvbkRhdGUoc2Vzc2lvbkV4cGlyYXRpb25UaW1lKSB7XG4gIGNvbnN0IGN1cnJlbnRTZXNzaW9uID0gSlNPTi5wYXJzZShsb2NhbFN0b3JhZ2UuZ2V0SXRlbShTRVNTSU9OX0tFWSkpO1xuICBjb25zdCBuZXdTZXNzaW9uID0ge1xuICAgIC4uLmN1cnJlbnRTZXNzaW9uLFxuICAgIGV4cGlyYXRpb25EYXRlOiBjYWxjRXhwaXJhdGlvbkRhdGUoc2Vzc2lvbkV4cGlyYXRpb25UaW1lKSxcbiAgfTtcblxuICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShTRVNTSU9OX0tFWSwgSlNPTi5zdHJpbmdpZnkobmV3U2Vzc2lvbikpO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gY3JlYXRlU2Vzc2lvbih7IHV0bVBhcmFtcywgc2Vzc2lvbkV4cGlyYXRpb25UaW1lIH0pIHtcbiAgY29uc3Qgc2Vzc2lvbiA9IHtcbiAgICB1dG06IHV0bVBhcmFtcyxcbiAgICBleHBpcmF0aW9uRGF0ZTogY2FsY0V4cGlyYXRpb25EYXRlKHNlc3Npb25FeHBpcmF0aW9uVGltZSksXG4gIH07XG5cbiAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oU0VTU0lPTl9LRVksIEpTT04uc3RyaW5naWZ5KHNlc3Npb24pKTtcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGNyZWF0ZVNlc3Npb25XaXRoVXRtUGFyYW1zKHsgcGFyYW1zLCBzZXNzaW9uRXhwaXJhdGlvblRpbWUgfSkge1xuICBjb25zdCB1dG1QYXJhbXMgPSBnZXRVdG1QYXJhbXMocGFyYW1zKTtcbiAgY3JlYXRlU2Vzc2lvbih7IHV0bVBhcmFtcywgc2Vzc2lvbkV4cGlyYXRpb25UaW1lIH0pO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gY3JlYXRlU2Vzc2lvbldpdGhSZWZlcnJhbCh7XG4gIHJlZmVycmVyID0gJycsXG4gIHNlc3Npb25FeHBpcmF0aW9uVGltZSxcbn0pIHtcbiAgY29uc3QgY3VycmVudEhvc3QgPSB3aW5kb3cubG9jYXRpb24uaG9zdDtcbiAgY29uc3QgY3VycmVudFJlZmVycmVySG9zdCA9IHJlZmVycmVyIHx8IG5ldyBVUkwoZG9jdW1lbnQucmVmZXJyZXIpLmhvc3Q7XG4gIGxldCB1dG1fc291cmNlID1cbiAgICBjdXJyZW50SG9zdCA9PT0gY3VycmVudFJlZmVycmVySG9zdCA/ICdEaXJlY3QnIDogY3VycmVudFJlZmVycmVySG9zdDtcbiAgbGV0IHV0bV9tZWRpdW0sIHV0bV9jYW1wYWlnbiwgdXRtX3Rlcm0sIHV0bV9jb250ZW50O1xuXG4gIGlmIChSRUZFUlJFUl9IT1NUUy5pbmNsdWRlcyh1dG1fc291cmNlKSkge1xuICAgIGlmIChTT0NJQUxfTUVESUFfSE9TVFMuaW5jbHVkZXModXRtX3NvdXJjZSkpIHtcbiAgICAgIHV0bV9tZWRpdW0gPSAnT3JnYW5pYyBTb2NpYWwnO1xuICAgIH0gZWxzZSBpZiAoU0VBUkNIX0VOR0lORV9IT1NUUy5pbmNsdWRlcyh1dG1fc291cmNlKSkge1xuICAgICAgdXRtX21lZGl1bSA9ICdPcmdhbmljIFNlYXJjaCc7XG4gICAgfVxuXG4gICAgdXRtX3NvdXJjZSA9IHV0bV9zb3VyY2UucmVwbGFjZSgnLmNvbScsICcnKS5yZXBsYWNlKCd3d3cuJywgJycpO1xuICB9IGVsc2Uge1xuICAgIHV0bV9tZWRpdW0gPSAnV2ViIFJlZmVycmFsJztcbiAgfVxuXG4gIGNvbnN0IHV0bVBhcmFtcyA9IHtcbiAgICBbVVRNX1RBR1NfTUFQLnV0bV9zb3VyY2VdOlxuICAgICAgdXRtX3NvdXJjZSB8fCBVVE1fVEFHU19SRUZFUlJFUl9ERUZBVUxUX1ZBTFVFU1tVVE1fVEFHU19NQVAudXRtX3NvdXJjZV0sXG4gICAgW1VUTV9UQUdTX01BUC51dG1fbWVkaXVtXTpcbiAgICAgIHV0bV9tZWRpdW0gfHwgVVRNX1RBR1NfUkVGRVJSRVJfREVGQVVMVF9WQUxVRVNbVVRNX1RBR1NfTUFQLnV0bV9tZWRpdW1dLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX2NhbXBhaWduXTpcbiAgICAgIHV0bV9jYW1wYWlnbiB8fFxuICAgICAgVVRNX1RBR1NfUkVGRVJSRVJfREVGQVVMVF9WQUxVRVNbVVRNX1RBR1NfTUFQLnV0bV9jYW1wYWlnbl0sXG4gICAgW1VUTV9UQUdTX01BUC51dG1fdGVybV06XG4gICAgICB1dG1fdGVybSB8fCBVVE1fVEFHU19SRUZFUlJFUl9ERUZBVUxUX1ZBTFVFU1tVVE1fVEFHU19NQVAudXRtX3Rlcm1dLFxuICAgIFtVVE1fVEFHU19NQVAudXRtX2NvbnRlbnRdOlxuICAgICAgdXRtX2NvbnRlbnQgfHwgVVRNX1RBR1NfUkVGRVJSRVJfREVGQVVMVF9WQUxVRVNbVVRNX1RBR1NfTUFQLnV0bV9jb250ZW50XSxcbiAgfTtcblxuICBjcmVhdGVTZXNzaW9uKHsgdXRtUGFyYW1zLCBzZXNzaW9uRXhwaXJhdGlvblRpbWUgfSk7XG59XG4iLCAiaW1wb3J0IHsgZ2V0VXRtUGFyYW1zRnJvbVNlc3Npb24gfSBmcm9tICcuL2hlbHBlcnMuanMnO1xuaW1wb3J0IHsgZ2V0Rm9ybUZpZWxkcyB9IGZyb20gJy4vZ2V0LWNvbnN0YW50cy5qcyc7XG5cbmV4cG9ydCBmdW5jdGlvbiBjaGVja0ZpZWxkcyh7XG4gIGNvbnRhaW5lcixcbiAgaW5wdXRTZWxlY3RUeXBlID0gJ25hbWUnLFxuICBjdXN0b21Gb3JtRmllbGRzID0ge30sXG59KSB7XG4gIGNvbnN0IHsgRk9STV9GSUVMRF9JRFNfTElTVCwgRk9STV9GSUVMRF9JRFNfVE9fVVRNX01BUCB9ID0gZ2V0Rm9ybUZpZWxkcyh7XG4gICAgY3VzdG9tRm9ybUZpZWxkcyxcbiAgfSk7XG4gIGNvbnN0IHV0bVBhcmFtcyA9IGdldFV0bVBhcmFtc0Zyb21TZXNzaW9uKCk7XG5cbiAgRk9STV9GSUVMRF9JRFNfTElTVC5mb3JFYWNoKGlkID0+IHtcbiAgICBsZXQgc2VsZWN0b3IgPSBjb250YWluZXIgfHwgJyc7XG5cbiAgICBpZiAoaW5wdXRTZWxlY3RUeXBlID09PSAnY2xhc3NOYW1lJykge1xuICAgICAgc2VsZWN0b3IgKz0gYCBpbnB1dC4ke2lkfWA7XG4gICAgfSBlbHNlIGlmIChpbnB1dFNlbGVjdFR5cGUgPT09ICduYW1lJykge1xuICAgICAgc2VsZWN0b3IgKz0gYCBpbnB1dFtuYW1lPScke2lkfSddYDtcbiAgICB9IGVsc2UgaWYgKGlucHV0U2VsZWN0VHlwZSA9PT0gJ2lkJykge1xuICAgICAgc2VsZWN0b3IgKz0gYCBpbnB1dCMke2lkfWA7XG4gICAgfVxuXG4gICAgbGV0IGZpZWxkcyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoc2VsZWN0b3IudHJpbSgpKTtcblxuICAgIGZvciAobGV0IGkgPSAwOyBpIDwgZnJhbWVzLmxlbmd0aDsgaSsrKSB7XG4gICAgICB0cnkge1xuICAgICAgICBsZXQgZnJhbWVGaWVsZHMgPSBmcmFtZXNbaV0uZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChzZWxlY3Rvci50cmltKCkpO1xuICAgICAgICBmaWVsZHMgPSBbLi4uZmllbGRzLCAuLi5mcmFtZUZpZWxkc107XG4gICAgICB9IGNhdGNoIChlcnIpIHtcbiAgICAgICAgLy8gZG8gbm90aGluZ1xuICAgICAgfVxuICAgIH1cblxuICAgIGZvciAobGV0IGZpZWxkIG9mIGZpZWxkcykge1xuICAgICAgZmllbGQudmFsdWUgPSB1dG1QYXJhbXNbRk9STV9GSUVMRF9JRFNfVE9fVVRNX01BUFtpZF1dIHx8ICcnO1xuICAgIH1cbiAgfSk7XG59XG4iLCAiaW1wb3J0IHsgZ2V0VXRtUGFyYW1zRnJvbVNlc3Npb24gfSBmcm9tICcuL2hlbHBlcnMuanMnO1xuaW1wb3J0IHsgVVRNX1RBR1NfTElTVCB9IGZyb20gJy4vZ2V0LWNvbnN0YW50cyc7XG5cbmV4cG9ydCBmdW5jdGlvbiBhcHBlbmRVcmxzKGFwcGVuZEhvc3RuYW1lcykge1xuICBjb25zdCBhbmNob3JzID0gZ2V0QW5jaG9ycygpO1xuXG4gIGNoZWNrQXBwZW5kKGFuY2hvcnMsIGFwcGVuZEhvc3RuYW1lcyk7XG59XG5cbmZ1bmN0aW9uIGdldEFuY2hvcnMoKSB7XG4gIGNvbnN0IGFuY2hvcnMgPSBkb2N1bWVudC5nZXRFbGVtZW50c0J5VGFnTmFtZSgnYScpO1xuICByZXR1cm4gYW5jaG9ycztcbn1cblxuZnVuY3Rpb24gY2hlY2tBcHBlbmQoYW5jaG9ycywgYXBwZW5kSG9zdG5hbWVzKSB7XG4gIGNvbnN0IHV0bVBhcmFtcyA9IGdldFV0bVBhcmFtc0Zyb21TZXNzaW9uKCk7XG5cbiAgQXJyYXkuZnJvbShhbmNob3JzKS5mb3JFYWNoKGFuY2hvciA9PiB7XG4gICAgaWYgKGFuY2hvci5ob3N0bmFtZSAmJiBhcHBlbmRIb3N0bmFtZXMuaW5jbHVkZXMoYW5jaG9yLmhvc3RuYW1lKSkge1xuICAgICAgY29uc3Qgc2VhcmNoUGFyYW1zID0gbmV3IFVSTFNlYXJjaFBhcmFtcyhhbmNob3Iuc2VhcmNoKTtcblxuICAgICAgVVRNX1RBR1NfTElTVC5mb3JFYWNoKHRhZyA9PiB7XG4gICAgICAgIGlmICh1dG1QYXJhbXNbdGFnXSkge1xuICAgICAgICAgIHNlYXJjaFBhcmFtcy5zZXQodGFnLCB1dG1QYXJhbXNbdGFnXSk7XG4gICAgICAgIH1cbiAgICAgIH0pO1xuXG4gICAgICBhbmNob3Iuc2VhcmNoID0gc2VhcmNoUGFyYW1zO1xuICAgIH1cbiAgfSk7XG59XG4iLCAiaW1wb3J0IHsgaW5pdGlhbGl6ZVNlc3Npb24gfSBmcm9tICcuL3Nlc3Npb24uanMnO1xuaW1wb3J0IHsgY2hlY2tGaWVsZHMgfSBmcm9tICcuL2NoZWNrLWZpZWxkcy5qcyc7XG5pbXBvcnQgeyBhcHBlbmRVcmxzIH0gZnJvbSAnLi9hcHBlbmQtdXJsLmpzJztcblxuY29uc3QgVXRtVGFncyA9ICgoKSA9PiB7XG4gIGxldCBpbml0UGFyYW1zID0ge1xuICAgIHNlc3Npb25FeHBpcmF0aW9uVGltZTogMzAsIC8vIDMwIG1pbnV0ZXNcbiAgICBpbnB1dFNlbGVjdFR5cGU6ICduYW1lJyxcbiAgICBjb250YWluZXI6ICcnLFxuICAgIGN1c3RvbUZvcm1GaWVsZHM6IHt9LFxuICAgIGFwcGVuZEhvc3RuYW1lczogW10sXG4gIH07XG5cbiAgbGV0IGluaXRpYWxpemVkID0gZmFsc2U7XG5cbiAgLy8gTk9URTogUnVuIGluIGFzeW5jIHdheSB0byBtYWtlIHN1cmUgaXQgZG9lc24ndCBibG9jayB0aGUgcGFnZSBsb2FkXG4gIGFzeW5jIGZ1bmN0aW9uIGluaXQoY3VzdG9tUGFyYW1zKSB7XG4gICAgaW5pdFBhcmFtcyA9IHsgLi4uaW5pdFBhcmFtcywgLi4uY3VzdG9tUGFyYW1zIH07XG5cbiAgICBjb25zdCB7XG4gICAgICBzZXNzaW9uRXhwaXJhdGlvblRpbWUsXG4gICAgICBpbnB1dFNlbGVjdFR5cGUsXG4gICAgICBjdXN0b21Gb3JtRmllbGRzLFxuICAgICAgY29udGFpbmVyLFxuICAgICAgYXBwZW5kSG9zdG5hbWVzLFxuICAgIH0gPSBpbml0UGFyYW1zO1xuXG4gICAgaW5pdGlhbGl6ZVNlc3Npb24oeyBzZXNzaW9uRXhwaXJhdGlvblRpbWUgfSk7XG5cbiAgICBjb25zdCBjaGVja0ZpZWxkc1BhcmFtcyA9IHtcbiAgICAgIGlucHV0U2VsZWN0VHlwZSxcbiAgICAgIGN1c3RvbUZvcm1GaWVsZHMsXG4gICAgICBjb250YWluZXIsXG4gICAgfTtcblxuICAgIGlmIChpbml0aWFsaXplZCkge1xuICAgICAgY2hlY2tGaWVsZHMoY2hlY2tGaWVsZHNQYXJhbXMpO1xuICAgICAgYXBwZW5kVXJscyhhcHBlbmRIb3N0bmFtZXMpO1xuICAgIH0gZWxzZSB7XG4gICAgICBpbml0aWFsaXplZCA9IHRydWU7XG4gICAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignbG9hZCcsICgpID0+IHtcbiAgICAgICAgY2hlY2tGaWVsZHMoY2hlY2tGaWVsZHNQYXJhbXMpO1xuICAgICAgICBhcHBlbmRVcmxzKGFwcGVuZEhvc3RuYW1lcyk7XG4gICAgICB9KTtcbiAgICB9XG4gIH1cblxuICAvLyB1dG0gcGFyYW1zIHF1ZXJ5IGV4YW1wbGUgP3V0bV9zb3VyY2U9Z29vZ2xlJnV0bV9tZWRpdW09Y3BjJnV0bV9jYW1wYWlnbj1icmFuZCZ1dG1fdGVybT1rZXl3b3JkJnV0bV9jb250ZW50PWFkXG4gIHJldHVybiB7XG4gICAgaW5pdCxcbiAgICBjdXN0b21Jbml0OiBjdXN0b21QYXJhbXMgPT4ge1xuICAgICAgaWYgKCFjdXN0b21QYXJhbXM/LmNvbnRhaW5lcikge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoJ2NvbnRhaW5lciBwYXJhbSBpcyByZXF1aXJlZCcpO1xuICAgICAgfVxuXG4gICAgICBpbml0KGN1c3RvbVBhcmFtcyB8fCBpbml0UGFyYW1zKTtcbiAgICB9LFxuICB9O1xufSkoKTtcblxuaWYgKCF3aW5kb3cuVXRtVGFncykge1xuICB3aW5kb3cuVXRtVGFncyA9IFV0bVRhZ3M7XG59XG4iXSwKICAibWFwcGluZ3MiOiAiTUFBTyxJQUFNQSxFQUFnQixDQUFDLENBQUUsaUJBQUFDLEVBQW1CLENBQUMsQ0FBRSxJQUFNLENBQzFELElBQU1DLEVBQXFCLENBQ3pCLGNBQWVELEdBQWtCLFFBQVUsZ0JBQzNDLGNBQWVBLEdBQWtCLFFBQVUsZ0JBQzNDLGdCQUFpQkEsR0FBa0IsVUFBWSxrQkFDL0MsZUFBZ0JBLEdBQWtCLFNBQVcsaUJBQzdDLFlBQWFBLEdBQWtCLE1BQVEsYUFDekMsRUFDTUUsRUFBc0IsT0FBTyxPQUFPRCxDQUFrQixFQUN0REUsRUFBNEIsQ0FDaEMsQ0FBQ0YsRUFBbUIsYUFBYSxF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
