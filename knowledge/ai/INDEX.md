@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0053 | 2026-10-29 | X2-Turn：让语音 AI 判断“你是不是说完了” | [notes](20261029-x2-turn/notes.md) |
 | #0052 | 2026-10-29 | Kent Beck：AI 时代的软件工程 | [notes](20261029b-software-engineering-ai/notes.md) |
 | #0051 | 2026-10-29 | ASR 一个字都没听错，Voice Agent 却没听出客户已经生气了 | [notes](20261029-voice-agent-emotion-sidecar/notes.md) |
 | #0050 | 2026-10-28 | On-Policy Distillation：让教师批改学生自己的每一步 | [notes](20261028-on-policy-distillation/notes.md) |
