@@ -1,0 +1,430 @@
+                                         X2-TURN: FRAME-SYNCHRONOUS DUAL-HEAD MODELING FOR JOINT STREAMING
+                                                            ASR AND TURN STATE PREDICTION
+
+                                                        Kaiqi Fu, Rime Wen, Altman Lin, Shawn Qin, Roy Gan, Hao Wang, Qian Wang
+
+                                                                                       X Square Robot
+                                                                             {kaiqifu, wanghao}@x2robot.com
+
+
+                                                                ABSTRACT                                  to align semantic and acoustic generation [3]. Although these
+
+
+
+
+arXiv:2608.10878v3 [cs.CL] 8 Sep 2026
+                                                                                                          systems directly model synchronous interactions, jointly op-
+                                        Accurate and responsive turn-taking is essential for spoken di-
+                                                                                                          timizing all components on limited full-duplex data may con-
+                                        alogue systems, which must distinguish in real time between
+                                                                                                          strain the scale and general capabilities of the dialogue back-
+                                        user interruptions, backchannels that should be ignored, and
+                                                                                                          bone.
+                                        the completion of an utterance. Prior modular approaches
+                                                                                                              Cascaded approaches instead decouple interaction control
+                                        typically optimize turn state prediction at the utterance or
+                                                                                                          from response generation [7–12]. A representative example is
+                                        fixed-chunk level, creating a mismatch with the continuous
+                                                                                                          the VAD–ASR–turn-detection pipeline [13], in which a front-
+                                        turn state estimate, and often depend on an auxiliary ASR
+                                                                                                          end voice activity detection (VAD) module first segments the
+                                        model, which limits responsiveness and increases overall sys-
+                                                                                                          continuous user speech stream, an ASR model transcribes
+                                        tem complexity. Therefore, we present X2-Turn 1 , a frame-
+                                                                                                          each resulting segment, and a semantic turn-detection model
+                                        synchronous turn state prediction method via delayed-stream
+                                                                                                          determines the turn state from the transcript. Because each
+                                        modeling. Specifically, building on the pretrained Voxtral
+                                                                                                          stage depends on the output of the preceding stage, this
+                                        Realtime model, we introduce a frame-synchronous turn state
+                                                                                                          pipeline introduces sequential latency and error propagation.
+                                        head that operates in parallel with the ASR head on shared
+                                                                                                          To reduce the dependence on a separate upstream ASR mod-
+                                        streaming representations, jointly predicting ASR tokens and
+                                                                                                          ule, subsequent studies have explored tighter integration be-
+                                        fine-grained turn states at the frame level. Experiments on
+                                                                                                          tween ASR and turn detection [8–11]. EasyTurn jointly pre-
+                                        bilingual EasyTurn and Full-Duplex-Bench demonstrate that
+                                                                                                          dicts transcriptions and four turn states from VAD-segmented
+                                        the proposed method achieves an effective trade-off between
+                                                                                                          utterances, replacing the separate downstream turn-detection
+                                        turn state accuracy and decision latency.
+                                                                                                          model with a unified model that reasons over ASR-derived
+                                            Index Terms— Turn-taking, spoken dialogue systems,            transcripts [8]. JAL-Turn combines frozen SenseVoice and
+                                        delayed streams modeling, streaming automatic speech recog-       CPC representations to classify hold and shift states at can-
+                                        nition                                                            didate boundaries, whereas FastTurn integrates partial CTC
+                                                                                                          hypotheses with acoustic cues to make low-latency decisions
+                                                                                                          as the transcript is incrementally updated, without waiting
+                                                           1. INTRODUCTION
+                                                                                                          for utterance completion [9, 10]. SoulX-Duplug further in-
+                                        Achieving natural spoken dialogue requires systems to seam-       terleaves chunk-level ASR and state tokens within a single
+                                        lessly handle continuous speech, backchannels, and user in-       autoregressive stream, achieving strong turn-taking perfor-
+                                        terruptions while maintaining low latency [1]. To manage          mance. However, it still relies on an external ASR model to
+                                        these complex conversational dynamics, a responsive system        guide state prediction during inference [11]. Despite these
+                                        must continuously estimate fine-grained turn states. These        advances, these methods generally operate at the utterance or
+                                        states serve as the foundation for real-time dialogue control,    chunk level rather than continuously estimating the turn state
+                                        determining when to interrupt text-to-speech (TTS) playback,      at every frame. This mismatch in temporal granularity limits
+                                        take the conversational floor, or ignore a user backchannel.      their responsiveness in real-time interactions.
+                                            Existing approaches broadly follow either end-to-end or           More recently, Voxtral Realtime introduced a natively
+                                        cascaded paradigms. End-to-end full-duplex models [2–6]           streaming ASR architecture based on delayed-stream model-
+                                        jointly learn speech understanding, interaction timing, and       ing [3, 14]. It emits transcription tokens synchronously with
+                                        response generation. For example, Moshi employs a dual-           the input audio at a fixed frame rate of 80 ms [15]. Inspired
+                                        stream architecture that jointly generates text and audio to-     by this architecture, we introduce a turn state prediction head
+                                        kens for both speakers, using an inner-monologue mechanism        parallel to the ASR head, with both heads jointly optimized
+                                                                                                          over shared causal decoder representations to predict ASR
+                                          1 Code and models: https://github.com/X-Square-Robot/X2-Turn.   tokens and turn states simultaneously. To temporally align
+the two tasks, we propose ASR-anchored supervision, which         the sum of the current audio embedding and the text embed-
+                                                                                                             asr
+projects word-level turn annotations onto the frame-level po-     ding of the previously emitted ASR token yi−1  . It then pro-
+sitions of the corresponding ASR tokens. Experiments on the       duces a hidden state hi , from which the ASR head predicts
+Chinese and English EasyTurn test sets demonstrate that the       the next token. The ASR head is trained using token-level
+proposed method achieves an effective trade-off between turn      cross-entropy over the ASR vocabulary:
+state accuracy and decision latency.
+                                                                                       T
+     Our main contributions are summarized as follows:                                 X
+                                                                            Lasr = −         log Pasr (yiasr | x≤i , y<i
+                                                                                                                      asr
+                                                                                                                          ),    (1)
+                                                                                       i=1
+   1. We propose X2-Turn, which extends a pretrained
+                                                                                                                              asr
+      delayed-stream ASR model with a parallel turn state             where x≤i denotes the audio observed up to step i, y<i
+      head, enabling joint frame-synchronous ASR and turn         denotes the previously emitted ASR tokens, and T is the se-
+      state prediction within a single streaming forward pass.    quence length.
+                                                                      In addition to ordinary subword tokens, the ASR vocab-
+   2. We design a unified turn state label set that supports      ulary contains two special symbols: a padding token [P]
+      interruption, turn completion, and backchannel detec-       and a word-boundary token [W]. The output token stream
+      tion. We further introduce an ASR-anchored supervi-         is delayed relative to the input audio by a configurable target
+      sion method that projects word-level turn annotations       delay τ . This delay is conditioned into the decoder through
+      onto the frame-level ASR token timeline.                    AdaRMSNorm, allowing a single model to operate at delays
+                                                                  corresponding to different multiples of 80 ms.
+   3. We conduct bilingual experiments on EasyTurn and                We preserve the original ASR prediction head and add a
+      Full-Duplex-Bench [16, 17], validating the effective-       parallel turn state prediction head. Both heads operate on the
+      ness of the proposed method for streaming turn state        shared hidden state hi , enabling ASR and turn state predic-
+      prediction under different latency settings controlled      tion within a single forward pass. The two heads are jointly
+      by τ .                                                      optimized using the following objective:
+
+
+                       2. METHOD                                                      T
+                                                                                      X
+                                                                                            log Pturn yiturn | x≤i , y<i
+                                                                                                                      asr
+                                                                                                                          
+                                                                          Lturn = −                                         ,   (2)
+In this section, we first introduce the streaming ASR back-                           i=1
+
+bone and dual-head architecture, and then describe the turn                   L = Lasr + λLturn ,                               (3)
+state token design and the construction of ASR-anchored turn
+state labels. An overview of the framework is shown in Fig. 1.        where yiturn denotes the ground-truth turn state at step i,
+                                                                  and λ controls the contribution of the turn state loss. For no-
+                                                                  tational simplicity, the target delay τ is omitted from the con-
+2.1. Dual-Head Modeling                                           ditional distributions above (τ = 0).
+                                                                      At inference time, autoregressive decoding is driven
+Our goal is to estimate turn states synchronously with ASR        solely by the ASR head. At each step, the turn head in-
+transcription as speech unfolds, while keeping interaction        dependently predicts the turn state from the shared hidden
+control independent of the downstream dialogue model. To          state hi , and its prediction is not fed back into the decoding
+this end, we build our system on Voxtral Realtime [15],           loop. Therefore, turn state prediction errors do not affect sub-
+a natively streaming ASR model based on delayed-stream            sequent ASR decoding. Both transcription and turn states are
+modeling (DSM). Voxtral Realtime maps an input waveform           produced within the same forward pass, without introducing
+to a delayed token stream using a causal audio encoder and        an additional sequential inference stage and latency.
+a language decoder. We retain the backbone architecture and
+introduce a parallel turn state prediction head. This design
+decouples turn state estimation from response generation, al-     2.2. Turn-Taking State Token Design
+lowing the resulting turn-taking module to be integrated into     We define five turn state tokens to represent the evolving state
+different dialogue systems.                                       of a user turn:
+    The architecture of the proposed method is illustrated in
+Fig. 1. We first briefly review the Voxtral Realtime backbone         • <|idle|> represents user silence, corresponding to
+before presenting our dual-head extension. Voxtral Realtime             non-speech segments derived from forced alignment.
+consists of three main components: a causal audio encoder             • <|noidle|> indicates active speech without seman-
+that maps 16-kHz waveforms to frame-level audio features,               tic content (e.g., the initial syllables of an utterance).
+a temporal adapter that downsamples the encoder features to
+12.5 Hz, and a decoder-only language model that emits one             • <|incomplete|> denotes active speech containing
+token at each 80-ms step. At step i, the decoder takes as input         partial semantic content.
+Fig. 1. Overview of X2-Turn, the proposed frame-synchronous dual-head architecture, with a target delay of τ = 80 ms. Once
+the onset of a word has been observed and the target delay has elapsed, the ASR head emits a word-boundary token [W],
+while the turn state head simultaneously predicts the corresponding state. Subsequent subword tokens are then emitted frame
+by frame.
+
+
+    • <|complete|> signifies active speech with com-                 onset. The word’s subword tokens are placed immediately
+      plete semantic content.                                        after [W], while all remaining positions are filled with the
+                                                                     padding token [P]. This onset-based placement makes the
+    • <|backchannel|> captures user backchannel sig-                 ASR and turn state predictions available earlier relative to the
+      nals or filler words (e.g., “um”, “ah”).                       spoken word. Because each word occupies one [W] position
+                                                                     followed by at least one subword position, its representation
+    Unlike the definition adopted in prior work [11], our            requires at least two 80-ms steps.
+<|noidle|> state refers specifically to early active speech
+for which sufficient semantic content has not yet been ob-
+served. It does not represent non-speech or background                   Turn state targets are constructed using the same place-
+noise. This distinction allows the model to separate true            ment procedure. We first prompt a powerful language
+silence from the early portion of an ongoing user utterance.         model [18] to assign a turn state label to each word. The
+                                                                     resulting word-level label is then assigned to all target posi-
+                                                                     tions occupied by the corresponding [W] token and subword
+2.3. ASR-Anchored Turn State Supervision
+                                                                     tokens. All unoccupied positions are labeled as <|idle|>,
+We next describe the construction of paired ASR and turn             including positions corresponding to pre-speech silence,
+state targets. We first construct the delayed-stream ASR tar-        inter-word pauses, mid-utterance pauses, and trailing silence.
+get sequence. Let the i-th word span the time interval [si , ei ].   In this way, the ASR and turn state targets are aligned on the
+Each word is tokenized into one or more subword tokens, for          same 80-ms discrete timeline.
+example, multiple BPE tokens for an English word. Regard-
+less of the number of subword tokens, each word is repre-                This ASR-anchored supervision scheme has three main
+sented by a single word-boundary token [W] followed by its           properties. First, each word-level turn state label is placed at
+corresponding subword tokens.                                        the same positions as its corresponding ASR tokens. The turn
+    Given the onset time si , the target position pi of the word-    head therefore predicts the state from the same decoder repre-
+boundary token is computed as                                        sentations used by the ASR head to emit the associated tran-
+                                 s 
+                                    i
+                                                                     scription. Second, silence is explicitly supervised using the
+                   pi = round           + nτ ,                (4)    <|idle|> state, allowing a downstream interaction policy
+                                   ∆
+                                                                     to perform endpointing by counting consecutive idle frames
+where ∆ = 80 ms is the frame duration and nτ = τ /∆ is the           following a <|complete|> prediction. Third, because the
+target delay measured in frames.                                     ASR and turn state targets are aligned position by position
+    Unlike the original Voxtral formulation, which places            rather than at the utterance or chunk level, both tasks are op-
+[W] according to the word offset, we anchor [W] to the word          timized over the same frame-synchronous discrete timeline.
+Table 1. System-level results on bilingual Full-Duplex-Bench. ↑/↓ indicate higher-/lower-better. Best per language in bold;
+second-best underlined.
+                                     Pause      Turn-Taking          Backchannel Interruption v1    Interruption v1.5         Overall
+             Model
+                                     TOR↓ TOR↑            RL↓           RsR↑      TOR↑    RL↓      RpR↑    SL↓     RL↓     ACC↑ Latency↓
+              English
+             dGSLM                   0.935      0.975    0.352            –       0.917   2.531      –       –       –     0.653   1.442
+             PersonaPlex             0.623      0.992    0.070            –       1.000   0.400      –       –       –     0.790   0.235
+             Moshi                   0.983      0.941    0.265          0.060     1.000   0.257    0.500   1.160   1.470   0.504   0.788
+             Freeze-Omni             0.562      0.336    0.953          0.800     0.867   1.409    0.720   1.420   1.350   0.632   1.283
+             Gemini Live             0.283      0.655    1.301          0.930     0.891   1.183    0.330   2.200   2.620   0.705   1.826
+             GPT-4o                    –          –        –            0.700       –       –      0.780   0.230   1.500   0.740   0.865
+             SoulX-Duplug            0.352      0.933    0.511          0.740     0.970   0.773    0.770   0.450   1.030   0.812   0.691
+             X2-Turn (Ours)          0.224      0.807    0.901          0.925     0.935   0.659    0.855   0.574   0.942   0.860   0.769
+              Chinese
+             Freeze-Omni    0.042               0.652 0.780             0.700     0.975   0.232    0.440 1.300 1.630 0.745         0.986
+             SoulX-Duplug   0.038               0.994 0.767             0.800     0.994   1.089    0.830 0.380 1.150 0.916         0.847
+             X2-Turn (Ours) 0.033               0.994 0.888             0.980     1.000   1.165    0.932 0.578 0.979 0.975         0.903
+
+
+
+                  3. EXPERIMENTAL SETUP                                             batch between 1 and 30 frames (80–2400 ms) in both stages,
+                                                                                    so that a single model covers a range of latency configura-
+3.1. Data Preparation                                                               tions.
+The corpora used in this work consist of two parts: Chinese-        During Stage 1, streaming ASR adaptation adapts the
+English ASR data and turn-taking data. For the ASR data,        backbone    to the delayed-stream ASR protocol on a large-
+we use AISHELL 1∼4 [19–22], AliMeeting [23], Wenet-             scale Chinese–English corpus with frame-level ASR labels.
+Speech [24], KeSpeech [25], LibriSpeech [26], GigaSpeech [27], Stage 2 then performs joint ASR and turn state fine-tuning.
+TED-LIUM [28], and VoxPopuli [29], totaling approximately       A turn state head is added, initialized as a copy of the ASR
+26k hours (14k hours in Chinese and 12k hours in English).      head, and the full model is fine-tuned on the Chinese–English
+This portion of data is used in Stage 1 to strengthen the       turn-taking training set with paired ASR and frame-level turn
+model’s ASR capability in both languages. For the turn-         state labels. The joint objective uses λ = 0.1.
+taking data, we select a subset of the EasyTurn training
+set for Chinese (approximately 126 hours) and a subset of
+Fisher [30] telephone conversations for English (approxi-
+mately 249 hours). This portion of data is used in Stage 2 for  3.3. Latency Metric
+joint ASR and turn-taking modeling.
+     For both parts of the data, Qwen3-ForceAligner [31] was    We measure latency relative to the end of each word. For a
+employed to obtain word-level timestamps. In addition, for      word spanning [si , ei ], the corresponding turn state becomes
+the turn-taking data, we use Qwen3.5-Plus as an LLM annota-     available at time si + τ , i.e., after the configured streaming
+tor to perform word-level semantic turn state labeling, follow- delay τ from the word onset. The resulting latency relative to
+ing the annotation criteria defined in Section 2.3. Word-level  the end of the word is
+labels are then projected onto the 80 ms frame delayed-stream
+positions of their ASR word markers [W] and subword to-                              Li = τ − (ei − si ),                   (5)
+kens.
+                                                                                    which measures how long after the user finishes speaking
+3.2. Implementation Details                                                         word i the corresponding turn decision becomes available. If
+We use Voxtral-Mini-4B-Realtime 2 as the pretrained stream-                         the word duration exceeds τ , Li can be negative, meaning the
+ing backbone. All experiments fully fine-tune both the causal                       state is available before the word ends. We report the aver-
+audio encoder and the language decoder. Training proceeds                           age Li over all words in the EasyTurn test set. For cascaded
+in two stages, with the ASR streaming delay τ sampled per                           baselines, following prior work [11], we report inference time
+                                                                                    plus the front-end VAD delay latencyvad . While not strictly
+  2 https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602                  identical to Li , this reflects their end-to-end decision delay.
+Table 2. Module-level results on EasyTurn. ACCcomp , ACCincomp , and ACCbc denote utterance-level accuracy for the com-
+plete, incomplete, and backchannel categories, respectively (ACCbc reported for Chinese only, as English has no backchannel
+split). “–” denotes an unsupported or unavailable state, and latencyvad denotes the front-end VAD delay incurred by cascaded
+methods.
+            Method                            Streaming    ACCcomp (%, ↑)    ACCincomp (%, ↑)    ACCbc (%, ↑)    Latency (ms, ↓)
+            Chinese
+            Paraformer + TEN Turn                  ✗           86.67               89.30               –        latencyvad + 204
+            Smart Turn V3                          ✗           91.33               60.00               –         latencyvad + 24
+            EasyTurn                               ✗           96.33               97.67             91.00      latencyvad + 263
+            SoulX-Duplug                           ✓           89.33               79.33               –               295
+            X2-Turn (Ours)                         ✓           91.00               93.00             96.00             288
+            English
+            SenseVoice En + TEN Turn               ✗           95.60               76.59               –         latencyvad + 57
+            Smart Turn V3                          ✗           78.93               72.24               –         latencyvad + 21
+            SoulX-Duplug                           ✓           77.67               88.96               –               205
+            X2-Turn (Ours)                         ✓           92.10               84.60               –               225
+
+
+
+                4. RESULTS AND ANALYSIS                                         Latency remains competitive overall. X2-Turn avoids
+                                                                            both the extreme pause TOR of Moshi and the multi-second
+We evaluate the proposed method at two levels. Section 4.1.1                interruption delays of Gemini Live. Among systems with
+reports system-level full-duplex behavior on bilingual Full-                fully reported metrics, X2-Turn therefore achieves the strongest
+Duplex-Bench. Section 4.1.2 then isolates the streaming                     overall ACC, with latency close to that of SoulX-Duplug.
+turn module on EasyTurn. Sections 4.2 and 4.3 ablate word-
+boundary placement and the streaming delay τ . Section 4.4
+reports streaming ASR quality.                                              4.1.2. Module results on bilingual EasyTurn
+
+                                                                            Table 2 compares X2-Turn (with τ = 480 ms) against base-
+4.1. Main Results                                                           lines on EasyTurn in terms of turn state classification accu-
+4.1.1. System results on bilingual Full-Duplex-Bench                        racy and latency. We compare the last non-idle predicted state
+                                                                            against the ground-truth utterance.
+We build a cascaded full-duplex dialogue system by coupling                     Among fully streaming systems, X2-Turn outperforms
+X2-Turn, which handles speech transcription and dialogue                    SoulX-Duplug on both accuracy metrics in Chinese, with
+state management, with Qwen2.5-7B-Instruct [32] for re-                     similar latency (slightly lower). In English, X2-Turn achieves
+sponse generation and Qwen3-TTS-Streaming 3 for speech                      substantially higher complete accuracy (92.10 vs. 77.67) but
+synthesis. We evaluate the complete system on Bilingual Full-               lower incomplete accuracy (84.60 vs. 88.96), at a latency
+Duplex-Bench [16, 17], with results summarized in Table 1.                  cost of 20ms. It also requires no auxiliary ASR model at
+The gains are distributed across tasks rather than concentrated             inference: a single model jointly decodes transcripts and turn
+in one. Pause TOR is the lowest among all systems in both                   states.
+languages, indicating that X2-Turn takes the floor least often                  Cascaded, VAD-dependent systems can post higher com-
+during intra-turn pauses. Backchannel RsR is highest in Chi-                plete and incomplete accuracy, especially EasyTurn on Chi-
+nese and second only to Gemini Live in English. Interruption                nese, because they classify a full VAD segment. That seg-
+RpR is highest in both languages, while interruption v1 TOR                 mentation adds a front-end delay that is not included in the
+is competitive but not top-ranked. Chinese turn-taking TOR                  raw inference times [7], so the higher accuracy does not im-
+matches SoulX-Duplug.                                                       ply a streaming responsiveness advantage. X2-Turn remains
+    The remaining gap lies in English turn-taking TOR and                   fully streaming and improves Chinese backchannel accuracy
+a slightly higher overall latency relative to SoulX-Duplug.                 over EasyTurn (96.00 vs. 91.00).
+SoulX-Duplug takes the floor as soon as the model emits
+<|complete|>, applying no additional decision rule,
+which yields very low response latency. We instead require a                4.2. Onset vs. Offset Word-boundary Placement
+short run of <|idle|> frames following <|complete|>
+                                                                            Voxtral places [W] at the word offset; we instead anchor it
+before taking the turn. This conservative endpointing rule
+                                                                            at the onset (Section 2). Because the turn state is aligned
+reduces false take-overs during pauses, at the cost of lower
+                                                                            with [W], this choice also sets when the decision can first ap-
+English turn-taking TOR and a small added delay.
+                                                                            pear. A delayed-stream model waits τ after that anchor. Off-
+  3 https://github.com/X-Square-Robot/Qwen3TTS-Streaming                    set therefore cannot emit until the word has been fully heard
+Table 3. Onset vs. offset [W] placement on the EasyTurn                             Table 5. Streaming ASR word error rate (WER, %, ↓). Uni-
+testset. Offset uses a smaller τ to match latency after the word                    ASR uses a 320 ms chunk with beam search; Freeze-Omni
+ends. Since we do not define an explicit <|wait|> label,                            uses a chunk size of 4. “–” denotes unreported results.
+ACCwait is computed using semantic completeness together                            Test set              Uni-ASR [33] Freeze-Omni [4]       Stage1      Stage2
+with the <|complete|> state.                                                                                                             480 ms 2400 ms 480 ms
+ Placement   τ (ms)    ACCcomp   ACCincomp    ACCbc   ACCwait    Avg.   Lat. (ms)   Chinese
+ Chinese                                                                            AISHELL-1                 2.90          2.79          2.57    1.48    3.94
+ Offset       240       90.33       91.67     93.00    96.00    91.88     240       AISHELL-2 Android          –             –           4.70    3.42    5.70
+ Offset       320       93.33       88.67     92.00    96.00    91.75     320       AISHELL-2 iOS              –              –           4.41    3.23    5.36
+ Onset        480       91.00       93.00     96.00    98.00    93.25     288       AISHELL-2 Mic               –             –           4.54    3.54    5.55
+ English                                                                            AISHELL-3                   –             –           3.16    2.13    4.66
+ Offset       240       87.74       83.61       –        –      85.74     240       AISHELL-4                   –             –          18.72   16.42   22.79
+ Offset       320       86.48       80.27       –        –      83.47     320       WenetSpeech Meeting        –            14.2          9.25    7.68   12.18
+ Onset        480       92.10       84.60       –        –      88.49     225
+                                                                                    WenetSpeech Net             –           12.6          9.50    8.40   10.39
+                                                                                     English
+                                                                                    GigaSpeech                  –              –         12.23   10.87   12.55
+                                                                                    LibriSpeech Clean         3.21           4.05         2.40    1.54    3.30
+plus τ , whereas onset can decide while the speaker is still fin-                   LibriSpeech Other         7.71          10.48        5.87    3.77     8.53
+ishing the word. The two cannot be compared at the same τ .                         TED-LIUM                    –              –          4.62    3.66    4.50
+                                                                                    VoxPopuli                   –              –         9.16    6.05    11.91
+Table 3 matches them on latency after the word ends (Eq. 5),
+using a larger τ for onset.
+    Onset is stronger overall in both languages and earlier in
+                                                                                    4.4. Streaming ASR Performance Comparison
+Chinese. Offset, having heard the full word, slightly improves
+Chinese complete accuracy; onset is better on incomplete,                           In this subsection, we compare our frame-synchronous ap-
+backchannel, and wait, i.e., less likely to take the floor too                      proach against representative chunk-based streaming ASR
+soon. On English, offset underperforms onset at both delays,                        systems. Since SoulX-Duplug does not report ASR results,
+and extra delay after the word end does not close the gap. The                      we instead select two strong chunk-based streaming base-
+modest drop from 240 ms to 320 ms may also reflect training                         lines, Uni-ASR and Freeze-Omni, for comparison. Table 5
+variance. We therefore keep onset in the X2-Turn system.                            summarizes the results. Under comparable or lower delay
+                                                                                    settings, Stage1-ASR at τ =480 ms already outperforms both
+                                                                                    baselines across nearly all evaluation sets. This indicates that
+ Table 4. Ablation on the delay τ on the EasyTurn testsets.                         frame-wise prediction with a short lookahead is competitive
+               τ (ms)     ACCcomp       ACCincomp     Avg.      Latency (ms)        with, and often superior to fixed-chunk streaming even be-
+                 480        91.00           93.00     92.00         288             fore accounting for its lower latency. Even after Stage2-Turn
+   Chinese
+                 400        88.70           94.30     91.50         208             joint training, where turn-state supervision introduces a set-
+                 320        87.33           94.00     90.67         128             dependent degradation relative to Stage1-ASR at the same
+                 480        92.10           84.60     88.49         225             delay, our model still matches or exceeds Freeze-Omni. This
+   English       400        85.20           85.30     85.25         145
+                 320        82.70           87.60     85.09          65
+                                                                                    suggests that the frame-synchronous backbone retains most
+                                                                                    of its recognition advantage over chunk-based streaming even
+                                                                                    under multi-task optimization.
+
+
+                                                                                                             5. CONCLUSION
+4.3. Effect of Streaming Delay τ for Turn-taking
+                                                                                    This paper presents X2-Turn, a frame-synchronous dual-head
+We report the effect of different values of the streaming delay                     extension of a pretrained delayed-stream ASR model for joint
+τ on both turn-taking and ASR performance. We first exam-                           streaming ASR and turn state prediction. A parallel turn state
+ine the effect of τ on turn-taking performance, considering                         head shares causal decoder representations with the ASR
+three configurations (320, 400 and 480 ms), as turn-taking in-                      head, with ASR-anchored supervision projecting word-level
+herently favors low-latency settings.                                               turn labels onto the native 80 ms token timeline. The stream-
+    Table 4 shows a consistent latency–accuracy trade-off                           ing delay τ offers a controllable trade-off between turn-taking
+across both languages. As τ decreases from 480 ms to                                accuracy, response latency, and ASR quality. Experiments on
+320 ms, latency drops substantially, while turn state accu-                         bilingual EasyTurn and Full-Duplex-Bench demonstrate that
+racy degrades only mildly. This indicates that our model is                         X2-Turn achieves accurate turn-taking detection while main-
+robust under tight latency constraints, allowing a suitable op-                     taining low latency. Future work will further balance the
+erating point to be chosen for different latency requirements                       ASR and turn state objectives and improve robustness in
+with little loss in turn-taking accuracy.                                           more challenging conversational settings.
+                      6. REFERENCES                                     [17] G.-T. Lin et al., “Full-duplex-bench v1. 5: Evaluating overlap
+                                                                             handling for full-duplex speech models,” in ICASSP 2026-
+ [1] G. Skantze, “Turn-taking in conversational systems and                  2026 IEEE International Conference on Acoustics, Speech and
+     human-robot interaction: a review,” Computer Speech & Lan-              Signal Processing (ICASSP). IEEE, 2026.
+     guage, vol. 67, pp. 101178, 2021.
+                                                                        [18] A. Yang et al., “Qwen3 technical report,” arXiv preprint
+ [2] T. A. Nguyen et al., “Generative spoken dialogue language               arXiv:2505.09388, 2025.
+     modeling,” Transactions of the Association for Computational       [19] H. Bu, J. Du, X. Na, B. Wu, and H. Zheng, “Aishell-1: An
+     Linguistics, vol. 11, pp. 250–266, 2023.                                open-source mandarin speech corpus and a speech recognition
+                                                                             baseline,” in Proc. O-COCOSDA, 2017, pp. 1–5.
+ [3] A. Défossez et al., “Moshi: a speech-text foundation model for
+     real-time dialogue,” arXiv preprint arXiv:2410.00037, 2024.        [20] J. Du, X. Na, X. Liu, and H. Bu, “Aishell-2: Transforming
+                                                                             mandarin asr research into industrial scale,” arXiv preprint
+ [4] X. Wang et al., “Freeze-omni: A smart and low latency                   arXiv:1808.10583, 2018.
+     speech-to-speech dialogue model with frozen LLM,” in Proc.
+     Int. Conf. Mach. Learn. (ICML), 2025.                              [21] Y. Shi, H. Bu, X. Xu, S. Zhang, and M. Li, “Aishell-3: A
+                                                                             multi-speaker mandarin tts corpus and the baselines,” arXiv
+ [5] Q. Zhang et al., “Omniflatten: An end-to-end gpt model for              preprint arXiv:2010.11567, 2020.
+     seamless voice conversation,” in Proc. Annu. Meeting Assoc.
+                                                                        [22] Y. Fu et al., “Aishell-4: An open source dataset for speech en-
+     Comput. Linguistics (ACL), 2025, pp. 14570–14580.
+                                                                             hancement, separation, recognition and speaker diarization in
+ [6] R. Roy et al., “Personaplex: Voice and role control for full du-        conference scenario,” arXiv preprint arXiv:2104.03603, 2021.
+     plex conversational speech models,” in Proc. IEEE Int. Conf.       [23] F. Yu et al., “M2met: The icassp 2022 multi-channel multi-
+     Acoust., Speech Signal Process. (ICASSP), 2026, pp. 16137–              party meeting transcription challenge,” in Proc. IEEE Int.
+     16141.                                                                  Conf. Acoust., Speech Signal Process. (ICASSP), 2022, pp.
+                                                                             6167–6171.
+ [7] B. Liao et al., “Flexduo: A pluggable system for enabling
+     full-duplex capabilities in speech dialogue systems,” arXiv        [24] B. Zhang et al., “Wenetspeech: A 10000+ hours multi-domain
+     preprint arXiv:2502.13472, 2025.                                        mandarin corpus for speech recognition,” in Proc. IEEE Int.
+                                                                             Conf. Acoust., Speech Signal Process. (ICASSP), 2022, pp.
+ [8] G. Li et al., “Easy turn: Integrating acoustic and linguistic           6182–6186.
+     modalities for robust turn-taking in full-duplex spoken dia-
+     logue systems,” in Proc. IEEE Int. Conf. Acoust., Speech Sig-      [25] Z. Tang et al., “Kespeech: An open source speech dataset of
+     nal Process. (ICASSP), 2026, pp. 16957–16961.                           mandarin and its eight subdialects,” in Proc. NeurIPS Datasets
+                                                                             and Benchmarks, 2021.
+ [9] G. Yang, Y. Pan, S. Qiu, and N. Bai, “Jal-turn: Joint acoustic-    [26] V. Panayotov, G. Chen, D. Povey, and S. Khudanpur, “Lib-
+     linguistic modeling for real-time and robust turn-taking detec-         rispeech: an asr corpus based on public domain audio books,”
+     tion in full-duplex spoken dialogue systems,” arXiv preprint            in Proc. IEEE Int. Conf. Acoust., Speech Signal Process.
+     arXiv:2603.26515, 2026.                                                 (ICASSP), 2015, pp. 5206–5210.
+[10] C. Wang et al., “Fastturn: Unifying acoustic and streaming se-     [27] G. Chen et al., “Gigaspeech: An evolving, multi-domain asr
+     mantic cues for low-latency and robust turn detection,” arXiv           corpus with 10,000 hours of transcribed audio,” arXiv preprint
+     preprint arXiv:2604.01897, 2026.                                        arXiv:2106.06909, 2021.
+[11] R. Yan et al., “Soulx-duplug: Plug-and-play streaming state        [28] F. Hernandez, V. Nguyen, S. Ghannay, N. Tomashenko, and
+     prediction module for realtime full-duplex speech conversa-             Y. Esteve, “Ted-lium 3: Twice as much data and corpus repar-
+     tion,” arXiv preprint arXiv:2603.14877, 2026.                           tition for experiments on speaker adaptation,” in Proc. Int.
+                                                                             Conf. Speech Comput. (SPECOM), 2018, pp. 198–208.
+[12] JD.com, “JoyAI-Talker: Full-duplex speech interactive large
+     model built for empathetic voice agents,” arXiv preprint           [29] C. Wang et al., “Voxpopuli: A large-scale multilingual speech
+     arXiv:2608.01119, 2026.                                                 corpus for representation learning, semi-supervised learning
+                                                                             and interpretation,” in Proc. ACL-IJCNLP, 2021, pp. 993–
+[13] T. Team, “Ten vad: A low-latency, lightweight and high-                 1003.
+     performance streaming voice activity detector (vad),” GitHub       [30] C. Cieri, D. Miller, and K. Walker, “The fisher corpus: A
+     repository: https://github.com/TEN-framework/ten-vad, 2025.             resource for the next generations of speech-to-text.,” in LREC,
+                                                                             2004, vol. 4, pp. 69–71.
+[14] N. Zeghidour et al.,     “Streaming sequence-to-sequence
+     learning with delayed streams modeling,” arXiv preprint            [31] X. Shi et al., “Qwen3-asr technical report,” arXiv preprint
+     arXiv:2509.08753, 2025.                                                 arXiv:2601.21337, 2026.
+
+[15] A. H. Liu et al.,    “Voxtral realtime,”        arXiv preprint     [32] Q. Team, “Qwen2.5: A party of foundation models,” Septem-
+     arXiv:2602.11298, 2026.                                                 ber 2024.
+                                                                        [33] Y. Xia, J. Tang, J. Hou, G. Xu, and H. Yao, “Uni-asr: Unified
+[16] G.-T. Lin et al., “Full-duplex-bench: A benchmark to evaluate
+                                                                             llm-based architecture for non-streaming and streaming auto-
+     full-duplex spoken dialogue models on turn-taking capabili-
+                                                                             matic speech recognition,” arXiv preprint arXiv:2603.11123,
+     ties,” in 2025 IEEE Automatic Speech Recognition and Un-
+                                                                             2026.
+     derstanding Workshop (ASRU). IEEE, 2025, pp. 1–8.
+
