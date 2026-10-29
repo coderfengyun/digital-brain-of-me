@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0052 | 2026-10-29 | Kent Beck：AI 时代的软件工程 | [notes](20261029b-software-engineering-ai/notes.md) |
 | #0051 | 2026-10-29 | ASR 一个字都没听错，Voice Agent 却没听出客户已经生气了 | [notes](20261029-voice-agent-emotion-sidecar/notes.md) |
 | #0050 | 2026-10-28 | On-Policy Distillation：让教师批改学生自己的每一步 | [notes](20261028-on-policy-distillation/notes.md) |
 | #0049 | 2026-10-27 | Post-Training 变革（中）：RL 到底学会了新能力，还是只把已有能力“压”进 pass@1？ | [notes](20261027-post-training-rl-capability/notes.md) |
