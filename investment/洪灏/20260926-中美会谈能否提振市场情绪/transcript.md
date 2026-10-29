@@ -1,3 +1,18 @@
+# The View Beyond: Can Trump-Xi talks shift market sentiment?
+
+**Show:** Moving Markets  
+**Guest:** Hong Hao（洪灏）, Managing Partner and CIO, Lotus Asset Management  
+**Host:** Richard Tang, Head of Research Hong Kong, Julius Baer  
+**Recorded:** 2026-09-25  
+**Published:** 2026-09-26  
+**Source:** [Spotify](https://open.spotify.com/episode/1NTlwFbnNPQ1FPYg2p1dFm)  
+**Language:** en  
+**Model:** whisper-small（CPU）
+
+> 自动转录文本，已核对节目元信息；个别专名和数字可能仍有 ASR 误差。
+
+## Transcript
+
  (upbeat music)
  - Hello everyone, welcome to the Julius Bear podcast.
  This is Richard Tang, the China strategist
