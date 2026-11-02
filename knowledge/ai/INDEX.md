@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0056 | 2026-11-02 | LiveTalking：实时数字人的核心不是“嘴形模型”，而是时间一致性 | [notes](20261102-livetalking-realtime-avatar/notes.md) |
 | #0055 | 2026-10-29 | The Future Worth Building Is Human：AI 不应替人做主，而应延伸人的判断 | [notes](20261029-human-future-ai/notes.md) |
 | #0054 | 2026-10-29 | 语音交互端到端自动化测试 | [notes](20261029c-voice-interaction-e2e-testing/notes.md) |
 | #0053 | 2026-10-29 | X2-Turn：让语音 AI 判断“你是不是说完了” | [notes](20261029-x2-turn/notes.md) |
