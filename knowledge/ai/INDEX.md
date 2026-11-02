@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0058 | 2026-11-02 | AI+教育实操：把一节课备成可核验的学习包 | [notes](20261102c-ai-teaching-verifiable-learning-pack/notes.md) |
 | #0057 | 2026-11-02 | EduDiag：会解题，不等于能诊断学生为什么答错 | [notes](20261102b-edudiag/notes.md) |
 | #0056 | 2026-11-02 | LiveTalking：实时数字人的核心不是“嘴形模型”，而是时间一致性 | [notes](20261102-livetalking-realtime-avatar/notes.md) |
 | #0055 | 2026-10-29 | The Future Worth Building Is Human：AI 不应替人做主，而应延伸人的判断 | [notes](20261029-human-future-ai/notes.md) |
