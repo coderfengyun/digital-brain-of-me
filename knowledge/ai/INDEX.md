@@ -4,6 +4,7 @@
 
 | # | 日期 | 标题 | 笔记 |
 |---|------|------|------|
+| #0059 | 2026-11-03 | Don’t be fooled—LLMs don’t reason：真正缺的不是更长思维链，而是可审计的认识状态 | [notes](20261103-llms-dont-reason/notes.md) |
 | #0058 | 2026-11-02 | AI+教育实操：把一节课备成可核验的学习包 | [notes](20261102c-ai-teaching-verifiable-learning-pack/notes.md) |
 | #0057 | 2026-11-02 | EduDiag：会解题，不等于能诊断学生为什么答错 | [notes](20261102b-edudiag/notes.md) |
 | #0056 | 2026-11-02 | LiveTalking：实时数字人的核心不是“嘴形模型”，而是时间一致性 | [notes](20261102-livetalking-realtime-avatar/notes.md) |
