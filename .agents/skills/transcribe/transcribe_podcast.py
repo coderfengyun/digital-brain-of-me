@@ -71,9 +71,13 @@ def find_qwen3_model() -> str | None:
     """Find Qwen3-ASR model directory."""
     models_dir = os.environ.get("MODELS_DIR")
     if models_dir:
-        candidate = Path(models_dir).expanduser() / QWEN3_MODEL_NAME
-        if candidate.exists():
-            return str(candidate)
+        # Prefer the explicit MLX directory. A directory named only
+        # ``Qwen3-ASR-0.6B`` may contain the official PyTorch checkpoint,
+        # which has a different weight layout and cannot be loaded by MLX.
+        for dirname in (f"{QWEN3_MODEL_NAME}-MLX", QWEN3_MODEL_NAME):
+            candidate = Path(models_dir).expanduser() / dirname
+            if candidate.exists():
+                return str(candidate)
     # Only select the Hugging Face model when it is already cached. Auto mode
     # must not trigger a multi-GB model download after the user removed it.
     try:
@@ -113,16 +117,17 @@ def transcribe_audio_qwen3(audio_path: str, language: str | None = None) -> str 
     if not model_path:
         return None
 
-    if model_path == QWEN3_MLX_MODEL_ID:
-        try:
-            from qwen3_asr_mlx import Qwen3ASR
-            print(f"  Transcribing with Qwen3-ASR ({QWEN3_MLX_MODEL_ID})...")
-            model = Qwen3ASR.from_pretrained(model_path)
-            result = model.transcribe(audio_path, language=language)
-            return result.text.strip() if result.text else None
-        except Exception as exc:
-            print(f"  Warning: qwen3-asr-mlx failed: {exc}")
-            return None
+    try:
+        from qwen3_asr_mlx import Qwen3ASR
+        print(f"  Transcribing with Qwen3-ASR ({model_path})...")
+        model = Qwen3ASR.from_pretrained(model_path)
+        result = model.transcribe(audio_path, language=language)
+        return result.text.strip() if result.text else None
+    except ImportError:
+        pass
+    except Exception as exc:
+        print(f"  Warning: qwen3-asr-mlx failed: {exc}")
+        return None
 
     try:
         from mlx_audio.stt.utils import load_model
