@@ -136,6 +136,7 @@ uv run .codex/skills/transcribe/transcribe_speakers.py \
 - `--speakers 2`：已知人数时固定说话人数；未知时省略，交给模型估计。
 - `--speaker-names "付老师,我"`：按首次主要发言的先后顺序命名；跨录音的 A/B 标签不保证自动保持一致。
 - `--save-segments /tmp/speakers.json`：保留 pyannote 原始时间段，方便复核或复用。
+- `--max-segment-duration 30`：Qwen 单次最多处理 30 秒，长轮次自动拆分；同时按片段时长限制生成 Token 数，避免异常解码长时间不结束。
 - `--asr-model`、`--diarization-model`：显式指定本地模型目录。
 - `--asr-python`、`--diarization-python`：覆盖两个隔离环境的解释器；也可设置 `ASR_PYTHON`、`DIARIZATION_PYTHON`。默认 ASR 解释器优先使用 `$MODELS_DIR/.venvs/qwen3-asr-mlx/bin/python`。
 - `--no-register-source`：只生成文件，不向 `sources/sources.jsonl` 追加记录。

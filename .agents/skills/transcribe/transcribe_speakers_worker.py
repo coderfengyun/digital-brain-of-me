@@ -5,7 +5,13 @@ import argparse
 import json
 from pathlib import Path
 
-from transcribe_speakers import merge_turns, render_markdown, speaker_mapping
+from transcribe_speakers import (
+    asr_token_budget,
+    merge_turns,
+    render_markdown,
+    speaker_mapping,
+    split_turns,
+)
 
 
 def main() -> None:
@@ -22,6 +28,7 @@ def main() -> None:
     parser.add_argument("--context")
     parser.add_argument("--min-segment-duration", type=float, default=0.2)
     parser.add_argument("--merge-gap", type=float, default=1.0)
+    parser.add_argument("--max-segment-duration", type=float, default=30.0)
     args = parser.parse_args()
 
     import numpy as np
@@ -29,10 +36,13 @@ def main() -> None:
     from qwen3_asr_mlx import Qwen3ASR
 
     raw_segments = json.loads(Path(args.segments).read_text(encoding="utf-8"))
-    segments = merge_turns(
-        raw_segments,
-        min_duration=args.min_segment_duration,
-        max_gap=args.merge_gap,
+    segments = split_turns(
+        merge_turns(
+            raw_segments,
+            min_duration=args.min_segment_duration,
+            max_gap=args.merge_gap,
+        ),
+        max_duration=args.max_segment_duration,
     )
     requested_names = (
         [name.strip() for name in args.speaker_names.split(",") if name.strip()]
@@ -54,7 +64,13 @@ def main() -> None:
             mono[int(start * sample_rate) : int(end * sample_rate)], dtype=np.float32
         )
         context = args.context if args.context and end - start >= 2.0 else None
-        result = model.transcribe(chunk, language=args.language, context=context)
+        result = model.transcribe(
+            chunk,
+            language=args.language,
+            context=context,
+            max_tokens=asr_token_budget(end - start),
+            chunk_duration=args.max_segment_duration,
+        )
         text = result.text.strip()
         if context and text == context.strip():
             text = ""

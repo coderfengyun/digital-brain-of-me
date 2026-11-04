@@ -151,6 +151,25 @@ def merge_turns(
     return merged
 
 
+def split_turns(segments: list[dict], max_duration: float = 30.0) -> list[dict]:
+    """Split long speaker turns into bounded ASR chunks."""
+    if max_duration <= 0:
+        raise ValueError("max_duration must be positive")
+    split: list[dict] = []
+    for segment in segments:
+        start = segment["start"]
+        while start < segment["end"]:
+            end = min(start + max_duration, segment["end"])
+            split.append({**segment, "start": start, "end": end})
+            start = end
+    return split
+
+
+def asr_token_budget(duration: float) -> int:
+    """Bound decoding work while leaving headroom for normal speech."""
+    return min(768, max(64, math.ceil(duration * 20)))
+
+
 def speaker_mapping(segments: list[dict], names: list[str] | None) -> dict[str, str]:
     labels: list[str] = []
     for segment in segments:
@@ -318,6 +337,7 @@ def main() -> None:
     parser.add_argument("--save-segments", help="Optional raw speaker JSON output")
     parser.add_argument("--min-segment-duration", type=float, default=0.2)
     parser.add_argument("--merge-gap", type=float, default=1.0)
+    parser.add_argument("--max-segment-duration", type=float, default=30.0)
     parser.add_argument("--url", help="Source URL")
     parser.add_argument("--tags", default="", help="Comma-separated tags")
     parser.add_argument(
@@ -408,6 +428,8 @@ def main() -> None:
             str(args.min_segment_duration),
             "--merge-gap",
             str(args.merge_gap),
+            "--max-segment-duration",
+            str(args.max_segment_duration),
         ]
         if args.speaker_names:
             transcription_command.extend(["--speaker-names", args.speaker_names])

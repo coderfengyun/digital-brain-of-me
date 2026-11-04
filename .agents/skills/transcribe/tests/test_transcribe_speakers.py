@@ -61,3 +61,19 @@ def test_default_asr_python_prefers_persistent_runtime(tmp_path, monkeypatch):
     monkeypatch.setenv("MODELS_DIR", str(tmp_path))
 
     assert MODULE.default_asr_python() == runtime
+
+
+def test_split_turns_caps_duration_and_preserves_speaker():
+    assert MODULE.split_turns(
+        [{"start": 5.0, "end": 70.0, "speaker": "S0"}], max_duration=30.0
+    ) == [
+        {"start": 5.0, "end": 35.0, "speaker": "S0"},
+        {"start": 35.0, "end": 65.0, "speaker": "S0"},
+        {"start": 65.0, "end": 70.0, "speaker": "S0"},
+    ]
+
+
+def test_asr_token_budget_is_bounded():
+    assert MODULE.asr_token_budget(1.0) == 64
+    assert MODULE.asr_token_budget(10.0) == 200
+    assert MODULE.asr_token_budget(100.0) == 768

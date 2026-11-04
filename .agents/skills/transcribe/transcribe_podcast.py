@@ -137,7 +137,12 @@ def transcribe_audio_qwen3(audio_path: str, language: str | None = None) -> str 
         from qwen3_asr_mlx import Qwen3ASR
         print(f"  Transcribing with Qwen3-ASR ({model_path})...")
         model = Qwen3ASR.from_pretrained(model_path)
-        result = model.transcribe(audio_path, language=language)
+        result = model.transcribe(
+            audio_path,
+            language=language,
+            max_tokens=768,
+            chunk_duration=30.0,
+        )
         return result.text.strip() if result.text else None
     except ImportError:
         pass
