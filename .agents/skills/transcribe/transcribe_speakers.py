@@ -350,6 +350,11 @@ def main() -> None:
         PROJECT_ROOT / ".venv-diarize" / "bin" / "python",
     )
 
+    print(f"ASR runtime: {asr_python}")
+    print(f"ASR model: {asr_model}")
+    print(f"Diarization runtime: {diarization_python}")
+    print(f"Diarization model: {diarization_model}")
+
     episode_id = generate_id()
     filename = (
         f"{sanitize_filename(args.show)}_{sanitize_filename(args.title)}_"
