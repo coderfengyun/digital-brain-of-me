@@ -43,3 +43,12 @@ def test_speaker_mapping_uses_first_substantial_appearance():
 def test_timestamp_supports_hour_long_audio():
     assert MODULE.timestamp(61.8) == "01:01"
     assert MODULE.timestamp(3661.2) == "01:01:01"
+
+
+def test_resolve_python_preserves_virtualenv_symlink(tmp_path):
+    base_python = tmp_path / "base-python"
+    base_python.touch()
+    venv_python = tmp_path / "venv-python"
+    venv_python.symlink_to(base_python)
+
+    assert MODULE.resolve_python(str(venv_python), "TEST_PYTHON", base_python) == venv_python

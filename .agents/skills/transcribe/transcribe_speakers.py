@@ -255,7 +255,10 @@ def resolve_python(explicit: str | None, env_name: str, default: Path) -> Path:
     value = explicit or os.environ.get(env_name) or str(default)
     expanded = Path(value).expanduser()
     if expanded.exists():
-        return expanded.resolve()
+        # Do not call Path.resolve() here: venv Python executables are often
+        # symlinks to the base interpreter. Dereferencing that symlink drops
+        # the virtual environment and therefore all of its installed packages.
+        return Path(os.path.abspath(expanded))
     executable = shutil.which(value)
     if executable:
         return Path(executable).resolve()
