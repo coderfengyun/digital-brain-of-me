@@ -84,6 +84,16 @@ python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episod
 1. pyannote 生成说话人时间轴；
 2. Qwen3-ASR 0.6B 按说话人轮次重新转录并输出时间戳。
 
+两阶段必须使用隔离的 Python 环境：新版 `qwen3-asr-mlx` 与 pyannote 间接依赖的 `transformers` 对 `huggingface-hub` / `tokenizers` 的版本要求冲突。统一入口会用 `.venv-diarize/bin/python` 跑 pyannote、用 `.venv/bin/python` 跑 Qwen，不能把两套依赖强行装进同一个环境。
+
+首次设置 diarization 环境：
+
+```bash
+uv venv --python 3.12 .venv-diarize
+uv pip install --python .venv-diarize/bin/python \
+  -r .codex/skills/transcribe/requirements-diarization.txt
+```
+
 ```bash
 uv run .codex/skills/transcribe/transcribe_speakers.py \
   --audio ~/Downloads/meeting.m4a \
@@ -100,6 +110,7 @@ uv run .codex/skills/transcribe/transcribe_speakers.py \
 - `--speaker-names "付老师,我"`：按首次主要发言的先后顺序命名；跨录音的 A/B 标签不保证自动保持一致。
 - `--save-segments /tmp/speakers.json`：保留 pyannote 原始时间段，方便复核或复用。
 - `--asr-model`、`--diarization-model`：显式指定本地模型目录。
+- `--asr-python`、`--diarization-python`：覆盖两个隔离环境的解释器；也可设置 `ASR_PYTHON`、`DIARIZATION_PYTHON`。
 - `--no-register-source`：只生成文件，不向 `sources/sources.jsonl` 追加记录。
 
 输出默认使用“说话人 A / B / C”并保留时间戳。短促插话、同时说话和环境噪声可能造成边界误差；不得仅凭声纹标签猜测真实身份。若用户确认身份，再用 `--speaker-names` 重新生成或批量改名。
@@ -168,12 +179,12 @@ uv run .codex/skills/transcribe/transcribe_speakers.py \
 brew install whisper-cpp ffmpeg
 
 # Python 依赖（uv 管理）
-uv add feedparser requests mlx-audio qwen3-asr-mlx pyannote-audio soundfile
+uv add feedparser requests mlx-audio qwen3-asr-mlx soundfile
 
 # 模型：见 env/models.toml（位置、下载地址、是否 required 全在里面）
 ```
 
-说话人分离还需要提前接受并下载 `pyannote/speaker-diarization-community-1`。脚本只查找 `MODELS_DIR` 和 Hugging Face 本地缓存；找不到时直接报错，不在执行过程中联网下载。
+说话人分离依赖由 `requirements-diarization.txt` 管理，并需要提前接受、下载 `pyannote/speaker-diarization-community-1`。脚本只查找 `MODELS_DIR` 和 Hugging Face 本地缓存；找不到时直接报错，不在执行过程中联网下载。
 
 ## 技术备忘
 

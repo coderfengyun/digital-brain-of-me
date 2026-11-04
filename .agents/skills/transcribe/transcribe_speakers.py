@@ -151,39 +151,6 @@ def merge_turns(
     return merged
 
 
-def diarize(
-    wav_path: Path, model_path: Path, speakers: int | None
-) -> list[dict]:
-    """Run local pyannote diarization with preloaded audio."""
-    import soundfile as sf
-    import torch
-    from pyannote.audio import Pipeline
-
-    audio, sample_rate = sf.read(wav_path, dtype="float32", always_2d=True)
-    waveform = torch.from_numpy(audio.T.copy())
-    pipeline = Pipeline.from_pretrained(model_path)
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
-    if device == "mps":
-        pipeline.to(torch.device("mps"))
-
-    kwargs = {"num_speakers": speakers} if speakers else {}
-    result = pipeline(
-        {"waveform": waveform, "sample_rate": sample_rate},
-        **kwargs,
-    )
-    annotation = getattr(result, "speaker_diarization", result)
-    segments = [
-        {
-            "start": round(turn.start, 3),
-            "end": round(turn.end, 3),
-            "speaker": speaker,
-        }
-        for turn, _, speaker in annotation.itertracks(yield_label=True)
-    ]
-    print(f"Diarization: device={device}, segments={len(segments)}")
-    return segments
-
-
 def speaker_mapping(segments: list[dict], names: list[str] | None) -> dict[str, str]:
     labels: list[str] = []
     for segment in segments:
@@ -207,41 +174,6 @@ def speaker_mapping(segments: list[dict], names: list[str] | None) -> dict[str, 
         label: f"说话人 {alphabet[index] if index < len(alphabet) else index + 1}"
         for index, label in enumerate(labels)
     }
-
-
-def transcribe_turns(
-    wav_path: Path,
-    segments: list[dict],
-    model_path: Path,
-    language: str,
-    context: str | None,
-) -> list[dict]:
-    import numpy as np
-    import soundfile as sf
-    from qwen3_asr_mlx import Qwen3ASR
-
-    audio, sample_rate = sf.read(wav_path, dtype="float32", always_2d=True)
-    mono = audio.mean(axis=1)
-    duration = len(mono) / sample_rate
-    model = Qwen3ASR.from_pretrained(str(model_path))
-
-    results: list[dict] = []
-    for index, segment in enumerate(segments, start=1):
-        start = max(0.0, segment["start"] - 0.08)
-        end = min(duration, segment["end"] + 0.08)
-        chunk = np.asarray(
-            mono[int(start * sample_rate) : int(end * sample_rate)], dtype=np.float32
-        )
-        turn_context = context if context and end - start >= 2.0 else None
-        result = model.transcribe(chunk, language=language, context=turn_context)
-        text = result.text.strip()
-        if turn_context and text == turn_context.strip():
-            text = ""
-        if text:
-            results.append({**segment, "text": text})
-        if index % 20 == 0 or index == len(segments):
-            print(f"Transcription: {index}/{len(segments)}", flush=True)
-    return results
 
 
 def timestamp(seconds: float) -> str:
@@ -319,6 +251,31 @@ def append_source(entry: dict) -> None:
         file.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
 
+def resolve_python(explicit: str | None, env_name: str, default: Path) -> Path:
+    value = explicit or os.environ.get(env_name) or str(default)
+    expanded = Path(value).expanduser()
+    if expanded.exists():
+        return expanded.resolve()
+    executable = shutil.which(value)
+    if executable:
+        return Path(executable).resolve()
+    raise FileNotFoundError(
+        f"Python interpreter not found: {value}. Pass it explicitly or set {env_name}."
+    )
+
+
+def run_worker(command: list[str], cache_dir: Path) -> None:
+    environment = os.environ.copy()
+    environment["HF_HUB_OFFLINE"] = "1"
+    environment["MPLCONFIGDIR"] = str(cache_dir / "matplotlib")
+    environment["XDG_CACHE_HOME"] = str(cache_dir / "xdg")
+    Path(environment["MPLCONFIGDIR"]).mkdir(parents=True, exist_ok=True)
+    Path(environment["XDG_CACHE_HOME"]).mkdir(parents=True, exist_ok=True)
+    result = subprocess.run(command, env=environment)
+    if result.returncode != 0:
+        raise RuntimeError(f"Worker failed with exit code {result.returncode}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Local speaker diarization with pyannote and Qwen3-ASR"
@@ -337,6 +294,14 @@ def main() -> None:
     parser.add_argument("--asr-model", help="Local Qwen3-ASR MLX model directory")
     parser.add_argument(
         "--diarization-model", help="Local pyannote pipeline directory"
+    )
+    parser.add_argument(
+        "--asr-python",
+        help="Python with qwen3-asr-mlx (default: .venv/bin/python)",
+    )
+    parser.add_argument(
+        "--diarization-python",
+        help="Python with pyannote-audio (default: .venv-diarize/bin/python)",
     )
     parser.add_argument("--save-segments", help="Optional raw speaker JSON output")
     parser.add_argument("--min-segment-duration", type=float, default=0.2)
@@ -362,36 +327,16 @@ def main() -> None:
 
     asr_model = resolve_model_path(args.asr_model, "asr")
     diarization_model = resolve_model_path(args.diarization_model, "diarization")
-    requested_names = (
-        [name.strip() for name in args.speaker_names.split(",") if name.strip()]
-        if args.speaker_names
-        else None
+    asr_python = resolve_python(
+        args.asr_python,
+        "ASR_PYTHON",
+        PROJECT_ROOT / ".venv" / "bin" / "python",
     )
-
-    with tempfile.TemporaryDirectory(prefix="speaker-transcribe-") as tmpdir:
-        wav_path = Path(tmpdir) / "audio.wav"
-        convert_to_wav(audio_path, wav_path)
-        raw_segments = diarize(wav_path, diarization_model, args.speakers)
-        if args.save_segments:
-            segment_path = Path(args.save_segments).expanduser()
-            segment_path.parent.mkdir(parents=True, exist_ok=True)
-            segment_path.write_text(
-                json.dumps(raw_segments, ensure_ascii=False, indent=2) + "\n",
-                encoding="utf-8",
-            )
-        segments = merge_turns(
-            raw_segments,
-            min_duration=args.min_segment_duration,
-            max_gap=args.merge_gap,
-        )
-        names = speaker_mapping(segments, requested_names)
-        turns = transcribe_turns(
-            wav_path,
-            segments,
-            asr_model,
-            args.language,
-            args.context,
-        )
+    diarization_python = resolve_python(
+        args.diarization_python,
+        "DIARIZATION_PYTHON",
+        PROJECT_ROOT / ".venv-diarize" / "bin" / "python",
+    )
 
     episode_id = generate_id()
     filename = (
@@ -399,17 +344,61 @@ def main() -> None:
         f"{episode_id}_speakers.md"
     )
     output_path = output_dir / filename
-    output_path.write_text(
-        render_markdown(
+    skill_dir = Path(__file__).resolve().parent
+
+    with tempfile.TemporaryDirectory(prefix="speaker-transcribe-") as tmpdir:
+        temporary_dir = Path(tmpdir)
+        wav_path = temporary_dir / "audio.wav"
+        segments_path = temporary_dir / "segments.json"
+        convert_to_wav(audio_path, wav_path)
+        diarization_command = [
+            str(diarization_python),
+            str(skill_dir / "diarize_speakers_worker.py"),
+            "--audio",
+            str(wav_path),
+            "--model",
+            str(diarization_model),
+            "--output",
+            str(segments_path),
+        ]
+        if args.speakers:
+            diarization_command.extend(["--speakers", str(args.speakers)])
+        run_worker(diarization_command, temporary_dir / "cache-diarization")
+
+        if args.save_segments:
+            segment_path = Path(args.save_segments).expanduser()
+            segment_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(segments_path, segment_path)
+
+        transcription_command = [
+            str(asr_python),
+            str(skill_dir / "transcribe_speakers_worker.py"),
+            "--audio",
+            str(wav_path),
+            "--segments",
+            str(segments_path),
+            "--model",
+            str(asr_model),
+            "--output",
+            str(output_path),
+            "--title",
             args.title,
+            "--show",
             args.show,
+            "--language",
             args.language,
-            turns,
-            names,
-            args.url,
-        ),
-        encoding="utf-8",
-    )
+            "--min-segment-duration",
+            str(args.min_segment_duration),
+            "--merge-gap",
+            str(args.merge_gap),
+        ]
+        if args.speaker_names:
+            transcription_command.extend(["--speaker-names", args.speaker_names])
+        if args.context:
+            transcription_command.extend(["--context", args.context])
+        if args.url:
+            transcription_command.extend(["--source", args.url])
+        run_worker(transcription_command, temporary_dir / "cache-asr")
 
     if not args.no_register_source:
         try:
