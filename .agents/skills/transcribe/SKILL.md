@@ -100,6 +100,13 @@ bash .codex/skills/transcribe/setup_asr_runtime.sh --download
 bash .codex/skills/transcribe/setup_asr_runtime.sh
 ```
 
+普通单文件或 RSS 转录也可以直接用这套持久环境执行：
+
+```bash
+~/Models/.venvs/qwen3-asr-mlx/bin/python \
+  .codex/skills/transcribe/transcribe_podcast.py <其余参数>
+```
+
 默认位置：
 
 - 权重：`$MODELS_DIR/Qwen3-ASR-0.6B-MLX`
