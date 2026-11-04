@@ -7,14 +7,12 @@
 #   1. uv → Python 3.13 + .venv + Python 包
 #   2. Node.js + npm 包
 #   3. 系统工具：ffmpeg, whisper-cpp
-#   4. Whisper 模型文件
+#   4. 本地配置
 #
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
-
-WHISPER_MODEL="ggml-base.bin"
 
 # ─────────────────────────────────────────────
 # Helpers
@@ -123,26 +121,6 @@ if ! grep -q "^MODELS_DIR=" .env; then
 else
     info "MODELS_DIR 已配置: $(grep '^MODELS_DIR=' .env | cut -d= -f2)"
 fi
-
-# Resolve MODELS_DIR for subsequent steps
-MODELS_DIR="$(grep '^MODELS_DIR=' .env | cut -d= -f2)"
-eval MODELS_DIR="$MODELS_DIR"
-
-# ─────────────────────────────────────────────
-# 5. 模型文件（required = true in models.toml）
-# ─────────────────────────────────────────────
-
-step "模型文件"
-
-WHISPER_MODEL_DIR="$MODELS_DIR/whisper-cpp"
-
-if [[ ! -f "$WHISPER_MODEL_DIR/$WHISPER_MODEL" ]]; then
-    echo "  下载 $WHISPER_MODEL..."
-    mkdir -p "$WHISPER_MODEL_DIR"
-    curl -L -o "$WHISPER_MODEL_DIR/$WHISPER_MODEL" \
-        "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/$WHISPER_MODEL"
-fi
-info "$WHISPER_MODEL ($(du -h "$WHISPER_MODEL_DIR/$WHISPER_MODEL" | awk '{print $1}'))"
 
 # ─────────────────────────────────────────────
 # Done

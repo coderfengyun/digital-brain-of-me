@@ -16,8 +16,8 @@
 本地推理用的预训练模型权重，统一存放在 `.env` 中 `MODELS_DIR` 指向的根目录。
 
 - 清单文件：`env/models.toml`（列出所有模型的相对路径、大小、下载地址、是否必需）
-- `setup.sh` 自动下载 `required = true` 的模型
-- 其余模型按需手动下载（`huggingface-cli download` 或 `wget`）
+- `required = true` 表示项目的标准本地推理模型；模型权重不由 `setup.sh` 自动下载
+- 模型按需手动下载（`huggingface-cli download`、`curl` 或 `wget`）
 
 ## 日常操作
 

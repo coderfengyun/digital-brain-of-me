@@ -2,20 +2,6 @@
 # 根目录由 .env 中 MODELS_DIR 指定
 # 完整路径 = $MODELS_DIR / path
 
-[whisper-cpp.ggml-base]
-path = "whisper-cpp/ggml-base.bin"
-size = "141MB"
-url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin"
-required = true
-description = "whisper.cpp 语音转文字，日常转录默认模型"
-
-[whisper-cpp.ggml-small]
-path = "whisper-cpp/ggml-small.bin"
-size = "244MB"
-url = "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin"
-required = false
-description = "whisper.cpp 高质量转录"
-
 [whisper-cpp.ggml-large]
 path = "whisper-cpp/ggml-large-v3.bin"
 size = "1.5GB"
@@ -36,10 +22,3 @@ size = "31MB"
 url = "https://huggingface.co/pyannote/speaker-diarization-community-1"
 required = false
 description = "本地说话人分离；首次下载前需在 Hugging Face 接受模型许可"
-
-[asr.mimo-v2_5-mlx]
-path = "MiMo-V2.5-ASR-MLX"
-size = "5.1GB"
-url = "https://huggingface.co/mlx-community/MiMo-V2.5-ASR-MLX"
-required = false
-description = "小米 MiMo，MLX 格式，中英双语，复杂声学场景"
