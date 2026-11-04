@@ -24,11 +24,18 @@ required = false
 description = "whisper.cpp 最高质量转录"
 
 [asr.qwen3-0_6b]
-path = "Qwen3-ASR-0.6B"
-size = "1.8GB"
+path = "Qwen3-ASR-0.6B-MLX"
+size = "1.6GB"
 url = "https://huggingface.co/mlx-community/Qwen3-ASR-0.6B-bf16"
 required = true
 description = "通义千问 ASR MLX 版，转录默认模型；本地不存在时回退 whisper"
+
+[diarization.pyannote-community-1]
+path = "pyannote/speaker-diarization-community-1"
+size = "31MB"
+url = "https://huggingface.co/pyannote/speaker-diarization-community-1"
+required = false
+description = "本地说话人分离；首次下载前需在 Hugging Face 接受模型许可"
 
 [asr.mimo-v2_5-mlx]
 path = "MiMo-V2.5-ASR-MLX"

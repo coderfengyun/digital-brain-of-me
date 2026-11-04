@@ -1,6 +1,6 @@
 ---
 name: transcribe
-description: "Audio/video transcription tool (Qwen3-ASR default, whisper.cpp fallback). Use when: user wants to transcribe a podcast episode, video, or any audio/video content to text. Trigger on phrases like 'transcribe podcast', 'podcast transcript', '转录播客', '播客转文字', 'transcribe this episode', 'whisper transcribe', '转录视频', 'transcribe video', or any request involving converting spoken content to text. Also trigger when the user provides a Spotify episode URL or mentions RSS feed transcription. Accepts both audio files (.mp3, .wav, .m4a) and video files (.mp4, .webm) — ffmpeg handles extraction automatically. Other skills (e.g. investment) may chain into this skill for transcription steps."
+description: "Audio/video transcription and local speaker diarization (Qwen3-ASR default, whisper.cpp fallback, pyannote speaker separation). Use when the user wants to transcribe spoken content or distinguish speakers in a recording, including podcasts, meetings, audio, video, Spotify episodes, and RSS feeds."
 ---
 
 # Transcribe
@@ -8,6 +8,8 @@ description: "Audio/video transcription tool (Qwen3-ASR default, whisper.cpp fal
 将音频/视频转录为文字的独立工具。
 
 输入 Spotify URL、RSS feed、本地音频或视频文件，输出 Markdown 格式的转录文本。
+
+多人对话可额外使用本地 pyannote 声纹聚类，将音频拆成带时间戳的说话人轮次，再逐段交给 Qwen3-ASR 转录。模型权重必须预先存在，本 Skill 不自动下载模型。
 
 ## 引擎优先级
 
@@ -75,6 +77,33 @@ python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/video.
 python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episode.mp3 --title "Title" --show "Show" --model base --language en --output-dir knowledge/research/
 ```
 
+### 方式四：区分多人对话的说话人
+
+使用 `transcribe_speakers.py` 在本机完成两阶段处理：
+
+1. pyannote 生成说话人时间轴；
+2. Qwen3-ASR 0.6B 按说话人轮次重新转录并输出时间戳。
+
+```bash
+uv run .codex/skills/transcribe/transcribe_speakers.py \
+  --audio ~/Downloads/meeting.m4a \
+  --title "会议标题" \
+  --show "语音备忘录" \
+  --output-dir operations/meetings/ \
+  --speakers 2 \
+  --context "讨论中的专有名词或主题"
+```
+
+常用参数：
+
+- `--speakers 2`：已知人数时固定说话人数；未知时省略，交给模型估计。
+- `--speaker-names "付老师,我"`：按首次主要发言的先后顺序命名；跨录音的 A/B 标签不保证自动保持一致。
+- `--save-segments /tmp/speakers.json`：保留 pyannote 原始时间段，方便复核或复用。
+- `--asr-model`、`--diarization-model`：显式指定本地模型目录。
+- `--no-register-source`：只生成文件，不向 `sources/sources.jsonl` 追加记录。
+
+输出默认使用“说话人 A / B / C”并保留时间戳。短促插话、同时说话和环境噪声可能造成边界误差；不得仅凭声纹标签猜测真实身份。若用户确认身份，再用 `--speaker-names` 重新生成或批量改名。
+
 ## 翻译规则
 
 **英文内容必须翻译为中文**。转录完成后，如果原始内容为英文（通过 `--language en` 指定或从转录结果判断），执行以下步骤：
@@ -139,10 +168,12 @@ python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episod
 brew install whisper-cpp ffmpeg
 
 # Python 依赖（uv 管理）
-uv add feedparser requests mlx-audio
+uv add feedparser requests mlx-audio qwen3-asr-mlx pyannote-audio soundfile
 
 # 模型：见 env/models.toml（位置、下载地址、是否 required 全在里面）
 ```
+
+说话人分离还需要提前接受并下载 `pyannote/speaker-diarization-community-1`。脚本只查找 `MODELS_DIR` 和 Hugging Face 本地缓存；找不到时直接报错，不在执行过程中联网下载。
 
 ## 技术备忘
 
@@ -151,3 +182,5 @@ uv add feedparser requests mlx-audio
 - 模型位置：统一查 `env/models.toml`
 - ffmpeg 会将音频预处理为 16kHz 单声道 WAV（whisper/qwen3 的输入要求）
 - 可通过 `--engine whisper` 强制使用 whisper 引擎
+- 说话人脚本以预加载 waveform 的方式调用 pyannote，避免依赖 torchcodec 的 ffmpeg 动态库兼容性
+- Apple Silicon 上 pyannote 优先使用 MPS；Qwen3-ASR MLX 使用 Metal。本机沙箱阻止 GPU 时，需要经用户授权在沙箱外离线运行
