@@ -52,3 +52,12 @@ def test_resolve_python_preserves_virtualenv_symlink(tmp_path):
     venv_python.symlink_to(base_python)
 
     assert MODULE.resolve_python(str(venv_python), "TEST_PYTHON", base_python) == venv_python
+
+
+def test_default_asr_python_prefers_persistent_runtime(tmp_path, monkeypatch):
+    runtime = tmp_path / ".venvs" / "qwen3-asr-mlx" / "bin" / "python"
+    runtime.parent.mkdir(parents=True)
+    runtime.touch()
+    monkeypatch.setenv("MODELS_DIR", str(tmp_path))
+
+    assert MODULE.default_asr_python() == runtime

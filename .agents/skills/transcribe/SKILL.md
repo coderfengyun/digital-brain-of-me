@@ -86,6 +86,26 @@ python .codex/skills/transcribe/transcribe_podcast.py --audio ~/Downloads/episod
 
 两阶段必须使用隔离的 Python 环境：新版 `qwen3-asr-mlx` 与 pyannote 间接依赖的 `transformers` 对 `huggingface-hub` / `tokenizers` 的版本要求冲突。统一入口会用 `.venv-diarize/bin/python` 跑 pyannote、用 `.venv/bin/python` 跑 Qwen，不能把两套依赖强行装进同一个环境。
 
+Qwen 运行环境优先使用 `$MODELS_DIR/.venvs/qwen3-asr-mlx/bin/python`。它和模型权重、离线 wheel 缓存都位于项目虚拟环境之外，因此重建 `.venv` 不会重复下载或安装 Qwen。若持久运行环境不存在，才回退到项目 `.venv`。
+
+首次建立持久缓存和运行环境（下载时显式禁用代理）：
+
+```bash
+bash .codex/skills/transcribe/setup_asr_runtime.sh --download
+```
+
+以后重建运行环境只从本地 wheel 缓存安装，不联网：
+
+```bash
+bash .codex/skills/transcribe/setup_asr_runtime.sh
+```
+
+默认位置：
+
+- 权重：`$MODELS_DIR/Qwen3-ASR-0.6B-MLX`
+- wheel 缓存：`$MODELS_DIR/python-wheels/qwen3-asr-mlx`
+- 持久运行环境：`$MODELS_DIR/.venvs/qwen3-asr-mlx`
+
 首次设置 diarization 环境：
 
 ```bash
@@ -110,7 +130,7 @@ uv run .codex/skills/transcribe/transcribe_speakers.py \
 - `--speaker-names "付老师,我"`：按首次主要发言的先后顺序命名；跨录音的 A/B 标签不保证自动保持一致。
 - `--save-segments /tmp/speakers.json`：保留 pyannote 原始时间段，方便复核或复用。
 - `--asr-model`、`--diarization-model`：显式指定本地模型目录。
-- `--asr-python`、`--diarization-python`：覆盖两个隔离环境的解释器；也可设置 `ASR_PYTHON`、`DIARIZATION_PYTHON`。
+- `--asr-python`、`--diarization-python`：覆盖两个隔离环境的解释器；也可设置 `ASR_PYTHON`、`DIARIZATION_PYTHON`。默认 ASR 解释器优先使用 `$MODELS_DIR/.venvs/qwen3-asr-mlx/bin/python`。
 - `--no-register-source`：只生成文件，不向 `sources/sources.jsonl` 追加记录。
 
 输出默认使用“说话人 A / B / C”并保留时间戳。短促插话、同时说话和环境噪声可能造成边界误差；不得仅凭声纹标签猜测真实身份。若用户确认身份，再用 `--speaker-names` 重新生成或批量改名。

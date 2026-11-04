@@ -69,6 +69,11 @@ QWEN3_MLX_MODEL_ID = "mlx-community/Qwen3-ASR-0.6B-bf16"
 
 def find_qwen3_model() -> str | None:
     """Find Qwen3-ASR model directory."""
+    explicit_model = os.environ.get("QWEN3_ASR_MODEL")
+    if explicit_model:
+        candidate = Path(explicit_model).expanduser()
+        if candidate.exists():
+            return str(candidate.resolve())
     models_dir = os.environ.get("MODELS_DIR")
     if models_dir:
         # Prefer the explicit MLX directory. A directory named only
@@ -85,8 +90,18 @@ def find_qwen3_model() -> str | None:
 
         cached_repos = {repo.repo_id for repo in scan_cache_dir().repos}
         if QWEN3_MLX_MODEL_ID in cached_repos:
-            import qwen3_asr_mlx  # noqa: F401
-            return QWEN3_MLX_MODEL_ID
+            repo = next(
+                repo
+                for repo in scan_cache_dir().repos
+                if repo.repo_id == QWEN3_MLX_MODEL_ID
+            )
+            revisions = sorted(
+                repo.revisions,
+                key=lambda revision: revision.last_modified,
+                reverse=True,
+            )
+            if revisions:
+                return str(revisions[0].snapshot_path)
     except ImportError:
         pass
     except Exception as exc:
@@ -113,6 +128,7 @@ def resolve_engine() -> str:
 
 def transcribe_audio_qwen3(audio_path: str, language: str | None = None) -> str | None:
     """Transcribe audio using Qwen3-ASR via mlx_audio."""
+    os.environ.setdefault("HF_HUB_OFFLINE", "1")
     model_path = find_qwen3_model()
     if not model_path:
         return None

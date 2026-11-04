@@ -18,6 +18,7 @@
 - 清单文件：`env/models.toml`（列出所有模型的相对路径、大小、下载地址、是否必需）
 - `required = true` 表示项目的标准本地推理模型；模型权重不由 `setup.sh` 自动下载
 - 模型按需手动下载（`huggingface-cli download`、`curl` 或 `wget`）
+- Qwen3-ASR MLX 的权重、离线 wheel 缓存和持久运行环境均放在 `MODELS_DIR`；初始化方式见 `transcribe` Skill 的 `setup_asr_runtime.sh`
 
 ## 日常操作
 

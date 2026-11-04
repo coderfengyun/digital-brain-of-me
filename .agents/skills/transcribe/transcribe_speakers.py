@@ -267,6 +267,15 @@ def resolve_python(explicit: str | None, env_name: str, default: Path) -> Path:
     )
 
 
+def default_asr_python() -> Path:
+    """Prefer the persistent ASR runtime stored beside local model weights."""
+    models_dir = Path(os.environ.get("MODELS_DIR", "~/Models")).expanduser()
+    persistent = models_dir / ".venvs" / "qwen3-asr-mlx" / "bin" / "python"
+    if persistent.exists():
+        return persistent
+    return PROJECT_ROOT / ".venv" / "bin" / "python"
+
+
 def run_worker(command: list[str], cache_dir: Path) -> None:
     environment = os.environ.copy()
     environment["HF_HUB_OFFLINE"] = "1"
@@ -333,7 +342,7 @@ def main() -> None:
     asr_python = resolve_python(
         args.asr_python,
         "ASR_PYTHON",
-        PROJECT_ROOT / ".venv" / "bin" / "python",
+        default_asr_python(),
     )
     diarization_python = resolve_python(
         args.diarization_python,
