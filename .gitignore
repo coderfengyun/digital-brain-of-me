@@ -8,3 +8,6 @@ MEMORY.md
 .claude/.auto-commit-daemon.pid
 transcribe-eval/*.m4a
 transcribe-eval/*/result.json
+operations/meetings/audio/
+operations/meetings/*_pod-*.md
+operations/meetings/*按说话人*.md
