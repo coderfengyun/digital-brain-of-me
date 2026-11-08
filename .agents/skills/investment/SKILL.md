@@ -31,6 +31,8 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 
 当用户说"更新交易记录"时，按顺序拉取三个平台（币安 → 富途 → 招商证券）。详细步骤见 [`references/trade-import.md`](references/trade-import.md)。
 
+招商证券查询有人工登录前置条件：开始任何招商证券交易记录查询或导入前，必须先通知用户登录“掌上证券 MAC 金融终端”，并暂停等待用户明确确认已经登录；未确认前不得打开查询模块或执行后续查询。
+
 ### 工具命令
 
 | 操作 | 命令 |
