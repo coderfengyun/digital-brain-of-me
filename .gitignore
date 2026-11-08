@@ -6,6 +6,7 @@ __pycache__/
 .env
 MEMORY.md
 .claude/.auto-commit-daemon.pid
+.claude/.auto-commit-review-required
 .claude/auto-commit-daemon.log
 transcribe-eval/*.m4a
 transcribe-eval/*/result.json
