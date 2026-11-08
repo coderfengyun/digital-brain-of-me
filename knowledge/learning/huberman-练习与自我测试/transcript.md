@@ -1,7 +1,8 @@
 # 练习与自我测试在学习中的作用（2:26:22–2:55:28）
 
 **Show:** 跨国串门儿计划｜#756. Huberman 多集混剪
-**Date:** 2026-11-08
+**Episode Date:** 2026-10-07
+**Transcribed:** 2026-11-08
 **Source:** [https://www.xiaoyuzhoufm.com/episode/6ac59c6ce742e36efcbf181a](https://www.xiaoyuzhoufm.com/episode/6ac59c6ce742e36efcbf181a)
 **Language:** Chinese
 **Model:** Qwen3-ASR-0.6B（30 秒分段转录）
