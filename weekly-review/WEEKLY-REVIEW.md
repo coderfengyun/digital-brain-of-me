@@ -30,9 +30,11 @@ weekly-review/
 
 ## 写作流程
 
-1. 复制 [`TEMPLATE.md`](./TEMPLATE.md)，按文件命名规则创建本期周记。
-2. 回顾 `operations/tasks/tasks.jsonl` 中本周完成的 task，并在周记中用 task-id 引用。
-3. 如果回顾中出现具体、可追踪的 TODO，先创建 task，再在周记中引用 task-id。
+1. 定位本期周记；不存在时复制 [`TEMPLATE.md`](./TEMPLATE.md)，按文件命名规则创建。
+2. 按投资模块流程依次更新币安、富途、招商证券的交易记录。招商证券查询前必须先通知用户登录，并等待用户确认登录完成。
+3. 校验 `investment/投资日志整理/交易日志汇总表.csv`，筛选日期落在本期周记起止范围内（含首尾两天）的全部交易，写入周记 `# 投资` 下方的交易表；按序号去重，不覆盖交易表之外的投资分析。
+4. 回顾 `operations/tasks/tasks.jsonl` 中本周完成的 task，并在周记中用 task-id 引用。
+5. 如果回顾中出现具体、可追踪的 TODO，先创建 task，再在周记中引用 task-id。
 
 ## Usage
 
