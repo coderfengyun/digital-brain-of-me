@@ -70,6 +70,7 @@ digital-brain-of-me/
 - 执行 Python 脚本前先读 `env/ENV.md`，按其要求选择运行方式
 - 移动/重命名文件前 `grep -r "filename"` 搜索并更新所有引用
 - 操作失败时优先修复相关模块的设计/指令
+- 会话开始时若存在 `.claude/.auto-commit-review-required`，先读取并向用户说明变更规模与触发原因，讨论是否提交；未经用户明确同意，不得执行 `.claude/scripts/auto-commit-daemon.sh --approve`
 
 ### Skill 单一来源
 
