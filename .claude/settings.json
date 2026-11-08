@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "nohup .claude/scripts/auto-commit-daemon.sh > /dev/null 2>&1 &",
+            "command": "nohup .claude/scripts/auto-commit-daemon.sh >> .claude/auto-commit-daemon.log 2>&1 &",
             "timeout": 5
           }
         ]
@@ -16,8 +16,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -f .claude/.auto-commit-daemon.pid ]; then kill $(cat .claude/.auto-commit-daemon.pid) 2>/dev/null; rm -f .claude/.auto-commit-daemon.pid; fi && if [ -n \"$(git status --porcelain)\" ]; then git add -A && git commit -m \"Auto-commit on session end\" && git push; fi",
-            "timeout": 30
+            "command": ".claude/scripts/auto-commit-daemon.sh --stop >> .claude/auto-commit-daemon.log 2>&1",
+            "timeout": 120
           }
         ]
       }
