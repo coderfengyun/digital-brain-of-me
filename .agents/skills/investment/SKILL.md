@@ -87,6 +87,10 @@ python .codex/skills/investment/scripts/write_trade_journal.py add \
 
 当用户要求更新、续读或获取洪灏在知识星球「洪灏的宏观策略」发表的帖子时，必须先完整阅读并执行 [`references/zsxq-posts.md`](references/zsxq-posts.md)。该流程从本地索引中最近一次已读帖子处续读，直到页面最新一条。
 
+### 更新洪灏的 X 帖子
+
+当用户要求更新、续读或获取洪灏在 X（Twitter）账号 `@HAOHONG_CFA` 发表的内容，或分享该账号的单条 X 链接时，必须先完整阅读并执行 [`references/x-posts.md`](references/x-posts.md)。该流程支持普通帖子、长帖串、引用帖、图片、视频和外链文章，并在入库前检查微博、知识星球等渠道是否已有相同内容，避免重复建档。
+
 ### 获取卢麒元的微博 VIP 群发言
 
 当用户要求更新卢麒元在微博 VIP 群中的发言，或从上次记录继续收集群主文字消息时，必须先完整阅读并执行 [`references/weibo-vip-chat.md`](references/weibo-vip-chat.md)。该流程包含固定群聊与发言人、断点回溯、文字消息筛选、原文写入和作者索引更新规则。
