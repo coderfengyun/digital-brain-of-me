@@ -6,6 +6,7 @@
 
 - `generated/radio_telescope.3mf`：推荐使用，Bambu Studio 可直接打开；包含反射面、桁架和底座三个分色对象。
 - `generated/radio_telescope_A1_190pct.3mf`：为 Bambu Lab A1 热床准备的 190% 大尺寸版，约 233 × 212 × 230 mm。
+- `generated/radio_telescope_A1_190pct_supported.3mf`：已在 Bambu Studio 中开启“树状（自动）”支撑并完成切片验证的项目版，推荐直接使用。
 - `generated/radio_telescope.stl`：通用单文件备份格式。
 - `generated/radio_telescope_preview.png`：模型预览。
 
