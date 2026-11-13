@@ -288,6 +288,17 @@ def validate(meshes: list[Mesh]) -> None:
             raise ValueError(f"{mesh.name}: degenerate triangle")
 
 
+def scaled_copy(meshes: list[Mesh], factor: float) -> list[Mesh]:
+    """Return a uniformly scaled copy while preserving object names and colours."""
+    result = []
+    for mesh in meshes:
+        scaled = Mesh(mesh.name, mesh.color)
+        scaled.vertices = [tuple(np.asarray(vertex) * factor) for vertex in mesh.vertices]
+        scaled.faces = list(mesh.faces)
+        result.append(scaled)
+    return result
+
+
 def write_preview(path: Path, meshes: list[Mesh]) -> None:
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -324,6 +335,9 @@ def main() -> None:
     validate(meshes)
     write_stl(OUT_DIR / "radio_telescope.stl", meshes)
     write_3mf(OUT_DIR / "radio_telescope.3mf", meshes)
+    # Safe near-maximum size for the user's 256 x 256 x 256 mm Bambu Lab A1.
+    # At 190%, the model is about 233 x 212 x 230 mm, leaving room for supports.
+    write_3mf(OUT_DIR / "radio_telescope_A1_190pct.3mf", scaled_copy(meshes, 1.9))
     write_preview(OUT_DIR / "radio_telescope_preview.png", meshes)
     vertices = sum(len(mesh.vertices) for mesh in meshes)
     faces = sum(len(mesh.faces) for mesh in meshes)
