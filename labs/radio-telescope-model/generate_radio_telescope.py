@@ -330,6 +330,28 @@ def scaled_copy(meshes: list[Mesh], factor: float) -> list[Mesh]:
     return result
 
 
+def orient_upper_on_socket(meshes: list[Mesh], frame: tuple[np.ndarray, np.ndarray, np.ndarray],
+                           origin: np.ndarray) -> list[Mesh]:
+    """Rotate the reflector aperture upward and place its socket on the bed."""
+    u, v, n = frame
+    result = []
+    for mesh in meshes:
+        oriented = Mesh(mesh.name, mesh.color)
+        transformed = []
+        for vertex in mesh.vertices:
+            relative = np.asarray(vertex) - origin
+            transformed.append((float(np.dot(relative, u)),
+                                float(np.dot(relative, v)),
+                                float(np.dot(relative, n))))
+        oriented.vertices = transformed
+        oriented.faces = list(mesh.faces)
+        result.append(oriented)
+    minimum_z = min(vertex[2] for mesh in result for vertex in mesh.vertices)
+    for mesh in result:
+        mesh.vertices = [(x, y, z - minimum_z) for x, y, z in mesh.vertices]
+    return result
+
+
 def write_preview(path: Path, meshes: list[Mesh]) -> None:
     import matplotlib.pyplot as plt
     from mpl_toolkits.mplot3d.art3d import Poly3DCollection
@@ -362,13 +384,26 @@ def write_preview(path: Path, meshes: list[Mesh]) -> None:
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    meshes = build_model()
+    meshes, upper, lower, frame, vertex = build_model()
     validate(meshes)
     write_stl(OUT_DIR / "radio_telescope.stl", meshes)
     write_3mf(OUT_DIR / "radio_telescope.3mf", meshes)
     # Safe near-maximum size for the user's 256 x 256 x 256 mm Bambu Lab A1.
     # At 190%, the model is about 233 x 212 x 230 mm, leaving room for supports.
     write_3mf(OUT_DIR / "radio_telescope_A1_190pct.3mf", scaled_copy(meshes, 1.9))
+    # Split-print version. Both assemblies make direct contact with the bed:
+    # the lower assembly rests on four feet and the upper rests on its socket.
+    upper_on_bed = orient_upper_on_socket(upper, frame, vertex)
+    plate1 = scaled_copy(lower, 1.9)
+    plate2 = scaled_copy(upper_on_bed, 1.9)
+    validate(plate1)
+    validate(plate2)
+    write_3mf(OUT_DIR / "radio_telescope_plate1_base_A1.3mf", plate1)
+    write_3mf(OUT_DIR / "radio_telescope_plate2_dish_A1.3mf", plate2)
+    write_stl(OUT_DIR / "radio_telescope_plate1_base_A1.stl", plate1)
+    write_stl(OUT_DIR / "radio_telescope_plate2_dish_A1.stl", plate2)
+    write_preview(OUT_DIR / "radio_telescope_plate1_base_preview.png", plate1)
+    write_preview(OUT_DIR / "radio_telescope_plate2_dish_preview.png", plate2)
     write_preview(OUT_DIR / "radio_telescope_preview.png", meshes)
     vertices = sum(len(mesh.vertices) for mesh in meshes)
     faces = sum(len(mesh.faces) for mesh in meshes)
@@ -376,6 +411,10 @@ def main() -> None:
     extent = all_vertices.max(axis=0) - all_vertices.min(axis=0)
     print(f"Generated {vertices:,} vertices / {faces:,} triangles")
     print("Size: " + " x ".join(f"{value:.1f}" for value in extent) + " mm")
+    for name, part in (("Plate 1", plate1), ("Plate 2", plate2)):
+        part_vertices = np.vstack([np.asarray(mesh.vertices) for mesh in part])
+        part_extent = part_vertices.max(axis=0) - part_vertices.min(axis=0)
+        print(name + ": " + " x ".join(f"{value:.1f}" for value in part_extent) + " mm")
 
 
 if __name__ == "__main__":
