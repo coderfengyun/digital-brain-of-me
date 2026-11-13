@@ -200,7 +200,8 @@ def build_model() -> tuple[list[Mesh], list[Mesh], list[Mesh], tuple[np.ndarray,
 
     # Tapered pedestal, neck and four stabilising braces.
     frustum(charcoal, (0, 0, 15), (0, 0, 55), 12.0, 7.5, 28)
-    cylinder(charcoal, (0, 0, 53), (0, 0, 72), 6.5, 24)
+    # Stop the neck below the removable reflector joint.
+    cylinder(charcoal, (0, 0, 53), (0, 0, 68), 6.5, 24)
     for x, y in ((-25, -25), (25, -25), (25, 25), (-25, 25)):
         cylinder(lower_dark, (x, y, 17), (0, 0, 49), 2.2, 12)
     cylinder(lower_dark, (-17, 0, 68), (17, 0, 68), 4.0, 18)
@@ -235,8 +236,8 @@ def build_model() -> tuple[list[Mesh], list[Mesh], list[Mesh], tuple[np.ndarray,
 
     # Two-part joint: the lower assembly has a peg and the upper assembly has
     # a matching socket. The 0.2 mm radial clearance becomes 0.38 mm at 190%.
-    tube(upper_dark, vertex - 8.0 * n, vertex + 2.0 * n, 5.2, 3.6, 28)
-    cylinder(lower_dark, vertex - 15.0 * n, vertex - 6.5 * n, 3.4, 20)
+    tube(upper_dark, vertex - 4.0 * n, vertex + 2.0 * n, 5.2, 3.6, 28)
+    cylinder(lower_dark, vertex - 4.0 * n, vertex + 1.0 * n, 3.4, 20)
     cylinder(lower_dark, (-14, 0, 70), (14, 0, 70), 3.2, 16)
 
     combined = [silver, upper_dark, lower_dark, charcoal]
