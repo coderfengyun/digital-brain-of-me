@@ -236,7 +236,10 @@ def build_model() -> tuple[list[Mesh], list[Mesh], list[Mesh], tuple[np.ndarray,
 
     # Two-part joint: the lower assembly has a peg and the upper assembly has
     # a matching socket. The 0.2 mm radial clearance becomes 0.38 mm at 190%.
-    tube(upper_dark, vertex - 4.0 * n, vertex + 2.0 * n, 5.2, 3.6, 28)
+    # A broad rear flange gives the 233 mm reflector a stable direct-contact
+    # footprint on plate 2; the narrower upper sleeve keeps the joint compact.
+    tube(upper_dark, vertex - 4.0 * n, vertex - 1.0 * n, 10.0, 3.6, 36)
+    tube(upper_dark, vertex - 2.0 * n, vertex + 2.0 * n, 5.2, 3.6, 28)
     cylinder(lower_dark, vertex - 4.0 * n, vertex + 1.0 * n, 3.4, 20)
     cylinder(lower_dark, (-14, 0, 70), (14, 0, 70), 3.2, 16)
 
