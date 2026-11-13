@@ -69,6 +69,31 @@ def cylinder(mesh: Mesh, p0, p1, radius: float, segments: int = 16) -> None:
     frustum(mesh, p0, p1, radius, radius, segments)
 
 
+def tube(mesh: Mesh, p0, p1, outer_radius: float, inner_radius: float,
+         segments: int = 24) -> None:
+    """Add a closed annular tube, used as the upper assembly's glue socket."""
+    p0 = np.asarray(p0, dtype=float)
+    p1 = np.asarray(p1, dtype=float)
+    u, v, _ = _basis(p1 - p0)
+    verts = []
+    for point in (p0, p1):
+        for radius in (outer_radius, inner_radius):
+            for i in range(segments):
+                angle = 2 * math.pi * i / segments
+                verts.append(point + radius * (math.cos(angle) * u + math.sin(angle) * v))
+    o0, i0, o1, i1 = 0, segments, 2 * segments, 3 * segments
+    faces = []
+    for i in range(segments):
+        j = (i + 1) % segments
+        # Outside and inside walls.
+        faces.extend([(o0 + i, o0 + j, o1 + j), (o0 + i, o1 + j, o1 + i)])
+        faces.extend([(i0 + i, i1 + j, i0 + j), (i0 + i, i1 + i, i1 + j)])
+        # Annular caps.
+        faces.extend([(o0 + i, i0 + j, o0 + j), (o0 + i, i0 + i, i0 + j)])
+        faces.extend([(o1 + i, o1 + j, i1 + j), (o1 + i, i1 + j, i1 + i)])
+    mesh.add(np.asarray(verts), np.asarray(faces))
+
+
 def beam(mesh: Mesh, p0, p1, width: float, depth: float | None = None) -> None:
     """Add a capped rectangular beam between arbitrary points."""
     if depth is None:
@@ -158,9 +183,10 @@ def dish(mesh: Mesh, vertex, normal, radius=60.0, depth=26.0,
     return u, v, normal, focal_length
 
 
-def build_model() -> list[Mesh]:
+def build_model() -> tuple[list[Mesh], list[Mesh], list[Mesh], tuple[np.ndarray, np.ndarray, np.ndarray], np.ndarray]:
     silver = Mesh("Reflector", "#BFC7CE")
-    dark = Mesh("Frame", "#303840")
+    upper_dark = Mesh("Upper frame", "#303840")
+    lower_dark = Mesh("Lower frame", "#303840")
     charcoal = Mesh("Base", "#4A535B")
 
     # Four feet and square azimuth frame.
@@ -176,8 +202,8 @@ def build_model() -> list[Mesh]:
     frustum(charcoal, (0, 0, 15), (0, 0, 55), 12.0, 7.5, 28)
     cylinder(charcoal, (0, 0, 53), (0, 0, 72), 6.5, 24)
     for x, y in ((-25, -25), (25, -25), (25, 25), (-25, 25)):
-        cylinder(dark, (x, y, 17), (0, 0, 49), 2.2, 12)
-    cylinder(dark, (-17, 0, 68), (17, 0, 68), 4.0, 18)
+        cylinder(lower_dark, (x, y, 17), (0, 0, 49), 2.2, 12)
+    cylinder(lower_dark, (-17, 0, 68), (17, 0, 68), 4.0, 18)
 
     # Parabolic reflector. Its aperture tilts toward -Y, matching the photo.
     vertex = np.array([0.0, 0.0, 72.0])
@@ -194,24 +220,29 @@ def build_model() -> list[Mesh]:
     inner_points = [local_point(45, a, -7.0) for a in truss_angles]
     for i in range(12):
         j = (i + 1) % 12
-        cylinder(dark, outer_points[i], outer_points[j], 1.35, 10)
-        cylinder(dark, inner_points[i], inner_points[j], 1.25, 10)
-        cylinder(dark, outer_points[i], inner_points[i], 1.2, 10)
-        cylinder(dark, inner_points[i], outer_points[j], 1.1, 10)
+        cylinder(upper_dark, outer_points[i], outer_points[j], 1.35, 10)
+        cylinder(upper_dark, inner_points[i], inner_points[j], 1.25, 10)
+        cylinder(upper_dark, outer_points[i], inner_points[i], 1.2, 10)
+        cylinder(upper_dark, inner_points[i], outer_points[j], 1.1, 10)
 
     # Feed horn at the focus with three support struts.
     focus = vertex + focal * n
     for angle in (math.radians(20), math.radians(160), math.radians(270)):
         anchor = local_point(57, angle, 1.0)
-        cylinder(dark, anchor, focus - 2.5 * n, 1.45, 12)
-    cylinder(dark, focus - 5.0 * n, focus + 5.0 * n, 2.7, 18)
-    frustum(dark, focus + 4.0 * n, focus + 9.0 * n, 3.0, 4.8, 20)
+        cylinder(upper_dark, anchor, focus - 2.5 * n, 1.45, 12)
+    cylinder(upper_dark, focus - 5.0 * n, focus + 5.0 * n, 2.7, 18)
+    frustum(upper_dark, focus + 4.0 * n, focus + 9.0 * n, 3.0, 4.8, 20)
 
-    # Compact rear hub connecting the reflector to the elevation axis.
-    cylinder(dark, vertex - 8.0 * n, vertex + 2.0 * n, 5.0, 20)
-    cylinder(dark, (-14, 0, 70), (14, 0, 70), 3.2, 16)
+    # Two-part joint: the lower assembly has a peg and the upper assembly has
+    # a matching socket. The 0.2 mm radial clearance becomes 0.38 mm at 190%.
+    tube(upper_dark, vertex - 8.0 * n, vertex + 2.0 * n, 5.2, 3.6, 28)
+    cylinder(lower_dark, vertex - 15.0 * n, vertex - 6.5 * n, 3.4, 20)
+    cylinder(lower_dark, (-14, 0, 70), (14, 0, 70), 3.2, 16)
 
-    return [silver, dark, charcoal]
+    combined = [silver, upper_dark, lower_dark, charcoal]
+    upper = [silver, upper_dark]
+    lower = [lower_dark, charcoal]
+    return combined, upper, lower, (u, v, n), vertex
 
 
 def write_stl(path: Path, meshes: list[Mesh]) -> None:
